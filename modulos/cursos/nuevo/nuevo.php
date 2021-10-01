@@ -16,6 +16,7 @@ include("../../seguridad/comprobar_login.php");
   <script src="../../../librerias/js/cookies.js"></script>
   <script src="../../../librerias/js/validaciones.js"></script>
   <script src="../../../librerias/js/Spry/SpryValidationTextField.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="../../../bootstrap/css/style.css">
 </head>
 
 <body class="sidebar-mini <?php include("../../../componentes/skin.php"); ?>">
@@ -109,89 +110,87 @@ include("../../seguridad/comprobar_login.php");
               </div>
 
               <!-- LECCIONES -->
-              <div class="box box-info" style="border-color:#000000">
-                <!-- HEADER LEECCIONES -->
-                <div class="box-header">
+              <div class="box box-info" style="border-color:#000000" id="padre-lecciones">
+                <!-- HEADER LECCIONES -->
+                <div class="box-header ">
                   <h3 class="box-title">Lecciones</h3>
-                  <button>Agregar Leccion</button>
+                  <button class="btn btn-success pull-right" id="agregar-leccion">Agregar Leccion </button>
                 </div>
 
 
                 <!-- Agregar Contenidos -->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
-                  <div class="col-sm-2">
-                    <select id="ctipoLeccion" name="tipoLeccion" class="form-control">
-                      <option value="texto">Texto</option>
-                      <option value="enlace">Enlace</option>
-                      <option value="imagen">Imagen</option>
-                      <option value="video">Video</option>
-                      <option value="documento">Documento</option>
-                    </select>
-                  </div>
-                  <!-- text arae -->
-                  <div class="form-group" id="contenidoTextArea">
-                    <label class="col-sm-2 control-label"> Contenido:</label>
-                    <textarea name="" id="" cols="80" rows="6"></textarea>
-                  </div>
-                  <!-- input -->
-                  <div class="form-group" id="contenidoInput">
-                    <label class="col-sm-2 control-label"> Contenido:</label>
-                    <div class="col-sm-4">
-                      <input value="" name="icono" type="text" class="form-control" id="cicono" />
+                <div class="carta-lecciones" id="nodo-padre">
+                  <div class="form-group" > <!-- div1 -->
+                    <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
+                    <div class="col-sm-2">
+                      <select id="ctipoLeccion" name="tipoLeccion" class="form-control">
+                        <option value="texto">Texto</option>
+                        <option value="enlace">Enlace</option>
+                        <option value="imagen">Imagen</option>
+                        <option value="video">Video</option>
+                        <option value="documento">Documento</option>
+                      </select>
                     </div>
-                  </div>
-                  <!-- archivo -->
-                  <div class="form-group" id="contenidoArchivo">
-                    <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
-                    <div class="col-sm-4">
-                      <div class="input-group">
-                        <input type="file" name="factura" style="display:none;" id="cfactura" accept=".pdf" onChange="fileinput('factura')" />
-                        <input type="text" name="nfactura" id="nfactura" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
-                        <span class="input-group-btn">
-                          <a class="btn btn-warning" onclick="$('#cfactura').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
-                        </span>
+                    <!-- text arae -->
+                    <div class="form-group" id="contenidoTextArea">
+                      <label class="col-sm-2 control-label"> Contenido:</label>
+                      <textarea name="" id="" cols="80" rows="6"></textarea>
+                    </div>
+                    <!-- input -->
+                    <div class="form-group" id="contenidoInput">
+                      <label class="col-sm-2 control-label"> Contenido:</label>
+                      <div class="col-sm-4">
+                        <input value="" name="icono" type="text" class="form-control" id="cicono" />
+                      </div>
+                    </div>
+                    <!-- archivo -->
+                    <div class="form-group" id="contenidoArchivo">
+                      <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
+                      <div class="col-sm-4">
+                        <div class="input-group">
+                          <input type="file" name="factura" style="display:none;" id="cfactura" accept=".pdf" onChange="fileinput('factura')" />
+                          <input type="text" name="nfactura" id="nfactura" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                          <span class="input-group-btn">
+                            <a class="btn btn-warning" onclick="$('#cfactura').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-
-
-
                 </div>
-
-
               </div>
               <!-- Final de Lecciones -->
 
               <!-- Examen -->
               <div class="box box-info" style="border-color:#000000">
-                <!-- HEADER LEECCIONES -->
+                <!-- HEADER EXAMEN -->
                 <div class="box-header">
                   <h3 class="box-title">Examen</h3>
-                  <button>Agregar Pregunta</button>
+                  <button class="btn btn-success pull-right">Agregar Pregunta</button>
+
                 </div>
 
 
                 <!-- Agregar Preguntas -->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
-                  <div class="col-sm-2">
-                    <select id="ccategoria" name="categoria" class="form-control">
-                      <option value="informatica">Opcion Multiple</option>
-                      <option value="logistica">Pregunta Abierta</option>
-                      <option value="inventarios">Practica</option>
-                    </select>
-                  </div>
-
+                <div class="carta-examen">
                   <div class="form-group">
+                    <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
+                    <div class="col-sm-2">
+                      <select id="ctipopregunta" name="categoria" class="form-control">
+                        <option value="abierta">Pregunta Abierta</option>
+                        <option value="multiple">Opcion Multiple</option>
+                        <option value="practica">Practica</option>
+                      </select>
+                    </div>
                     <label class="col-sm-2 control-label"> Pregunta:</label>
-                    <div class="col-sm-4">
-                      <input class="form-control" type="text" name="" id="">
+                    <div class="col-sm-4" >
+                      <input class="form-control" type="text" name="" id="input-pregunta">
+                      <textarea class="form-control" name="descripcion" cols="80" rows="4" id="textarea-pregunta"></textarea>
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label"> Pregunta:</label>
+                  <div class="form-group" id="respuesta-checkbox">
+                    <label class="col-sm-2 control-label"> Respuesta:</label>
                     <div class="col-sm-4">
                       <input class="form-control" type="text" name="" id="">
                     </div>
@@ -202,7 +201,10 @@ include("../../seguridad/comprobar_login.php");
                     </div>
                     <button type="button" class="btn btn-default">Agregar Respuesta</button>
                   </div>
+
                 </div>
+
+
 
 
               </div>

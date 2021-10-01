@@ -4,12 +4,22 @@ function vaciarCampos(){
 }
 $(document).ready(function() {
 
-	/* Mostrar y Ocultar tipo de Leccion */
+	/* Mostrar y Ocultar tipo de Leccion y Examen */
 	contenidoLecciones()
+	contenidoExamen()
+
 	$("#ctipoLeccion").change(()=>{
 		contenidoLecciones()
-		/* alert($("#idempresa_ajax").val()); */
-	});
+	})
+	$('#ctipopregunta').change(()=>{
+		contenidoExamen()
+	})
+	var contador = 0
+	//crear Lecciones
+	$("#agregar-leccion").click(()=>{
+		contador++
+		crearLeccion(contador);
+	})
 
 	$("#panel_alertas").hide();
 	$(".loading").hide();
@@ -94,59 +104,98 @@ const contenidoLecciones = ()=> {
 			textArea.show()
 			input.hide()
 			documento.hide()
-			console.log("se esta mostrando Texto")
+			// console.log("se esta mostrando Texto")
 			break;
 
 		case "enlace":
 			input.show()
 			textArea.hide()
 			documento.hide()
-			console.log("se esta mostrando enlace")
+			// console.log("se esta mostrando enlace")
 			break;
 
 		case "imagen":
 			documento.show()
 			input.hide()
 			textArea.hide()
-			console.log("se esta mostrando imagen")
+			// console.log("se esta mostrando imagen")
 			break;
 
 		case "video":
 			documento.show()
 			input.hide()
 			textArea.hide()
-			console.log("se esta mostrando video")
+			// console.log("se esta mostrando video")
 			break;
 
 		case "documento":
 			documento.show()
 			input.hide()
 			textArea.hide()
-			console.log("se esta mostrando documento")
+			// console.log("se esta mostrando documento")
 			break;
 	
 		default:
 			textArea.show()
 			input.hide()
 			documento.hide()
-			console.log("se esta mostrando default")
+			// console.log("se esta mostrando default")
 			break;
 	}
 }
 
-const menuFiltroFecha = () => {
-	//OCULTAR Y MOSTRAR FILTRO POR FECHA
-	const selectFecha = $('#cfiltrarfecha')
-	const filtroFecha = $("#ocultarFecha")
-	filtroFecha.hide()
-	selectFecha.change(()=>{
-		if(selectFecha.val() == "SI"){
-			filtroFecha.show()
-		} else {
-			filtroFecha.hide()
-		}
-	})
+const contenidoExamen = ()=> {
+	const checkbox = $('#respuesta-checkbox')
+	const select = $('#ctipopregunta')
+	const textarea = $('#textarea-pregunta')
+	const input = $('#input-pregunta')
+
+	checkbox.hide()
+	textarea.hide()
+	input.show()
+
+	switch (select.val()) {
+		
+		case "abierta":
+			checkbox.hide()
+			input.show()
+			textarea.hide()
+			break;
+
+		case "multiple":
+			checkbox.show()
+			input.show()
+			textarea.hide()
+			break;
+
+		case "practica":
+			checkbox.hide()
+			input.hide()
+			textarea.show()
+			break;
+	
+		default:
+			break;
+	}
 }
+/* function clonarNodo(indice) {
+	var original=document.getElementById("nodo_original");
+	var nuevo=original.cloneNode(true);
+	nuevo.id=indice;
+	destino=document.getElementById("nodo_destino");
+	destino.appendChild(nuevo);
+   }  */
+/* https://qastack.mx/programming/10126395/how-to-jquery-clone-and-change-id */
+
+ const crearLeccion = (index)=>{
+	const original = document.getElementById("nodo-padre")
+	const destino = document.getElementById("padre-lecciones")
+	const nuevo = original.cloneNode(true);
+	nuevo.id=index
+	destino.appendChild(nuevo)
+	console.log(index)
+	
+} 
 
 function buscar (busqueda){
 	location.href='../consultar/vista.php?link=vista&busqueda='+busqueda+'&n1=cursos&n2=consultarcursos';
