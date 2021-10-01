@@ -1,0 +1,43 @@
+[10-Feb-2014 12:49:13 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[11-Feb-2014 11:07:27 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[11-Feb-2014 12:07:13 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[11-Feb-2014 19:11:30 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[12-Feb-2014 11:32:47 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[24-Feb-2014 19:45:29 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[28-Feb-2014 10:29:11 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[28-Feb-2014 22:57:12 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[01-Mar-2014 13:33:56 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[06-Mar-2014 17:00:46 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[19-Mar-2014 22:35:32 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[19-Mar-2014 22:35:32 America/Chicago] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'http://demo-facturacion.finkok.com/servicios/soap/cancel.wsdl' : Start tag expected, '<' not found
+ in /home/serviexp/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[19-Mar-2014 22:35:37 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[19-Mar-2014 22:35:37 America/Chicago] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'http://demo-facturacion.finkok.com/servicios/soap/cancel.wsdl' : Start tag expected, '<' not found
+ in /home/serviexp/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[21-Mar-2014 18:55:59 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[25-Mar-2014 11:46:25 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[25-Mar-2014 11:46:39 America/Chicago] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/alt/php54/usr/lib64/php/modules/imap.so' - libc-client.so.1: cannot open shared object file: No such file or directory in Unknown on line 0
+[19-Jan-2015 02:12:14 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[19-Jan-2015 02:15:33 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[09-Feb-2015 17:22:25 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[09-Feb-2015 18:28:33 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[28-Feb-2015 01:05:26 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[01-Mar-2015 01:44:45 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[01-Mar-2015 01:45:46 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[01-Mar-2015 01:46:44 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[01-Mar-2015 01:47:48 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[01-Mar-2015 02:04:43 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[01-Mar-2015 02:05:37 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49
+[01-Mar-2015 02:06:23 UTC] PHP Fatal error:  SOAP-ERROR: Parsing WSDL: Couldn't load from 'https://facturacion.finkok.com/servicios/soap/cancel.wsdl' : failed to load external entity "https://facturacion.finkok.com/servicios/soap/cancel.wsdl"
+ in /home/imodulac/public_html/modula/modulos/facturas/cancelar/cancelar.php on line 49

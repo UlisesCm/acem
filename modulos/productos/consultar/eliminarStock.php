@@ -1,0 +1,30 @@
+<?php 
+include ("../../seguridad/comprobar_login.php");
+require('../Producto.class.php');
+
+$Oproducto=new Producto;
+$mensaje="";
+
+if (isset($_REQUEST['id']) && $_REQUEST['id'] !="") {
+	if($_REQUEST['id']!="undefined"){
+		
+		$id=$_REQUEST['id'];
+		if($resultado=$Oproducto->eliminarStock($id)){
+			if ($resultado=="denegado"){
+					$mensaje="aviso@Acceso denegado@Su cuenta no cuenta con los privilegios para poder realizar esta tarea";
+			}else{
+				$mensaje="exito@Operaci&oacute;n exitosa@Los registos han sido eliminados";
+			}
+		}else{
+				$mensaje="fracaso@Operaci&oacute;n fallida@Ha ocurrido un problema en la base de datos [001]";
+		}
+		
+	}else{
+		$mensaje="fracaso@Operaci&oacute;n fallida@Ha ocurrido un problema la transmisión de datos[002]";
+	}
+}else{
+	$mensaje="aviso@Operaci&oacute;n fallida@No se ha seleccionado ning&uacute;n registro";
+}
+
+echo utf8_encode($mensaje);
+?>

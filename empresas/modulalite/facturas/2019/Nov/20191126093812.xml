@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="3.3" Serie="A" Folio="1" Fecha="2019-11-26T09:38:12" FormaPago="99" NoCertificado="1" CondicionesDePago="Pago de contado" SubTotal="23.10" Moneda="MXN" TipoCambio="1" Total="26.80" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="60000" Sello="" Certificado="">
+  <cfdi:Emisor Rfc="VIRA881016L52" Nombre="FUMYLIM S DE RL DE CV" RegimenFiscal="612"/>
+  <cfdi:Receptor UsoCFDI="P01"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="56101500" NoIdentificacion="HER FIG PRU" Cantidad="1" ClaveUnidad="op" Unidad="NO APLICA" Descripcion="FIGURA PRUEBA AZUL INFRA H 4.2cm AP1 M1 M2" ValorUnitario="1.1" Importe="1.10">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1.1" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="0.18"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="56101500" NoIdentificacion="HER FIG DEC" Cantidad="1" ClaveUnidad="op" Unidad="NO APLICA" Descripcion="FIGURA NUDO NEGRO A 4.1cm H 4.2cm" ValorUnitario="22" Importe="22.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="22" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="3.52"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosRetenidos="0.00" TotalImpuestosTrasladados="3.70">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="3.7"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento/>
+</cfdi:Comprobante>

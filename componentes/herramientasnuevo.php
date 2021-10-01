@@ -1,0 +1,1 @@
+					<li class="btn-default border-right" title="Guardar registro"><a href="#" class="botonSave"><i class="fa fa-save"></i><span class="visible-xs-inline">&nbsp;&nbsp;Guardar</span></a></li>

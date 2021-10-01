@@ -1,0 +1,2 @@
+					<li class="btn-default border-right tipoLista" title="Mostrar datos en lista"><a href="#"><i class="fa fa-th-list"></i><span class="visible-xs-inline">&nbsp;&nbsp;Mostrar datos en lista</span></a></li>
+                    <li class="btn-default border-right tipoTabla" title="Mostrar datos en tabla"><a href="#"><i class="fa fa-table"></i><span class="visible-xs-inline">&nbsp;&nbsp;Mostrar datos en tabla</span></a></li>
