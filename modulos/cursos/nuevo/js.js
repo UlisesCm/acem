@@ -3,23 +3,31 @@ function vaciarCampos(){
 	$("#cnombre").focus();
 }
 $(document).ready(function() {
-
+	let contador = 0
 	/* Mostrar y Ocultar tipo de Leccion y Examen */
-	contenidoLecciones()
+	contenidoLecciones(contador)
 	contenidoExamen()
 
-	$("#ctipoLeccion").change(()=>{
-		contenidoLecciones()
-	})
-	$('#ctipopregunta').change(()=>{
-		contenidoExamen()
-	})
-	var contador = 0
 	//crear Lecciones
 	$("#agregar-leccion").click(()=>{
 		contador++
 		crearLeccion(contador);
 	})
+/* SOLUCION PROV - crear un input hidden y manipularlo cada que haya cambios y ejecutar un solo change que cambie todos los selects */
+	$("#ctipoLeccion").change(()=>{
+		contenidoLecciones(contador)
+		$("#change-global").val($("#ctipoLeccion").val())
+		console.log(contador)
+	})
+
+	$("#change-global").change(()=>{
+		
+	})
+
+	$('#ctipopregunta').change(()=>{
+		contenidoExamen()
+	})
+	
 
 	$("#panel_alertas").hide();
 	$(".loading").hide();
@@ -86,13 +94,36 @@ function validar(){
 // Autor: Armando Viera Rodríguez
 // Onixbm 2016
 
+/* const modificarSelect = (contador)=>{
+	for (let index = 0; index < contador; index++) {
+		$("#ctipoLeccion"+index).change(()=>{
+			contenidoLecciones(index)
+			$("#change-global").val($("#ctipoLeccion").val())
+		})
+		
+	}
+} */
 /* Funcion en flecha para ocultar y mostrar el input de contenidos. */
-const contenidoLecciones = ()=> {
-	/* declaracion de variables */
-	const select = $("#ctipoLeccion")
-	const textArea = $("#contenidoTextArea")
-	const input = $("#contenidoInput")
-	const documento = $("#contenidoArchivo")
+const contenidoLecciones = (index ) => {
+		let select, textArea, input, documento
+
+		 if (index === 0) {
+			select = $("#ctipoLeccion")
+			textArea = $("#contenidoTextArea")
+			input = $("#contenidoInput")
+			documento = $("#contenidoArchivo")
+			console.log(index)
+			console.log("DENTRO DEL IF")
+		 } else {
+			select = $("#ctipoLeccion"+index)
+			textArea = $("#contenidoTextArea"+index)
+			input = $("#contenidoInput"+index)
+			documento = $("#contenidoArchivo"+index)
+			console.log("FUERA DEL IF")
+			console.log(index)
+		 }
+			
+		
 
 	/* asignacion de valores por defecto */
 	textArea.show()
@@ -178,24 +209,48 @@ const contenidoExamen = ()=> {
 			break;
 	}
 }
-/* function clonarNodo(indice) {
-	var original=document.getElementById("nodo_original");
-	var nuevo=original.cloneNode(true);
-	nuevo.id=indice;
-	destino=document.getElementById("nodo_destino");
-	destino.appendChild(nuevo);
-   }  */
-/* https://qastack.mx/programming/10126395/how-to-jquery-clone-and-change-id */
+
 
  const crearLeccion = (index)=>{
 	const original = document.getElementById("nodo-padre")
 	const destino = document.getElementById("padre-lecciones")
 	const nuevo = original.cloneNode(true);
-	nuevo.id=index
+
+	const nuevoId = "nodo-padre"+index
+	nuevo.id = nuevoId
+
 	destino.appendChild(nuevo)
-	console.log(index)
+	
+	//acceso al primer div.
+	let cloneChild = document.getElementById(nuevoId).childNodes
+	let divPrincipal = "div-principal"+index
+	cloneChild[1].id = divPrincipal
+	//acceso a los div hijos y cambio de id a text area, Input y archivo
+	let cloneChild2 = document.getElementById(divPrincipal).childNodes
+	let divSelect = cloneChild2[5].id+index
+	cloneChild2[5].id = divSelect // DIV SELECT
+	cloneChild2[9].id = cloneChild2[9].id+index //TEXT AREA
+	cloneChild2[13].id = cloneChild2[13].id+index // CONTENIDO INPUT
+	cloneChild2[17].id = cloneChild2[17].id+index // CONTENIDO ARCHIVO
+	//Accesso al div del select
+	let cloneChild3 = document.getElementById(divSelect).childNodes
+	cloneChild3[1].id = cloneChild3[1].id+index
+
+	console.log(nuevo)
 	
 } 
+/* var clone = $("#selection").clone();
+clone.attr("id", newId);
+
+clone.find("#select").attr("id","select-"+length);
+
+//append clone on the end
+$("#selections").append(clone); */
+
+	/* const select = $("#ctipoLeccion")
+	const textArea = $("#contenidoTextArea")
+	const input = $("#contenidoInput")
+	const documento = $("#contenidoArchivo") */
 
 function buscar (busqueda){
 	location.href='../consultar/vista.php?link=vista&busqueda='+busqueda+'&n1=cursos&n2=consultarcursos';

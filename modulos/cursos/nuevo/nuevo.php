@@ -114,16 +114,17 @@ include("../../seguridad/comprobar_login.php");
                 <!-- HEADER LECCIONES -->
                 <div class="box-header ">
                   <h3 class="box-title">Lecciones</h3>
+                  <input type="text" id="change-global">
                   <button class="btn btn-success pull-right" id="agregar-leccion">Agregar Leccion </button>
                 </div>
 
 
                 <!-- Agregar Contenidos -->
                 <div class="carta-lecciones" id="nodo-padre">
-                  <div class="form-group" > <!-- div1 -->
+                  <div class="form-group" id="div-principal"> <!-- div1 -->
                     <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
-                    <div class="col-sm-2">
-                      <select id="ctipoLeccion" name="tipoLeccion" class="form-control">
+                    <div class="col-sm-2" id="div-select">
+                      <select id="ctipoLeccion" name="tipoLeccion" class="form-control tipoLeccion">
                         <option value="texto">Texto</option>
                         <option value="enlace">Enlace</option>
                         <option value="imagen">Imagen</option>
