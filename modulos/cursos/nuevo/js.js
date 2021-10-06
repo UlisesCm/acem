@@ -3,25 +3,30 @@ function vaciarCampos(){
 	$("#cnombre").focus();
 }
 $(document).ready(function() {
-	let contador = 0
+	let contadorLeccion = 0
+	let contadorExamen = 0
 	/* Mostrar y Ocultar tipo de Leccion y Examen */
-	contenidoLecciones(contador)
+	contenidoLecciones()
 	contenidoExamen()
 
 	//crear Lecciones
 	$("#agregar-leccion").click(()=>{
-		contador++
-		crearLeccion(contador);
-	})
-/* SOLUCION PROV - crear un input hidden y manipularlo cada que haya cambios y ejecutar un solo change que cambie todos los selects */
-	$("#ctipoLeccion").change(()=>{
-		contenidoLecciones(contador)
-		$("#change-global").val($("#ctipoLeccion").val())
-		console.log(contador)
+		contadorLeccion++
+		// console.log("contador Leccion aumentado a: "+contadorLeccion)
+		crearLeccion(contadorLeccion)
+		contenidoLecciones(contadorLeccion)
+
 	})
 
-	$("#change-global").change(()=>{
-		
+	$("#agregar-pregunta").click(()=>{
+		contadorExamen++
+		// console.log("contador aumentado a: "+contadorExamen)
+		crearPregunta(contadorExamen);
+	})
+	
+/* SOLUCION PROV - crear un input hidden y manipularlo cada que haya cambios y ejecutar un solo change que cambie todos los selects */
+	$("#ctipoLeccion").change(()=>{	
+		contenidoLecciones(contador)
 	})
 
 	$('#ctipopregunta').change(()=>{
@@ -94,38 +99,27 @@ function validar(){
 // Autor: Armando Viera Rodríguez
 // Onixbm 2016
 
-/* const modificarSelect = (contador)=>{
-	for (let index = 0; index < contador; index++) {
-		$("#ctipoLeccion"+index).change(()=>{
-			contenidoLecciones(index)
-			$("#change-global").val($("#ctipoLeccion").val())
-		})
-		
-	}
-} */
 /* Funcion en flecha para ocultar y mostrar el input de contenidos. */
-const contenidoLecciones = (index ) => {
+const contenidoLecciones = (index) => {
 		let select, textArea, input, documento
+		console.log(index)
 
-		 if (index === 0) {
-			select = $("#ctipoLeccion")
-			textArea = $("#contenidoTextArea")
-			input = $("#contenidoInput")
-			documento = $("#contenidoArchivo")
-			console.log(index)
-			console.log("DENTRO DEL IF")
-		 } else {
-			select = $("#ctipoLeccion"+index)
-			textArea = $("#contenidoTextArea"+index)
-			input = $("#contenidoInput"+index)
-			documento = $("#contenidoArchivo"+index)
-			console.log("FUERA DEL IF")
-			console.log(index)
-		 }
-			
-		
+	if (index === 0 || !index) {
+		select = $("#ctipoLeccion")
+		textArea = $("#contenidoTextArea")
+		input = $("#contenidoInput")
+		documento = $("#contenidoArchivo")
+		console.log(index)
+		console.log("DENTRO DEL IF")
+	 } else {
+		select = $("#ctipoLeccion"+index)
+		textArea = $("#contenidoTextArea"+index)
+		input = $("#contenidoInput"+index)
+		documento = $("#contenidoArchivo"+index)
+		console.log("FUERA DEL IF")
+		console.log(index)
+	 }
 
-	/* asignacion de valores por defecto */
 	textArea.show()
 	input.hide()
 	documento.hide()
@@ -212,11 +206,11 @@ const contenidoExamen = ()=> {
 
 
  const crearLeccion = (index)=>{
-	const original = document.getElementById("nodo-padre")
+	const original = document.getElementById("nodo-padre-leccion")
 	const destino = document.getElementById("padre-lecciones")
 	const nuevo = original.cloneNode(true);
 
-	const nuevoId = "nodo-padre"+index
+	const nuevoId = "nodo-padre-leccion"+index
 	nuevo.id = nuevoId
 
 	destino.appendChild(nuevo)
@@ -232,26 +226,30 @@ const contenidoExamen = ()=> {
 	cloneChild2[9].id = cloneChild2[9].id+index //TEXT AREA
 	cloneChild2[13].id = cloneChild2[13].id+index // CONTENIDO INPUT
 	cloneChild2[17].id = cloneChild2[17].id+index // CONTENIDO ARCHIVO
+
 	//Accesso al div del select
 	let cloneChild3 = document.getElementById(divSelect).childNodes
-	cloneChild3[1].id = cloneChild3[1].id+index
-
+	cloneChild3[1].id = "ctipoLeccion"+index
+	cloneChild3[1].setAttribute("onChange",`contenidoLecciones(${index});`);
 	console.log(nuevo)
-	
 } 
-/* var clone = $("#selection").clone();
-clone.attr("id", newId);
 
-clone.find("#select").attr("id","select-"+length);
+const crearPregunta = (index) => {
+	const original = document.getElementById("nodo-padre-examen")
+	const destino = document.getElementById("padre-examen")
+	const nuevo = original.cloneNode(true);
 
-//append clone on the end
-$("#selections").append(clone); */
+	const nuevoId = "nodo-padre-examen"+index
+	nuevo.id = nuevoId
 
-	/* const select = $("#ctipoLeccion")
-	const textArea = $("#contenidoTextArea")
-	const input = $("#contenidoInput")
-	const documento = $("#contenidoArchivo") */
+	destino.appendChild(nuevo)
 
+	let cloneChild = document.getElementById(nuevoId).childNodes
+	console.log(cloneChild)
+
+}
+
+ 
 function buscar (busqueda){
 	location.href='../consultar/vista.php?link=vista&busqueda='+busqueda+'&n1=cursos&n2=consultarcursos';
 }

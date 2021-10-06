@@ -114,17 +114,17 @@ include("../../seguridad/comprobar_login.php");
                 <!-- HEADER LECCIONES -->
                 <div class="box-header ">
                   <h3 class="box-title">Lecciones</h3>
-                  <input type="text" id="change-global">
                   <button class="btn btn-success pull-right" id="agregar-leccion">Agregar Leccion </button>
                 </div>
 
-
+                <!-- Padre para clonacion -->
+                
                 <!-- Agregar Contenidos -->
-                <div class="carta-lecciones" id="nodo-padre">
+                <div class="carta-lecciones" id="nodo-padre-leccion">
                   <div class="form-group" id="div-principal"> <!-- div1 -->
                     <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
                     <div class="col-sm-2" id="div-select">
-                      <select id="ctipoLeccion" name="tipoLeccion" class="form-control tipoLeccion">
+                      <select id="ctipoLeccion" name="tipoLeccion" class="form-control tipoLeccion" onchange="contenidoLecciones(0)">
                         <option value="texto">Texto</option>
                         <option value="enlace">Enlace</option>
                         <option value="imagen">Imagen</option>
@@ -159,24 +159,25 @@ include("../../seguridad/comprobar_login.php");
                     </div>
                   </div>
                 </div>
+
+                
               </div>
               <!-- Final de Lecciones -->
 
               <!-- Examen -->
-              <div class="box box-info" style="border-color:#000000">
+              <div class="box box-info" style="border-color:#000000" id="padre-examen">
                 <!-- HEADER EXAMEN -->
                 <div class="box-header">
                   <h3 class="box-title">Examen</h3>
-                  <button class="btn btn-success pull-right">Agregar Pregunta</button>
-
+                  <button class="btn btn-success pull-right" id="agregar-pregunta">Agregar Pregunta</button>
                 </div>
 
-
                 <!-- Agregar Preguntas -->
-                <div class="carta-examen">
-                  <div class="form-group">
+                <div class="carta-examen" id="nodo-padre-examen">
+                  <!-- div de select -->
+                  <div class="form-group" id="primer-div">
                     <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-2" id="div-select">
                       <select id="ctipopregunta" name="categoria" class="form-control">
                         <option value="abierta">Pregunta Abierta</option>
                         <option value="multiple">Opcion Multiple</option>
@@ -189,7 +190,7 @@ include("../../seguridad/comprobar_login.php");
                       <textarea class="form-control" name="descripcion" cols="80" rows="4" id="textarea-pregunta"></textarea>
                     </div>
                   </div>
-
+                  <!-- respuesta en checkbox -->
                   <div class="form-group" id="respuesta-checkbox">
                     <label class="col-sm-2 control-label"> Respuesta:</label>
                     <div class="col-sm-4">
@@ -200,7 +201,7 @@ include("../../seguridad/comprobar_login.php");
                         <input type="checkbox"> Correcta
                       </label>
                     </div>
-                    <button type="button" class="btn btn-default">Agregar Respuesta</button>
+                    <button type="button" class="btn btn-default" >Agregar Respuesta</button>
                   </div>
 
                 </div>
