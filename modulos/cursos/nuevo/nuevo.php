@@ -185,16 +185,16 @@ include("../../seguridad/comprobar_login.php");
                       </select>
                     </div>
                     <label class="col-sm-2 control-label"> Pregunta:</label>
-                    <div class="col-sm-4" >
+                    <div class="col-sm-4" id="div-pregunta">
                       <input class="form-control" type="text" name="" id="input-pregunta">
                       <textarea class="form-control" name="descripcion" cols="80" rows="4" id="textarea-pregunta"></textarea>
                     </div>
                   </div>
                   <!-- respuesta en checkbox -->
-                  <div class="form-group" id="respuesta-checkbox">
+                  <div class="form-group" id="div-respuesta">
                     <label class="col-sm-2 control-label"> Respuesta:</label>
-                    <div class="col-sm-4">
-                      <input class="form-control" type="text" name="" id="">
+                    <div class="col-sm-4" id="div-input-respuesta">
+                      <input class="form-control" type="text" name="" id="input-respuesta">
                     </div>
                     <div class="checkbox col-sm-2">
                       <label>
