@@ -178,7 +178,7 @@ include("../../seguridad/comprobar_login.php");
                   <div class="form-group" id="primer-div">
                     <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
                     <div class="col-sm-2" id="div-select">
-                      <select id="ctipopregunta" name="categoria" class="form-control">
+                      <select id="ctipopregunta" name="categoria" class="form-control" onchange="contenidoExamen(0)">
                         <option value="abierta">Pregunta Abierta</option>
                         <option value="multiple">Opcion Multiple</option>
                         <option value="practica">Practica</option>
@@ -191,18 +191,21 @@ include("../../seguridad/comprobar_login.php");
                     </div>
                   </div>
                   <!-- respuesta en checkbox -->
+                  <div id="nodo-padre-respuesta">
                   <div class="form-group" id="div-respuesta">
                     <label class="col-sm-2 control-label"> Respuesta:</label>
                     <div class="col-sm-4" id="div-input-respuesta">
                       <input class="form-control" type="text" name="" id="input-respuesta">
                     </div>
-                    <div class="checkbox col-sm-2">
-                      <label>
-                        <input type="checkbox"> Correcta
-                      </label>
+                    <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
+                      
+                        <input type="checkbox" id="respuesta-checkbox"> Correcta
+                     
                     </div>
-                    <button type="button" class="btn btn-default" >Agregar Respuesta</button>
+                    <button type="button" class="btn btn-default" id="agregar-respuesta" >Agregar Respuesta</button>
                   </div>
+                  </div>
+                  
 
                 </div>
 

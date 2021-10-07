@@ -5,31 +5,35 @@ function vaciarCampos() {
 $(document).ready(function () {
   let contadorLeccion = 0;
   let contadorExamen = 0;
+  let contadorRespuesta = 0;
   /* Mostrar y Ocultar tipo de Leccion y Examen */
-  contenidoLecciones();
-  contenidoExamen();
+  contenidoLecciones(contadorLeccion);
+  contenidoExamen(contadorExamen);
 
   //crear Lecciones
   $("#agregar-leccion").click(() => {
     contadorLeccion++;
-    // console.log("contador Leccion aumentado a: "+contadorLeccion)
     crearLeccion(contadorLeccion);
     contenidoLecciones(contadorLeccion);
   });
 
   $("#agregar-pregunta").click(() => {
     contadorExamen++;
-    // console.log("contador aumentado a: "+contadorExamen)
     crearPregunta(contadorExamen);
+    contenidoExamen(contadorExamen);
   });
 
-  /* SOLUCION PROV - crear un input hidden y manipularlo cada que haya cambios y ejecutar un solo change que cambie todos los selects */
+  $("#agregar-respuesta").click(() => {
+    contadorRespuesta++
+    crearRespuesta(contadorRespuesta)
+  });
+
   $("#ctipoLeccion").change(() => {
-    contenidoLecciones(contador);
+    contenidoLecciones(contadorLeccion);
   });
 
   $("#ctipopregunta").change(() => {
-    contenidoExamen();
+    contenidoExamen(contadorExamen);
   });
 
   $("#panel_alertas").hide();
@@ -96,22 +100,17 @@ function validar() {
 /* Funcion en flecha para ocultar y mostrar el input de contenidos. */
 const contenidoLecciones = (index) => {
   let select, textArea, input, documento;
-  console.log(index);
 
   if (index === 0 || !index) {
     select = $("#ctipoLeccion");
     textArea = $("#contenidoTextArea");
     input = $("#contenidoInput");
     documento = $("#contenidoArchivo");
-    console.log(index);
-    console.log("DENTRO DEL IF");
   } else {
     select = $("#ctipoLeccion" + index);
     textArea = $("#contenidoTextArea" + index);
     input = $("#contenidoInput" + index);
     documento = $("#contenidoArchivo" + index);
-    console.log("FUERA DEL IF");
-    console.log(index);
   }
 
   textArea.show();
@@ -163,36 +162,51 @@ const contenidoLecciones = (index) => {
   }
 };
 
-const contenidoExamen = () => {
-  const checkbox = $("#respuesta-checkbox");
-  const select = $("#ctipopregunta");
-  const textarea = $("#textarea-pregunta");
-  const input = $("#input-pregunta");
+const contenidoExamen = (index) => {
+  let select, textarea, input, respuesta;
+  if (index === 0 || !index) {
+    select = $("#ctipopregunta");
+    textarea = $("#textarea-pregunta");
+    input = $("#input-pregunta");
+    respuesta = $("#div-respuesta");
+  } else {
+    select = $("#ctipopregunta" + index);
+    textarea = $("#textarea-pregunta" + index);
+    input = $("#input-pregunta" + index);
+    respuesta = $("#div-respuesta" + index);
+  }
 
-  checkbox.hide();
+  // console.log("se esta manipulando: " + index);
   textarea.hide();
   input.show();
+  respuesta.hide();
 
   switch (select.val()) {
     case "abierta":
-      checkbox.hide();
       input.show();
       textarea.hide();
+      respuesta.hide();
+      // console.log("Examen Abierta");
       break;
 
     case "multiple":
-      checkbox.show();
       input.show();
       textarea.hide();
+      respuesta.show();
+      // console.log("Examen Multiple");
       break;
 
     case "practica":
-      checkbox.hide();
       input.hide();
       textarea.show();
+      respuesta.hide();
+      // console.log("Examen Practica");
       break;
 
     default:
+      textarea.hide();
+      input.show();
+      respuesta.hide();
       break;
   }
 };
@@ -223,7 +237,7 @@ const crearLeccion = (index) => {
   let cloneChild3 = document.getElementById(divSelect).childNodes;
   cloneChild3[1].id = "ctipoLeccion" + index;
   cloneChild3[1].setAttribute("onChange", `contenidoLecciones(${index});`);
-  console.log(nuevo);
+  //   console.log(nuevo);
 };
 
 const crearPregunta = (index) => {
@@ -238,38 +252,84 @@ const crearPregunta = (index) => {
 
   let cloneChild = document.getElementById(nuevoId).childNodes;
   let primerDiv = cloneChild[3].id + index;
-  let divRespuesta = cloneChild[7].id + index;
-  cloneChild[7].id = divRespuesta;
+  let nodoPadreRespuesta = cloneChild[7].id + index;
+  cloneChild[7].id = nodoPadreRespuesta;
   cloneChild[3].id = primerDiv;
 
-  let cloneChild2 = document.getElementById(primerDiv).childNodes;
-  let divSelect = cloneChild2[3].id + index;
-  let divPregunta = cloneChild2[7].id + index;
+  let cloneChild2 = document.getElementById(primerDiv).childNodes; //PRIMER DIV NODO
+  let divSelect = cloneChild2[3].id + index
+  let divPregunta = cloneChild2[7].id + index
+  cloneChild2[3].id = divSelect //DIV SELECT ID
+  cloneChild2[7].id = divPregunta // DIV PREGUNTA ID
 
-  cloneChild2[3].id = divSelect;
-  cloneChild2[7].id = divPregunta;
+  let cloneChild21 = document.getElementById(divSelect).childNodes // DIV SELECT NODO
+  let selectPregunta = cloneChild21[1].id + index
+  cloneChild21[1].id = selectPregunta // SELECT PREGUNTA ID
+  cloneChild21[1].setAttribute("onChange", `contenidoExamen(${index});`); //se agrega atributo onchange al select
 
-  let cloneChild3 = document.getElementById(divSelect).childNodes;
-  let select = cloneChild3[1].id + index;
-  cloneChild3[1].id = select;
+  let cloneChild22 = document.getElementById(divPregunta).childNodes; // DIV PREGUNTA NODO
+  let inputPregunta = cloneChild22[1].id + index
+  let textAreaPregunta = cloneChild22[3].id + index
 
-  let cloneChild4 = document.getElementById(divPregunta).childNodes;
-  let inputPregunta = cloneChild4[1].id + index;
-  let textAreaPregunta = cloneChild4[3].id + index;
-  cloneChild4[1].id = inputPregunta;
-  cloneChild4[3].id = textAreaPregunta;
+  cloneChild22[1].id = inputPregunta
+  cloneChild22[3].id = textAreaPregunta
 
-  let cloneChild5 = document.getElementById(divRespuesta).childNodes;
-  let divInputRespuesta = cloneChild5[3].id + index;
-  cloneChild5[3].id = divInputRespuesta;
+  let cloneChild3 = document.getElementById(nodoPadreRespuesta).childNodes; //PRIMER DIV
+  let divRespuesta = cloneChild3[1].id + index;
+  cloneChild3[1].id = divRespuesta;
 
-  let cloneChild6 = document.getElementById(divInputRespuesta).childNodes;
-  let inputRespuesta = cloneChild6[1].id + index;
+  let cloneChild31 = document.getElementById(divRespuesta).childNodes; //DIV RESPUESTAS NODO
+  let divInputRespuesta = cloneChild31[3].id + index + 0; // DIV INPUT RESPUESTA ID
+  let divCheckboxRespuesta = cloneChild31[5].id + index + 0; // DIV CHECKBOX RESPUESTA ID
+  let botonAgregarRespuesta = cloneChild31[7].id + index; // BOTON AGREGAR RESPUESTA ID
+  cloneChild31[7].setAttribute("onClick", `crearRespuesta(${index});`);
 
-  cloneChild6[1].id = inputRespuesta;
-  console.log(inputRespuesta);
+  cloneChild31[3].id = divInputRespuesta;
+  cloneChild31[5].id = divCheckboxRespuesta;
+  cloneChild31[7].id = botonAgregarRespuesta;
+
+  let cloneChild311 = document.getElementById(divInputRespuesta).childNodes;
+  let inputRespuesta = cloneChild311[1].id + index
+  cloneChild311[1].id = inputRespuesta;
+  
+  let cloneChild312 = document.getElementById(divCheckboxRespuesta).childNodes;
+  let checkbox = cloneChild312[1].id + index;
+  cloneChild312[1].id = checkbox
+  
 };
 
+const crearRespuesta = (index) => {
+
+  const original = document.getElementById("div-respuesta");
+  const destino = document.getElementById("nodo-padre-respuesta");
+  const nuevo = original.cloneNode(true);
+
+  destino.appendChild(nuevo);
+
+  const nuevoId = nuevo.id + index;
+  nuevo.id = nuevoId;
+
+  let cloneChild = document.getElementById(nuevoId).childNodes;
+  let divInputRespuesta = cloneChild[3].id + index ; // DIV INPUT RESPUESTA ID
+  let divCheckboxRespuesta = cloneChild[5].id + index; // DIV CHECKBOX RESPUESTA ID
+  let botonAgregarRespuesta = cloneChild[7].id + index ;
+  cloneChild[3].id = divInputRespuesta;
+  cloneChild[5].id = divCheckboxRespuesta;
+  cloneChild[7].id = botonAgregarRespuesta;
+  document.getElementById(botonAgregarRespuesta).remove()
+
+  let cloneChild1 = document.getElementById(divInputRespuesta).childNodes;
+  let inputRespuesta = cloneChild1[1].id + index
+  cloneChild1[1].id = inputRespuesta;
+  
+  let cloneChild2 = document.getElementById(divCheckboxRespuesta).childNodes;
+  let checkbox = cloneChild2[1].id + index;
+  cloneChild2[1].id = checkbox
+
+  console.log(cloneChild)
+};
+
+// onclick="crearRespuesta()"
 function buscar(busqueda) {
   location.href =
     "../consultar/vista.php?link=vista&busqueda=" +
