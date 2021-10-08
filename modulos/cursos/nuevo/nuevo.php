@@ -202,7 +202,7 @@ include("../../seguridad/comprobar_login.php");
                         <input type="checkbox" id="respuesta-checkbox"> Correcta
                      
                     </div>
-                    <button type="button" class="btn btn-default" id="agregar-respuesta" >Agregar Respuesta</button>
+                    <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button>
                   </div>
                   </div>
                   
