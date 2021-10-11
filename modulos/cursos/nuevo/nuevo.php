@@ -110,141 +110,146 @@ include("../../seguridad/comprobar_login.php");
               </div>
 
               <!-- LECCIONES -->
-              <div class="box box-info" style="border-color:#000000" id="padre-lecciones">
+              <div class="box box-info" style="border-color:#000000">
                 <!-- HEADER LECCIONES -->
                 <div class="box-header ">
                   <h3 class="box-title">Lecciones</h3>
                   <button class="btn btn btn-secondary pull-right" id="mostrarLeccion" onclick="mostrarLecciones()">Mostrar </button>
                   <button class="btn btn btn-secondary pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar </button>
-                  <button class="btn btn-success pull-right" id="agregar-leccion">Agregar Leccion </button>
+                  <button class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion </button>
                 </div>
                 <!-- Padre para clonacion -->
-                
+
                 <!-- Agregar Contenidos -->
-                <div class="carta-lecciones" id="nodo-padre-leccion">
-                  <div class="form-group" id="div-principal"> <!-- div1 -->
-                    <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
-                    <div class="col-sm-2" id="div-select">
-                      <select id="ctipoLeccion" name="tipoLeccion" class="form-control tipoLeccion" onchange="contenidoLecciones(0)">
-                        <option value="texto">Texto</option>
-                        <option value="enlace">Enlace</option>
-                        <option value="imagen">Imagen</option>
-                        <option value="video">Video</option>
-                        <option value="documento">Documento</option>
-                      </select>
-                    </div>
-                    <!-- text arae -->
-                    <div class="form-group" id="contenidoTextArea">
-                      <label class="col-sm-2 control-label"> Contenido:</label>
-                      <textarea name="" id="" cols="80" rows="6"></textarea>
-                    </div>
-                    <!-- input -->
-                    <div class="form-group" id="contenidoInput">
-                      <label class="col-sm-2 control-label"> Contenido:</label>
-                      <div class="col-sm-4">
-                        <input value="" name="icono" type="text" class="form-control" id="cicono" />
+                <div id="padre-lecciones">
+                  <div class="carta-lecciones" id="nodo-padre-leccion">
+                    <div class="form-group" id="div-principal">
+                      <!-- div1 -->
+                      <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
+                      <div class="col-sm-2" id="div-select">
+                        <select id="ctipoLeccion" name="tipoLeccion" class="form-control tipoLeccion" onchange="contenidoLecciones(0)">
+                          <option value="texto">Texto</option>
+                          <option value="enlace">Enlace</option>
+                          <option value="imagen">Imagen</option>
+                          <option value="video">Video</option>
+                          <option value="documento">Documento</option>
+                        </select>
                       </div>
-                    </div>
-                    <!-- archivo -->
-                    <div class="form-group" id="contenidoArchivo">
-                      <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
-                      <div class="col-sm-4">
-                        <div class="input-group">
-                          <input type="file" name="factura" style="display:none;" id="cfactura" accept=".pdf" onChange="fileinput('factura')" />
-                          <input type="text" name="nfactura" id="nfactura" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
-                          <span class="input-group-btn">
-                            <a class="btn btn-warning" onclick="$('#cfactura').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
-                          </span>
+                      <!-- text arae -->
+                      <div class="form-group" id="contenidoTextArea">
+                        <label class="col-sm-2 control-label"> Contenido:</label>
+                        <textarea name="" id="" cols="80" rows="6"></textarea>
+                      </div>
+                      <!-- input -->
+                      <div class="form-group" id="contenidoInput">
+                        <label class="col-sm-2 control-label"> Contenido:</label>
+                        <div class="col-sm-4">
+                          <input value="" name="icono" type="text" class="form-control" id="cicono" />
+                        </div>
+                      </div>
+                      <!-- archivo -->
+                      <div class="form-group" id="contenidoArchivo">
+                        <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
+                        <div class="col-sm-4">
+                          <div class="input-group">
+                            <input type="file" name="factura" style="display:none;" id="cfactura" accept=".pdf" onChange="fileinput('factura')" />
+                            <input type="text" name="nfactura" id="nfactura" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                            <span class="input-group-btn">
+                              <a class="btn btn-warning" onclick="$('#cfactura').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                
+
+
               </div>
               <!-- Final de Lecciones -->
 
               <!-- Examen -->
-              <div class="box box-info" style="border-color:#000000" id="padre-examen">
+              <div class="box box-info" style="border-color:#000000" >
                 <!-- HEADER EXAMEN -->
                 <div class="box-header">
                   <h3 class="box-title">Examen</h3>
-                  <button class="btn btn-success pull-right" id="agregar-pregunta">Agregar Pregunta</button>
+                  <button class="btn btn btn-secondary pull-right" id="mostrarExamen" onclick="mostrarExamenes()">Mostrar </button>
+                  <button class="btn btn btn-secondary pull-right" id="ocultarExamen" onclick="ocultarExamenes()">Ocultar </button>
+                  <button class="btn btn-success pull-right margen-right" id="agregar-pregunta">Agregar Pregunta</button>
+
                 </div>
+                <div id="padre-examen">
+                  <!-- ORIGINAL CLONE -->
+                  <div style="display:none">
+                    <div class="carta-examen" id="nodo-padre-examen">
+                      <!-- div de select -->
+                      <div class="form-group" id="primer-divX">
+                        <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
+                        <div class="col-sm-2" id="div-selectX">
+                          <select id="ctipopreguntaX" name="categoria" class="form-control" onchange="contenidoExamen(0)">
+                            <option value="abierta">Pregunta Abierta</option>
+                            <option value="multiple">Opcion Multiple</option>
+                            <option value="practica">Practica</option>
+                          </select>
+                        </div>
+                        <label class="col-sm-2 control-label"> Pregunta:</label>
+                        <div class="col-sm-4" id="div-preguntaX">
+                          <input class="form-control" type="text" name="" id="input-preguntaX">
+                          <textarea class="form-control" name="descripcion" cols="80" rows="4" id="textarea-preguntaX"></textarea>
+                        </div>
+                      </div>
+                      <!-- respuesta en checkbox -->
+                      <div id="nodo-padre-respuestaX">
+                        <div class="form-group" id="div-respuestaX">
+                          <label class="col-sm-2 control-label"> Respuesta:</label>
+                          <div class="col-sm-4" id="div-input-respuestaX">
+                            <input class="form-control" type="text" name="" id="input-respuestaX">
+                          </div>
+                          <div class="checkbox col-sm-2" id="div-checkbox-respuestaX">
+                            <input type="checkbox" id="respuesta-checkboxX"> Correcta
+                          </div>
+                          <button type="button" class="btn btn-default" id="agregar-respuestaX" onclick="crearRespuesta(0)">Agregar Respuesta</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                <!-- ORIGINAL CLONE -->
-                <div style="display:none">
-                <div class="carta-examen" id="nodo-padre-examen" >
-                  <!-- div de select -->
-                  <div class="form-group" id="primer-divX">
-                    <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
-                    <div class="col-sm-2" id="div-selectX">
-                      <select id="ctipopreguntaX" name="categoria" class="form-control" onchange="contenidoExamen(0)">
-                        <option value="abierta">Pregunta Abierta</option>
-                        <option value="multiple">Opcion Multiple</option>
-                        <option value="practica">Practica</option>
-                      </select>
+
+                  <!-- PRIMER NODO -->
+                  <div class="carta-examen" id="nodo-padre-examen0">
+                    <!-- div de select -->
+                    <div class="form-group" id="primer-div">
+                      <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
+                      <div class="col-sm-2" id="div-select">
+                        <select id="ctipopregunta" name="categoria" class="form-control" onchange="contenidoExamen(0)">
+                          <option value="abierta">Pregunta Abierta</option>
+                          <option value="multiple">Opcion Multiple</option>
+                          <option value="practica">Practica</option>
+                        </select>
+                      </div>
+                      <label class="col-sm-2 control-label"> Pregunta:</label>
+                      <div class="col-sm-4" id="div-pregunta">
+                        <input class="form-control" type="text" name="" id="input-pregunta">
+                        <textarea class="form-control" name="descripcion" cols="80" rows="4" id="textarea-pregunta"></textarea>
+                      </div>
                     </div>
-                    <label class="col-sm-2 control-label"> Pregunta:</label>
-                    <div class="col-sm-4" id="div-preguntaX">
-                      <input class="form-control" type="text" name="" id="input-preguntaX">
-                      <textarea class="form-control" name="descripcion" cols="80" rows="4" id="textarea-preguntaX"></textarea>
+                    <!-- respuesta en checkbox -->
+                    <div id="nodo-padre-respuesta">
+                      <div class="form-group" id="div-respuesta">
+                        <label class="col-sm-2 control-label"> Respuesta:</label>
+                        <div class="col-sm-4" id="div-input-respuesta">
+                          <input class="form-control" type="text" name="" id="input-respuesta">
+                        </div>
+                        <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
+                          <input type="checkbox" id="respuesta-checkbox"> Correcta
+                        </div>
+                        <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button>
+                        <button type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</button>
+                      </div>
                     </div>
-                  </div>
-                  <!-- respuesta en checkbox -->
-                  <div id="nodo-padre-respuestaX">
-                  <div class="form-group" id="div-respuestaX">
-                    <label class="col-sm-2 control-label"> Respuesta:</label>
-                    <div class="col-sm-4" id="div-input-respuestaX">
-                      <input class="form-control" type="text" name="" id="input-respuestaX">
-                    </div>
-                    <div class="checkbox col-sm-2" id="div-checkbox-respuestaX">
-                        <input type="checkbox" id="respuesta-checkboxX"> Correcta
-                    </div>
-                    <button type="button" class="btn btn-default" id="agregar-respuestaX" onclick="crearRespuesta(0)">Agregar Respuesta</button>
-                  </div>
                   </div>
                 </div>
-                </div>
-                
-
-                <!-- PRIMER NODO -->
-                <div class="carta-examen" id="nodo-padre-examen0">
-                  <!-- div de select -->
-                  <div class="form-group" id="primer-div">
-                    <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
-                    <div class="col-sm-2" id="div-select">
-                      <select id="ctipopregunta" name="categoria" class="form-control" onchange="contenidoExamen(0)">
-                        <option value="abierta">Pregunta Abierta</option>
-                        <option value="multiple">Opcion Multiple</option>
-                        <option value="practica">Practica</option>
-                      </select>
-                    </div>
-                    <label class="col-sm-2 control-label"> Pregunta:</label>
-                    <div class="col-sm-4" id="div-pregunta">
-                      <input class="form-control" type="text" name="" id="input-pregunta0">
-                      <textarea class="form-control" name="descripcion" cols="80" rows="4" id="textarea-pregunta"></textarea>
-                    </div>
-                  </div>
-                  <!-- respuesta en checkbox -->
-                  <div id="nodo-padre-respuesta">
-                  <div class="form-group" id="div-respuesta">
-                    <label class="col-sm-2 control-label"> Respuesta:</label>
-                    <div class="col-sm-4" id="div-input-respuesta">
-                      <input class="form-control" type="text" name="" id="input-respuesta">
-                    </div>
-                    <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
-                        <input type="checkbox" id="respuesta-checkbox"> Correcta
-                    </div>
-                    <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button>
-                    <button type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</button>
-                  </div>
-                  </div>
-                </div>
-
-
-
 
               </div>
               <!-- Final Examen -->
