@@ -8,7 +8,6 @@ const objetoContador = [0];
 $(document).ready(function () {
   let contadorLeccion = 0;
   let contadorExamen = 0;
-  
 
   /* Mostrar y Ocultar tipo de Leccion y Examen */
   contenidoLecciones(contadorLeccion);
@@ -28,18 +27,7 @@ $(document).ready(function () {
     contenidoExamen(contadorExamen);
   });
 
-  /* $("#agregar-respuesta").click(() => {
-    contadorRespuesta++
-    crearRespuesta(contadorRespuesta)
-  }); */
-
-  $("#ctipoLeccion").change(() => {
-    contenidoLecciones(contadorLeccion);
-  });
-
-  $("#ctipopregunta").change(() => {
-    contenidoExamen(contadorExamen);
-  });
+  ocultarLecciones()
 
   $("#panel_alertas").hide();
   $(".loading").hide();
@@ -164,8 +152,11 @@ const contenidoLecciones = (index) => {
 };
 
 const contenidoExamen = (index) => {
+  objetoContador[index]
+  
   let select, textarea, input, respuesta;
-  if (index === 0 || !index) {
+  // if (index === 0 || !index) {
+  if (index === 0) {
     select = $("#ctipopregunta");
     textarea = $("#textarea-pregunta");
     input = $("#input-pregunta");
@@ -177,13 +168,16 @@ const contenidoExamen = (index) => {
     respuesta = $("#div-respuesta" + index);
   }
 
-  // console.log("se esta manipulando: " + index);
   textarea.hide();
   input.show();
   respuesta.hide();
 
   switch (select.val()) {
     case "abierta":
+      for (let i = 0; i < objetoContador[index]+1; i++) {
+        $("#div-respuesta" + index + i).hide()
+        // console.log($("#div-respuesta" + index + i))
+      }
       input.show();
       textarea.hide();
       respuesta.hide();
@@ -191,6 +185,10 @@ const contenidoExamen = (index) => {
       break;
 
     case "multiple":
+      for (let i = 0; i < objetoContador[index]+1; i++) {
+          $("#div-respuesta" + index + i).show()
+          // console.log($("#div-respuesta" + index + i))
+        }
       input.show();
       textarea.hide();
       respuesta.show();
@@ -198,6 +196,10 @@ const contenidoExamen = (index) => {
       break;
 
     case "practica":
+      for (let i = 0; i < objetoContador[index]+1; i++) {
+        $("#div-respuesta" + index + i).hide()
+        // console.log($("#div-respuesta" + index + i))
+      }
       input.hide();
       textarea.show();
       respuesta.hide();
@@ -238,111 +240,137 @@ const crearLeccion = (index) => {
   let cloneChild3 = document.getElementById(divSelect).childNodes;
   cloneChild3[1].id = "ctipoLeccion" + index;
   cloneChild3[1].setAttribute("onChange", `contenidoLecciones(${index});`);
-  //   console.log(nuevo);
+    
 };
 
 const crearPregunta = (index) => {
-  
-  /* ERROR CON LOS IDENTIFICADORES EL "DIV-RESPUESTA SIEMPRE MUESTRA 0" Y LOS OTROS COMPONENTES JALAN MAL EL INDEX */
+  objetoContador[index]
+
   const original = document.getElementById("nodo-padre-examen");
   const destino = document.getElementById("padre-examen");
   const nuevo = original.cloneNode(true);
-
   const nuevoId = "nodo-padre-examen" + index;
   nuevo.id = nuevoId;
-
+  // nuevo.setAttribute("style","display: block")
   destino.appendChild(nuevo);
 
   let cloneChild = document.getElementById(nuevoId).childNodes;
-  let primerDiv = cloneChild[3].id + index;
-  let nodoPadreRespuesta = cloneChild[7].id + index;
+  let primerDiv = "primer-div" + index;
+  let nodoPadreRespuesta = "nodo-padre-respuesta" + index;
   cloneChild[7].id = nodoPadreRespuesta;
   cloneChild[3].id = primerDiv;
 
   let cloneChild2 = document.getElementById(primerDiv).childNodes; //PRIMER DIV NODO
-  let divSelect = cloneChild2[3].id + index
-  let divPregunta = cloneChild2[7].id + index
+  let divSelect = "div-select" + index
+  let divPregunta = "div-pregunta" + index
   cloneChild2[3].id = divSelect //DIV SELECT ID
   cloneChild2[7].id = divPregunta // DIV PREGUNTA ID
 
   let cloneChild21 = document.getElementById(divSelect).childNodes // DIV SELECT NODO
-  let selectPregunta = cloneChild21[1].id + index
+  let selectPregunta = "ctipopregunta" + index
   cloneChild21[1].id = selectPregunta // SELECT PREGUNTA ID
   cloneChild21[1].setAttribute("onChange", `contenidoExamen(${index});`); //se agrega atributo onchange al select
-  
 
   let cloneChild22 = document.getElementById(divPregunta).childNodes; // DIV PREGUNTA NODO
-  let inputPregunta = cloneChild22[1].id + index
-  let textAreaPregunta = cloneChild22[3].id + index
-
+  let inputPregunta = "input-pregunta" + index
+  let textAreaPregunta = "textarea-pregunta" + index
   cloneChild22[1].id = inputPregunta
   cloneChild22[3].id = textAreaPregunta
 
   let cloneChild3 = document.getElementById(nodoPadreRespuesta).childNodes; //PRIMER DIV
-  let divRespuesta = cloneChild3[1].id + index;
+  let divRespuesta = "div-respuesta" + index;
   cloneChild3[1].id = divRespuesta;
 
   let cloneChild31 = document.getElementById(divRespuesta).childNodes; //DIV RESPUESTAS NODO
-  let divInputRespuesta = cloneChild31[3].id + index; // DIV INPUT RESPUESTA ID
-  let divCheckboxRespuesta = cloneChild31[5].id + index; // DIV CHECKBOX RESPUESTA ID
-  let botonAgregarRespuesta = cloneChild31[7].id + index; // BOTON AGREGAR RESPUESTA ID
-  cloneChild31[7].setAttribute("onClick", `crearRespuesta(${index});`);
-  // cloneChild31[7].setAttribute("onClick", `funcionBoton(${index})`);
-
+  let divInputRespuesta = "div-input-respuesta" + index; // DIV INPUT RESPUESTA ID
+  let divCheckboxRespuesta = "div-checkbox-respuesta" + index; // DIV CHECKBOX RESPUESTA ID
+  let botonAgregarRespuesta = "agregar-respuesta" + index; // BOTON AGREGAR RESPUESTA ID
   cloneChild31[3].id = divInputRespuesta;
   cloneChild31[5].id = divCheckboxRespuesta;
   cloneChild31[7].id = botonAgregarRespuesta;
+  cloneChild31[7].setAttribute("onClick", `crearRespuesta(${index});contenidoExamen(${index});`);
 
   let cloneChild311 = document.getElementById(divInputRespuesta).childNodes;
-  let inputRespuesta = cloneChild311[1].id + index
+  let inputRespuesta = "input-respuesta" + index
   cloneChild311[1].id = inputRespuesta;
+  // console.log(cloneChild311[1].id)
   
   let cloneChild312 = document.getElementById(divCheckboxRespuesta).childNodes;
-  let checkbox = cloneChild312[1].id + index;
+  let checkbox = "respuesta-checkbox" + index;
   cloneChild312[1].id = checkbox
   
 };
 
 const crearRespuesta = (index) => {
+  let destino
   objetoContador[index] = objetoContador[index]+1
+  console.log(objetoContador)
   const original = document.getElementById("div-respuesta");
-  const destino = document.getElementById("nodo-padre-respuesta");
+  if (index === 0 || index === null) {
+    destino = document.getElementById("nodo-padre-respuesta");
+  } else {
+    destino = document.getElementById("nodo-padre-respuesta"+index);
+  }
+  // console.log(destino)
+  // const destino = document.getElementById("nodo-padre-respuesta"+objetoContador[index]);
   const nuevo = original.cloneNode(true);
 
   destino.appendChild(nuevo);
-
-  const nuevoId = "div-respuesta" + index /* + objetoContador[index] */;
+  let indice = index + objetoContador[index];
+  const nuevoId = "div-respuesta" + index + objetoContador[index] /* + objetoContador[index] */;
   nuevo.id = nuevoId;
-  console.log(nuevo.id)
+  console.log("el elemento seleccionado es:" + nuevo.id)
 
   let cloneChild = document.getElementById(nuevoId).childNodes;
+  console.log(cloneChild)
   let divInputRespuesta = cloneChild[3].id + objetoContador[index] ; // DIV INPUT RESPUESTA ID
   let divCheckboxRespuesta = cloneChild[5].id + objetoContador[index]; // DIV CHECKBOX RESPUESTA ID
-  let botonAgregarRespuesta = cloneChild[7].id + objetoContador[index];
-  /* let divInputRespuesta = cloneChild[3].id + index ; // DIV INPUT RESPUESTA ID
-  let divCheckboxRespuesta = cloneChild[5].id + index; // DIV CHECKBOX RESPUESTA ID
-  let botonAgregarRespuesta = cloneChild[7].id + index ; */
+  let botonAgregarRespuesta = cloneChild[7].id + index + objetoContador[index];
+  let botonBorrarRespuesta = cloneChild[9].id + index + objetoContador[index]
   cloneChild[3].id = divInputRespuesta;
   cloneChild[5].id = divCheckboxRespuesta;
   cloneChild[7].id = botonAgregarRespuesta;
-   
+  cloneChild[9].id = botonBorrarRespuesta;
+  cloneChild[9].setAttribute("onclick", `borrarRespuesta(${index},${objetoContador[index]});`);
+  cloneChild[9].setAttribute("style", "display:block");
+
   /* console.log(divCheckboxRespuesta) 
   console.log(botonAgregarRespuesta)  */
 
-  // document.getElementById(botonAgregarRespuesta).remove()
+  document.getElementById(botonAgregarRespuesta).remove()
 
   let cloneChild1 = document.getElementById(divInputRespuesta).childNodes;
-  let inputRespuesta = cloneChild1[1].id + index
+  let inputRespuesta = "input-respuesta" + index + objetoContador[index]
+  console.log(inputRespuesta)
   cloneChild1[1].id = inputRespuesta;
   
   let cloneChild2 = document.getElementById(divCheckboxRespuesta).childNodes;
-  let checkbox = cloneChild2[1].id + index;
+  let checkbox = "respuesta-checkbox" + index + objetoContador[index];
+  console.log(checkbox)
   cloneChild2[1].id = checkbox
 
   // CONTADOR DINAMICO PARA CONTAR EL NUMERO DE RESPUESTAS
   // console.log(objetoContador)
 
 };
+
+const borrarRespuesta = (iPregunta, iRespuesta) => {
+  let elemento = "div-respuesta" + iPregunta + iRespuesta;
+  console.log(elemento)
+  document.getElementById(elemento).remove()
+}
+
+const ocultarLecciones = () =>{
+  $("#nodo-padre-leccion").hide(200)
+  $("#ocultarLeccion").hide()
+  $("#mostrarLeccion").show()
+}
+
+const mostrarLecciones = () =>{
+  $("#nodo-padre-leccion").show(200)
+  $("#ocultarLeccion").show()
+  $("#mostrarLeccion").hide()
+}
 
 
 function buscar(busqueda) {
