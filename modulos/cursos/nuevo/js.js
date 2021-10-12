@@ -25,7 +25,9 @@ $(document).ready(function () {
     crearPregunta(contadorExamen);
     contenidoExamen(contadorExamen);
   });
-
+  
+  $("#padre-examen").hide();
+  $("#padre-lecciones").hide();
   ocultarLecciones();
   ocultarExamenes();
 
@@ -229,17 +231,24 @@ const crearLeccion = (index) => {
   let divPrincipal = "div-principal" + index;
   cloneChild[1].id = divPrincipal;
   //acceso a los div hijos y cambio de id a text area, Input y archivo
-  let cloneChild2 = document.getElementById(divPrincipal).childNodes;
+  let cloneChild2 = document.getElementById(divPrincipal).childNodes;//div-principal
   let divSelect = cloneChild2[5].id + index;
+  let divBotonBorrar = cloneChild2[7].id + index;
   cloneChild2[5].id = divSelect; // DIV SELECT
-  cloneChild2[9].id = cloneChild2[9].id + index; //TEXT AREA
-  cloneChild2[13].id = cloneChild2[13].id + index; // CONTENIDO INPUT
-  cloneChild2[17].id = cloneChild2[17].id + index; // CONTENIDO ARCHIVO
+  cloneChild2[7].id =  divBotonBorrar;// DIV BOTON BORRAR
+  cloneChild2[7].setAttribute("style", "display:block");
+  cloneChild2[11].id = cloneChild2[11].id + index; //TEXT AREA
+  cloneChild2[15].id = cloneChild2[15].id + index; // CONTENIDO INPUT
+  cloneChild2[19].id = cloneChild2[19].id + index; // CONTENIDO ARCHIVO
 
   //Accesso al div del select
   let cloneChild3 = document.getElementById(divSelect).childNodes;
   cloneChild3[1].id = "ctipoLeccion" + index;
   cloneChild3[1].setAttribute("onChange", `contenidoLecciones(${index});`);
+  // Acceso al div de boton
+  let cloneChild4 = document.getElementById(divBotonBorrar).childNodes;
+  cloneChild4[1].id = cloneChild4[1].id + index;
+  cloneChild4[1].setAttribute("onClick", `borrarLeccion(${index});`);
 };
 
 const crearPregunta = (index) => {
@@ -250,7 +259,6 @@ const crearPregunta = (index) => {
   const nuevo = original.cloneNode(true);
   const nuevoId = "nodo-padre-examen" + index;
   nuevo.id = nuevoId;
-  // nuevo.setAttribute("style","display: block")
   destino.appendChild(nuevo);
 
   let cloneChild = document.getElementById(nuevoId).childNodes;
@@ -261,9 +269,13 @@ const crearPregunta = (index) => {
 
   let cloneChild2 = document.getElementById(primerDiv).childNodes; //PRIMER DIV NODO
   let divSelect = "div-select" + index;
+  let divBotonPregunta = "div-button-pregunta" + index;
   let divPregunta = "div-pregunta" + index;
+  let divInputValor = "div-input-valor" + index;
   cloneChild2[3].id = divSelect; //DIV SELECT ID
-  cloneChild2[7].id = divPregunta; // DIV PREGUNTA ID
+  cloneChild2[5].id = divBotonPregunta; // DIV PREGUNTA ID
+  cloneChild2[9].id = divPregunta; // DIV PREGUNTA ID
+  cloneChild2[13].id = divInputValor; // DIV PREGUNTA ID
 
   let cloneChild21 = document.getElementById(divSelect).childNodes; // DIV SELECT NODO
   let selectPregunta = "ctipopregunta" + index;
@@ -275,6 +287,16 @@ const crearPregunta = (index) => {
   let textAreaPregunta = "textarea-pregunta" + index;
   cloneChild22[1].id = inputPregunta;
   cloneChild22[3].id = textAreaPregunta;
+
+  let cloneChild23 = document.getElementById(divBotonPregunta).childNodes;
+  let botonBorrar = "boton-borrar-pregunta" + index;
+  cloneChild23[1].id = botonBorrar;
+  cloneChild23[1].setAttribute("onClick", `borrarPregunta(${index});`);
+
+  let cloneChild24 = document.getElementById(divInputValor).childNodes;
+  let inputValor = "input-valor" + index;
+  cloneChild24[1].id = inputValor;
+  console.log(cloneChild24)
 
   let cloneChild3 = document.getElementById(nodoPadreRespuesta).childNodes; //PRIMER DIV
   let divRespuesta = "div-respuesta" + index;
@@ -352,7 +374,7 @@ const crearRespuesta = (index) => {
   cloneChild1[1].id = inputRespuesta;
 
   let cloneChild2 = document.getElementById(divCheckboxRespuesta).childNodes;
-  let checkbox = "respuesta-checkbox" + index + objetoContador[index];
+  let checkbox = "checkbox-respuesta" + index + objetoContador[index];
   console.log(checkbox);
   cloneChild2[1].id = checkbox;
 
@@ -360,11 +382,20 @@ const crearRespuesta = (index) => {
   // console.log(objetoContador)
 };
 
-const borrarRespuesta = (iPregunta, iRespuesta) => {
-  let elemento = "div-respuesta" + iPregunta + iRespuesta;
-  console.log(elemento);
+const borrarRespuesta = (indexPregunta, indexRespuesta) => {
+  let elemento = "div-respuesta" + indexPregunta + indexRespuesta;
   document.getElementById(elemento).remove();
 };
+
+const borrarLeccion = (index) =>{
+  let elemento = "nodo-padre-leccion" + index
+  document.getElementById(elemento).remove()
+}
+
+const borrarPregunta = (index) => {
+  let elemento = "nodo-padre-examen" + index
+  document.getElementById(elemento).remove()
+}
 
 const ocultarLecciones = () => {
   $("#padre-lecciones").hide(200);

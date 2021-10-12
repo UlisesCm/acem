@@ -290,7 +290,7 @@ function mostrarMensaje(mensaje,ids, accion){
 	}
 	$("#panel_alertas").stop(false, true);
 	$("#panel_alertas").fadeIn("slow");
-	$("#panel_alertas").delay(5000).fadeOut("slow");
+	$("#panel_alertas").delay(5000).fadeOut("slow"); 
 }
 function ocultar_registros_eliminados(ids){
 	if (ids.length){

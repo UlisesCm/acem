@@ -77,7 +77,6 @@ include("../../seguridad/comprobar_login.php");
                 <div class="col-sm-5">
                   <span id="Vnombre">
                     <input value="" name="nombre" type="text" class="form-control" id="cnombre" />
-
                     <span class="textfieldMinCharsMsg">No se cumple el mínimo de caracteres requerido.</span>
                     <span class="textfieldRequiredMsg">Se necesita un valor.</span>
                   </span>
@@ -98,7 +97,7 @@ include("../../seguridad/comprobar_login.php");
               <div class="form-group ">
                 <label for="cicono" class="col-sm-2 control-label">Icono:</label>
                 <div class="col-sm-5">
-                  <input value="" name="icono" type="text" class="form-control" id="cicono" />
+                  <input name="icono" type="text" class="form-control" id="cicono" />
                 </div>
               </div>
 
@@ -114,8 +113,8 @@ include("../../seguridad/comprobar_login.php");
                 <!-- HEADER LECCIONES -->
                 <div class="box-header ">
                   <h3 class="box-title">Lecciones</h3>
-                  <button class="btn btn btn-secondary pull-right" id="mostrarLeccion" onclick="mostrarLecciones()">Mostrar </button>
-                  <button class="btn btn btn-secondary pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar </button>
+                  <button class="btn btn btn-default pull-right" id="mostrarLeccion" onclick="mostrarLecciones()">Mostrar </button>
+                  <button class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar </button>
                   <button class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion </button>
                 </div>
                 <!-- Padre para clonacion -->
@@ -135,16 +134,19 @@ include("../../seguridad/comprobar_login.php");
                           <option value="documento">Documento</option>
                         </select>
                       </div>
+                      <div id="div-button" style="display: none;">
+                        <button class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</button>
+                      </div>
                       <!-- text arae -->
                       <div class="form-group" id="contenidoTextArea">
                         <label class="col-sm-2 control-label"> Contenido:</label>
-                        <textarea name="" id="" cols="80" rows="6"></textarea>
+                        <textarea name="contenidoTextArea" id="ccontenidoTextArea" cols="80" rows="6"></textarea>
                       </div>
                       <!-- input -->
                       <div class="form-group" id="contenidoInput">
                         <label class="col-sm-2 control-label"> Contenido:</label>
                         <div class="col-sm-4">
-                          <input value="" name="icono" type="text" class="form-control" id="cicono" />
+                          <input value="" name="contenidoInput" type="text" class="form-control" id="ccontenidoInput" />
                         </div>
                       </div>
                       <!-- archivo -->
@@ -152,10 +154,10 @@ include("../../seguridad/comprobar_login.php");
                         <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
                         <div class="col-sm-4">
                           <div class="input-group">
-                            <input type="file" name="factura" style="display:none;" id="cfactura" accept=".pdf" onChange="fileinput('factura')" />
-                            <input type="text" name="nfactura" id="nfactura" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                            <input type="file" name="recurso" style="display:none;" id="crecurso" accept=".pdf" onChange="fileinput('recurso')" />
+                            <input type="text" name="nrecurso" id="nrecurso" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
                             <span class="input-group-btn">
-                              <a class="btn btn-warning" onclick="$('#cfactura').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                              <a class="btn btn-warning" onclick="$('#crecurso').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
                             </span>
                           </div>
                         </div>
@@ -163,7 +165,6 @@ include("../../seguridad/comprobar_login.php");
                     </div>
                   </div>
                 </div>
-
 
 
               </div>
@@ -174,10 +175,9 @@ include("../../seguridad/comprobar_login.php");
                 <!-- HEADER EXAMEN -->
                 <div class="box-header">
                   <h3 class="box-title">Examen</h3>
-                  <button class="btn btn btn-secondary pull-right" id="mostrarExamen" onclick="mostrarExamenes()">Mostrar </button>
-                  <button class="btn btn btn-secondary pull-right" id="ocultarExamen" onclick="ocultarExamenes()">Ocultar </button>
+                  <button class="btn btn btn-default pull-right" id="mostrarExamen" onclick="mostrarExamenes()">Mostrar </button>
+                  <button class="btn btn btn-default pull-right" id="ocultarExamen" onclick="ocultarExamenes()">Ocultar </button>
                   <button class="btn btn-success pull-right margen-right" id="agregar-pregunta">Agregar Pregunta</button>
-
                 </div>
                 <div id="padre-examen">
                   <!-- ORIGINAL CLONE -->
@@ -187,16 +187,23 @@ include("../../seguridad/comprobar_login.php");
                       <div class="form-group" id="primer-divX">
                         <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
                         <div class="col-sm-2" id="div-selectX">
-                          <select id="ctipopreguntaX" name="categoria" class="form-control" onchange="contenidoExamen(0)">
+                          <select id="ctipopreguntaX" name="tipopreguntaX" class="form-control" onchange="contenidoExamen(0)">
                             <option value="abierta">Pregunta Abierta</option>
                             <option value="multiple">Opcion Multiple</option>
                             <option value="practica">Practica</option>
                           </select>
                         </div>
-                        <label class="col-sm-2 control-label"> Pregunta:</label>
+                        <div id="div-button-preguntaX">
+                          <button class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-preguntaX"onclick="borrarPregunta(0)">x</button>
+                        </div>
+                        <label class="col-sm-1 control-label"> Pregunta:</label>
                         <div class="col-sm-4" id="div-preguntaX">
-                          <input class="form-control" type="text" name="" id="input-preguntaX">
-                          <textarea class="form-control" name="descripcion" cols="80" rows="4" id="textarea-preguntaX"></textarea>
+                          <input class="form-control" type="text" name="inputPreguntaX" id="input-preguntaX">
+                          <textarea class="form-control" name="textareaPregunta" cols="80" rows="4" id="textarea-preguntaX"></textarea>
+                        </div>
+                        <label class="col-sm-1 control-label">valor:</label>
+                        <div  class="col-sm-1" id="div-input-valorX">
+                          <input class="form-control" name="inputValorX" type="text" id="input-valorX">
                         </div>
                       </div>
                       <!-- respuesta en checkbox -->
@@ -204,10 +211,10 @@ include("../../seguridad/comprobar_login.php");
                         <div class="form-group" id="div-respuestaX">
                           <label class="col-sm-2 control-label"> Respuesta:</label>
                           <div class="col-sm-4" id="div-input-respuestaX">
-                            <input class="form-control" type="text" name="" id="input-respuestaX">
+                            <input class="form-control" type="text" name="" id="input-respuestaX" name="inputRespuestaX">
                           </div>
                           <div class="checkbox col-sm-2" id="div-checkbox-respuestaX">
-                            <input type="checkbox" id="respuesta-checkboxX"> Correcta
+                            <input type="checkbox" id="respuesta-checkboxX" name="respuestaCheckboxX"> Correcta
                           </div>
                           <button type="button" class="btn btn-default" id="agregar-respuestaX" onclick="crearRespuesta(0)">Agregar Respuesta</button>
                         </div>
@@ -215,23 +222,26 @@ include("../../seguridad/comprobar_login.php");
                     </div>
                   </div>
 
-
                   <!-- PRIMER NODO -->
                   <div class="carta-examen" id="nodo-padre-examen0">
                     <!-- div de select -->
                     <div class="form-group" id="primer-div">
                       <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
                       <div class="col-sm-2" id="div-select">
-                        <select id="ctipopregunta" name="categoria" class="form-control" onchange="contenidoExamen(0)">
+                        <select id="ctipopregunta" name="tipopregunta" class="form-control" onchange="contenidoExamen(0)">
                           <option value="abierta">Pregunta Abierta</option>
                           <option value="multiple">Opcion Multiple</option>
                           <option value="practica">Practica</option>
                         </select>
                       </div>
-                      <label class="col-sm-2 control-label"> Pregunta:</label>
+                      <label class="col-sm-1 control-label"> Pregunta:</label>
                       <div class="col-sm-4" id="div-pregunta">
-                        <input class="form-control" type="text" name="" id="input-pregunta">
-                        <textarea class="form-control" name="descripcion" cols="80" rows="4" id="textarea-pregunta"></textarea>
+                        <input class="form-control" type="text" name="inputPregunta" id="input-pregunta">
+                        <textarea class="form-control" name="textareaPregunta" cols="80" rows="4" id="textarea-pregunta"></textarea>
+                      </div>
+                      <label class="col-sm-1 control-label">valor:</label>
+                      <div  class="col-sm-1" id="div-input-valor">
+                        <input class="form-control" type="text" id="input-valor">
                       </div>
                     </div>
                     <!-- respuesta en checkbox -->
@@ -239,10 +249,10 @@ include("../../seguridad/comprobar_login.php");
                       <div class="form-group" id="div-respuesta">
                         <label class="col-sm-2 control-label"> Respuesta:</label>
                         <div class="col-sm-4" id="div-input-respuesta">
-                          <input class="form-control" type="text" name="" id="input-respuesta">
+                          <input class="form-control" type="text" name="inputRespuesta" id="input-respuesta">
                         </div>
                         <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
-                          <input type="checkbox" id="respuesta-checkbox"> Correcta
+                          <input type="checkbox" id="checkbox-respuesta" name="checkboxRespuesta"> Correcta
                         </div>
                         <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button>
                         <button type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</button>

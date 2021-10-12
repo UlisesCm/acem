@@ -27,7 +27,6 @@ if (isset($_POST['categoria'])){
 if (isset($_POST['icono'])){
 	$icono=htmlentities(trim($_POST['icono']));
 	//$icono=mysql_real_escape_string($icono);
-	
 }else{
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo icono no es correcto</p>";
@@ -35,7 +34,6 @@ if (isset($_POST['icono'])){
 if($validacion){
 	$resultado=$Ocursos->guardar($nombre,$categoria,$icono);
 	if($resultado=="exito"){
-		
 		$mensaje="exito@Operaci&oacute;n exitosa@El registro ha sido guardado";
 	}
 	if($resultado=="nombreExiste"){
