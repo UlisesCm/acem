@@ -113,14 +113,15 @@ include("../../seguridad/comprobar_login.php");
                 <!-- HEADER LECCIONES -->
                 <div class="box-header ">
                   <h3 class="box-title">Lecciones</h3>
-                  <button class="btn btn btn-default pull-right" id="mostrarLeccion" onclick="mostrarLecciones()">Mostrar </button>
-                  <button class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar </button>
-                  <button class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion </button>
+                  <a class="btn btn btn-default pull-right" id="mostrarLeccion" onclick="mostrarLecciones()"> Mostrar</a>
+                  <a class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()"> Ocultar</a>
+                  <a class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion </a>
                 </div>
                 <!-- Padre para clonacion -->
 
                 <!-- Agregar Contenidos -->
                 <div id="padre-lecciones">
+                  <div style="display: none;">
                   <div class="carta-lecciones" id="nodo-padre-leccion">
                     <div class="form-group" id="div-principal">
                       <!-- div1 -->
@@ -135,7 +136,8 @@ include("../../seguridad/comprobar_login.php");
                         </select>
                       </div>
                       <div id="div-button" style="display: none;">
-                        <button class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</button>
+                        <!-- <button class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</button> -->
+                        <a class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</a>
                       </div>
                       <!-- text arae -->
                       <div class="form-group" id="div-contenido-textArea">
@@ -164,6 +166,52 @@ include("../../seguridad/comprobar_login.php");
                       </div>
                     </div>
                   </div>
+                  </div>
+                  <!-- PRIMEN NODO -->
+                  <div class="carta-lecciones" id="nodo-padre-leccion0">
+                    <div class="form-group" id="div-principal0">
+                      <!-- div1 -->
+                      <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
+                      <div class="col-sm-2" id="div-select0">
+                        <select id="ctipoLeccion0" name="tipoLeccion0" class="form-control tipoLeccion" onchange="contenidoLecciones(0)">
+                          <option value="texto">Texto</option>
+                          <option value="enlace">Enlace</option>
+                          <option value="imagen">Imagen</option>
+                          <option value="video">Video</option>
+                          <option value="documento">Documento</option>
+                        </select>
+                      </div>
+                      <div id="div-button0" style="display: none;">
+                        <!-- <button class="btn btn btn-danger pull-right boton-eliminar" id="borrar-leccion0" onclick="borrarLeccion(0)">x</button> -->
+                        <a class="btn btn btn-danger pull-right boton-eliminar" id="borrar-leccion0" onclick="borrarLeccion(0)">x</a>
+                      </div>
+                      <!-- text arae -->
+                      <div class="form-group" id="div-contenido-textArea0">
+                        <label class="col-sm-2 control-label"> Contenido:</label>
+                        <textarea name="contenidoTextArea0" id="ccontenidoTextArea0" cols="80" rows="6"></textarea>
+                      </div>
+                      <!-- input -->
+                      <div class="form-group" id="div-contenido-input0">
+                        <label class="col-sm-2 control-label"> Contenido:</label>
+                        <div class="col-sm-4" id="div-input0">
+                          <input name="contenidoInput0" type="text" class="form-control" id="ccontenidoInput0" />
+                        </div>
+                      </div>
+                      <!-- archivo -->
+                      <div class="form-group" id="div-contenido-archivo0">
+                        <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
+                        <div class="col-sm-4" id="div-contenido-archivo-hijo0">
+                          <div class="input-group" id="div-contenido-archivo-nieto0">
+                            <input type="file" name="recurso0" style="display:none;" id="crecurso0" accept=".pdf" onChange="fileinput('recurso')" />
+                            <input type="text" name="nrecurso0" id="nrecurso0" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                            <span class="input-group-btn">
+                              <a class="btn btn-warning" onclick="$('#crecurso').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
 
@@ -184,39 +232,43 @@ include("../../seguridad/comprobar_login.php");
                   <div style="display:none">
                     <div class="carta-examen" id="nodo-padre-examen">
                       <!-- div de select -->
-                      <div class="form-group" id="primer-divX">
+                      <div class="form-group" id="primer-div">
                         <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
-                        <div class="col-sm-2" id="div-selectX">
-                          <select id="ctipopreguntaX" name="tipopreguntaX" class="form-control" onchange="contenidoExamen(0)">
+                        <div class="col-sm-2" id="div-select">
+                          <select id="ctipopregunta" name="tipopregunta" class="form-control" onchange="contenidoExamen(0)">
                             <option value="abierta">Pregunta Abierta</option>
                             <option value="multiple">Opcion Multiple</option>
                             <option value="practica">Practica</option>
                           </select>
                         </div>
-                        <div id="div-button-preguntaX">
-                          <button class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-preguntaX"onclick="borrarPregunta(0)">x</button>
+                        <div id="div-button-pregunta">
+                          <!-- <button class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta"onclick="borrarPregunta(0)">x</button> -->
+                          <a class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta"onclick="borrarPregunta(0)">x</a>
                         </div>
                         <label class="col-sm-1 control-label"> Pregunta:</label>
                         <div class="col-sm-4" id="div-preguntaX">
-                          <input class="form-control" type="text" name="inputPreguntaX" id="input-preguntaX">
-                          <textarea class="form-control" name="textareaPregunta" cols="80" rows="4" id="textarea-preguntaX"></textarea>
+                          <input class="form-control" type="text" name="inputPregunta" id="input-pregunta">
+                          <textarea class="form-control" name="textareaPregunta" cols="80" rows="4" id="textarea-pregunta"></textarea>
                         </div>
                         <label class="col-sm-1 control-label">valor:</label>
-                        <div  class="col-sm-1" id="div-input-valorX">
-                          <input class="form-control" name="inputValorX" type="text" id="input-valorX">
+                        <div  class="col-sm-1" id="div-input-valor">
+                          <input class="form-control" name="inputValor" type="text" id="input-valor">
                         </div>
                       </div>
                       <!-- respuesta en checkbox -->
-                      <div id="nodo-padre-respuestaX">
-                        <div class="form-group" id="div-respuestaX">
+                      <div id="nodo-padre-respuesta">
+                        <div class="form-group" id="div-respuesta">
                           <label class="col-sm-2 control-label"> Respuesta:</label>
-                          <div class="col-sm-4" id="div-input-respuestaX">
-                            <input class="form-control" type="text" name="" id="input-respuestaX" name="inputRespuestaX">
+                          <div class="col-sm-4" id="div-input-respuesta">
+                            <input class="form-control" type="text" name="inputRespuesta" id="input-respuesta">
                           </div>
-                          <div class="checkbox col-sm-2" id="div-checkbox-respuestaX">
-                            <input type="checkbox" id="respuesta-checkboxX" name="respuestaCheckboxX"> Correcta
+                          <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
+                            <input type="checkbox" id="checkbox-respuesta" name="checkboxRespuesta"> Correcta
                           </div>
-                          <button type="button" class="btn btn-default" id="agregar-respuestaX" onclick="crearRespuesta(0)">Agregar Respuesta</button>
+                          <!-- <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button> -->
+                          <a type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</a>
+                          <!-- <button type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</button> -->
+                          <a type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</a>
                         </div>
                       </div>
                     </div>
@@ -225,37 +277,39 @@ include("../../seguridad/comprobar_login.php");
                   <!-- PRIMER NODO -->
                   <div class="carta-examen" id="nodo-padre-examen0">
                     <!-- div de select -->
-                    <div class="form-group" id="primer-div">
+                    <div class="form-group" id="primer-div0">
                       <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
-                      <div class="col-sm-2" id="div-select">
-                        <select id="ctipopregunta" name="tipopregunta" class="form-control" onchange="contenidoExamen(0)">
+                      <div class="col-sm-2" id="div-select0">
+                        <select id="ctipopregunta0" name="tipopregunta0" class="form-control" onchange="contenidoExamen(0)">
                           <option value="abierta">Pregunta Abierta</option>
                           <option value="multiple">Opcion Multiple</option>
                           <option value="practica">Practica</option>
                         </select>
                       </div>
                       <label class="col-sm-1 control-label"> Pregunta:</label>
-                      <div class="col-sm-4" id="div-pregunta">
-                        <input class="form-control" type="text" name="inputPregunta" id="input-pregunta">
-                        <textarea class="form-control" name="textareaPregunta" cols="80" rows="4" id="textarea-pregunta"></textarea>
+                      <div class="col-sm-4" id="div-pregunta0">
+                        <input class="form-control" type="text" name="inputPregunta0" id="input-pregunta0">
+                        <textarea class="form-control" name="textareaPregunta0" cols="80" rows="4" id="textarea-pregunta0"></textarea>
                       </div>
                       <label class="col-sm-1 control-label">valor:</label>
-                      <div  class="col-sm-1" id="div-input-valor">
-                        <input class="form-control" type="text" id="input-valor">
+                      <div  class="col-sm-1" id="div-input-valor0">
+                        <input class="form-control" type="text" id="input-valor0" name="inputValor0">
                       </div>
                     </div>
                     <!-- respuesta en checkbox -->
-                    <div id="nodo-padre-respuesta">
-                      <div class="form-group" id="div-respuesta">
+                    <div id="nodo-padre-respuesta0">
+                      <div class="form-group" id="div-respuesta0">
                         <label class="col-sm-2 control-label"> Respuesta:</label>
-                        <div class="col-sm-4" id="div-input-respuesta">
-                          <input class="form-control" type="text" name="inputRespuesta" id="input-respuesta">
+                        <div class="col-sm-4" id="div-input-respuesta0">
+                          <input class="form-control" type="text" name="inputRespuesta0" id="input-respuesta0">
                         </div>
-                        <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
-                          <input type="checkbox" id="checkbox-respuesta" name="checkboxRespuesta"> Correcta
+                        <div class="checkbox col-sm-2" id="div-checkbox-respuesta0">
+                          <input type="checkbox" id="checkbox-respuesta0" name="checkboxRespuesta0"> Correcta
                         </div>
-                        <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button>
-                        <button type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</button>
+                        <!-- <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</button> -->
+                        <a type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</a>
+                        <!-- <button type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</button> -->
+                        <a type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</a>
                       </div>
                     </div>
                   </div>

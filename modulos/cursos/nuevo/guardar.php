@@ -5,7 +5,15 @@ require('../Cursos.class.php');
 $Ocursos=new Cursos;
 $mensaje="";
 $validacion=true;
+//DEBUGGER POR CONSOLA
+function debug_to_console( $data ) {
+	$output = $data;
+	if ( is_array( $output ) )
+			$output = implode( ',', $output);
 
+	echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
+}
+// GUARDAR DATOS GENERALES DEL CURSO //////////////////////////////////////////////
 if (isset($_POST['nombre'])){
 	$nombre=htmlentities(trim($_POST['nombre']));
 	//$nombre=mysql_real_escape_string($nombre);
@@ -31,6 +39,35 @@ if (isset($_POST['icono'])){
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo icono no es correcto</p>";
 }
+// VARIABLES EXAMEN /////////////////////////////////////////////////////////////////
+/* NOTAS Y OBSERVACIONES DE GUARDAR */
+/* Buscar traer todas las variables e irlas pusheando a un arreglo, ver la manera de traer el los index */
+//select tipo leccion
+if (isset($_POST['tipoLeccion0'])){ 
+	$tipoLeccion=htmlentities(trim($_POST['tipoLeccion0']));
+	//$icono=mysql_real_escape_string($icono);
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo icono no es correcto</p>";
+}
+//Text Area Contenido
+if (isset($_POST['contenidoTextArea0'])){ 
+	$contenidoTextArea=htmlentities(trim($_POST['contenidoTextArea0']));
+	//$icono=mysql_real_escape_string($icono);
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo icono no es correcto</p>";
+}
+//Input Contenido
+if (isset($_POST['contenidoInput0'])){ //select tipo leccion
+	$contenidoInput=htmlentities(trim($_POST['contenidoInput0']));
+	//$icono=mysql_real_escape_string($icono);
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo icono no es correcto</p>";
+}
+
+
 if($validacion){
 	$resultado=$Ocursos->guardar($nombre,$categoria,$icono);
 	if($resultado=="exito"){
@@ -50,5 +87,6 @@ if($validacion){
 }
 
 echo utf8_encode($mensaje);
+echo utf8_encode($tipoLeccion);
 
 ?>
