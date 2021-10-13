@@ -94,7 +94,7 @@ include("../../seguridad/comprobar_login.php");
                 </div>
               </div>
 
-              <div class="form-group ">
+              <div class="form-group">
                 <label for="cicono" class="col-sm-2 control-label">Icono:</label>
                 <div class="col-sm-5">
                   <input name="icono" type="text" class="form-control" id="cicono" />
@@ -138,22 +138,22 @@ include("../../seguridad/comprobar_login.php");
                         <button class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</button>
                       </div>
                       <!-- text arae -->
-                      <div class="form-group" id="contenidoTextArea">
+                      <div class="form-group" id="div-contenido-textArea">
                         <label class="col-sm-2 control-label"> Contenido:</label>
                         <textarea name="contenidoTextArea" id="ccontenidoTextArea" cols="80" rows="6"></textarea>
                       </div>
                       <!-- input -->
-                      <div class="form-group" id="contenidoInput">
+                      <div class="form-group" id="div-contenido-input">
                         <label class="col-sm-2 control-label"> Contenido:</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" id="div-input">
                           <input value="" name="contenidoInput" type="text" class="form-control" id="ccontenidoInput" />
                         </div>
                       </div>
                       <!-- archivo -->
-                      <div class="form-group" id="contenidoArchivo">
+                      <div class="form-group" id="div-contenido-archivo">
                         <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
-                        <div class="col-sm-4">
-                          <div class="input-group">
+                        <div class="col-sm-4" id="div-contenido-archivo-hijo">
+                          <div class="input-group" id="div-contenido-archivo-nieto">
                             <input type="file" name="recurso" style="display:none;" id="crecurso" accept=".pdf" onChange="fileinput('recurso')" />
                             <input type="text" name="nrecurso" id="nrecurso" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
                             <span class="input-group-btn">

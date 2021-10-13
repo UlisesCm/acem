@@ -25,7 +25,7 @@ $(document).ready(function () {
     crearPregunta(contadorExamen);
     contenidoExamen(contadorExamen);
   });
-  
+
   $("#padre-examen").hide();
   $("#padre-lecciones").hide();
   ocultarLecciones();
@@ -94,14 +94,14 @@ const contenidoLecciones = (index) => {
 
   if (index === 0 || !index) {
     select = $("#ctipoLeccion");
-    textArea = $("#contenidoTextArea");
-    input = $("#contenidoInput");
-    documento = $("#contenidoArchivo");
+    textArea = $("#div-contenido-textArea");
+    input = $("#div-contenido-input");
+    documento = $("#div-contenido-archivo");
   } else {
     select = $("#ctipoLeccion" + index);
-    textArea = $("#contenidoTextArea" + index);
-    input = $("#contenidoInput" + index);
-    documento = $("#contenidoArchivo" + index);
+    textArea = $("#div-contenido-textArea" + index);
+    input = $("#div-contenido-input" + index);
+    documento = $("#div-contenido-archivo" + index);
   }
 
   textArea.show();
@@ -155,7 +155,7 @@ const contenidoLecciones = (index) => {
 
 const contenidoExamen = (index) => {
   objetoContador[index];
-  console.log(index);
+  // console.log(index);
   let select, textarea, input, respuesta;
   // if (index === 0 || !index) {
   if (index === 0) {
@@ -217,6 +217,8 @@ const contenidoExamen = (index) => {
 };
 
 const crearLeccion = (index) => {
+  /* MOVER TODOS LOS IDENTIFICADORES Y AGREGAR NAMES */
+  // CAMBIE LOS ID PARA ESTANDARIZAR IDS Y NAMES ENTONCES HAY QUE CAMBIAR LA FUNCION DE OCULTAR LECCIONES
   const original = document.getElementById("nodo-padre-leccion");
   const destino = document.getElementById("padre-lecciones");
   const nuevo = original.cloneNode(true);
@@ -231,20 +233,55 @@ const crearLeccion = (index) => {
   let divPrincipal = "div-principal" + index;
   cloneChild[1].id = divPrincipal;
   //acceso a los div hijos y cambio de id a text area, Input y archivo
-  let cloneChild2 = document.getElementById(divPrincipal).childNodes;//div-principal
+  let cloneChild2 = document.getElementById(divPrincipal).childNodes; //div-principal
   let divSelect = cloneChild2[5].id + index;
   let divBotonBorrar = cloneChild2[7].id + index;
+  let divTextArea = cloneChild2[11].id + index;
+  let divContenidoInput = cloneChild2[15].id + index;
+  let divContenidoArchivo = cloneChild2[19].id + index;
+
   cloneChild2[5].id = divSelect; // DIV SELECT
-  cloneChild2[7].id =  divBotonBorrar;// DIV BOTON BORRAR
+  cloneChild2[7].id = divBotonBorrar; // DIV BOTON BORRAR
   cloneChild2[7].setAttribute("style", "display:block");
-  cloneChild2[11].id = cloneChild2[11].id + index; //TEXT AREA
-  cloneChild2[15].id = cloneChild2[15].id + index; // CONTENIDO INPUT
-  cloneChild2[19].id = cloneChild2[19].id + index; // CONTENIDO ARCHIVO
+  cloneChild2[11].id = divTextArea; //DIV DEL TEXT AREA
+  cloneChild2[15].id = divContenidoInput; // DIV CONTENIDO INPUT
+  cloneChild2[19].id = divContenidoArchivo; // DIV CONTENIDO ARCHIVO
 
   //Accesso al div del select
-  let cloneChild3 = document.getElementById(divSelect).childNodes;
+  let cloneChild3 = document.getElementById(divSelect).childNodes; //DIV SELECT
   cloneChild3[1].id = "ctipoLeccion" + index;
-  cloneChild3[1].setAttribute("onChange", `contenidoLecciones(${index});`);
+  cloneChild3[1].setAttribute("name", `tipoLeccion${index}`); //agregamos atributo de name
+  cloneChild3[1].setAttribute("onChange", `contenidoLecciones(${index});`); //agregamos atributo de onChange para disparar funcion contenidolecciones()
+  //Acceso al div del textArea
+  let cloneChild31 = document.getElementById(divTextArea).childNodes;
+  let textArea = cloneChild31[3].id + index;
+  cloneChild31[3].id = textArea;
+  cloneChild31[3].setAttribute("name", `contenidoTextArea${index}`);
+  // Accesso al div contenido Input
+  let cloneChild32 = document.getElementById(divContenidoInput).childNodes;
+  let divInput = cloneChild32[3].id + index;
+  cloneChild32[3].id = divInput;
+  /* Acceso al div input */
+  let cloneChild321 = document.getElementById(divInput).childNodes;
+  let input = cloneChild321[1].id + index;
+  cloneChild321[1].id = input;
+  cloneChild321[1].setAttribute("name", `contenidoInput${index}`);
+  // Acceso al div contenido archivo
+  let cloneChild33 = document.getElementById(divContenidoArchivo).childNodes;
+  let divArchivoHijo = cloneChild33[3].id + index;
+  cloneChild33[3].id = divArchivoHijo;
+  // Acceso al div Archivo Hijo
+  let cloneChild331 = document.getElementById(divArchivoHijo).childNodes;
+  let divArchivoNieto = cloneChild331[1].id + index;
+  cloneChild331[1].id = divArchivoNieto;
+  //Accesso al div Archivo Nieto
+  let cloneChild3311 = document.getElementById(divArchivoNieto).childNodes;
+  let inputArchivo1 = cloneChild3311[1].id + index;
+  let inputArchivo2 = cloneChild3311[3].id + index;
+  cloneChild3311[1].id = inputArchivo1;
+  cloneChild3311[3].id = inputArchivo2;
+  cloneChild3311[1].setAttribute("name", `recurso${index}`);
+  cloneChild3311[3].setAttribute("name", `nrecurso${index}`);
   // Acceso al div de boton
   let cloneChild4 = document.getElementById(divBotonBorrar).childNodes;
   cloneChild4[1].id = cloneChild4[1].id + index;
@@ -296,7 +333,7 @@ const crearPregunta = (index) => {
   let cloneChild24 = document.getElementById(divInputValor).childNodes;
   let inputValor = "input-valor" + index;
   cloneChild24[1].id = inputValor;
-  console.log(cloneChild24)
+  // console.log(cloneChild24)
 
   let cloneChild3 = document.getElementById(nodoPadreRespuesta).childNodes; //PRIMER DIV
   let divRespuesta = "div-respuesta" + index;
@@ -327,7 +364,7 @@ const crearPregunta = (index) => {
 const crearRespuesta = (index) => {
   let destino;
   objetoContador[index] = objetoContador[index] + 1;
-  console.log(objetoContador);
+  // console.log(objetoContador);
   const original = document.getElementById("div-respuesta");
   if (index === 0 || index === null) {
     destino = document.getElementById("nodo-padre-respuesta");
@@ -335,20 +372,17 @@ const crearRespuesta = (index) => {
     destino = document.getElementById("nodo-padre-respuesta" + index);
   }
   // console.log(destino)
-  // const destino = document.getElementById("nodo-padre-respuesta"+objetoContador[index]);
   const nuevo = original.cloneNode(true);
 
   destino.appendChild(nuevo);
-  let indice = index + objetoContador[index];
   const nuevoId =
     "div-respuesta" +
     index +
     objetoContador[index]; /* + objetoContador[index] */
   nuevo.id = nuevoId;
-  console.log("el elemento seleccionado es:" + nuevo.id);
 
   let cloneChild = document.getElementById(nuevoId).childNodes;
-  console.log(cloneChild);
+  // console.log(cloneChild);
   let divInputRespuesta = cloneChild[3].id + objetoContador[index]; // DIV INPUT RESPUESTA ID
   let divCheckboxRespuesta = cloneChild[5].id + objetoContador[index]; // DIV CHECKBOX RESPUESTA ID
   let botonAgregarRespuesta = cloneChild[7].id + index + objetoContador[index];
@@ -362,20 +396,16 @@ const crearRespuesta = (index) => {
     `borrarRespuesta(${index},${objetoContador[index]});`
   );
   cloneChild[9].setAttribute("style", "display:block");
-
-  /* console.log(divCheckboxRespuesta) 
-  console.log(botonAgregarRespuesta)  */
-
   document.getElementById(botonAgregarRespuesta).remove();
 
   let cloneChild1 = document.getElementById(divInputRespuesta).childNodes;
   let inputRespuesta = "input-respuesta" + index + objetoContador[index];
-  console.log(inputRespuesta);
+  // console.log(inputRespuesta);
   cloneChild1[1].id = inputRespuesta;
 
   let cloneChild2 = document.getElementById(divCheckboxRespuesta).childNodes;
   let checkbox = "checkbox-respuesta" + index + objetoContador[index];
-  console.log(checkbox);
+  // console.log(checkbox);
   cloneChild2[1].id = checkbox;
 
   // CONTADOR DINAMICO PARA CONTAR EL NUMERO DE RESPUESTAS
@@ -387,15 +417,15 @@ const borrarRespuesta = (indexPregunta, indexRespuesta) => {
   document.getElementById(elemento).remove();
 };
 
-const borrarLeccion = (index) =>{
-  let elemento = "nodo-padre-leccion" + index
-  document.getElementById(elemento).remove()
-}
+const borrarLeccion = (index) => {
+  let elemento = "nodo-padre-leccion" + index;
+  document.getElementById(elemento).remove();
+};
 
 const borrarPregunta = (index) => {
-  let elemento = "nodo-padre-examen" + index
-  document.getElementById(elemento).remove()
-}
+  let elemento = "nodo-padre-examen" + index;
+  document.getElementById(elemento).remove();
+};
 
 const ocultarLecciones = () => {
   $("#padre-lecciones").hide(200);
