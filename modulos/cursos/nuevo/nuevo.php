@@ -76,7 +76,7 @@ include("../../seguridad/comprobar_login.php");
                 <label for="cnombre" class="col-sm-2 control-label">Nombre:</label>
                 <div class="col-sm-5">
                   <span id="Vnombre">
-                    <input value="" name="nombre" type="text" class="form-control" id="cnombre" />
+                    <input name="nombre" type="text" class="form-control" id="cnombre" />
                     <span class="textfieldMinCharsMsg">No se cumple el mínimo de caracteres requerido.</span>
                     <span class="textfieldRequiredMsg">Se necesita un valor.</span>
                   </span>
@@ -113,9 +113,10 @@ include("../../seguridad/comprobar_login.php");
                 <!-- HEADER LECCIONES -->
                 <div class="box-header ">
                   <h3 class="box-title">Lecciones</h3>
-                  <a class="btn btn btn-default pull-right" id="mostrarLeccion" onclick="mostrarLecciones()"> Mostrar</a>
-                  <a class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()"> Ocultar</a>
-                  <a class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion </a>
+                  <input type="text" name="inputContadorLecciones" id="input-contador-lecciones" value="0">
+                  <button type="button" class="btn btn btn-default pull-right" id="mostrarLeccion" onclick="mostrarLecciones()"> Mostrar</button>
+                  <button type="button"class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar</button>           
+                  <button type="button" class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion</button>
                 </div>
                 <!-- Padre para clonacion -->
 
@@ -136,8 +137,7 @@ include("../../seguridad/comprobar_login.php");
                         </select>
                       </div>
                       <div id="div-button" style="display: none;">
-                        <!-- <button class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</button> -->
-                        <a class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</a>
+                        <button type="button" class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</button>
                       </div>
                       <!-- text arae -->
                       <div class="form-group" id="div-contenido-textArea">
@@ -148,7 +148,7 @@ include("../../seguridad/comprobar_login.php");
                       <div class="form-group" id="div-contenido-input">
                         <label class="col-sm-2 control-label"> Contenido:</label>
                         <div class="col-sm-4" id="div-input">
-                          <input value="" name="contenidoInput" type="text" class="form-control" id="ccontenidoInput" />
+                          <input  name="contenidoInput" type="text" class="form-control" id="ccontenidoInput" />
                         </div>
                       </div>
                       <!-- archivo -->
@@ -182,8 +182,8 @@ include("../../seguridad/comprobar_login.php");
                         </select>
                       </div>
                       <div id="div-button0" style="display: none;">
-                        <!-- <button class="btn btn btn-danger pull-right boton-eliminar" id="borrar-leccion0" onclick="borrarLeccion(0)">x</button> -->
-                        <a class="btn btn btn-danger pull-right boton-eliminar" id="borrar-leccion0" onclick="borrarLeccion(0)">x</a>
+                        <button type="button" class="btn btn btn-danger pull-right boton-eliminar" id="borrar-leccion0" onclick="borrarLeccion(0)">x</button>
+                        <!-- <a class="btn btn btn-danger pull-right boton-eliminar" id="borrar-leccion0" onclick="borrarLeccion(0)">x</a> -->
                       </div>
                       <!-- text arae -->
                       <div class="form-group" id="div-contenido-textArea0">
@@ -223,9 +223,11 @@ include("../../seguridad/comprobar_login.php");
                 <!-- HEADER EXAMEN -->
                 <div class="box-header">
                   <h3 class="box-title">Examen</h3>
-                  <button class="btn btn btn-default pull-right" id="mostrarExamen" onclick="mostrarExamenes()">Mostrar </button>
-                  <button class="btn btn btn-default pull-right" id="ocultarExamen" onclick="ocultarExamenes()">Ocultar </button>
-                  <button class="btn btn-success pull-right margen-right" id="agregar-pregunta">Agregar Pregunta</button>
+                  <input type="text" name="inputContadorExamen" id="input-contador-examen" value="0">
+                  <input type="text" name="inputContadorRespuestas" id="input-contador-respuesta" value="0">
+                  <button type="button" class="btn btn btn-default pull-right" id="mostrarExamen" onclick="mostrarExamenes()">Mostrar </button>
+                  <button type="button" class="btn btn btn-default pull-right" id="ocultarExamen" onclick="ocultarExamenes()">Ocultar </button>
+                  <button type="button" class="btn btn-success pull-right margen-right" id="agregar-pregunta">Agregar Pregunta</button>
                 </div>
                 <div id="padre-examen">
                   <!-- ORIGINAL CLONE -->
@@ -242,8 +244,8 @@ include("../../seguridad/comprobar_login.php");
                           </select>
                         </div>
                         <div id="div-button-pregunta">
-                          <!-- <button class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta"onclick="borrarPregunta(0)">x</button> -->
-                          <a class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta"onclick="borrarPregunta(0)">x</a>
+                          <button type="button" class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta"onclick="borrarPregunta(0)">x</button>
+                          <!-- <a class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta"onclick="borrarPregunta(0)">x</a> -->
                         </div>
                         <label class="col-sm-1 control-label"> Pregunta:</label>
                         <div class="col-sm-4" id="div-preguntaX">
@@ -265,10 +267,8 @@ include("../../seguridad/comprobar_login.php");
                           <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
                             <input type="checkbox" id="checkbox-respuesta" name="checkboxRespuesta"> Correcta
                           </div>
-                          <!-- <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button> -->
-                          <a type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</a>
-                          <!-- <button type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</button> -->
-                          <a type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</a>
+                          <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button>
+                          <button type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</button>
                         </div>
                       </div>
                     </div>
@@ -306,10 +306,10 @@ include("../../seguridad/comprobar_login.php");
                         <div class="checkbox col-sm-2" id="div-checkbox-respuesta0">
                           <input type="checkbox" id="checkbox-respuesta0" name="checkboxRespuesta0"> Correcta
                         </div>
-                        <!-- <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</button> -->
-                        <a type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</a>
-                        <!-- <button type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</button> -->
-                        <a type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</a>
+                        <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</button>
+                        <!-- <a type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</a> -->
+                        <button type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</button>
+                        <!-- <a type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</a> -->
                       </div>
                     </div>
                   </div>

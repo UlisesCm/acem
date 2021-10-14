@@ -41,16 +41,24 @@ class Cursos{
 		}
 	}
 
-	function guardar($nombre,$categoria,$icono){
+	function guardar($nombre,$categoria,$icono,$ContadorLecciones, $aTipoLecciones){
 		/////PERMISOS////////////////
 		if (!isset($_SESSION['permisos']['cursos']['guardar'])){
 			return "denegado";
 			exit;
 		}
 		/////FIN  DE PERMISOS////////
-		
 		$idcurso=$this->con->generarClave(2); /*Sincronizacion 1 */
-		
+		/* 
+			Traer variable contador y hacer un for sacando todos los campos de los arreglos
+		*/
+		for ($i=0; $i <= $ContadorLecciones ; $i++) { 
+				$tipoLeccion = $aTipoLecciones[$i];
+				// $inputLeccion ="";
+				// $textareaLeccion ="";
+				mysqli_query($this->con->conect,"INSERT INTO detallecurso (tipo) VALUES ('$tipoLeccion')");
+		}
+		// $guardarLeccion = mysqli_query($this->con->conect,"INSERT INTO detallecurso");
 		if($this->con->conectar()==true){
 			if($this->comprobarCampo("nombre",$nombre, "nuevo")){
 				return "nombreExiste";

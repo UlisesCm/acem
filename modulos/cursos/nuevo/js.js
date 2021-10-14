@@ -17,6 +17,7 @@ $(document).ready(function () {
     contadorLeccion++;
     crearLeccion(contadorLeccion);
     contenidoLecciones(contadorLeccion);
+    actualizarContadorLecciones(contadorLeccion);
   });
 
   $("#agregar-pregunta").click(() => {
@@ -24,6 +25,7 @@ $(document).ready(function () {
     contadorExamen++;
     crearPregunta(contadorExamen);
     contenidoExamen(contadorExamen);
+    actualizarContadorExamen(contadorExamen);
   });
 
   $("#padre-examen").hide();
@@ -93,10 +95,10 @@ function validar() {
 const contenidoLecciones = (index) => {
   let select, textArea, input, documento;
 
-   select = $("#ctipoLeccion" + index);
-    textArea = $("#div-contenido-textArea" + index);
-    input = $("#div-contenido-input" + index);
-    documento = $("#div-contenido-archivo" + index);
+  select = $("#ctipoLeccion" + index);
+  textArea = $("#div-contenido-textArea" + index);
+  input = $("#div-contenido-input" + index);
+  documento = $("#div-contenido-archivo" + index);
 
   textArea.show();
   input.hide();
@@ -240,7 +242,7 @@ const crearLeccion = (index) => {
   let textArea = cloneChild31[3].id + index;
   cloneChild31[3].id = textArea;
   cloneChild31[3].setAttribute("name", `contenidoTextArea${index}`);
-  
+  // cloneChild31[3].setAttribute("value", `valor del Text Area ${index}`);//VALOR PARA HACER PRUEBAS
   // Accesso al div contenido Input
   let cloneChild32 = document.getElementById(divContenidoInput).childNodes;
   let divInput = cloneChild32[3].id + index;
@@ -250,7 +252,7 @@ const crearLeccion = (index) => {
   let input = cloneChild321[1].id + index;
   cloneChild321[1].id = input;
   cloneChild321[1].setAttribute("name", `contenidoInput${index}`);
-  cloneChild321[1].setAttribute("value", "123");
+  cloneChild321[1].setAttribute("value", `valor del Input ${index}`);//VALOR PARA HACER PRUEBAS
   // Acceso al div contenido archivo
   let cloneChild33 = document.getElementById(divContenidoArchivo).childNodes;
   let divArchivoHijo = cloneChild33[3].id + index;
@@ -352,7 +354,9 @@ const crearPregunta = (index) => {
 
 const crearRespuesta = (index) => {
   objetoContador[index] = objetoContador[index] + 1;
-
+  console.log(objetoContador)
+  actualizarContadorRespuesta(objetoContador)
+  
   const original = document.getElementById("div-respuesta");
   const destino = document.getElementById("nodo-padre-respuesta" + index);
   const nuevo = original.cloneNode(true);
@@ -365,7 +369,6 @@ const crearRespuesta = (index) => {
   nuevo.id = nuevoId;
 
   let cloneChild = document.getElementById(nuevoId).childNodes;
-  console.log(cloneChild)
   let divInputRespuesta = "div-input-respuesta" + index + objetoContador[index]; // DIV INPUT RESPUESTA ID
   let divCheckboxRespuesta = "div-checkbox-respuesta" + index + objetoContador[index]; // DIV CHECKBOX RESPUESTA ID
   let botonAgregarRespuesta = "agregar-respuestas" + index + objetoContador[index];
@@ -439,6 +442,18 @@ const mostrarExamenes = () => {
   $("#mostrarExamen").hide();
   $("#agregar-pregunta").show();
 };
+
+const actualizarContadorLecciones = (index) => {
+  $("#input-contador-lecciones").val(index)
+}
+
+const actualizarContadorExamen = (index) => {
+  $("#input-contador-examen").val(index)
+}
+
+const actualizarContadorRespuesta = (index) => {
+  $("#input-contador-respuesta").val(index)
+}
 
 function buscar(busqueda) {
   location.href =
