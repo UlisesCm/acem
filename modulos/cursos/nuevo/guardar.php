@@ -2,6 +2,8 @@
 include ("../../seguridad/comprobar_login.php");
 include ("../../../librerias/php/validaciones.php");
 require('../Cursos.class.php');
+/*CARGA DE ARCHIVOS*/
+include_once('../../../librerias/php/thumb.php');
 $Ocursos=new Cursos;
 $mensaje="";
 $validacion=true;
@@ -43,9 +45,9 @@ if (isset($_POST['inputContadorLecciones'])){ //select tipo leccion
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo Contador-Lecciones no es correcto</p>";
 }
-//select tipo leccion
+// select tipo leccion
 $aTipoLecciones = array(); //se declara el arreglo que contiene todos elementos
-for ($i=0; $i <= $inputContadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
+for ($i=0; $i <= $ContadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "tipoLeccion".$i;
 	if (isset($_POST[$concatenacion])){ 
 		$tipoLeccion=htmlentities(trim($_POST[$concatenacion]));
@@ -57,7 +59,7 @@ for ($i=0; $i <= $inputContadorLecciones; $i++) { //recorremos el arreglo en bas
 
 //Input Contenido
 $aInputLecciones = array(); //se declara el arreglo que contiene todos elementos
-for ($i=0; $i <= $inputContadorLecciones ; $i++) { //recorremos el arreglo en base a la variable contador
+for ($i=0; $i <= $ContadorLecciones ; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "contenidoInput".$i;
 	if (isset($_POST[$concatenacion])){ 
 		$contenidoInput=htmlentities(trim($_POST[$concatenacion]));
@@ -69,7 +71,7 @@ for ($i=0; $i <= $inputContadorLecciones ; $i++) { //recorremos el arreglo en ba
 
 //Text Area Contenido
 $aTextareaLecciones = array(); //se declara el arreglo que contiene todos elementos
-for ($i=0; $i <= $inputContadorLecciones ; $i++) { //recorremos el arreglo en base a la variable contador
+for ($i=0; $i <= $ContadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "contenidoTextArea".$i;
 	if (isset($_POST[$concatenacion])){ 
 		$contenidoTextArea=htmlentities(trim($_POST[$concatenacion]));
@@ -78,31 +80,44 @@ for ($i=0; $i <= $inputContadorLecciones ; $i++) { //recorremos el arreglo en ba
 		array_push($aTextareaLecciones,"");
 	}
 }
-
-
-
-/* //Cargar Archivo 1
-if (isset($_POST['recurso'])){ //select tipo leccion
-	$recurso=htmlentities(trim($_POST['recurso']));
-	//$icono=mysql_real_escape_string($icono);
-}else{
-	$validacion=false;
-	$mensaje=$mensaje."<p>El campo Archivo-1 no es correcto</p>";
-}
-//Cargar Archivo 2
-if (isset($_POST['nrecurso'])){ //select tipo leccion
-	$nrecurso=htmlentities(trim($_POST['nrecurso']));
-	//$icono=mysql_real_escape_string($icono);
-}else{
-	$validacion=false;
-	$mensaje=$mensaje."<p>El campo Archivo-2 no es correcto</p>";
+/*CARGAR ARCHIVO*/
+/* $aRecursoLecciones = array();
+for ($i=0; $i < $ContadorLecciones ; $i++) { 
+	$recurso = "recurso".$i;
+	if (isset($_FILES[$recurso]['name'])){
+		$recursotemporal=$_FILES[$recurso]['tmp_name'];
+		$recursonombre=$_FILES[$recurso]['name'];
+		$extencionrecurso=pathinfo($_FILES[$recurso]['name'], PATHINFO_EXTENSION);
+		$recurso=basename($_FILES[$recurso]['name'],".".$extencionrecurso)."_".generarClave(5);
+		$recursoExtencion= $recurso.".".$extencionrecurso;
+			if($recursotemporal==""){
+				$recurso="";
+			}
+		array_push($aRecursoLecciones,$recursonombre); //pendiente saber que objeto es el que pusheo al array 
+		}else{
+			array_push($aRecursoLecciones,"");
+	}
 } */
 
 
-
 if($validacion){
-	$resultado=$Ocursos->guardar($nombre,$categoria,$icono,$ContadorLecciones,$aTipoLecciones);
+	$resultado=$Ocursos->guardar($nombre,$categoria,$icono,$ContadorLecciones,$aTipoLecciones,$aInputLecciones,$aTextareaLecciones);
 	if($resultado=="exito"){
+		/*CARGAR ARCHIVOS*/
+		//ABRE
+		$mensajeArchivo="";
+		if($facturatemporal!=""){
+			
+			$estadoArchivo=cargarArchivo($recurso,$extencionrecurso, $recursotemporal, $recursoExtencion,"pdf","garantias",0,0,"archivo","center");
+			if ($estadoArchivo=="exito"){
+				$mensajeArchivo="";
+			}else if ($estadoArchivo=="extencionInvalida"){
+				$mensajeArchivo=$mensajeArchivo."| La extenci&oacute;n: ".$extencionfactura. " del archivo, no es v&aacute;lida. ";
+			}else{
+				$mensajeArchivo=$mensajeArchivo."| No se pudo guardar el archivo (".$extencionfoto."). ";
+			}
+		} 
+		$mensaje=$mensaje.$mensajeArchivo; //CIERRA
 		$mensaje="exito@Operaci&oacute;n exitosa@El registro ha sido guardado";
 	}
 	if($resultado=="nombreExiste"){
@@ -119,8 +134,5 @@ if($validacion){
 }
 
 echo utf8_encode($mensaje);
-// echo utf8_encode("- Contador Leccion :".$inputContadorLecciones." - ");
-// echo utf8_encode(print_r($aTextareaLecciones))
-
-
-?>
+// echo utf8_encode("- Contador Leccion :".$ContadorLecciones." - ");
+// echo utf8_encode(print_r($aTipoLecciones));
