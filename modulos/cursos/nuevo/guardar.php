@@ -70,6 +70,7 @@ for ($i=0; $i <= $ContadorLecciones ; $i++) { //recorremos el arreglo en base a 
 }
 
 //Text Area Contenido
+
 $aTextareaLecciones = array(); //se declara el arreglo que contiene todos elementos
 for ($i=0; $i <= $ContadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "contenidoTextArea".$i;
@@ -81,43 +82,66 @@ for ($i=0; $i <= $ContadorLecciones; $i++) { //recorremos el arreglo en base a l
 	}
 }
 /*CARGAR ARCHIVO*/
-/* $aRecursoLecciones = array();
-for ($i=0; $i < $ContadorLecciones ; $i++) { 
-	$recurso = "recurso".$i;
-	if (isset($_FILES[$recurso]['name'])){
-		$recursotemporal=$_FILES[$recurso]['tmp_name'];
-		$recursonombre=$_FILES[$recurso]['name'];
-		$extencionrecurso=pathinfo($_FILES[$recurso]['name'], PATHINFO_EXTENSION);
-		$recurso=basename($_FILES[$recurso]['name'],".".$extencionrecurso)."_".generarClave(5);
+function generarClave2($longitud){ 
+	$cadena="[^A-Z0-9]"; 
+	return substr(str_replace($cadena, "", md5(rand())) . 
+	str_replace($cadena, "", md5(rand())) . 
+	str_replace($cadena, "", md5(rand())), 
+	0, $longitud); 
+}
+
+$aRecursoTemporal = array();
+$aRecursoNombre = array();
+$aExtencionRecurso = array();
+$aRecurso = array();
+$aRecursoExtencion = array();
+
+/* for ($i=0; $i <= $ContadorLecciones ; $i++) { 
+	$recursoContador = "recurso".$i;
+	$clave = generarClave2(5);
+	if (isset($_FILES['recurso0']['name'])){
+		$recursotemporal=$_FILES['recurso0']['tmp_name'];
+		$recursonombre=$_FILES['recurso0']['name'];
+		$extencionrecurso=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
+		$recurso=basename($_FILES['recurso0']['name'],".".$extencionrecurso)."_".$clave;
 		$recursoExtencion= $recurso.".".$extencionrecurso;
 			if($recursotemporal==""){
 				$recurso="";
 			}
-		array_push($aRecursoLecciones,$recursonombre); //pendiente saber que objeto es el que pusheo al array 
+		array_push($aRecursoTemporal,$recursotemporal); //pendiente saber que objeto es el que pusheo al array 
+		array_push($aRecursoNombre,$recursonombre); //pendiente saber que objeto es el que pusheo al array 
+		array_push($aExtencionRecurso,$extencionrecurso); //pendiente saber que objeto es el que pusheo al array 
+		array_push($aRecurso,$recurso); //pendiente saber que objeto es el que pusheo al array 
+		array_push($aRecursoExtencion,$recursoExtencion); //pendiente saber que objeto es el que pusheo al array 
 		}else{
-			array_push($aRecursoLecciones,"");
+		array_push($aRecursoTemporal,$recurso); 
+		array_push($aRecursoNombre,$recurso); 
+		array_push($aExtencionRecurso,$recurso); 
+		array_push($aRecurso,$recurso); 
+		array_push($aRecursoExtencion,$recurso);
 	}
 } */
-
+/*CARGAR ARCHIVO*/
+if (isset($_FILES['recurso0']['name'])){
+	$facturatemporal=$_FILES['recurso0']['tmp_name'];
+	$facturanombre=$_FILES['recurso0']['name'];
+	$extencionfactura=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
+	$factura=basename($_FILES['recurso0']['name'],".".$extencionfactura)."_".generarClave(5);
+	$facturaExtencion= $factura.".".$extencionfactura;
+	
+	if($facturatemporal==""){
+		$factura="";
+	}
+	
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo factura no es correcto</p>";
+}
 
 if($validacion){
-	$resultado=$Ocursos->guardar($nombre,$categoria,$icono,$ContadorLecciones,$aTipoLecciones,$aInputLecciones,$aTextareaLecciones);
+	$resultado=$Ocursos->guardar($nombre,$categoria,$icono,$ContadorLecciones,$aTipoLecciones,$aInputLecciones,$aTextareaLecciones,$aRecursoTemporal,$aRecursoNombre,$aExtencionRecurso,$aRecurso,$aRecursoExtencion);
 	if($resultado=="exito"){
-		/*CARGAR ARCHIVOS*/
-		//ABRE
-		$mensajeArchivo="";
-		if($facturatemporal!=""){
-			
-			$estadoArchivo=cargarArchivo($recurso,$extencionrecurso, $recursotemporal, $recursoExtencion,"pdf","garantias",0,0,"archivo","center");
-			if ($estadoArchivo=="exito"){
-				$mensajeArchivo="";
-			}else if ($estadoArchivo=="extencionInvalida"){
-				$mensajeArchivo=$mensajeArchivo."| La extenci&oacute;n: ".$extencionfactura. " del archivo, no es v&aacute;lida. ";
-			}else{
-				$mensajeArchivo=$mensajeArchivo."| No se pudo guardar el archivo (".$extencionfoto."). ";
-			}
-		} 
-		$mensaje=$mensaje.$mensajeArchivo; //CIERRA
+	
 		$mensaje="exito@Operaci&oacute;n exitosa@El registro ha sido guardado";
 	}
 	if($resultado=="nombreExiste"){
@@ -134,5 +158,11 @@ if($validacion){
 }
 
 echo utf8_encode($mensaje);
-// echo utf8_encode("- Contador Leccion :".$ContadorLecciones." - ");
-// echo utf8_encode(print_r($aTipoLecciones));
+echo utf8_encode("- Recurso Nombre :".$recursonombre." - ");
+// echo utf8_encode(print_r($aRecurso));
+
+// $aRecursoTemporal = array();
+// $aRecursoNombre = array();
+// $aExtencionRecurso = array();
+// $aRecurso = array();
+// $aRecursoExtencion = array();

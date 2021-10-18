@@ -202,10 +202,10 @@ include("../../seguridad/comprobar_login.php");
                         <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
                         <div class="col-sm-4" id="div-contenido-archivo-hijo0">
                           <div class="input-group" id="div-contenido-archivo-nieto0">
-                            <input type="file" name="recurso0" style="display:none;" id="crecurso0" accept=".pdf" onChange="fileinput('recurso')" />
+                            <input type="file" name="recurso0" style="display:none;" id="crecurso0" accept=".pdf" onChange="fileinput('recurso0')" />
                             <input type="text" name="nrecurso0" id="nrecurso0" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
                             <span class="input-group-btn">
-                              <a class="btn btn-warning" onclick="$('#crecurso').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                              <a class="btn btn-warning" onclick="$('#crecurso0').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
                             </span>
                           </div>
                         </div>

@@ -1,6 +1,6 @@
 <?php
 include_once("../../conexion/Conexion.class.php");
-
+include_once('../../../librerias/php/thumb.php');
 class Cursos
 {
 	//constructor	
@@ -46,7 +46,7 @@ class Cursos
 		}
 	}
 
-	function guardar($nombre, $categoria, $icono, $ContadorLecciones, $aTipoLecciones, $aInputLecciones, $aTextareaLecciones)
+	function guardar($nombre, $categoria, $icono, $ContadorLecciones, $aTipoLecciones, $aInputLecciones, $aTextareaLecciones,$aRecursoTemporal,$aRecursoNombre, $aExtencionRecurso, $aRecurso, $aRecursoExtencion)
 	{
 		/////PERMISOS////////////////
 		if (!isset($_SESSION['permisos']['cursos']['guardar'])) {
@@ -60,8 +60,8 @@ class Cursos
 				return "nombreExiste";
 			} else {
 				if (mysqli_query($this->con->conect, "INSERT INTO cursos (idcurso, nombre, categoria, icono) VALUES ('$idcurso','$nombre','$categoria','$icono')")) {
-					/* GUARDAR LECCION */
 					
+					/* GUARDAR LECCION */
 					for ($i = 0; $i <= $ContadorLecciones; $i++) {
 						$contenido = "";
 						$iddetallecurso = $this->con->generarClave(2);
@@ -78,15 +78,18 @@ class Cursos
 								break;
 
 							case 'imagen':
-								$contenido = "";
+								cargarArchivo($aRecurso[$i],$aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i],"jpg","detallecurso",500, 500,"archivo","center");
+								$contenido = $aRecurso[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 							case 'video':
-								$contenido = "";
+								cargarArchivo($aRecurso[$i],$aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i],"mp4","detallecurso",0,0,"archivo","center");
+								$contenido = $aRecurso[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 							case 'documento':
-								$contenido = "";
+								cargarArchivo($aRecurso[$i],$aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i],"pdf","detallecurso",0,0,"archivo","center");
+								$contenido = $aRecurso[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 

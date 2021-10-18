@@ -49,7 +49,8 @@ function cargarArchivo($nombreArchivo, $extencionArchivo, $nombreArchivoTemporal
 	}
 }
 
-function generarClave($longitud){ 
+
+function generarClaveThumb($longitud){ 
        $cadena="[^A-Z0-9]"; 
        return substr(str_replace($cadena, "", md5(rand())) . 
        str_replace($cadena, "", md5(rand())) . 
@@ -152,7 +153,7 @@ break;
 }
 
 //---Actualizar la imagen y sus dimensiones
-$info = getimagesize($name);
+// $info = getimagesize($name);
 
 $this->width = imagesx($image);
 $this->height = imagesy($image);
