@@ -305,7 +305,7 @@ const crearPregunta = (index) => {
   let selectPregunta = "ctipopregunta" + index;
   cloneChild21[1].id = selectPregunta; // SELECT PREGUNTA ID
   cloneChild21[1].setAttribute("onChange", `contenidoExamen(${index});`);
-  cloneChild21[1].setAttribute("name", `tipopregunta${index}`); //se agrega atributo onchange al select
+  cloneChild21[1].setAttribute("name", `tipoPregunta${index}`); //se agrega atributo onchange al select
 
   let cloneChild22 = document.getElementById(divPregunta).childNodes; // DIV PREGUNTA NODO
   let inputPregunta = "input-pregunta" + index;

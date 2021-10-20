@@ -118,8 +118,8 @@ include("../../seguridad/comprobar_login.php");
                   <button type="button"class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar</button>           
                   <button type="button" class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion</button>
                 </div>
+                
                 <!-- Padre para clonacion -->
-
                 <!-- Agregar Contenidos -->
                 <div id="padre-lecciones">
                   <div style="display: none;">
@@ -229,7 +229,14 @@ include("../../seguridad/comprobar_login.php");
                   <button type="button" class="btn btn btn-default pull-right" id="ocultarExamen" onclick="ocultarExamenes()">Ocultar </button>
                   <button type="button" class="btn btn-success pull-right margen-right" id="agregar-pregunta">Agregar Pregunta</button>
                 </div>
+                
                 <div id="padre-examen">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Nombre del Examen:</label>
+                    <div class="col-sm-4">
+                      <input type="text" name="nombreExamen" id="nombre-examen"class="form-control"> 
+                    </div>          
+                  </div>
                   <!-- ORIGINAL CLONE -->
                   <div style="display:none">
                     <div class="carta-examen" id="nodo-padre-examen">
@@ -237,7 +244,7 @@ include("../../seguridad/comprobar_login.php");
                       <div class="form-group" id="primer-div">
                         <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
                         <div class="col-sm-2" id="div-select">
-                          <select id="ctipopregunta" name="tipopregunta" class="form-control" onchange="contenidoExamen(0)">
+                          <select id="ctipopregunta" name="tipoPregunta" class="form-control" onchange="contenidoExamen(0)">
                             <option value="abierta">Pregunta Abierta</option>
                             <option value="multiple">Opcion Multiple</option>
                             <option value="practica">Practica</option>
@@ -280,7 +287,7 @@ include("../../seguridad/comprobar_login.php");
                     <div class="form-group" id="primer-div0">
                       <label class="col-sm-2 control-label"> Tipo de Pregunta:</label>
                       <div class="col-sm-2" id="div-select0">
-                        <select id="ctipopregunta0" name="tipopregunta0" class="form-control" onchange="contenidoExamen(0)">
+                        <select id="ctipopregunta0" name="tipoPregunta0" class="form-control" onchange="contenidoExamen(0)">
                           <option value="abierta">Pregunta Abierta</option>
                           <option value="multiple">Opcion Multiple</option>
                           <option value="practica">Practica</option>

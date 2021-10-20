@@ -47,35 +47,46 @@ if (isset($_POST['inputContadorLecciones'])){ //select tipo leccion
 $aTipoLecciones = array(); //se declara el arreglo que contiene todos elementos
 for ($i=0; $i <= $contadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "tipoLeccion".$i;
-	if (isset($_POST[$concatenacion])){ 
-		$tipoLeccion=htmlentities(trim($_POST[$concatenacion]));
-		array_push($aTipoLecciones,$tipoLeccion);
-	}else{
-		array_push($aTipoLecciones,"");
+	switch (isset($_POST[$concatenacion])) {
+		case true:
+			$tipoLeccion=htmlentities(trim($_POST[$concatenacion]));
+			array_push($aTipoLecciones,$tipoLeccion);
+			break;
+		
+		default:
+			array_push($aTipoLecciones,"");
+			break;
 	}
 }
 //Input Contenido
 $aInputLecciones = array(); //se declara el arreglo que contiene todos elementos
 for ($i=0; $i <= $contadorLecciones ; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "contenidoInput".$i;
-	if (isset($_POST[$concatenacion])){ 
-		$contenidoInput=htmlentities(trim($_POST[$concatenacion]));
-		array_push($aInputLecciones,$contenidoInput);
-	}else{
-		array_push($aInputLecciones,"");
+	switch (isset($_POST[$concatenacion])) {
+		case true:
+			$contenidoInput=htmlentities(trim($_POST[$concatenacion]));
+			array_push($aInputLecciones,$contenidoInput);
+			break;
+		
+		default:
+			array_push($aInputLecciones,"");
+			break;
 	}
 }
 
 //Text Area Contenido
-
 $aTextareaLecciones = array(); //se declara el arreglo que contiene todos elementos
 for ($i=0; $i <= $contadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "contenidoTextArea".$i;
-	if (isset($_POST[$concatenacion])){ 
-		$contenidoTextArea=htmlentities(trim($_POST[$concatenacion]));
+	switch (isset($_POST[$concatenacion])) {
+		case true:
+			$contenidoTextArea=htmlentities(trim($_POST[$concatenacion]));
 		array_push($aTextareaLecciones,$contenidoTextArea);
-	}else{
+			break;
+		
+		default:
 		array_push($aTextareaLecciones,"");
+			break;
 	}
 }
 /*CARGAR ARCHIVO*/
@@ -118,23 +129,7 @@ $aRecursoExtencion = array();
 		array_push($aRecursoExtencion,$recurso);
 	}
 } */
-/*CARGAR ARCHIVO*/
-/* if (isset($_FILES['recurso0']['name'])){
-	$facturatemporal=$_FILES['recurso0']['tmp_name'];
-	$facturanombre=$_FILES['recurso0']['name'];
-	$extencionfactura=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
-	$factura=basename($_FILES['recurso0']['name'],".".$extencionfactura)."_".generarClave(5);
-	$facturaExtencion= $factura.".".$extencionfactura;
-	
-	if($facturatemporal==""){
-		$factura="";
-	}
-	
-}else{
-	$validacion=false;
-	$mensaje=$mensaje."<p>El campo factura no es correcto</p>";
-} */
-// VARIABLES EXAMEN /////////////////////////////////////////////////////////////////
+// VARIABLES EXAMEN /////////////////////////////////////////////////////////////////////////////////////
 /* Contador Preguntas */
 if (isset($_POST['inputContadorExamen'])){ //select tipo leccion
 	$contadorExamen=htmlentities(trim($_POST['inputContadorExamen']));
@@ -142,40 +137,117 @@ if (isset($_POST['inputContadorExamen'])){ //select tipo leccion
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo Contador-Examen no es correcto</p>";
 }
+/* NOMBRE DEL EXAMEN */
+if (isset($_POST['nombreExamen'])){ //select tipo leccion
+	$nombreExamen=htmlentities(trim($_POST['nombreExamen']));
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo Nombre del Examen no es correcto</p>";
+}
 /* Arreglo Contador Respuestas */
-/* if (isset($_POST['inputContadorRespuestas'])){ //select tipo leccion
+if (isset($_POST['inputContadorRespuestas'])){ //select tipo leccion
 	$contadorRespuestas=htmlentities(trim($_POST['inputContadorRespuestas']));
 }else{
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo Contador-Respuesta no es correcto</p>";
-} */
+}
+$aContadorRespuestas = array();
+$aContadorRespuestas = explode(",",$contadorRespuestas);
+
 /* Valor de Pregunta */
 $aValorPregunta = array();
 for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "inputValor".$i;
-	if (isset($_POST[$concatenacion])){ 
-		$valorPregunta=htmlentities(trim($_POST[$concatenacion]));
-		array_push($aValorPregunta,$valorPregunta);
-	}else{
-		array_push($aValorPregunta,"");
+	switch (isset($_POST[$concatenacion])) {
+		case true:
+			$valorPregunta=htmlentities(trim($_POST[$concatenacion]));
+			array_push($aValorPregunta,$valorPregunta);
+			break;
+		
+		default:
+			array_push($aValorPregunta,"");
+			break;
 	}
 }
 /* Tipo pregunta */
-$atipoPregunta = array();
+$aTipoPregunta = array();
 for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la variable contador
-	$concatenacion = "tipopregunta".$i;
-	if (isset($_POST[$concatenacion])){ 
-		$tipoPregunta=htmlentities(trim($_POST[$concatenacion]));
-		array_push($atipoPregunta,$tipoPreguntan);
-	}else{
-		array_push($aTipoLecciones,"");
+	$concatenacion = "tipoPregunta".$i;
+	switch (isset($_POST[$concatenacion])) {
+		case true:
+			$tipoPregunta=htmlentities(trim($_POST[$concatenacion]));
+			array_push($aTipoPregunta,$tipoPregunta);
+			break;
+		
+		default:
+			array_push($aTipoPregunta,"");
+			break;
+	}
+}
+/* Input Pregunta */
+$aInputPregunta = array();
+for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la variable contador
+	$concatenacion = "inputPregunta".$i;
+	switch (isset($_POST[$concatenacion])) {
+		case true:
+			$inputPregunta=htmlentities(trim($_POST[$concatenacion]));
+			array_push($aInputPregunta,$inputPregunta);
+			break;
+		
+		default:
+			array_push($aInputPregunta,"");
+			break;
 	}
 }
 
-
+/* textArea Pregunta */
+$aTextareaPregunta = array();
+for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la variable contador
+	$concatenacion = "textareaPregunta".$i;
+	switch (isset($_POST[$concatenacion])) {
+		case true:
+			$textareaPregunta=htmlentities(trim($_POST[$concatenacion]));
+			array_push($aTextareaPregunta,$textareaPregunta);
+			break;
+		
+		default:
+			array_push($aTextareaPregunta,"eliminado");
+			break;
+	}
+}
+// RESPUESTAS ////////////////////////////////////////////////////////////////////////////////////////
+$aInputRespuesta = array();
+for ($i=0; $i <= $contadorExamen ; $i++) { 
+	$aInputRespuestaTemporal = array();
+	for ($i2=0; $i2 <= $aContadorRespuestas[$i] ; $i2++) { 
+		$inputRespuesta = "inputRespuesta"+[$i]+[$i2];
+		array_push($aInputRespuestaTemporal,$inputRespuesta);
+	}
+	array_push($aInputRespuesta,$aInputRespuestaTemporal);
+}
 
 if($validacion){
-	$resultado=$Ocursos->guardar($nombre,$categoria,$icono,$ContadorLecciones,$aTipoLecciones,$aInputLecciones,$aTextareaLecciones,$aRecursoTemporal,$aRecursoNombre,$aExtencionRecurso,$aRecurso,$aRecursoExtencion);
+	$resultado=$Ocursos->guardar(
+		$nombre,// datos generales del curso
+		$categoria,
+		$icono,
+		$contadorLecciones,// Lecciones
+		$aTipoLecciones,
+		$aInputLecciones,
+		$aTextareaLecciones,
+		$aRecursoTemporal,
+		$aRecursoNombre,
+		$aExtencionRecurso,
+		$aRecurso,
+		$aRecursoExtencion,
+		$contadorExamen,// Examen
+		$nombreExamen,
+		$aContadorRespuestas,// Respuestas
+		$aValorPregunta,
+		$aTipoPregunta,
+		$aTextareaPregunta,
+		$aInputPregunta
+	);
 	if($resultado=="exito"){
 	
 		$mensaje="exito@Operaci&oacute;n exitosa@El registro ha sido guardado";
@@ -194,6 +266,6 @@ if($validacion){
 }
 
 echo utf8_encode($mensaje);
-echo utf8_encode(" - "."Contador Pregunta :".$contadorExamen." - ");
-// echo utf8_encode(" - "."Valor Pregunta :".$contadorExamen." - ");
-echo utf8_encode(print_r($atipoPregunta));
+// echo utf8_encode(" - "."Contador Examen :".$contadorExamen." - ");
+// echo utf8_encode(" - "."Contador Respuestas :".$contadorRespuestas." - ");
+echo utf8_encode(print_r($aContadorRespuestas));
