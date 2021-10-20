@@ -34,12 +34,10 @@ if (isset($_POST['icono'])){
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo icono no es correcto</p>";
 }
-// VARIABLES EXAMEN /////////////////////////////////////////////////////////////////
-/* NOTAS Y OBSERVACIONES DE GUARDAR */
-/* Buscar traer todas las variables e irlas pusheando a un arreglo, ver la manera de traer el los index */
+// VARIABLES LECCIONES /////////////////////////////////////////////////////////////////
 //Input input Contador Lecciones
 if (isset($_POST['inputContadorLecciones'])){ //select tipo leccion
-	$ContadorLecciones=htmlentities(trim($_POST['inputContadorLecciones']));
+	$contadorLecciones=htmlentities(trim($_POST['inputContadorLecciones']));
 	//$icono=mysql_real_escape_string($icono);
 }else{
 	$validacion=false;
@@ -47,7 +45,7 @@ if (isset($_POST['inputContadorLecciones'])){ //select tipo leccion
 }
 // select tipo leccion
 $aTipoLecciones = array(); //se declara el arreglo que contiene todos elementos
-for ($i=0; $i <= $ContadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
+for ($i=0; $i <= $contadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "tipoLeccion".$i;
 	if (isset($_POST[$concatenacion])){ 
 		$tipoLeccion=htmlentities(trim($_POST[$concatenacion]));
@@ -56,10 +54,9 @@ for ($i=0; $i <= $ContadorLecciones; $i++) { //recorremos el arreglo en base a l
 		array_push($aTipoLecciones,"");
 	}
 }
-
 //Input Contenido
 $aInputLecciones = array(); //se declara el arreglo que contiene todos elementos
-for ($i=0; $i <= $ContadorLecciones ; $i++) { //recorremos el arreglo en base a la variable contador
+for ($i=0; $i <= $contadorLecciones ; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "contenidoInput".$i;
 	if (isset($_POST[$concatenacion])){ 
 		$contenidoInput=htmlentities(trim($_POST[$concatenacion]));
@@ -72,7 +69,7 @@ for ($i=0; $i <= $ContadorLecciones ; $i++) { //recorremos el arreglo en base a 
 //Text Area Contenido
 
 $aTextareaLecciones = array(); //se declara el arreglo que contiene todos elementos
-for ($i=0; $i <= $ContadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
+for ($i=0; $i <= $contadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
 	$concatenacion = "contenidoTextArea".$i;
 	if (isset($_POST[$concatenacion])){ 
 		$contenidoTextArea=htmlentities(trim($_POST[$concatenacion]));
@@ -122,7 +119,7 @@ $aRecursoExtencion = array();
 	}
 } */
 /*CARGAR ARCHIVO*/
-if (isset($_FILES['recurso0']['name'])){
+/* if (isset($_FILES['recurso0']['name'])){
 	$facturatemporal=$_FILES['recurso0']['tmp_name'];
 	$facturanombre=$_FILES['recurso0']['name'];
 	$extencionfactura=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
@@ -136,7 +133,46 @@ if (isset($_FILES['recurso0']['name'])){
 }else{
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo factura no es correcto</p>";
+} */
+// VARIABLES EXAMEN /////////////////////////////////////////////////////////////////
+/* Contador Preguntas */
+if (isset($_POST['inputContadorExamen'])){ //select tipo leccion
+	$contadorExamen=htmlentities(trim($_POST['inputContadorExamen']));
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo Contador-Examen no es correcto</p>";
 }
+/* Arreglo Contador Respuestas */
+/* if (isset($_POST['inputContadorRespuestas'])){ //select tipo leccion
+	$contadorRespuestas=htmlentities(trim($_POST['inputContadorRespuestas']));
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo Contador-Respuesta no es correcto</p>";
+} */
+/* Valor de Pregunta */
+$aValorPregunta = array();
+for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la variable contador
+	$concatenacion = "inputValor".$i;
+	if (isset($_POST[$concatenacion])){ 
+		$valorPregunta=htmlentities(trim($_POST[$concatenacion]));
+		array_push($aValorPregunta,$valorPregunta);
+	}else{
+		array_push($aValorPregunta,"");
+	}
+}
+/* Tipo pregunta */
+$atipoPregunta = array();
+for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la variable contador
+	$concatenacion = "tipopregunta".$i;
+	if (isset($_POST[$concatenacion])){ 
+		$tipoPregunta=htmlentities(trim($_POST[$concatenacion]));
+		array_push($atipoPregunta,$tipoPreguntan);
+	}else{
+		array_push($aTipoLecciones,"");
+	}
+}
+
+
 
 if($validacion){
 	$resultado=$Ocursos->guardar($nombre,$categoria,$icono,$ContadorLecciones,$aTipoLecciones,$aInputLecciones,$aTextareaLecciones,$aRecursoTemporal,$aRecursoNombre,$aExtencionRecurso,$aRecurso,$aRecursoExtencion);
@@ -158,11 +194,6 @@ if($validacion){
 }
 
 echo utf8_encode($mensaje);
-echo utf8_encode("- Recurso Nombre :".$recursonombre." - ");
-// echo utf8_encode(print_r($aRecurso));
-
-// $aRecursoTemporal = array();
-// $aRecursoNombre = array();
-// $aExtencionRecurso = array();
-// $aRecurso = array();
-// $aRecursoExtencion = array();
+echo utf8_encode(" - "."Contador Pregunta :".$contadorExamen." - ");
+// echo utf8_encode(" - "."Valor Pregunta :".$contadorExamen." - ");
+echo utf8_encode(print_r($atipoPregunta));

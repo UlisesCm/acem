@@ -44,7 +44,7 @@ $(document).ready(function () {
       }
     }
   });
-  
+
   $(".botonSave").click(function () {
     if (Spry.Widget.Form.validate(formulario)) {
       if (validar()) {
@@ -252,7 +252,7 @@ const crearLeccion = (index) => {
   let input = cloneChild321[1].id + index;
   cloneChild321[1].id = input;
   cloneChild321[1].setAttribute("name", `contenidoInput${index}`);
-  cloneChild321[1].setAttribute("value", `valor del Input ${index}`);//VALOR PARA HACER PRUEBAS
+  cloneChild321[1].setAttribute("value", `valor del Input ${index}`); //VALOR PARA HACER PRUEBAS
   // Acceso al div contenido archivo
   let cloneChild33 = document.getElementById(divContenidoArchivo).childNodes;
   let divArchivoHijo = cloneChild33[3].id + index;
@@ -304,7 +304,8 @@ const crearPregunta = (index) => {
   let cloneChild21 = document.getElementById(divSelect).childNodes; // DIV SELECT NODO
   let selectPregunta = "ctipopregunta" + index;
   cloneChild21[1].id = selectPregunta; // SELECT PREGUNTA ID
-  cloneChild21[1].setAttribute("onChange", `contenidoExamen(${index});`); //se agrega atributo onchange al select
+  cloneChild21[1].setAttribute("onChange", `contenidoExamen(${index});`);
+  cloneChild21[1].setAttribute("name", `tipopregunta${index}`); //se agrega atributo onchange al select
 
   let cloneChild22 = document.getElementById(divPregunta).childNodes; // DIV PREGUNTA NODO
   let inputPregunta = "input-pregunta" + index;
@@ -313,7 +314,6 @@ const crearPregunta = (index) => {
   cloneChild22[3].id = textAreaPregunta;
   cloneChild22[1].setAttribute("name", `inputPregunta${index}`);
   cloneChild22[3].setAttribute("name", `textareaPregunta${index}`);
-  
 
   let cloneChild23 = document.getElementById(divBotonPregunta).childNodes;
   let botonBorrar = "boton-borrar-pregunta" + index;
@@ -354,24 +354,23 @@ const crearPregunta = (index) => {
 
 const crearRespuesta = (index) => {
   objetoContador[index] = objetoContador[index] + 1;
-  console.log(objetoContador)
-  actualizarContadorRespuesta(objetoContador)
-  
+  console.log(objetoContador);
+  actualizarContadorRespuesta(objetoContador);
+
   const original = document.getElementById("div-respuesta");
   const destino = document.getElementById("nodo-padre-respuesta" + index);
   const nuevo = original.cloneNode(true);
 
   destino.appendChild(nuevo);
-  const nuevoId =
-    "div-respuesta" +
-    index +
-    objetoContador[index];
+  const nuevoId = "div-respuesta" + index + objetoContador[index];
   nuevo.id = nuevoId;
 
   let cloneChild = document.getElementById(nuevoId).childNodes;
   let divInputRespuesta = "div-input-respuesta" + index + objetoContador[index]; // DIV INPUT RESPUESTA ID
-  let divCheckboxRespuesta = "div-checkbox-respuesta" + index + objetoContador[index]; // DIV CHECKBOX RESPUESTA ID
-  let botonAgregarRespuesta = "agregar-respuestas" + index + objetoContador[index];
+  let divCheckboxRespuesta =
+    "div-checkbox-respuesta" + index + objetoContador[index]; // DIV CHECKBOX RESPUESTA ID
+  let botonAgregarRespuesta =
+    "agregar-respuestas" + index + objetoContador[index];
   let botonBorrarRespuesta = "borrar-respuesta" + index + objetoContador[index];
   cloneChild[3].id = divInputRespuesta;
   cloneChild[5].id = divCheckboxRespuesta;
@@ -387,14 +386,23 @@ const crearRespuesta = (index) => {
   let cloneChild1 = document.getElementById(divInputRespuesta).childNodes;
   let inputRespuesta = "input-respuesta" + index + objetoContador[index];
   cloneChild1[1].id = inputRespuesta;
-  cloneChild1[1].setAttribute("name", `inputRespuesta${index}${objetoContador[index]}`);
-  cloneChild1[1].setAttribute("value", `inputRespuesta${index}${objetoContador[index]}`);
+  cloneChild1[1].setAttribute(
+    "name",
+    `inputRespuesta${index}${objetoContador[index]}`
+  );
+  cloneChild1[1].setAttribute(
+    "value",
+    `inputRespuesta${index}${objetoContador[index]}`
+  );
 
   let cloneChild2 = document.getElementById(divCheckboxRespuesta).childNodes;
   let checkbox = "checkbox-respuesta" + index + objetoContador[index];
   // console.log(checkbox);
   cloneChild2[1].id = checkbox;
-  cloneChild2[1].setAttribute("name", `checkboxRespuesta${index}${objetoContador[index]}`);
+  cloneChild2[1].setAttribute(
+    "name",
+    `checkboxRespuesta${index}${objetoContador[index]}`
+  );
 
   // CONTADOR DINAMICO PARA CONTAR EL NUMERO DE RESPUESTAS
   // console.log(objetoContador)
@@ -444,16 +452,16 @@ const mostrarExamenes = () => {
 };
 
 const actualizarContadorLecciones = (index) => {
-  $("#input-contador-lecciones").val(index)
-}
+  $("#input-contador-lecciones").val(index);
+};
 
 const actualizarContadorExamen = (index) => {
-  $("#input-contador-examen").val(index)
-}
+  $("#input-contador-examen").val(index);
+};
 
 const actualizarContadorRespuesta = (index) => {
-  $("#input-contador-respuesta").val(index)
-}
+  $("#input-contador-respuesta").val(index);
+};
 
 function buscar(busqueda) {
   location.href =
