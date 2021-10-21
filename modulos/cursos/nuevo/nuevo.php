@@ -308,10 +308,10 @@ include("../../seguridad/comprobar_login.php");
                       <div class="form-group" id="div-respuesta0">
                         <label class="col-sm-2 control-label"> Respuesta:</label>
                         <div class="col-sm-4" id="div-input-respuesta0">
-                          <input class="form-control" type="text" name="inputRespuesta0" id="input-respuesta0">
+                          <input class="form-control" type="text" name="inputRespuesta00" id="input-respuesta00">
                         </div>
                         <div class="checkbox col-sm-2" id="div-checkbox-respuesta0">
-                          <input type="checkbox" id="checkbox-respuesta0" name="checkboxRespuesta0"> Correcta
+                          <input type="checkbox" id="checkbox-respuesta00" name="checkboxRespuesta00"> Correcta
                         </div>
                         <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</button>
                         <!-- <a type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</a> -->

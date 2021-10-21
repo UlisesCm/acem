@@ -49,7 +49,8 @@ class Cursos
 	function guardar(
 		$nombre,// Datos generales del curso
 		$categoria,
-		$icono, 
+		$icono,
+		$descripcion,
 		$contadorLecciones,// Lecciones
 		$aTipoLecciones,
 		$aInputLecciones,
@@ -61,11 +62,13 @@ class Cursos
 		$aRecursoExtencion,
 		$contadorExamen,// Examen
 		$nombreExamen,
-		$aContadorRespuestas,// Respuestas
 		$aValorPregunta,
 		$aTipoPregunta,
+		$aTextareaPregunta,
 		$aInputPregunta,
-		$aTextareaPregunta
+		$aContadorRespuestas,// PREGUNTAS
+		$aaInputRespuesta,
+		$aaCheckboxRespuesta
 		)
 	{
 		/////PERMISOS////////////////
@@ -79,9 +82,10 @@ class Cursos
 			if ($this->comprobarCampo("nombre", $nombre, "nuevo")) {
 				return "nombreExiste";
 			} else {
-				if (mysqli_query($this->con->conect, "INSERT INTO cursos (idcurso, nombre, categoria, icono) VALUES ('$idcurso','$nombre','$categoria','$icono')")) {
+				if (mysqli_query($this->con->conect, "INSERT INTO cursos (idcurso, nombre, categoria, icono, descripcion) VALUES ('$idcurso','$nombre','$categoria','$icono','$descripcion')")) {
 					
 					/* GUARDAR LECCION */////////////////////////////////////////////////////////////////////////////////////////////////
+					/* FALTA GUARDAR ARCHIVOS */
 					for ($i = 0; $i <= $contadorLecciones; $i++) {	
 						$contenido = "";
 						$iddetallecurso = $this->con->generarClave(2);
@@ -93,7 +97,9 @@ class Cursos
 
 							case 'enlace':
 								$contenido = $aInputLecciones[$i];
+								// $contenido = "si entra al case";
 								$tipo = $aTipoLecciones[$i];
+								// $tipo = "si entra al case";
 								break;
 
 							case 'imagen':
@@ -113,13 +119,15 @@ class Cursos
 								break;
 
 							default:
-								$contenido = "";
-								$tipo = $aTipoLecciones[$i];
+								$contenido = "default";
+								// $contenido = "";
+								$tipo = "default";
+								// $tipo = $aTipoLecciones[$i];
 								break;
 							}
-								/* if ($contenido != "eliminado") {
-								}  */
-								mysqli_query($this->con->conect, "INSERT INTO detallecurso (iddetallecurso,tipo,contenido,idcurso) VALUES ('$iddetallecurso','$tipo','$contenido','$idcurso')");
+								if ($contenido != "eliminado") {
+									mysqli_query($this->con->conect, "INSERT INTO detallecurso (iddetallecurso,tipo,contenido,idcurso) VALUES ('$iddetallecurso','$tipo','$contenido','$idcurso')");
+								} 
 					}
 
 					/* GUARDAR EXMANEN */////////////////////////////////////////////////////////////////////////////////////////////////
@@ -128,42 +136,45 @@ class Cursos
 					mysqli_query($this->con->conect, "INSERT INTO examenes (idexamen,idcurso,nombreExamen) VALUES ('$idexamen','$idcurso','$nombreExamen')");
 
 					/* GUARDAR PREGUNTAS */////////////////////////////////////////////////////////////////////////////////////////////////
-					for ($i=0; $i <= $contadorExamen; $i++) { 
-						$valorPregunta = $aValorPregunta[$i];
+					for ($x=0; $x <= $contadorExamen; $x++) {
+						$aInputRespuesta = $aaInputRespuesta[$x];
+						$aCheckboxRespuesta = $aaCheckboxRespuesta[$x];
+						$valorPregunta = $aValorPregunta[$x];
 						$pregunta = "";
 						$autoCalificar = "NO";
 						$idpregunta = $this->con->generarClave(2);
-						switch ($aTipoPregunta[$i]) {
+						switch ($aTipoPregunta[$x]) {
 							case 'abierta':
-								$pregunta = $aInputPregunta[$i];
-								$tipoPregunta = $aTipoPregunta[$i];
+								$pregunta = $aInputPregunta[$x];
+								$tipoPregunta = $aTipoPregunta[$x];
 								$autoCalificar = "NO";
 								break;
 
 							case 'multiple':
-								$pregunta = $aInputPregunta[$i];
-								$tipoPregunta = $aTipoPregunta[$i];
+								$pregunta = $aInputPregunta[$x];
+								$tipoPregunta = $aTipoPregunta[$x];
 								$autoCalificar = "SI";
-								for ($i=0; $i <= $aContadorRespuestas; $i++) {
+								$contador = $aContadorRespuestas[$x];
+								for ($y=0; $y <= $contador; $y++) {
 									$iddetallesrespuesta = $this->con->generarClave(2);
-									$respuesta ="";
-									$correcto ="";
+									$respuesta = $aInputRespuesta[$y];
+									$correcto = $aCheckboxRespuesta[$y];
 									mysqli_query($this->con->conect, "INSERT INTO detallesrespuestas (iddetallesrespuesta, idpregunta, respuesta, correcto) VALUES ('$iddetallesrespuesta','$idpregunta','$respuesta','$correcto')");
 								}
 								break;
 
 							case 'practica':
-								$pregunta = $aTextareaPregunta[$i];
-								$tipoPregunta = $aTipoPregunta[$i];
-								$autoCalificar = "SI";
+								$pregunta = $aTextareaPregunta[$x];
+								$tipoPregunta = $aTipoPregunta[$x];
+								$autoCalificar = "NO";
 								break;
 							
 							default:
-							$pregunta = "";
-							$tipoPregunta = $aTipoPregunta[$i];
+							$pregunta = "sindatos";
+							$tipoPregunta = "sindatos";
 								break;
 						}
-						if ($contenido != "eliminado") {
+						if ($contenido != "eliminado" && $aTipoPregunta[$x] != "sindatos" && $pregunta != "sindatos") {
 							mysqli_query($this->con->conect, "INSERT INTO preguntas (idpregunta,idexamen,tipopregunta,pregunta,valor,autocalificar) VALUES ('$idpregunta','$idexamen','$tipoPregunta','$pregunta','$valorPregunta','$autoCalificar')");
 						} 
 					}

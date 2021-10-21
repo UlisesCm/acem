@@ -34,6 +34,14 @@ if (isset($_POST['icono'])){
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo icono no es correcto</p>";
 }
+
+if (isset($_POST['descripcion'])){
+	$descripcion=htmlentities(trim($_POST['descripcion']));
+	//$icono=mysql_real_escape_string($icono);
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo descripcion no es correcto</p>";
+}
 // VARIABLES LECCIONES /////////////////////////////////////////////////////////////////
 //Input input Contador Lecciones
 if (isset($_POST['inputContadorLecciones'])){ //select tipo leccion
@@ -69,7 +77,7 @@ for ($i=0; $i <= $contadorLecciones ; $i++) { //recorremos el arreglo en base a 
 			break;
 		
 		default:
-			array_push($aInputLecciones,"");
+			array_push($aInputLecciones,"error");
 			break;
 	}
 }
@@ -216,21 +224,52 @@ for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la v
 	}
 }
 // RESPUESTAS ////////////////////////////////////////////////////////////////////////////////////////
-$aInputRespuesta = array();
-for ($i=0; $i <= $contadorExamen ; $i++) { 
-	$aInputRespuestaTemporal = array();
-	for ($i2=0; $i2 <= $aContadorRespuestas[$i] ; $i2++) { 
-		$inputRespuesta = "inputRespuesta"+[$i]+[$i2];
-		array_push($aInputRespuestaTemporal,$inputRespuesta);
-	}
-	array_push($aInputRespuesta,$aInputRespuestaTemporal);
+/* SE CREA UN ARREGLO BIDIMIENCIONAL PARA GUARDAR LAS RESPUESTAS*/
+$aaInputRespuesta = array();
+for ($x=0; $x <= $contadorExamen; $x++) {
+	array_push($aaInputRespuesta, array());
+	$contador = $aContadorRespuestas[$x];
+	for ($y=0; $y <= $contador; $y++) {
+		$concatenacion = "inputRespuesta".$x.$y;		
+		switch (isset($_POST[$concatenacion])) {
+			case true:
+				$inputRespuesta=htmlentities(trim($_POST[$concatenacion]));
+				array_push($aaInputRespuesta[$x],$inputRespuesta);
+				break;
+			
+			default:
+				array_push($aaInputRespuesta[$x],"eliminado");
+				break;
+			}
+	} 
 }
+/* Arreglo BIDIMENCIONAL PARA GUARDAR VALOR DE CHECKBOX */
+$aaCheckboxRespuesta = array();
+for ($x=0; $x <= $contadorExamen ; $x++) { 
+	array_push($aaCheckboxRespuesta, array());
+	$contador = $aContadorRespuestas[$x];
+	for ($y=0; $y <= $contador; $y++) { 
+		$concatenacion = "checkboxRespuesta".$x.$y;		
+		switch (isset($_POST[$concatenacion])) {
+			case true:
+				$checkboxRespuesta=htmlentities(trim($_POST[$concatenacion]));
+				array_push($aaCheckboxRespuesta[$x],$checkboxRespuesta);
+				break;
+			
+			default:
+				array_push($aaCheckboxRespuesta[$x],"off");
+				break;
+			}
+	}
+}
+
 
 if($validacion){
 	$resultado=$Ocursos->guardar(
 		$nombre,// datos generales del curso
 		$categoria,
 		$icono,
+		$descripcion,
 		$contadorLecciones,// Lecciones
 		$aTipoLecciones,
 		$aInputLecciones,
@@ -242,11 +281,13 @@ if($validacion){
 		$aRecursoExtencion,
 		$contadorExamen,// Examen
 		$nombreExamen,
-		$aContadorRespuestas,// Respuestas
-		$aValorPregunta,
+		$aValorPregunta, // PREGUNTAS
 		$aTipoPregunta,
 		$aTextareaPregunta,
-		$aInputPregunta
+		$aInputPregunta,
+		$aContadorRespuestas,// PREGUNTAS
+		$aaInputRespuesta,
+		$aaCheckboxRespuesta
 	);
 	if($resultado=="exito"){
 	
@@ -267,5 +308,6 @@ if($validacion){
 
 echo utf8_encode($mensaje);
 // echo utf8_encode(" - "."Contador Examen :".$contadorExamen." - ");
-// echo utf8_encode(" - "."Contador Respuestas :".$contadorRespuestas." - ");
-echo utf8_encode(print_r($aContadorRespuestas));
+// echo utf8_encode(" - "."Contador inputRespuesta :".$inputRespuesta." - ");
+// echo utf8_encode(print_r($aaCheckboxRespuesta));
+

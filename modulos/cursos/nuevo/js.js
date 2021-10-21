@@ -292,21 +292,23 @@ const crearPregunta = (index) => {
   cloneChild[3].id = primerDiv;
 
   let cloneChild2 = document.getElementById(primerDiv).childNodes; //PRIMER DIV NODO
-  let divSelect = "div-select" + index;
+  let divSelectPregunta = "div-select-pregunta" + index;
   let divBotonPregunta = "div-button-pregunta" + index;
   let divPregunta = "div-pregunta" + index;
   let divInputValor = "div-input-valor" + index;
-  cloneChild2[3].id = divSelect; //DIV SELECT ID
+  cloneChild2[3].id = divSelectPregunta; //DIV SELECT ID
   cloneChild2[5].id = divBotonPregunta; // DIV PREGUNTA ID
   cloneChild2[9].id = divPregunta; // DIV PREGUNTA ID
   cloneChild2[13].id = divInputValor; // DIV PREGUNTA ID
 
-  let cloneChild21 = document.getElementById(divSelect).childNodes; // DIV SELECT NODO
+  let cloneChild21 = document.getElementById(divSelectPregunta).childNodes; // DIV SELECT NODO
+  console.log(cloneChild21);
   let selectPregunta = "ctipopregunta" + index;
   cloneChild21[1].id = selectPregunta; // SELECT PREGUNTA ID
   cloneChild21[1].setAttribute("onChange", `contenidoExamen(${index});`);
   cloneChild21[1].setAttribute("name", `tipoPregunta${index}`); //se agrega atributo onchange al select
-
+  
+  
   let cloneChild22 = document.getElementById(divPregunta).childNodes; // DIV PREGUNTA NODO
   let inputPregunta = "input-pregunta" + index;
   let textAreaPregunta = "textarea-pregunta" + index;
@@ -342,14 +344,14 @@ const crearPregunta = (index) => {
   );
 
   let cloneChild311 = document.getElementById(divInputRespuesta).childNodes;
-  let inputRespuesta = "input-respuesta" + index;
+  let inputRespuesta = "input-respuesta" + index + 0;
   cloneChild311[1].id = inputRespuesta;
-  cloneChild311[1].setAttribute("name", `inputRespuesta${index}`);
+  cloneChild311[1].setAttribute("name", `inputRespuesta${index}0`);
 
   let cloneChild312 = document.getElementById(divCheckboxRespuesta).childNodes;
-  let checkbox = "respuesta-checkbox" + index;
+  let checkbox = "respuesta-checkbox" + index + 0;
   cloneChild312[1].id = checkbox;
-  cloneChild312[1].setAttribute("name", `respuestaCheckbox${index}`);
+  cloneChild312[1].setAttribute("name", `respuestaCheckbox${index}0`);
 };
 
 const crearRespuesta = (index) => {
