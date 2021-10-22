@@ -202,7 +202,7 @@ include("../../seguridad/comprobar_login.php");
                         <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
                         <div class="col-sm-4" id="div-contenido-archivo-hijo0">
                           <div class="input-group" id="div-contenido-archivo-nieto0">
-                            <input type="file" name="recurso0" style="display:none;" id="crecurso0" accept=".pdf" onChange="fileinput('recurso0')" />
+                            <input type="file" name="recurso0" style="display:none;" id="crecurso0" accept=".pdf" onchange="fileinput('recurso0')" />
                             <input type="text" name="nrecurso0" id="nrecurso0" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
                             <span class="input-group-btn">
                               <a class="btn btn-warning" onclick="$('#crecurso0').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
@@ -272,7 +272,7 @@ include("../../seguridad/comprobar_login.php");
                             <input class="form-control" type="text" name="inputRespuesta" id="input-respuesta">
                           </div>
                           <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
-                            <input type="checkbox" id="checkbox-respuesta" name="checkboxRespuesta"> Correcta
+                            <input type="checkbox" id="checkbox-respuesta" name="respuestaCheckbox"> Correcta
                           </div>
                           <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button>
                           <button type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</button>

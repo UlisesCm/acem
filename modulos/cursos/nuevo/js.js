@@ -2,6 +2,11 @@
 function vaciarCampos() {
   $("#cnombre").focus();
 }
+
+function fileinput(nombre) {
+  $("#n" + nombre).val($("#c" + nombre).val());
+}
+
 const objetoContador = [0];
 
 $(document).ready(function () {
@@ -41,6 +46,7 @@ $(document).ready(function () {
       if (validar()) {
         var variables = $("#formulario").serialize();
         guardar(variables);
+        // guardarArchivo();
       }
     }
   });
@@ -50,6 +56,7 @@ $(document).ready(function () {
       if (validar()) {
         var variables = $("#formulario").serialize();
         guardar(variables);
+        // guardarArchivo();
       }
     }
   });
@@ -307,8 +314,7 @@ const crearPregunta = (index) => {
   cloneChild21[1].id = selectPregunta; // SELECT PREGUNTA ID
   cloneChild21[1].setAttribute("onChange", `contenidoExamen(${index});`);
   cloneChild21[1].setAttribute("name", `tipoPregunta${index}`); //se agrega atributo onchange al select
-  
-  
+
   let cloneChild22 = document.getElementById(divPregunta).childNodes; // DIV PREGUNTA NODO
   let inputPregunta = "input-pregunta" + index;
   let textAreaPregunta = "textarea-pregunta" + index;
@@ -351,7 +357,7 @@ const crearPregunta = (index) => {
   let cloneChild312 = document.getElementById(divCheckboxRespuesta).childNodes;
   let checkbox = "respuesta-checkbox" + index + 0;
   cloneChild312[1].id = checkbox;
-  cloneChild312[1].setAttribute("name", `respuestaCheckbox${index}0`);
+  cloneChild312[1].setAttribute("name", `checkboxRespuesta${index}0`);
 };
 
 const crearRespuesta = (index) => {
@@ -489,6 +495,22 @@ function guardar(variables) {
   });
   return false;
 }
+
+const guardarArchivo = () => {
+  var formData = new FormData($("#formulario")[0]);
+  $.ajax({
+    url: "guardar.php",
+    type: "POST",
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (data) {
+      console.log(data);
+      alert(data);
+    },
+  });
+};
 
 function mostrarMensaje(mensaje) {
   //alert(mensaje);

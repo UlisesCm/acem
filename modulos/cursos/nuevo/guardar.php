@@ -137,6 +137,21 @@ $aRecursoExtencion = array();
 		array_push($aRecursoExtencion,$recurso);
 	}
 } */
+if (isset($_FILES['recurso0']['name'])){
+	$recursotemporal=$_FILES['recurso0']['tmp_name'];
+	$recursonombre=$_FILES['recurso0']['name'];
+	$extencionrecurso=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
+	$recurso=basename($_FILES['recurso0']['name'],".".$extencionfactura)."_".generarClave(5);
+	$recursoExtencion= $recurso.".".$extencionrecurso;	
+	if($recursotemporal==""){
+		$frecurso="";
+	}
+}else{
+	$recursonombre = "No se encontro";
+	// $validacion=false;
+	// $mensaje=$mensaje."<p>El campo recurso no es correcto</p>";
+}
+
 // VARIABLES EXAMEN /////////////////////////////////////////////////////////////////////////////////////
 /* Contador Preguntas */
 if (isset($_POST['inputContadorExamen'])){ //select tipo leccion
@@ -245,11 +260,11 @@ for ($x=0; $x <= $contadorExamen; $x++) {
 }
 /* Arreglo BIDIMENCIONAL PARA GUARDAR VALOR DE CHECKBOX */
 $aaCheckboxRespuesta = array();
-for ($x=0; $x <= $contadorExamen ; $x++) { 
+for ($x=0; $x <= $contadorExamen; $x++) {
 	array_push($aaCheckboxRespuesta, array());
 	$contador = $aContadorRespuestas[$x];
-	for ($y=0; $y <= $contador; $y++) { 
-		$concatenacion = "checkboxRespuesta".$x.$y;		
+	for ($y=0; $y <= $contador; $y++) {
+		// $concatenacion = "checkboxRespuesta".$x.$y;		
 		switch (isset($_POST[$concatenacion])) {
 			case true:
 				$checkboxRespuesta=htmlentities(trim($_POST[$concatenacion]));
@@ -260,7 +275,7 @@ for ($x=0; $x <= $contadorExamen ; $x++) {
 				array_push($aaCheckboxRespuesta[$x],"off");
 				break;
 			}
-	}
+	} 
 }
 
 
@@ -307,7 +322,7 @@ if($validacion){
 }
 
 echo utf8_encode($mensaje);
-// echo utf8_encode(" - "."Contador Examen :".$contadorExamen." - ");
+echo utf8_encode(" - "."Nombre del Recurso :".$recursonombre." - ");
 // echo utf8_encode(" - "."Contador inputRespuesta :".$inputRespuesta." - ");
 // echo utf8_encode(print_r($aaCheckboxRespuesta));
 
