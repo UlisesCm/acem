@@ -37,6 +37,36 @@
   padding-bottom: 5px;
   margin: 5px;
 }
+.col-sm-3{
+  width: 24% !important;
+}
+.carta-cursos {
+  /* background-color: salmon; */
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding-top: 10px;
+  padding-bottom: 5px;
+  margin: 5px;
+}
+
+.icono-curso{
+  font-size:120px;
+}
+
+.boton-curso{
+  width: 180px;
+  font-size: 16px;
+}
+
+.centrar-elementos{
+  justify-content: center;
+}
+
+.margen-bot{
+  margin-bottom: 8px;
+}
 
 .boton-eliminar{
   margin-right: 25px;

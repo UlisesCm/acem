@@ -163,75 +163,22 @@ else{ // Si se ha elegido el tipo lista ?>
     <?php
 	while ($filas=mysqli_fetch_array($resultado)) {		
 ?>
-	<div class="info-box" style="height:120px;" id="iregistro<?php echo $filas['idcurso'] ?>">
-    	<span class="info-box-icon bg-red" style="background-color:#000000 !important; height:120px; padding-top:15px;"><i class="fa fa-magic"></i></span>
-    	<div class="info-box-content">
-    		<span class="info-box-text Cidcurso" style="font-size:18px;">
-				<span class="checksEliminar">
-					<?php /////PERMISOS////////////////
-					if (isset($_SESSION['permisos']['cursos']['eliminar'])){ ?>
-						<?php if($filas['idcurso']!=0){ ?>
-							<input id="registroEliminar<?php echo $filas['idcurso'] ?>" type="checkbox" name="registroEliminar[]"  value="<?php echo $filas['idcurso'] ?>" class="checkEliminar">
-						<?php } ?>
-					<?php
-					}
-					?>
-				</span>
-			<?php echo $filas['idcurso'] ?>
-            </span>
-    		<span class="info-box-number Cnombre" style="font-weight:normal; color:#000000;"><?php echo $filas['nombre'] ?></span>
-            <span class="info-box-number Ccomposicion" style="font-weight:normal; font-size:12px;">
-				<?php 
-				$composicion="";
-				echo $composicion;
-				?>
-			</span>
-			
-            <table border="0">
-             	<tr>
-             		<td style=" padding-right:2px;">
-						<?php 
-						if (!$papelera){
-						?>
-							<?php /////PERMISOS////////////////
-							if (isset($_SESSION['permisos']['cursos']['eliminar'])){ ?>
-								<?php if($filas['idcurso']==0){ ?>
-									<a class="btn btn-default disabled"><i class="fa fa-trash-o"></i></a>
-								<?php }else{ ?>
-									<a class="btn btn-default" onclick="(eliminarIndividual(<?php echo $filas['idcurso'] ?>))" title="Eliminar"><i class="fa fa-trash-o"></i></a>
-								<?php } ?>
-							<?php 
-							}else{ ?>
-								<a class="btn btn-default disabled"><i class="fa fa-trash-o"></i></a>
-							<?php
-							}
-							?>
-						<?php 
-						}else{?>
-								<a class="btn btn-default" onclick="(restaurarIndividual(<?php echo $filas['idcurso'] ?>))" title="Restaurar Resgistro"><i class="fa fa-recycle"></i></a>
-						<?php 
-						}
-						?>
-					</td>
-					<td style=" padding-right:2px;">
-						<?php /////PERMISOS////////////////
-						if (isset($_SESSION['permisos']['cursos']['modificar'])){ ?>
-							<form action="../modificar/actualizar.php?n1=cursos&n2=consultarcursos" method="post">
-								<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
-								<button type="submit" class="btn btn-default"><i class="fa fa-pencil"></i></button>
-							</form>
-						<?php 
-						}else{ ?>
-							<a class="btn btn-default disabled"><i class="fa fa-pencil"></i></a>
-                        <?php
-                        }
-						?>
-                	</td>
-        	 	</tr>
-             </table>  
-            
-    	</div><!-- /.info-box-content -->
-    </div><!-- /.box -->
+	<div class="col-sm-3 carta-cursos" id="iregistro<?php echo $filas['idcurso']?>">
+		<h4 class="d-flex centrar-elementos">
+			<?php echo $filas['categoria'] ?>
+		</h4>
+		<hr class="d-flex centrar-elementos">
+		<div class="d-flex centrar-elementos">
+			<i class="fa fa-pencil icono-curso"></i>
+		</div>
+		<hr>
+		<h3 class="d-flex centrar-elementos">
+			<?php echo $filas['nombre'] ?>
+		</h3>
+		<div class="d-flex centrar-elementos margen-bot">
+			<button class="btn btn-default boton-curso "> Incribirme</button>
+		</div>
+	</div>
 <?php 
 		} //Fin de while
 }// Fin de sis es lista
@@ -245,3 +192,7 @@ if(mysqli_num_rows($resultado)==0){
 	include("../../../componentes/mensaje_no_hay_registros.php");
 }
 ?>
+<!-- 
+
+
+ -->

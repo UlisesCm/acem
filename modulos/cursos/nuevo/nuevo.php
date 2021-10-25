@@ -252,7 +252,6 @@ include("../../seguridad/comprobar_login.php");
                         </div>
                         <div id="div-button-pregunta">
                           <button type="button" class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta"onclick="borrarPregunta(0)">x</button>
-                          <!-- <a class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta"onclick="borrarPregunta(0)">x</a> -->
                         </div>
                         <label class="col-sm-1 control-label"> Pregunta:</label>
                         <div class="col-sm-4" id="div-preguntaX">
@@ -313,11 +312,8 @@ include("../../seguridad/comprobar_login.php");
                         <div class="checkbox col-sm-2" id="div-checkbox-respuesta0">
                           <input type="checkbox" id="checkbox-respuesta00" name="checkboxRespuesta00"> Correcta
                         </div>
-                        <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</button>
-                        <!-- <a type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</a> -->
+                        <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</button>                        
                         <button type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</button>
-                        <!-- <a type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</a> -->
-                      </div>
                     </div>
                   </div>
                 </div>
