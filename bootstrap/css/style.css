@@ -71,3 +71,7 @@
 .boton-eliminar{
   margin-right: 25px;
 }
+
+.cabecera-cursos{
+  justify-content: space-around;
+}

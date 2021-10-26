@@ -18,6 +18,7 @@ class Cursos
 		}
 		return $consulta;
 	}
+	
 	function comprobarCampo($campo, $valor, $tipoGuardado)
 	{
 		if ($this->con->conectar() == true) {
@@ -192,52 +193,6 @@ class Cursos
 		}
 	}
 
-/* 	function guardarLeccion($ContadorLecciones, $aTipoLecciones, $aInputLecciones, $aTextareaLecciones)
-	{
-		/////PERMISOS////////////////
-		if (!isset($_SESSION['permisos']['cursos']['guardar'])) {
-			return "denegado";
-			exit;
-		}
-		$contenido = "";
-		for ($i = 0; $i <= $ContadorLecciones; $i++) {
-			$iddetallecurso = $this->con->generarClave(2);
-			switch ($aTipoLecciones[$i]) {
-
-				case 'texto':
-					$contenido = $aTextareaLecciones[$i];
-					$tipo = $aTipoLecciones[$i];
-					break;
-
-				case 'enlace':
-					$contenido = $aInputLecciones[$i];
-					$tipo = $aTipoLecciones[$i];
-					break;
-
-				case 'imagen':
-					$contenido = "";
-					$tipo = $aTipoLecciones[$i];
-					break;
-				case 'video':
-					$contenido = "";
-					$tipo = $aTipoLecciones[$i];
-					break;
-				case 'documento':
-					$contenido = "";
-					$tipo = $aTipoLecciones[$i];
-					break;
-
-				default:
-					$contenido = "";
-					$tipo = $aTipoLecciones[$i];
-					break;
-			}
-			if ($this->con->conectar() == true) {
-				mysqli_query($this->con->conect, "INSERT INTO detallecurso (iddetallecurso,tipo,contenido) VALUES ('$iddetallecurso','$tipo','$contenido')");
-			}
-		}
-	} */
-
 
 	function actualizar($nombre, $categoria, $icono, $idcurso)
 	{
@@ -333,7 +288,7 @@ class Cursos
 		}
 	}
 
-	function mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera)
+	function mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias)
 	{
 		/////PERMISOS////////////////
 		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
@@ -341,8 +296,19 @@ class Cursos
 			exit;
 		}
 
+		$consultarCategoria = "";
+		if ($categorias != "todos") {
+			$consultarCategoria = "AND cursos.categoria='$categorias'";
+		} else {
+			$consultarCategoria = "";
+		}
+
 		$condicion = trim($condicion);
-		$where = $this->armarConsulta($condicion, $papelera);
+		$where = "";
+		$where = "
+			WHERE cursos.idcurso <>'0'
+			$consultarCategoria
+		";
 
 		$consulta = "SELECT 
 					cursos.idcurso,
@@ -358,6 +324,8 @@ class Cursos
 			return $resultado = mysqli_query($this->con->conect, $consulta);
 		}
 	}
+
+
 	function consultaGeneral($condicion)
 	{
 		if ($this->con->conectar() == true) {

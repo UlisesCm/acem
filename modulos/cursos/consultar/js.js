@@ -94,6 +94,9 @@ function comprobarReglas(){
 
 	
 $(document).ready(function() {
+
+	menuFiltro();
+
 	$("#cajaBuscar").focus();
 	comprobarReglas();
 	load_tablas(campoOrden,orden,cantidadamostrar,paginacion,busqueda,tipoVista);
@@ -173,6 +176,10 @@ $(document).ready(function() {
 		var busqueda=$.trim( $("#cajaBuscar").val());
 		load_tablas(campoOrden,orden,cantidadamostrar,paginacion,busqueda,tipoVista);
 	});
+
+	$("#botonFiltrar").click(function() {
+		load_tablas(campoOrden,orden,cantidadamostrar,paginacion,busqueda,tipoVista);
+	});
 	
 	 $("#cajaBuscar").keypress(function(event){  
       	var keycode = (event.keyCode ? event.keyCode : event.which); 
@@ -204,6 +211,27 @@ $(document).ready(function() {
 });
 
 //***********************AJAX*********************
+const menuFiltro = () => {
+	//MOSTRAR Y OCULTAR FILTRO GENERAL
+	const botonMostrarFiltro = $('.botonMostrarFiltro')
+	const botonOcultarFiltro = $('.botonOcultarFiltro')
+	const formulario = $('.box-body')
+
+	botonOcultarFiltro.hide()
+	formulario.hide()
+ 
+	botonMostrarFiltro.click(()=>{
+	 botonOcultarFiltro.show()
+	 botonMostrarFiltro.hide()
+	 formulario.show(200)
+	})
+ 
+	botonOcultarFiltro.click(()=>{
+	 botonMostrarFiltro.show()
+	 botonOcultarFiltro.hide()
+	 formulario.hide(200)
+	})
+}
 
 // Autor: Armando Viera Rodríguez
 // Onixbm 2014
@@ -222,8 +250,8 @@ function load_tablas (campoOrden, orden, cantidadamostrar, paginacion, busqueda,
 			$("#loading").show();
 		}
 	}
-	
-	xmlhttp.open("POST","consultar.php?campoOrden="+campoOrden+"&orden="+orden+"&cantidadamostrar="+cantidadamostrar+"&paginacion="+paginacion+"&busqueda="+busqueda+"&tipoVista="+tipoVista+"&papelera="+papelera, true);
+	var variables=$("#formularioFiltro").serialize();
+	xmlhttp.open("POST","consultar.php?campoOrden="+campoOrden+"&orden="+orden+"&cantidadamostrar="+cantidadamostrar+"&paginacion="+paginacion+"&busqueda="+busqueda+"&tipoVista="+tipoVista+"&papelera="+papelera+"&"+variables, true);
 	xmlhttp.send();
 }
 

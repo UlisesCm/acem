@@ -471,6 +471,8 @@ const actualizarContadorRespuesta = (index) => {
   $("#input-contador-respuesta").val(index);
 };
 
+
+
 function buscar(busqueda) {
   location.href =
     "../consultar/vista.php?link=vista&busqueda=" +
