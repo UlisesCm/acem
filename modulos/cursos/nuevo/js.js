@@ -164,14 +164,17 @@ const contenidoExamen = (index) => {
   textarea = $("#textarea-pregunta" + index);
   input = $("#input-pregunta" + index);
   respuesta = $("#div-respuesta" + index);
+  
 
   textarea.hide();
   input.show();
   respuesta.hide();
+  // $("#respuesta-checkbox"+index+"0").hide()
 
   switch (select.val()) {
     case "abierta":
-      for (let i = 0; i < objetoContador[index] + 1; i++) {
+      // for (let i = 0; i < objetoContador[index] + 1; i++) {
+      for (let i = 0; i <= objetoContador[index]; i++) {
         $("#div-respuesta" + index + i).hide();
       }
       input.show();
@@ -181,17 +184,37 @@ const contenidoExamen = (index) => {
       break;
 
     case "multiple":
-      for (let i = 0; i < objetoContador[index] + 1; i++) {
+      for (let i = 0; i <= objetoContador[index]; i++) {
         $("#div-respuesta" + index + i).show();
+        let radioTemporal = $("#radio-respuesta" + index + i );
+        let checkboxTemporal = $("#checkbox-respuesta" + index + i );
+        console.log(checkboxTemporal)
+        console.log(radioTemporal)
+        radioTemporal.show()
+        checkboxTemporal.hide()
       }
       input.show();
       textarea.hide();
       respuesta.show();
-      // console.log("Examen Multiple");
+      break;
+
+    case "casilla":
+      for (let i = 0; i <= objetoContador[index]; i++) {
+        $("#div-respuesta" + index + i).show();
+        let radioTemporal = $("#radio-respuesta" + index + i );
+        let checkboxTemporal = $("#checkbox-respuesta" + index + i );
+        console.log(radioTemporal)
+        console.log(checkboxTemporal)
+        radioTemporal.hide()
+        checkboxTemporal.show()
+      }
+      input.show();
+      textarea.hide();
+      respuesta.show();
       break;
 
     case "practica":
-      for (let i = 0; i < objetoContador[index] + 1; i++) {
+      for (let i = 0; i <= objetoContador[index]; i++) {
         $("#div-respuesta" + index + i).hide();
       }
       input.hide();
@@ -309,7 +332,7 @@ const crearPregunta = (index) => {
   cloneChild2[13].id = divInputValor; // DIV PREGUNTA ID
 
   let cloneChild21 = document.getElementById(divSelectPregunta).childNodes; // DIV SELECT NODO
-  console.log(cloneChild21);
+  // console.log(cloneChild21);
   let selectPregunta = "ctipopregunta" + index;
   cloneChild21[1].id = selectPregunta; // SELECT PREGUNTA ID
   cloneChild21[1].setAttribute("onChange", `contenidoExamen(${index});`);
@@ -346,7 +369,7 @@ const crearPregunta = (index) => {
   cloneChild31[7].id = botonAgregarRespuesta;
   cloneChild31[7].setAttribute(
     "onClick",
-    `crearRespuesta(${index});contenidoExamen(${index});`
+    `crearRespuesta(${index}),contenidoExamen(${index});`
   );
 
   let cloneChild311 = document.getElementById(divInputRespuesta).childNodes;
@@ -355,14 +378,18 @@ const crearPregunta = (index) => {
   cloneChild311[1].setAttribute("name", `inputRespuesta${index}0`);
 
   let cloneChild312 = document.getElementById(divCheckboxRespuesta).childNodes;
-  let checkbox = "respuesta-checkbox" + index + 0;
+  let radio = "radio-respuesta" + index + 0;
+  let checkbox = "checkbox-respuesta" + index + 0;
   cloneChild312[1].id = checkbox;
+  cloneChild312[3].id = radio;
+  console.log(cloneChild312[1])
   cloneChild312[1].setAttribute("name", `checkboxRespuesta${index}0`);
+  cloneChild312[3].setAttribute("name", `radioRespuesta${index}`);
+  cloneChild312[3].setAttribute("value", `radio${index}0`);
 };
 
 const crearRespuesta = (index) => {
   objetoContador[index] = objetoContador[index] + 1;
-  console.log(objetoContador);
   actualizarContadorRespuesta(objetoContador);
 
   const original = document.getElementById("div-respuesta");
@@ -404,12 +431,22 @@ const crearRespuesta = (index) => {
   );
 
   let cloneChild2 = document.getElementById(divCheckboxRespuesta).childNodes;
+  let radio = "radio-respuesta" + index + objetoContador[index];
   let checkbox = "checkbox-respuesta" + index + objetoContador[index];
   // console.log(checkbox);
   cloneChild2[1].id = checkbox;
+  cloneChild2[3].id = radio;
   cloneChild2[1].setAttribute(
     "name",
     `checkboxRespuesta${index}${objetoContador[index]}`
+  );
+  cloneChild2[3].setAttribute(
+    "name",
+    `radioRespuesta${index}`
+  );
+  cloneChild2[3].setAttribute(
+    "value",
+    `radio${index}${objetoContador[index]}`
   );
 
   // CONTADOR DINAMICO PARA CONTAR EL NUMERO DE RESPUESTAS

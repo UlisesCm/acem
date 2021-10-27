@@ -239,6 +239,21 @@ for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la v
 	}
 }
 // RESPUESTAS ////////////////////////////////////////////////////////////////////////////////////////
+/* Input RADIO Resputas */
+$aRadioRespuesta = array();
+for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la variable contador
+	$concatenacion = "radioRespuesta".$i;
+	switch (isset($_POST[$concatenacion])) {
+		case true:
+			$radioRespuesta=htmlentities(trim($_POST[$concatenacion]));
+			array_push($aRadioRespuesta,$radioRespuesta);
+			break;
+		
+		default:
+			array_push($aRadioRespuesta,"eliminado");
+			break;
+	}
+}
 /* SE CREA UN ARREGLO BIDIMIENCIONAL PARA GUARDAR LAS RESPUESTAS*/
 $aaInputRespuesta = array();
 for ($x=0; $x <= $contadorExamen; $x++) {
@@ -264,11 +279,11 @@ for ($x=0; $x <= $contadorExamen; $x++) {
 	array_push($aaCheckboxRespuesta, array());
 	$contador = $aContadorRespuestas[$x];
 	for ($y=0; $y <= $contador; $y++) {
-		// $concatenacion = "checkboxRespuesta".$x.$y;		
+		$concatenacion = "checkboxRespuesta".$x.$y;		
 		switch (isset($_POST[$concatenacion])) {
 			case true:
 				$checkboxRespuesta=htmlentities(trim($_POST[$concatenacion]));
-				array_push($aaCheckboxRespuesta[$x],$checkboxRespuesta);
+				array_push($aaCheckboxRespuesta[$x],"on");
 				break;
 			
 			default:
@@ -300,7 +315,8 @@ if($validacion){
 		$aTipoPregunta,
 		$aTextareaPregunta,
 		$aInputPregunta,
-		$aContadorRespuestas,// PREGUNTAS
+		$aContadorRespuestas,// Respuestas
+		$aRadioRespuesta,
 		$aaInputRespuesta,
 		$aaCheckboxRespuesta
 	);
@@ -322,7 +338,7 @@ if($validacion){
 }
 
 echo utf8_encode($mensaje);
-echo utf8_encode(" - "."Nombre del Recurso :".$recursonombre." - ");
+// echo utf8_encode(" - "."Value Radio :".$radio." - ");
 // echo utf8_encode(" - "."Contador inputRespuesta :".$inputRespuesta." - ");
-// echo utf8_encode(print_r($aaCheckboxRespuesta));
+echo utf8_encode(print_r($aRadioRespuesta));
 

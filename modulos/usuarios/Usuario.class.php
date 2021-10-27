@@ -14,7 +14,8 @@ class Usuario{
 			$consulta="WHERE usuarios.idusuario <>'0'";
 		}
 		return $consulta;
-	}function comprobarCampo($campo, $valor, $tipoGuardado){
+	}
+	function comprobarCampo($campo, $valor, $tipoGuardado){
 		if($this->con->conectar()==true){
 			//print_r($listaCampos);
 			$resultado=mysqli_query($this->con->conect,"SELECT COUNT( * ) AS contador from usuarios WHERE $campo = '$valor'");
@@ -248,6 +249,7 @@ class Usuario{
 			return $resultado=mysqli_query($this->con->conect,$consulta);
 		}
 	}
+
 	function consultaGeneral($condicion){
 		if($this->con->conectar()==true){
 			return mysqli_query($this->con->conect,"SELECT * FROM usuarios $condicion");

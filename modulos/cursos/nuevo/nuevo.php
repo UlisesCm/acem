@@ -247,6 +247,7 @@ include("../../seguridad/comprobar_login.php");
                           <select id="ctipopregunta" name="tipoPregunta" class="form-control" onchange="contenidoExamen(0)">
                             <option value="abierta">Pregunta Abierta</option>
                             <option value="multiple">Opcion Multiple</option>
+                            <option value="casilla">Casilla de Verificacion</option>
                             <option value="practica">Practica</option>
                           </select>
                         </div>
@@ -271,7 +272,8 @@ include("../../seguridad/comprobar_login.php");
                             <input class="form-control" type="text" name="inputRespuesta" id="input-respuesta">
                           </div>
                           <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
-                            <input type="checkbox" id="checkbox-respuesta" name="respuestaCheckbox"> Correcta
+                            <input type="checkbox" id="checkbox-respuesta" name="respuestaCheckbox"> 
+                            <input type="radio" id="radio-respuesta" name="radioRespuesta"> Correcta
                           </div>
                           <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button>
                           <button type="button" class="btn btn-danger" id="borrar-respuesta" onclick="borrarRespuesta(0)" style="display:none">x</button>
@@ -289,6 +291,7 @@ include("../../seguridad/comprobar_login.php");
                         <select id="ctipopregunta0" name="tipoPregunta0" class="form-control" onchange="contenidoExamen(0)">
                           <option value="abierta">Pregunta Abierta</option>
                           <option value="multiple">Opcion Multiple</option>
+                          <option value="casilla">Casilla de Verificacion</option>
                           <option value="practica">Practica</option>
                         </select>
                       </div>
@@ -310,9 +313,10 @@ include("../../seguridad/comprobar_login.php");
                           <input class="form-control" type="text" name="inputRespuesta00" id="input-respuesta00">
                         </div>
                         <div class="checkbox col-sm-2" id="div-checkbox-respuesta0">
-                          <input type="checkbox" id="checkbox-respuesta00" name="checkboxRespuesta00"> Correcta
+                          <input type="checkbox" id="checkbox-respuesta00" name="checkboxRespuesta00">
+                          <input type="radio" id="radio-respuesta00" name="radioRespuesta0" value="radio00"> Correcta
                         </div>
-                        <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0)">Agregar Respuesta</button>                        
+                        <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0),contenidoExamen(0)">Agregar Respuesta</button>                        
                         <button type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</button>
                     </div>
                   </div>

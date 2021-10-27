@@ -13,6 +13,8 @@ class Cursos
 	{
 		if ($condicion != "") {
 			$consulta = "WHERE cursos.idcurso <>'0'";
+			$consulta="WHERE ((cursos.nombre LIKE '%".$condicion."%') OR (cursos.nombre LIKE '%".$condicion."%'))AND cursos.idcurso <>'0'";
+			// $consulta="WHERE ((usuarios.nombre LIKE '%".$condicion."%') OR (usuarios.usuario LIKE '%".$condicion."%'))AND usuarios.idusuario <>'0'";
 		} else {
 			$consulta = "WHERE cursos.idcurso <>'0'";
 		}
@@ -68,6 +70,7 @@ class Cursos
 		$aTextareaPregunta,
 		$aInputPregunta,
 		$aContadorRespuestas,// PREGUNTAS
+		$aRadioRespuesta,
 		$aaInputRespuesta,
 		$aaCheckboxRespuesta
 		)
@@ -98,9 +101,7 @@ class Cursos
 
 							case 'enlace':
 								$contenido = $aInputLecciones[$i];
-								// $contenido = "si entra al case";
 								$tipo = $aTipoLecciones[$i];
-								// $tipo = "si entra al case";
 								break;
 
 							case 'imagen':
@@ -120,13 +121,11 @@ class Cursos
 								break;
 
 							default:
-								$contenido = "default";
-								// $contenido = "";
-								$tipo = "default";
-								// $tipo = $aTipoLecciones[$i];
+								$contenido = "_eliminado";
+								$tipo = "_eliminado";
 								break;
 							}
-								if ($contenido != "eliminado") {
+								if ($contenido != "_eliminado" && $tipo != "_eliminado") {
 									mysqli_query($this->con->conect, "INSERT INTO detallecurso (iddetallecurso,tipo,contenido,idcurso) VALUES ('$iddetallecurso','$tipo','$contenido','$idcurso')");
 								} 
 					}
@@ -138,12 +137,14 @@ class Cursos
 
 					/* GUARDAR PREGUNTAS */////////////////////////////////////////////////////////////////////////////////////////////////
 					for ($x=0; $x <= $contadorExamen; $x++) {
+
 						$aInputRespuesta = $aaInputRespuesta[$x];
 						$aCheckboxRespuesta = $aaCheckboxRespuesta[$x];
 						$valorPregunta = $aValorPregunta[$x];
 						$pregunta = "";
 						$autoCalificar = "NO";
 						$idpregunta = $this->con->generarClave(2);
+
 						switch ($aTipoPregunta[$x]) {
 							case 'abierta':
 								$pregunta = $aInputPregunta[$x];
@@ -152,6 +153,25 @@ class Cursos
 								break;
 
 							case 'multiple':
+								$pregunta = $aInputPregunta[$x];
+								$tipoPregunta = $aTipoPregunta[$x];
+								$autoCalificar = "SI";
+								$contador = $aContadorRespuestas[$x];
+								$radio = $aRadioRespuesta[$x];
+								for ($y=0; $y <= $contador; $y++) {
+									$radioTemporal = "radio".$x.$y;
+									$iddetallesrespuesta = $this->con->generarClave(2);
+									$respuesta = $aInputRespuesta[$y];
+									if ($radio == $radioTemporal) {
+										$correcto = "on";
+									} else {
+										$correcto = "off";
+									}
+									mysqli_query($this->con->conect, "INSERT INTO detallesrespuestas (iddetallesrespuesta, idpregunta, respuesta, correcto) VALUES ('$iddetallesrespuesta','$idpregunta','$respuesta','$correcto')");
+								}
+								break;
+
+							case 'casilla':
 								$pregunta = $aInputPregunta[$x];
 								$tipoPregunta = $aTipoPregunta[$x];
 								$autoCalificar = "SI";
@@ -171,11 +191,11 @@ class Cursos
 								break;
 							
 							default:
-							$pregunta = "sindatos";
-							$tipoPregunta = "sindatos";
+							$pregunta = "_eliminado";
+							$tipoPregunta = "_eliminado";
 								break;
 						}
-						if ($contenido != "eliminado" && $aTipoPregunta[$x] != "sindatos" && $pregunta != "sindatos") {
+						if ($contenido != "eliminado" && $aTipoPregunta[$x] != "_eliminado" && $pregunta != "_eliminado") {
 							mysqli_query($this->con->conect, "INSERT INTO preguntas (idpregunta,idexamen,tipopregunta,pregunta,valor,autocalificar) VALUES ('$idpregunta','$idexamen','$tipoPregunta','$pregunta','$valorPregunta','$autoCalificar')");
 						} 
 					}
@@ -304,7 +324,9 @@ class Cursos
 		}
 
 		$condicion = trim($condicion);
-		$where = "";
+		/* if ($condition == "") {
+			
+		} */
 		$where = "
 			WHERE cursos.idcurso <>'0'
 			$consultarCategoria
