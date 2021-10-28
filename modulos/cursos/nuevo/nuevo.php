@@ -69,7 +69,7 @@ include("../../seguridad/comprobar_login.php");
             <h3 class="box-title">Formulario de registro</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
-          <form class="form-horizontal" name="formulario" id="formulario" method="post">
+          <form class="form-horizontal" name="formulario" id="formulario" method="post" enctype ="multipart/form-data">
             <div class="box-body">
 
               <div class="form-group">
@@ -115,57 +115,57 @@ include("../../seguridad/comprobar_login.php");
                   <h3 class="box-title">Lecciones</h3>
                   <input type="text" name="inputContadorLecciones" id="input-contador-lecciones" value="0">
                   <button type="button" class="btn btn btn-default pull-right" id="mostrarLeccion" onclick="mostrarLecciones()"> Mostrar</button>
-                  <button type="button"class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar</button>           
+                  <button type="button" class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar</button>
                   <button type="button" class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion</button>
                 </div>
-                
+
                 <!-- Padre para clonacion -->
                 <!-- Agregar Contenidos -->
                 <div id="padre-lecciones">
                   <div style="display: none;">
-                  <div class="carta-lecciones" id="nodo-padre-leccion">
-                    <div class="form-group" id="div-principal">
-                      <!-- div1 -->
-                      <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
-                      <div class="col-sm-2" id="div-select">
-                        <select id="ctipoLeccion" name="tipoLeccion" class="form-control tipoLeccion" onchange="contenidoLecciones(0)">
-                          <option value="texto">Texto</option>
-                          <option value="enlace">Enlace</option>
-                          <option value="imagen">Imagen</option>
-                          <option value="video">Video</option>
-                          <option value="documento">Documento</option>
-                        </select>
-                      </div>
-                      <div id="div-button" style="display: none;">
-                        <button type="button" class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</button>
-                      </div>
-                      <!-- text arae -->
-                      <div class="form-group" id="div-contenido-textArea">
-                        <label class="col-sm-2 control-label"> Contenido:</label>
-                        <textarea name="contenidoTextArea" id="ccontenidoTextArea" cols="80" rows="6"></textarea>
-                      </div>
-                      <!-- input -->
-                      <div class="form-group" id="div-contenido-input">
-                        <label class="col-sm-2 control-label"> Contenido:</label>
-                        <div class="col-sm-4" id="div-input">
-                          <input  name="contenidoInput" type="text" class="form-control" id="ccontenidoInput" />
+                    <div class="carta-lecciones" id="nodo-padre-leccion">
+                      <div class="form-group" id="div-principal">
+                        <!-- div1 -->
+                        <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
+                        <div class="col-sm-2" id="div-select">
+                          <select id="ctipoLeccion" name="tipoLeccion" class="form-control tipoLeccion" onchange="contenidoLecciones(0)">
+                            <option value="texto">Texto</option>
+                            <option value="enlace">Enlace</option>
+                            <option value="imagen">Imagen</option>
+                            <option value="video">Video</option>
+                            <option value="documento">Documento</option>
+                          </select>
                         </div>
-                      </div>
-                      <!-- archivo -->
-                      <div class="form-group" id="div-contenido-archivo">
-                        <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
-                        <div class="col-sm-4" id="div-contenido-archivo-hijo">
-                          <div class="input-group" id="div-contenido-archivo-nieto">
-                            <input type="file" name="recurso" style="display:none;" id="crecurso" accept=".pdf" onChange="fileinput('recurso')" />
-                            <input type="text" name="nrecurso" id="nrecurso" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
-                            <span class="input-group-btn">
-                              <a class="btn btn-warning" onclick="$('#crecurso').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
-                            </span>
+                        <div id="div-button" style="display: none;">
+                          <button type="button" class="btn btn btn-danger pull-right boton-eliminar" onclick="borrarLeccion(0)">x</button>
+                        </div>
+                        <!-- text arae -->
+                        <div class="form-group" id="div-contenido-textArea">
+                          <label class="col-sm-2 control-label"> Contenido:</label>
+                          <textarea name="contenidoTextArea" id="ccontenidoTextArea" cols="80" rows="6"></textarea>
+                        </div>
+                        <!-- input -->
+                        <div class="form-group" id="div-contenido-input">
+                          <label class="col-sm-2 control-label"> Contenido:</label>
+                          <div class="col-sm-4" id="div-input">
+                            <input name="contenidoInput" type="text" class="form-control" id="ccontenidoInput" />
+                          </div>
+                        </div>
+                        <!-- archivo -->
+                        <div class="form-group" id="div-contenido-archivo">
+                          <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
+                          <div class="col-sm-4" id="div-contenido-archivo-hijo">
+                            <div class="input-group" id="div-contenido-archivo-nieto">
+                              <input type="file" name="recurso" style="display:none;" id="crecurso" accept=".pdf" onChange="fileinput('recurso')" />
+                              <input type="text" name="nrecurso" id="nrecurso" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                              <span class="input-group-btn">
+                                <a class="btn btn-warning" onclick="$('#crecurso').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
                   </div>
                   <!-- PRIMEN NODO -->
                   <div class="carta-lecciones" id="nodo-padre-leccion0">
@@ -198,18 +198,23 @@ include("../../seguridad/comprobar_login.php");
                         </div>
                       </div>
                       <!-- archivo -->
-                      <div class="form-group" id="div-contenido-archivo0">
-                        <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
-                        <div class="col-sm-4" id="div-contenido-archivo-hijo0">
-                          <div class="input-group" id="div-contenido-archivo-nieto0">
-                            <input type="file" name="recurso0" style="display:none;" id="crecurso0" accept=".pdf" onchange="fileinput('recurso0')" />
-                            <input type="text" name="nrecurso0" id="nrecurso0" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
-                            <span class="input-group-btn">
-                              <a class="btn btn-warning" onclick="$('#crecurso0').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
-                            </span>
+                      
+                        <div class="form-group" id="div-contenido-archivo0">
+                          <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
+                          <div class="col-sm-4" id="div-contenido-archivo-hijo0">
+                            <div class="input-group" id="div-contenido-archivo-nieto0">
+                              <form class="form-horizontal" id="formulario-recurso0" name="formularioRecurso0" method="post" enctype ="multipart/form-data">
+                                <input type="file" name="recurso0" style="display:none;" id="crecurso0" accept=".pdf" onchange="fileinput('recurso0')" />
+                                <input type="text" name="nrecurso0" id="nrecurso0" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                                <span class="input-group-btn">
+                                  <a class="btn btn-warning" onclick="$('#crecurso0').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                                </span>
+                              </form>
+                              
+                            </div>
                           </div>
                         </div>
-                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -219,7 +224,7 @@ include("../../seguridad/comprobar_login.php");
               <!-- Final de Lecciones -->
 
               <!-- Examen -->
-              <div class="box box-info" style="border-color:#000000" >
+              <div class="box box-info" style="border-color:#000000">
                 <!-- HEADER EXAMEN -->
                 <div class="box-header">
                   <h3 class="box-title">Examen</h3>
@@ -229,13 +234,13 @@ include("../../seguridad/comprobar_login.php");
                   <button type="button" class="btn btn btn-default pull-right" id="ocultarExamen" onclick="ocultarExamenes()">Ocultar </button>
                   <button type="button" class="btn btn-success pull-right margen-right" id="agregar-pregunta">Agregar Pregunta</button>
                 </div>
-                
+
                 <div id="padre-examen">
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Nombre del Examen:</label>
                     <div class="col-sm-4">
-                      <input type="text" name="nombreExamen" id="nombre-examen"class="form-control"> 
-                    </div>          
+                      <input type="text" name="nombreExamen" id="nombre-examen" class="form-control">
+                    </div>
                   </div>
                   <!-- ORIGINAL CLONE -->
                   <div style="display:none">
@@ -252,7 +257,7 @@ include("../../seguridad/comprobar_login.php");
                           </select>
                         </div>
                         <div id="div-button-pregunta">
-                          <button type="button" class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta"onclick="borrarPregunta(0)">x</button>
+                          <button type="button" class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta" onclick="borrarPregunta(0)">x</button>
                         </div>
                         <label class="col-sm-1 control-label"> Pregunta:</label>
                         <div class="col-sm-4" id="div-preguntaX">
@@ -260,7 +265,7 @@ include("../../seguridad/comprobar_login.php");
                           <textarea class="form-control" name="textareaPregunta" cols="80" rows="4" id="textarea-pregunta"></textarea>
                         </div>
                         <label class="col-sm-1 control-label">valor:</label>
-                        <div  class="col-sm-1" id="div-input-valor">
+                        <div class="col-sm-1" id="div-input-valor">
                           <input class="form-control" name="inputValor" type="text" id="input-valor">
                         </div>
                       </div>
@@ -272,7 +277,7 @@ include("../../seguridad/comprobar_login.php");
                             <input class="form-control" type="text" name="inputRespuesta" id="input-respuesta">
                           </div>
                           <div class="checkbox col-sm-2" id="div-checkbox-respuesta">
-                            <input type="checkbox" id="checkbox-respuesta" name="respuestaCheckbox"> 
+                            <input type="checkbox" id="checkbox-respuesta" name="respuestaCheckbox">
                             <input type="radio" id="radio-respuesta" name="radioRespuesta"> Correcta
                           </div>
                           <button type="button" class="btn btn-default" id="agregar-respuesta" onclick="crearRespuesta(0)">Agregar Respuesta</button>
@@ -301,7 +306,7 @@ include("../../seguridad/comprobar_login.php");
                         <textarea class="form-control" name="textareaPregunta0" cols="80" rows="4" id="textarea-pregunta0"></textarea>
                       </div>
                       <label class="col-sm-1 control-label">valor:</label>
-                      <div  class="col-sm-1" id="div-input-valor0">
+                      <div class="col-sm-1" id="div-input-valor0">
                         <input class="form-control" type="text" id="input-valor0" name="inputValor0">
                       </div>
                     </div>
@@ -316,20 +321,20 @@ include("../../seguridad/comprobar_login.php");
                           <input type="checkbox" id="checkbox-respuesta00" name="checkboxRespuesta00">
                           <input type="radio" id="radio-respuesta00" name="radioRespuesta0" value="radio00"> Correcta
                         </div>
-                        <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0),contenidoExamen(0)">Agregar Respuesta</button>                        
+                        <button type="button" class="btn btn-default" id="agregar-respuesta0" onclick="crearRespuesta(0),contenidoExamen(0)">Agregar Respuesta</button>
                         <button type="button" class="btn btn-danger" id="borrar-respuesta0" onclick="borrarRespuesta(0)" style="display:none">x</button>
+                      </div>
                     </div>
                   </div>
+
                 </div>
+                <!-- Final Examen -->
+              </div><!-- /.box-body -->
 
-              </div>
-              <!-- Final Examen -->
-            </div><!-- /.box-body -->
-
-            <div class="box-footer">
-              <button type="button" class="btn btn-default" id="botonCancelar" onclick="vaciarCampos();">Limpiar</button>
-              <button type="button" class="btn btn-primary pull-right" id="botonGuardar"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
-            </div><!-- /.box-footer -->
+              <div class="box-footer">
+                <button type="button" class="btn btn-default" id="botonCancelar" onclick="vaciarCampos();">Limpiar</button>
+                <button type="button" class="btn btn-primary pull-right" id="botonGuardar"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
+              </div><!-- /.box-footer -->
           </form>
           <div id="loading" class="overlay" style="display:none">
             <i class="fa fa-cog fa-spin" style="color:#000000"></i>

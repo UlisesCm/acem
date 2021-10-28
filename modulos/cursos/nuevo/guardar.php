@@ -340,5 +340,5 @@ if($validacion){
 echo utf8_encode($mensaje);
 // echo utf8_encode(" - "."Value Radio :".$radio." - ");
 // echo utf8_encode(" - "."Contador inputRespuesta :".$inputRespuesta." - ");
-echo utf8_encode(print_r($aRadioRespuesta));
+// echo utf8_encode(print_r($aRadioRespuesta));
 

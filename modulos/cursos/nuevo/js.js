@@ -5,6 +5,7 @@ function vaciarCampos() {
 
 function fileinput(nombre) {
   $("#n" + nombre).val($("#c" + nombre).val());
+  guardarArchivo()
 }
 
 const objetoContador = [0];
@@ -508,7 +509,27 @@ const actualizarContadorRespuesta = (index) => {
   $("#input-contador-respuesta").val(index);
 };
 
-
+const guardarArchivo = () => {
+  var formData = new FormData($("#formulario-recurso0")[0]);
+  $("#botonGuardar").hide();
+  $("#botonSave").hide();
+  $("#loading").show();
+  $.ajax({
+    url: "guardararchivoscurso.php",
+    type: "POST",
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (mensaje) {
+      $("#botonGuardar").show();
+      $("#botonSave").show();
+      $("#loading").hide();
+      console.log(mensaje)
+    },
+  });
+  return false;
+}
 
 function buscar(busqueda) {
   location.href =
@@ -529,27 +550,12 @@ function guardar(variables) {
       $("#botonGuardar").show();
       $("#botonSave").show();
       $("#loading").hide();
-      mostrarMensaje(mensaje);
+      // mostrarMensaje(mensaje);
     },
   });
   return false;
 }
 
-const guardarArchivo = () => {
-  var formData = new FormData($("#formulario")[0]);
-  $.ajax({
-    url: "guardar.php",
-    type: "POST",
-    data: formData,
-    cache: false,
-    contentType: false,
-    processData: false,
-    success: function (data) {
-      console.log(data);
-      alert(data);
-    },
-  });
-};
 
 function mostrarMensaje(mensaje) {
   //alert(mensaje);
