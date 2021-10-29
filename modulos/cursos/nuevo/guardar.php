@@ -137,7 +137,7 @@ $aRecursoExtencion = array();
 		array_push($aRecursoExtencion,$recurso);
 	}
 } */
-if (isset($_FILES['recurso0']['name'])){
+/* if (isset($_FILES['recurso0']['name'])){
 	$recursotemporal=$_FILES['recurso0']['tmp_name'];
 	$recursonombre=$_FILES['recurso0']['name'];
 	$extencionrecurso=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
@@ -150,7 +150,7 @@ if (isset($_FILES['recurso0']['name'])){
 	$recursonombre = "No se encontro";
 	// $validacion=false;
 	// $mensaje=$mensaje."<p>El campo recurso no es correcto</p>";
-}
+} */
 
 // VARIABLES EXAMEN /////////////////////////////////////////////////////////////////////////////////////
 /* Contador Preguntas */
@@ -188,7 +188,7 @@ for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la v
 			break;
 		
 		default:
-			array_push($aValorPregunta,"");
+			array_push($aValorPregunta,"_eliminado");
 			break;
 	}
 }
@@ -203,7 +203,7 @@ for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la v
 			break;
 		
 		default:
-			array_push($aTipoPregunta,"");
+			array_push($aTipoPregunta,"_eliminado");
 			break;
 	}
 }
@@ -218,7 +218,7 @@ for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la v
 			break;
 		
 		default:
-			array_push($aInputPregunta,"");
+			array_push($aInputPregunta,"_eliminado");
 			break;
 	}
 }
@@ -234,7 +234,7 @@ for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la v
 			break;
 		
 		default:
-			array_push($aTextareaPregunta,"eliminado");
+			array_push($aTextareaPregunta,"_eliminado");
 			break;
 	}
 }
@@ -250,7 +250,7 @@ for ($i=0; $i <= $contadorExamen; $i++) { //recorremos el arreglo en base a la v
 			break;
 		
 		default:
-			array_push($aRadioRespuesta,"eliminado");
+			array_push($aRadioRespuesta,"_eliminado");
 			break;
 	}
 }
@@ -268,7 +268,7 @@ for ($x=0; $x <= $contadorExamen; $x++) {
 				break;
 			
 			default:
-				array_push($aaInputRespuesta[$x],"eliminado");
+				array_push($aaInputRespuesta[$x],"_eliminado");
 				break;
 			}
 	} 

@@ -259,7 +259,10 @@ include("../../seguridad/comprobar_login.php");
                         <div id="div-button-pregunta">
                           <button type="button" class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta" onclick="borrarPregunta(0)">x</button>
                         </div>
-                        <label class="col-sm-1 control-label"> Pregunta:</label>
+                        <label class="col-sm-1 control-label" id="label-cambiante">
+                        <span id="label-pregunta">Pregunta:</span>
+                        <span id="label-respuesta">Practica:</span>
+                        </label>
                         <div class="col-sm-4" id="div-preguntaX">
                           <input class="form-control" type="text" name="inputPregunta" id="input-pregunta">
                           <textarea class="form-control" name="textareaPregunta" cols="80" rows="4" id="textarea-pregunta"></textarea>
@@ -300,7 +303,10 @@ include("../../seguridad/comprobar_login.php");
                           <option value="practica">Practica</option>
                         </select>
                       </div>
-                      <label class="col-sm-1 control-label"> Pregunta:</label>
+                      <label class="col-sm-1 control-label" id="label-pregunta"> 
+                        <span id="label-pregunta0">Pregunta:</span>
+                        <span id="label-respuesta0">Practica:</span>
+                      </label>
                       <div class="col-sm-4" id="div-pregunta0">
                         <input class="form-control" type="text" name="inputPregunta0" id="input-pregunta0">
                         <textarea class="form-control" name="textareaPregunta0" cols="80" rows="4" id="textarea-pregunta0"></textarea>

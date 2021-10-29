@@ -167,7 +167,9 @@ class Cursos
 									} else {
 										$correcto = "off";
 									}
-									mysqli_query($this->con->conect, "INSERT INTO detallesrespuestas (iddetallesrespuesta, idpregunta, respuesta, correcto) VALUES ('$iddetallesrespuesta','$idpregunta','$respuesta','$correcto')");
+									if ($respuesta != "_eliminado") {
+										mysqli_query($this->con->conect, "INSERT INTO detallesrespuestas (iddetallesrespuesta, idpregunta, respuesta, correcto) VALUES ('$iddetallesrespuesta','$idpregunta','$respuesta','$correcto')");
+									}
 								}
 								break;
 
@@ -180,7 +182,9 @@ class Cursos
 									$iddetallesrespuesta = $this->con->generarClave(2);
 									$respuesta = $aInputRespuesta[$y];
 									$correcto = $aCheckboxRespuesta[$y];
-									mysqli_query($this->con->conect, "INSERT INTO detallesrespuestas (iddetallesrespuesta, idpregunta, respuesta, correcto) VALUES ('$iddetallesrespuesta','$idpregunta','$respuesta','$correcto')");
+									if ($respuesta != "_eliminado") {
+										mysqli_query($this->con->conect, "INSERT INTO detallesrespuestas (iddetallesrespuesta, idpregunta, respuesta, correcto) VALUES ('$iddetallesrespuesta','$idpregunta','$respuesta','$correcto')");
+									}
 								}
 								break;
 
@@ -195,7 +199,7 @@ class Cursos
 							$tipoPregunta = "_eliminado";
 								break;
 						}
-						if ($contenido != "eliminado" && $aTipoPregunta[$x] != "_eliminado" && $pregunta != "_eliminado") {
+						if ($contenido != "_eliminado" && $aTipoPregunta[$x] != "_eliminado" && $pregunta != "_eliminado") {
 							mysqli_query($this->con->conect, "INSERT INTO preguntas (idpregunta,idexamen,tipopregunta,pregunta,valor,autocalificar) VALUES ('$idpregunta','$idexamen','$tipoPregunta','$pregunta','$valorPregunta','$autoCalificar')");
 						} 
 					}

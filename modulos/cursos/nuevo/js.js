@@ -165,22 +165,28 @@ const contenidoExamen = (index) => {
   textarea = $("#textarea-pregunta" + index);
   input = $("#input-pregunta" + index);
   respuesta = $("#div-respuesta" + index);
+  labelPregunta = $("#label-pregunta" + index);
+  labelPractica = $("#label-respuesta" + index);
   
 
   textarea.hide();
   input.show();
   respuesta.hide();
+  labelPregunta.show();
+  labelPractica.hide();
   // $("#respuesta-checkbox"+index+"0").hide()
 
   switch (select.val()) {
     case "abierta":
-      // for (let i = 0; i < objetoContador[index] + 1; i++) {
+
       for (let i = 0; i <= objetoContador[index]; i++) {
         $("#div-respuesta" + index + i).hide();
       }
       input.show();
       textarea.hide();
       respuesta.hide();
+      labelPregunta.show();
+      labelPractica.hide();
       // console.log("Examen Abierta");
       break;
 
@@ -189,14 +195,14 @@ const contenidoExamen = (index) => {
         $("#div-respuesta" + index + i).show();
         let radioTemporal = $("#radio-respuesta" + index + i );
         let checkboxTemporal = $("#checkbox-respuesta" + index + i );
-        console.log(checkboxTemporal)
-        console.log(radioTemporal)
         radioTemporal.show()
         checkboxTemporal.hide()
       }
       input.show();
       textarea.hide();
       respuesta.show();
+      labelPregunta.show();
+      labelPractica.hide();
       break;
 
     case "casilla":
@@ -212,6 +218,8 @@ const contenidoExamen = (index) => {
       input.show();
       textarea.hide();
       respuesta.show();
+      labelPregunta.show();
+      labelPractica.hide();
       break;
 
     case "practica":
@@ -221,6 +229,8 @@ const contenidoExamen = (index) => {
       input.hide();
       textarea.show();
       respuesta.hide();
+      labelPregunta.hide();
+      labelPractica.show();
       // console.log("Examen Practica");
       break;
 
@@ -323,12 +333,15 @@ const crearPregunta = (index) => {
   cloneChild[3].id = primerDiv;
 
   let cloneChild2 = document.getElementById(primerDiv).childNodes; //PRIMER DIV NODO
+  // console.log(cloneChild2)
   let divSelectPregunta = "div-select-pregunta" + index;
   let divBotonPregunta = "div-button-pregunta" + index;
   let divPregunta = "div-pregunta" + index;
   let divInputValor = "div-input-valor" + index;
+  let labelPregunta = "label-cambiante" + index;
   cloneChild2[3].id = divSelectPregunta; //DIV SELECT ID
   cloneChild2[5].id = divBotonPregunta; // DIV PREGUNTA ID
+  cloneChild2[7].id = labelPregunta; // Label que muestra respuesta o practica
   cloneChild2[9].id = divPregunta; // DIV PREGUNTA ID
   cloneChild2[13].id = divInputValor; // DIV PREGUNTA ID
 
@@ -357,6 +370,13 @@ const crearPregunta = (index) => {
   cloneChild24[1].id = inputValor;
   cloneChild24[1].setAttribute("name", `inputValor${index}`);
 
+  let cloneChild25 = document.getElementById(labelPregunta).childNodes;
+  // console.log(cloneChild25);
+  let spanPregunta = "label-pregunta" + index;
+  let spanRespuesta = "label-respuesta" + index;
+  cloneChild25[1].id = spanPregunta;
+  cloneChild25[3].id = spanRespuesta;
+
   let cloneChild3 = document.getElementById(nodoPadreRespuesta).childNodes; //PRIMER DIV
   let divRespuesta = "div-respuesta" + index;
   cloneChild3[1].id = divRespuesta;
@@ -383,7 +403,6 @@ const crearPregunta = (index) => {
   let checkbox = "checkbox-respuesta" + index + 0;
   cloneChild312[1].id = checkbox;
   cloneChild312[3].id = radio;
-  console.log(cloneChild312[1])
   cloneChild312[1].setAttribute("name", `checkboxRespuesta${index}0`);
   cloneChild312[3].setAttribute("name", `radioRespuesta${index}`);
   cloneChild312[3].setAttribute("value", `radio${index}0`);
