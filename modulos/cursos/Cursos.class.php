@@ -312,7 +312,7 @@ class Cursos
 		}
 	}
 
-	function mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias)
+	function mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias, $cursosBusqueda)
 	{
 		/////PERMISOS////////////////
 		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
@@ -327,13 +327,17 @@ class Cursos
 			$consultarCategoria = "";
 		}
 
+		$consultarCursos ="";
+		if ($cursosBusqueda != "") {
+			$consultarCursos = "AND cursos.nombre LIKE '%".$cursosBusqueda."%'";
+		} else {
+			$consultarCursos = "";
+		}
 		$condicion = trim($condicion);
-		/* if ($condition == "") {
-			
-		} */
 		$where = "
 			WHERE cursos.idcurso <>'0'
 			$consultarCategoria
+			$consultarCursos
 		";
 
 		$consulta = "SELECT 

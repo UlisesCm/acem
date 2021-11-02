@@ -11,6 +11,7 @@ function fileinput(nombre) {
 const objetoContador = [0];
 
 $(document).ready(function () {
+
   let contadorLeccion = 0;
   let contadorExamen = 0;
 
@@ -32,6 +33,12 @@ $(document).ready(function () {
     crearPregunta(contadorExamen);
     contenidoExamen(contadorExamen);
     actualizarContadorExamen(contadorExamen);
+  });
+
+  /* Llenar select */
+  llenarSelectDocente("");
+  $("#iddocente_ajax").change(function () {
+    llenarSelectSucursalgarantias($("#iddocente_ajax").val());
   });
 
   $("#padre-examen").hide();
@@ -85,6 +92,7 @@ $(document).ready(function () {
     $("#panel_alertas").hide();
   });
 });
+
 function validar() {
   var estado = true;
   var mensaje = "";
@@ -537,6 +545,19 @@ const guardarArchivo = () => {
       $("#botonSave").show();
       $("#loading").hide();
       console.log(mensaje);
+    },
+  });
+  return false;
+};
+
+const llenarSelectDocente = (condicion) => {
+  $("#iddocente_ajax").html("<option value='1'>cargando...</option>");
+  $.ajax({
+    url: "../componentes/llenarSelectDocente.php",
+    type: "POST",
+    data: "submit=&condicion=" + condicion, //Pasamos los datos en forma de array seralizado desde la funcion de envio
+    success: function (mensaje) {
+      $("#iddocente_ajax").html(mensaje);
     },
   });
   return false;

@@ -209,17 +209,13 @@ include("../../seguridad/comprobar_login.php");
                                 <span class="input-group-btn">
                                   <a class="btn btn-warning" onclick="$('#crecurso0').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
                                 </span>
-                              </form>
-                              
+                              </form>                           
                             </div>
                           </div>
                         </div>
-
                     </div>
                   </div>
                 </div>
-
-
               </div>
               <!-- Final de Lecciones -->
 
