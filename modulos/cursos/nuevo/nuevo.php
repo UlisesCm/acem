@@ -146,7 +146,7 @@ include("../../seguridad/comprobar_login.php");
                         </div>
                         <!-- input -->
                         <div class="form-group" id="div-contenido-input">
-                          <label class="col-sm-2 control-label"> Contenido:</label>
+                          <label class="col-sm-2 control-label"> Enlace:</label>
                           <div class="col-sm-4" id="div-input">
                             <input name="contenidoInput" type="text" class="form-control" id="ccontenidoInput" />
                           </div>
@@ -192,7 +192,7 @@ include("../../seguridad/comprobar_login.php");
                       </div>
                       <!-- input -->
                       <div class="form-group" id="div-contenido-input0">
-                        <label class="col-sm-2 control-label"> Contenido:</label>
+                        <label class="col-sm-2 control-label"> Enlace:</label>
                         <div class="col-sm-4" id="div-input0">
                           <input name="contenidoInput0" type="text" class="form-control" id="ccontenidoInput0" />
                         </div>

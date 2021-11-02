@@ -5,7 +5,7 @@ function vaciarCampos() {
 
 function fileinput(nombre) {
   $("#n" + nombre).val($("#c" + nombre).val());
-  guardarArchivo()
+  // guardarArchivo()
 }
 
 const objetoContador = [0];
@@ -167,7 +167,6 @@ const contenidoExamen = (index) => {
   respuesta = $("#div-respuesta" + index);
   labelPregunta = $("#label-pregunta" + index);
   labelPractica = $("#label-respuesta" + index);
-  
 
   textarea.hide();
   input.show();
@@ -178,7 +177,6 @@ const contenidoExamen = (index) => {
 
   switch (select.val()) {
     case "abierta":
-
       for (let i = 0; i <= objetoContador[index]; i++) {
         $("#div-respuesta" + index + i).hide();
       }
@@ -193,10 +191,10 @@ const contenidoExamen = (index) => {
     case "multiple":
       for (let i = 0; i <= objetoContador[index]; i++) {
         $("#div-respuesta" + index + i).show();
-        let radioTemporal = $("#radio-respuesta" + index + i );
-        let checkboxTemporal = $("#checkbox-respuesta" + index + i );
-        radioTemporal.show()
-        checkboxTemporal.hide()
+        let radioTemporal = $("#radio-respuesta" + index + i);
+        let checkboxTemporal = $("#checkbox-respuesta" + index + i);
+        radioTemporal.show();
+        checkboxTemporal.hide();
       }
       input.show();
       textarea.hide();
@@ -208,12 +206,12 @@ const contenidoExamen = (index) => {
     case "casilla":
       for (let i = 0; i <= objetoContador[index]; i++) {
         $("#div-respuesta" + index + i).show();
-        let radioTemporal = $("#radio-respuesta" + index + i );
-        let checkboxTemporal = $("#checkbox-respuesta" + index + i );
-        console.log(radioTemporal)
-        console.log(checkboxTemporal)
-        radioTemporal.hide()
-        checkboxTemporal.show()
+        let radioTemporal = $("#radio-respuesta" + index + i);
+        let checkboxTemporal = $("#checkbox-respuesta" + index + i);
+        console.log(radioTemporal);
+        console.log(checkboxTemporal);
+        radioTemporal.hide();
+        checkboxTemporal.show();
       }
       input.show();
       textarea.hide();
@@ -460,14 +458,8 @@ const crearRespuesta = (index) => {
     "name",
     `checkboxRespuesta${index}${objetoContador[index]}`
   );
-  cloneChild2[3].setAttribute(
-    "name",
-    `radioRespuesta${index}`
-  );
-  cloneChild2[3].setAttribute(
-    "value",
-    `radio${index}${objetoContador[index]}`
-  );
+  cloneChild2[3].setAttribute("name", `radioRespuesta${index}`);
+  cloneChild2[3].setAttribute("value", `radio${index}${objetoContador[index]}`);
 
   // CONTADOR DINAMICO PARA CONTAR EL NUMERO DE RESPUESTAS
   // console.log(objetoContador)
@@ -544,11 +536,11 @@ const guardarArchivo = () => {
       $("#botonGuardar").show();
       $("#botonSave").show();
       $("#loading").hide();
-      console.log(mensaje)
+      console.log(mensaje);
     },
   });
   return false;
-}
+};
 
 function buscar(busqueda) {
   location.href =
@@ -569,12 +561,11 @@ function guardar(variables) {
       $("#botonGuardar").show();
       $("#botonSave").show();
       $("#loading").hide();
-      // mostrarMensaje(mensaje);
+      mostrarMensaje(mensaje);
     },
   });
   return false;
 }
-
 
 function mostrarMensaje(mensaje) {
   //alert(mensaje);
