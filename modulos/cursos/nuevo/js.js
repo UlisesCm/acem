@@ -550,6 +550,24 @@ const guardarArchivo = () => {
   return false;
 };
 
+const guardarInscribir = (variables) => {
+  $("#botonGuardar").hide();
+  $("#botonSave").hide();
+  $("#loading").show();
+  $.ajax({
+    url: "guardarInscribir.php",
+    type: "POST",
+    data: "submit=&" + variables, //Pasamos los datos en forma de array seralizado desde la funcion de envio
+    success: function (mensaje) {
+      $("#botonGuardar").show();
+      $("#botonSave").show();
+      $("#loading").hide();
+      mostrarMensaje(mensaje);
+    },
+  });
+  return false;
+}
+
 const llenarSelectDocente = (condicion) => {
   $("#iddocente_ajax").html("<option value='1'>cargando...</option>");
   $.ajax({
@@ -569,6 +587,8 @@ function buscar(busqueda) {
     busqueda +
     "&n1=cursos&n2=consultarcursos";
 }
+
+
 
 function guardar(variables) {
   $("#botonGuardar").hide();

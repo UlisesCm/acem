@@ -129,24 +129,7 @@ include("../../seguridad/comprobar_login.php");
 					<div class="box-header with-border">
 						<h3 class="box-title">Consultar Cursos</h3>
 					</div><!-- /.box-header -->
-<!-- 
-					<div class="d-flex cabecera-cursos">
-						<div class="d-flex">
-							<label class="control-label"> Buscar Curso:</label>
-							<div class="">
-								<input type="text" name="buscarCurso" id="buscar-curso" class="form-control">
-							</div>
-						</div>
 
-						<div class="d-flex">
-							<label class="control-label"> Filtrar Categorias:</label>
-							<select name="filtrarCurso" id="filtrar-curso" class="form-control">
-								<option value="informatica">Informatica</option>
-								<option value="logistica">Logistica</option>
-								<option value="inventarios">Inventarios</option>
-							</select>
-						</div>
-					</div> -->
 					
 					<div id="muestra_contenido_ajax" style="min-height:100px;">
 					</div><!-- /din contenido ajax -->

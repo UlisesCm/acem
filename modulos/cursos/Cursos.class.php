@@ -217,6 +217,40 @@ class Cursos
 		}
 	}
 
+	function guardarInscribir($idcurso, $nombre, $categoria, $icono, $docente){
+		/////PERMISOS////////////////
+		if (!isset($_SESSION['permisos']['empleados']['guardar'])){
+			return "denegado";
+			exit;
+		}
+		
+		$idavancecurso="";
+		$idcurso="";
+		$idalumno="";
+		$iddocente="";
+		$iddetalleexamen="";
+		$avance="";
+		$fechainicio="";
+		$fechafin="";
+		$calificacion="";
+		$finalizado="";
+
+		/////FIN  DE PERMISOS////////
+		$idavancecurso=$this->con->generarClave(2); /*Sincronizacion 1 */
+
+		if ($this->con->conectar()==true) {
+			if (mysqli_query($this->con->conect,"INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, calificacion, finalizado) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$calificacion','$finalizado')")) {
+				if ($_SESSION['bitacora']=="si"){
+					$descripcionB="agreg&oacute; un nuevo registro en la tabla empleados ";
+					$this->registrarBitacora("guardar",$descripcionB);
+				}
+				return "exito";
+			} else {
+				return "fracaso";
+			}
+		}
+	}
+
 
 	function actualizar($nombre, $categoria, $icono, $idcurso)
 	{

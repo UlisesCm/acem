@@ -198,9 +198,12 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				<h3 class="d-flex centrar-elementos">
 					<?php echo $filas['nombre'] ?>
 				</h3>
-				<div class="d-flex centrar-elementos margen-bot">
-					<button class="btn btn-default boton-curso "> Incribirme</button>
-				</div>
+
+				<form class="d-flex centrar-elementos margen-bot" action="../nuevo/inscribirme.php?n1=cursos&n2=nuevocursos" method="post">
+					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
+					<button class="btn btn-default boton-curso "> Incribirme </button>
+				</form>
+
 			</div>
 	<?php
 		} //Fin de while

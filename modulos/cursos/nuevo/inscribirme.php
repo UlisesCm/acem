@@ -1,5 +1,16 @@
 <?php
 include("../../seguridad/comprobar_login.php");
+require("../Cursos.class.php");
+if (isset($_POST['id'])){
+	$id=htmlentities(trim($_POST['id']));
+	$Ocursos= new Cursos;
+	$resultado=$Ocursos->mostrarIndividual($id);
+	$extractor = mysqli_fetch_array($resultado);
+  $idcurso=$extractor["idcurso"];
+	$nombre=$extractor["nombre"];
+	$categoria=$extractor["categoria"];
+	$icono=$extractor["icono"];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -72,10 +83,11 @@ include("../../seguridad/comprobar_login.php");
           <form class="form-horizontal" name="formularioInscribirme" id="formulario-inscribirme" method="post" enctype ="multipart/form-data">
             <div class="box-body">
 
+              <input type="hidden" name="id" value="<?php echo $idcurso ?>"/>
               <div class="form-group ">
                 <label for="selectiddocente_ajax" class="col-sm-2 control-label">Docentes:</label>
                 <div class="col-sm-5">
-                  <select id="iddocente_ajax" name="iddocente" class="form-control">
+                  <select id="iddocente_ajax" name="docente" class="form-control">
                   </select>
                 </div>
               </div>
@@ -89,23 +101,15 @@ include("../../seguridad/comprobar_login.php");
               <div class="form-group">
                 <label for="calumno" class="col-sm-2 control-label">Curso:</label>
                 <div class="col-sm-5">
-                  <input name="calumno" type="text" class="form-control" id="alumno" />
+                  <input name="ccurso" type="text" class="form-control" id="curso" value="<?php echo $nombre ?>" readonly="readonly"/>
                 </div>
               </div>
               <div class="form-group">
                 <label for="calumno" class="col-sm-2 control-label">Categoria:</label>
                 <div class="col-sm-5">
-                  <input name="calumno" type="text" class="form-control" id="alumno" />
+                  <input name="ccategoria" type="text" class="form-control" id="categoria" value="<?php echo $categoria ?>" readonly="readonly"/>
                 </div>
               </div>
-
-              <div class="form-group">
-                <label for="cicono" class="col-sm-2 control-label">Fecha:</label>
-                <div class="col-sm-5">
-                  <input name="icono" type="text" class="form-control" id="cicono" />
-                </div>
-              </div>
-
            
             </div><!-- /.box-body -->
 
