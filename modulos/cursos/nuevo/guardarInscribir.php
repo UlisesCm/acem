@@ -28,7 +28,7 @@ if (isset($_POST['docente'])){
 
 $alumno = isset($_SESSION['usuario']);
 /* 
- $idcurso, $nombre, $categoria, $icono, $docente
+ $idcurso, $nombre, $categoria, $icono, $docentegit 
 */
 /* 
  $idcurso, $docente, $alumno
