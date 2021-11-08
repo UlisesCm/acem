@@ -217,29 +217,44 @@ class Cursos
 		}
 	}
 
-	function guardarInscribir($idcurso, $nombre, $categoria, $icono, $docente){
+	function guardarInscribir($curso, $docente, $alumno){
 		/////PERMISOS////////////////
 		if (!isset($_SESSION['permisos']['empleados']['guardar'])){
 			return "denegado";
 			exit;
 		}
-		
-		$idavancecurso="";
-		$idcurso="";
-		$idalumno="";
-		$iddocente="";
-		$iddetalleexamen="";
-		$avance="";
-		$fechainicio="";
-		$fechafin="";
-		$calificacion="";
-		$finalizado="";
+		//Avance Cursos
+		$idavancecurso= $this->con->generarClave(2); //se genera aqui
+		if ($curso) {
+			$idcurso = $curso; //se traen de id curso
+		} else {
+			$idcurso = 000;
+		} 
+		if($alumno){
+			$idalumno= $alumno; //se trae desde variables de session
+		} else {
+			$idalumno= 000;
+		}
+		$iddocente= $docente; // se trae de docente
+		$iddetalleexamen= $this->con->generarClave(2); // Se genera aqui
+		$avance=""; // se deja asi
+		$fechainicio= date('d-m-Y'); // se genera aqui
+		$fechafin=""; //se deja asi
+		$finalizado=false; // se genera aqui
+
+		//Detalle Examenes
+		$examen = mysqli_query($this->con->conect, "SELECT * FROM examenes WHERE idcurso='$idcurso'");
+		$extractor = mysqli_fetch_array($examen);
+  	$idexamen=$extractor["idexamen"]; // Se trae desde idcurso
+		// $iddetalleexamen; //se genera aqui
+		$calificacion=""; // Deja asi
+		$examenPDF=""; // temporalmente asi
 
 		/////FIN  DE PERMISOS////////
-		$idavancecurso=$this->con->generarClave(2); /*Sincronizacion 1 */
-
+		$avancecursos = mysqli_query($this->con->conect,"INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, finalizado) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$finalizado')");
+		$detallesexamen = mysqli_query($this->con->conect,"INSERT INTO detalleexamenes (iddetalleexamen, idexamen, calificacion	, examenpdf	) VALUES ('$iddetalleexamen', '$idexamen', '$calificacion', '$examenPDF')");
 		if ($this->con->conectar()==true) {
-			if (mysqli_query($this->con->conect,"INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, calificacion, finalizado) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$calificacion','$finalizado')")) {
+			if ($avancecursos && $detallesexamen) {
 				if ($_SESSION['bitacora']=="si"){
 					$descripcionB="agreg&oacute; un nuevo registro en la tabla empleados ";
 					$this->registrarBitacora("guardar",$descripcionB);
@@ -323,6 +338,13 @@ class Cursos
 	{
 		if ($this->con->conectar() == true) {
 			return mysqli_query($this->con->conect, "SELECT * FROM cursos WHERE idcurso='$idcurso'");
+		}
+	}
+
+	function mostrarExamen($idcurso)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM examenes WHERE idcurso='$idcurso'");
 		}
 	}
 

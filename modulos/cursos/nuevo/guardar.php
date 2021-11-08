@@ -20,7 +20,6 @@ if (isset($_POST['nombre'])){
 
 if (isset($_POST['categoria'])){
 	$categoria=htmlentities(trim($_POST['categoria']));
-	//$categoria=mysql_real_escape_string($categoria);
 	
 }else{
 	$validacion=false;

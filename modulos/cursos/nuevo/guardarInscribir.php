@@ -19,29 +19,25 @@ if (isset($_POST['id'])){
 	$icono=$extractor["icono"];
 }
 
+if (isset($_SESSION['idusuario'])){
+	$alumno=htmlentities(trim($_SESSION['idusuario']));
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo alumno no es correcto</p>";
+}
+
 if (isset($_POST['docente'])){
 	$docente=htmlentities(trim($_POST['docente']));
 }else{
 	$validacion=false;
-	$mensaje=$mensaje."<p>El campo nombre no es correcto</p>";
+	$mensaje=$mensaje."<p>El campo docente no es correcto</p>";
 }
 
-$alumno = isset($_SESSION['usuario']);
-/* 
- $idcurso, $nombre, $categoria, $icono, $docentegit 
-*/
-/* 
- $idcurso, $docente, $alumno
-*/
-
 if($validacion){
-	$resultado=$Ocursos->guardarInscribir($idcurso, $nombre, $categoria, $icono, $docente);
+	$resultado=$Ocursos->guardarInscribir($idcurso, $docente, $alumno);
 	if($resultado=="exito"){
 		
 		$mensaje="exito@Operaci&oacute;n exitosa@El registro ha sido guardado";
-	}
-	if($resultado=="nombreExiste"){
-		$mensaje="fracaso@Operaci&oacute;n fallida@El campo nombre ya existe en la base de datos";
 	}
 	if($resultado=="fracaso"){
 		$mensaje="fracaso@Operaci&oacute;n fallida@Ha ocurrido un problema en la base de datos [001]";

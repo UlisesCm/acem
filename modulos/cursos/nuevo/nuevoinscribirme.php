@@ -80,12 +80,12 @@ if (isset($_POST['id'])){
             <h3 class="box-title">Formulario de registro</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
-          <form class="form-horizontal" name="formularioInscribirme" id="formulario-inscribirme" method="post" enctype ="multipart/form-data">
-            <div class="box-body">
+          <form class="form-horizontal" name="formularioInscribirme" id="formulario-inscribirme" method="post" enctype ="multipart/form-data">  
+          <div class="box-body">
 
-              <input type="hidden" name="id" value="<?php echo $idcurso ?>"/>
+              <input type="hidden" name="id" value="<?php echo $idcurso ?>" readonly="readonly"/>
               <div class="form-group ">
-                <label for="selectiddocente_ajax" class="col-sm-2 control-label">Docentes:</label>
+                <label for="selectiddocente_ajax" class="col-sm-2 control-label">Docente:</label>
                 <div class="col-sm-5">
                   <select id="iddocente_ajax" name="docente" class="form-control">
                   </select>
@@ -115,7 +115,7 @@ if (isset($_POST['id'])){
 
               <div class="box-footer">
                 <button type="button" class="btn btn-default" id="botonCancelar" onclick="vaciarCampos();">Limpiar</button>
-                <button type="button" class="btn btn-primary pull-right" id="botonGuardar"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
+                <button type="button" class="btn btn-primary pull-right" id="botonGuardarInscribir"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
               </div><!-- /.box-footer -->
           </form>
           <div id="loading" class="overlay" style="display:none">

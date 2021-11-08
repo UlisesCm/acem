@@ -9,7 +9,7 @@
 		$idselect=1;
 	}
 	while ($filas=mysqli_fetch_array($resultado)) { ?>
-		<option value="<?php echo $filas['nombre']; ?>"
+		<option value="<?php echo $filas['idempleado']; ?>"
         <?php
         	if($filas['nombre']==$idselect){
 				echo 'selected="selected"';

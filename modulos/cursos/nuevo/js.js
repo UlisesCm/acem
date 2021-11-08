@@ -49,6 +49,7 @@ $(document).ready(function () {
   $("#panel_alertas").hide();
   $(".loading").hide();
   //$("#panel_alertas").delay(8000).hide(600);
+
   $("#botonGuardar").click(function () {
     if (Spry.Widget.Form.validate(formulario)) {
       if (validar()) {
@@ -57,6 +58,11 @@ $(document).ready(function () {
         // guardarArchivo();
       }
     }
+  });
+
+  $("#botonGuardarInscribir").click(function () {
+        var variables = $("#formulario-inscribirme").serialize();
+        guardarInscribir(variables);
   });
 
   $(".botonSave").click(function () {
@@ -68,6 +74,7 @@ $(document).ready(function () {
       }
     }
   });
+
   $(".botonBuscar").click(function () {
     var busqueda = $.trim($("#cajaBuscar").val());
     //if(busqueda!=""){
