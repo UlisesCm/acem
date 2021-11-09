@@ -1,6 +1,5 @@
-
 <?php
-///INSCRIBIRME////////////////////////
+///MIS CURSOS////////////////////////
 include("../../seguridad/comprobar_login.php");
 /////PERMISOS////////////////
 if (!isset($_SESSION['permisos']['cursos']['acceso'])) {
@@ -30,10 +29,10 @@ if (isset($_REQUEST['campoOrden']) && $_REQUEST['campoOrden'] != "") {
 	if ($_REQUEST['campoOrden'] != "undefined") {
 		$campoOrden = htmlentities($_REQUEST['campoOrden']);
 	} else {
-		$campoOrden = "idcurso";
+		$campoOrden = "idavancecursos";
 	}
 } else {
-	$campoOrden = "idcurso";
+	$campoOrden = "idavancecursos";
 }
 
 if (isset($_REQUEST['orden']) && $_REQUEST['orden'] != "") {
@@ -74,17 +73,17 @@ if (isset($_REQUEST['id-categorias-select']) && $_REQUEST['id-categorias-select'
 	$categorias = "";
 }
 
-if (isset($_REQUEST['id-cursos-input']) && $_REQUEST['id-cursos-input'] != "") {
-	$cursosBusqueda = htmlentities($_REQUEST['id-cursos-input']);
-	// $busqueda=mysql_real_escape_string($busqueda);
+if (isset($_REQUEST['cursosTerminados'])) {
+	$cursosTerminados = true;
 } else {
-	$cursosBusqueda = "";
+	$cursosTerminados = false;
 }
 
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
-$resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
+// $resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
+$resultado = $Ocursos->mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosTerminados);
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
@@ -200,12 +199,22 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				<h3 class="d-flex centrar-elementos">
 					<?php echo $filas['nombre'] ?>
 				</h3>
-
-				<form class="d-flex centrar-elementos margen-bot" action="../nuevo/nuevoinscribirme.php?n1=cursos&n2=nuevocursos" method="post">
-					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
-					<button class="btn btn-default boton-curso "> Incribirme </button>
-				</form>
-
+				<h5 class="d-flex centrar-elementos">
+					<?php 
+						if ($filas['avance'] != 100) {
+							echo $filas['avance']?>% de Progreso<?php
+						} else {
+							?> Curso Terminado <?php
+						}
+					?>
+				</h5>
+				
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $filas['avance']?>%;">
+						<span class="sr-only"><?php echo $filas['avance']?>% Complete</span>
+					</div>
+				</div>
+				
 			</div>
 	<?php
 		} //Fin de while

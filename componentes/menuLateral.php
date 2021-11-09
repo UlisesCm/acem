@@ -55,12 +55,22 @@ function checarLink($nivel,$base){
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
+
+              <?php 
+			  	/////PERMISOS////////////////
+			  	if (isset($_SESSION['permisos']['cursos']['consultar'])){
+			  	?>
+                <li class="<?php echo checarLink("n2","miscursos"); ?>">
+                  <a href="../../../modulos/cursos/miscursos/vistacursos.php?n1=cursos&n2=miscursos"><i class="fa fa-circle-o text-green"></i> Mis Cursos</i></a>
+                </li>
+                 <?php }?>
+
               	<?php 
 				/////PERMISOS////////////////
 				if (isset($_SESSION['permisos']['cursos']['guardar'])){
 				?>
                 <li class="<?php echo checarLink("n2","nuevocursos"); ?>">
-                <a href="../../../modulos/cursos/nuevo/nuevo.php?n1=cursos&n2=nuevocursos"><i class="fa fa-circle-o text-green"></i> Nueva cursos</a></li>
+                <a href="../../../modulos/cursos/nuevo/nuevo.php?n1=cursos&n2=nuevocursos"><i class="fa fa-circle-o text-green"></i>Crear Curso</a></li>
                 <?php }?>
                 
                 <?php 
@@ -68,12 +78,16 @@ function checarLink($nivel,$base){
 			  	if (isset($_SESSION['permisos']['cursos']['consultar'])){
 			  	?>
                 <li class="<?php echo checarLink("n2","consultarcursos"); ?>">
-                  <a href="../../../modulos/cursos/consultar/vista.php?n1=cursos&n2=consultarcursos"><i class="fa fa-circle-o text-red"></i> Consultar cursos</i></a>
+                  <a href="../../../modulos/cursos/consultar/vista.php?n1=cursos&n2=consultarcursos"><i class="fa fa-circle-o text-red"></i>Inscribirme</i></a>
                 </li>
                  <?php }?>
               </ul>
             </li>
+
+            
             <?php }?>
+
+            
 			<!-- Fin de Bloque de Cursos -->
               <!-- Inicio de Bloque Preventa -->
 					<?php 

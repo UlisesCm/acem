@@ -1,5 +1,5 @@
 <?php
-///INSCRIBIRME////////////////////////
+///MIS CURSOS////////////////////////
 include("../../seguridad/comprobar_login.php");
 ?>
 <!DOCTYPE html>
@@ -42,11 +42,11 @@ include("../../seguridad/comprobar_login.php");
 		<div class="content-wrapper">
 			<!-- Contenido de la cabecera -->
 			<section class="content-header">
-				<h1>Cursos<small> Inscribirme</small>
+				<h1>Cursos<small> Consulta</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="../../inicio/inicio/inicio.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
-					<li><a href="#">Inscribirme</a></li>
+					<li><a href="#">Consultar cursos</a></li>
 				</ol>
 			</section>
 
@@ -104,15 +104,16 @@ include("../../seguridad/comprobar_login.php");
 									<label for="selectidcategoria_ajax" class="col-sm-1 control-label"> Categoria:</label>
 									<div class="col-sm-2">
 										<select id="idcategoria_ajax" name="id-categorias-select" class="form-control">
-											<option value="todos">Todos los Cursos</option>
+											<option value="todos">Todos mis Cursos</option>
 											<option value="informatica">Informatica</option>
 											<option value="logistica">Logistica</option>
 											<option value="inventarios">Inventarios</option>
 										</select>
 									</div>
-									<label for="inputcurso_ajax" class="col-sm-1 control-label">Buscar Curso:</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" id="idcurso_ajax" name="id-cursos-input">
+									<label for="inputcurso_ajax" class="col-sm-2 control-label">Mostra Cursos terminados:</label>
+									<div class="checkbox col-sm-1">
+										<!-- <input type="text" class="form-control" id="idcurso_ajax" name="id-cursos-input"> -->
+										<input type="checkbox" name="cursosTerminados" id="cursos-terminados">
 									</div>
 									<div class='col-sm-2 pull-right' style="margin-right: 30px;">
 										<div class="form-group">
@@ -128,7 +129,7 @@ include("../../seguridad/comprobar_login.php");
 				<!-- box -->
 				<div class="box box-info" style="border-color:#000000">
 					<div class="box-header with-border">
-						<h3 class="box-title">Inscribirme a un Curso</h3>
+						<h3 class="box-title">Consultar Cursos</h3>
 					</div><!-- /.box-header -->
 
 					

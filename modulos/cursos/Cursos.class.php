@@ -13,14 +13,14 @@ class Cursos
 	{
 		if ($condicion != "") {
 			$consulta = "WHERE cursos.idcurso <>'0'";
-			$consulta="WHERE ((cursos.nombre LIKE '%".$condicion."%') OR (cursos.nombre LIKE '%".$condicion."%'))AND cursos.idcurso <>'0'";
+			$consulta = "WHERE ((cursos.nombre LIKE '%" . $condicion . "%') OR (cursos.nombre LIKE '%" . $condicion . "%'))AND cursos.idcurso <>'0'";
 			// $consulta="WHERE ((usuarios.nombre LIKE '%".$condicion."%') OR (usuarios.usuario LIKE '%".$condicion."%'))AND usuarios.idusuario <>'0'";
 		} else {
 			$consulta = "WHERE cursos.idcurso <>'0'";
 		}
 		return $consulta;
 	}
-	
+
 	function comprobarCampo($campo, $valor, $tipoGuardado)
 	{
 		if ($this->con->conectar() == true) {
@@ -50,11 +50,11 @@ class Cursos
 	}
 
 	function guardar(
-		$nombre,// Datos generales del curso
+		$nombre, // Datos generales del curso
 		$categoria,
 		$icono,
 		$descripcion,
-		$contadorLecciones,// Lecciones
+		$contadorLecciones, // Lecciones
 		$aTipoLecciones,
 		$aInputLecciones,
 		$aTextareaLecciones,
@@ -63,18 +63,17 @@ class Cursos
 		$aExtencionRecurso,
 		$aRecurso,
 		$aRecursoExtencion,
-		$contadorExamen,// Examen
+		$contadorExamen, // Examen
 		$nombreExamen,
 		$aValorPregunta,
 		$aTipoPregunta,
 		$aTextareaPregunta,
 		$aInputPregunta,
-		$aContadorRespuestas,// PREGUNTAS
+		$aContadorRespuestas, // PREGUNTAS
 		$aRadioRespuesta,
 		$aaInputRespuesta,
 		$aaCheckboxRespuesta
-		)
-	{
+	) {
 		/////PERMISOS////////////////
 		if (!isset($_SESSION['permisos']['cursos']['guardar'])) {
 			return "denegado";
@@ -87,10 +86,10 @@ class Cursos
 				return "nombreExiste";
 			} else {
 				if (mysqli_query($this->con->conect, "INSERT INTO cursos (idcurso, nombre, categoria, icono, descripcion) VALUES ('$idcurso','$nombre','$categoria','$icono','$descripcion')")) {
-					
-					/* GUARDAR LECCION */////////////////////////////////////////////////////////////////////////////////////////////////
+
+					/* GUARDAR LECCION */ ////////////////////////////////////////////////////////////////////////////////////////////////
 					/* FALTA GUARDAR ARCHIVOS */
-					for ($i = 0; $i <= $contadorLecciones; $i++) {	
+					for ($i = 0; $i <= $contadorLecciones; $i++) {
 						$contenido = "";
 						$iddetallecurso = $this->con->generarClave(2);
 						switch ($aTipoLecciones[$i]) {
@@ -105,17 +104,17 @@ class Cursos
 								break;
 
 							case 'imagen':
-								cargarArchivo($aRecurso[$i],$aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i],"jpg","detallecurso",500, 500,"archivo","center");
+								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "jpg", "detallecurso", 500, 500, "archivo", "center");
 								$contenido = $aRecurso[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 							case 'video':
-								cargarArchivo($aRecurso[$i],$aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i],"mp4","detallecurso",0,0,"archivo","center");
+								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "mp4", "detallecurso", 0, 0, "archivo", "center");
 								$contenido = $aRecurso[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 							case 'documento':
-								cargarArchivo($aRecurso[$i],$aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i],"pdf","detallecurso",0,0,"archivo","center");
+								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "pdf", "detallecurso", 0, 0, "archivo", "center");
 								$contenido = $aRecurso[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
@@ -124,19 +123,19 @@ class Cursos
 								$contenido = "_eliminado";
 								$tipo = "_eliminado";
 								break;
-							}
-								if ($contenido != "_eliminado" && $tipo != "_eliminado") {
-									mysqli_query($this->con->conect, "INSERT INTO detallecurso (iddetallecurso,tipo,contenido,idcurso) VALUES ('$iddetallecurso','$tipo','$contenido','$idcurso')");
-								} 
+						}
+						if ($contenido != "_eliminado" && $tipo != "_eliminado") {
+							mysqli_query($this->con->conect, "INSERT INTO detallecurso (iddetallecurso,tipo,contenido,idcurso) VALUES ('$iddetallecurso','$tipo','$contenido','$idcurso')");
+						}
 					}
 
-					/* GUARDAR EXMANEN */////////////////////////////////////////////////////////////////////////////////////////////////
+					/* GUARDAR EXMANEN */ ////////////////////////////////////////////////////////////////////////////////////////////////
 					$nombreExamen;
 					$idexamen = $this->con->generarClave(2);
 					mysqli_query($this->con->conect, "INSERT INTO examenes (idexamen,idcurso,nombreExamen) VALUES ('$idexamen','$idcurso','$nombreExamen')");
 
-					/* GUARDAR PREGUNTAS */////////////////////////////////////////////////////////////////////////////////////////////////
-					for ($x=0; $x <= $contadorExamen; $x++) {
+					/* GUARDAR PREGUNTAS */ ////////////////////////////////////////////////////////////////////////////////////////////////
+					for ($x = 0; $x <= $contadorExamen; $x++) {
 
 						$aInputRespuesta = $aaInputRespuesta[$x];
 						$aCheckboxRespuesta = $aaCheckboxRespuesta[$x];
@@ -158,8 +157,8 @@ class Cursos
 								$autoCalificar = "SI";
 								$contador = $aContadorRespuestas[$x];
 								$radio = $aRadioRespuesta[$x];
-								for ($y=0; $y <= $contador; $y++) {
-									$radioTemporal = "radio".$x.$y;
+								for ($y = 0; $y <= $contador; $y++) {
+									$radioTemporal = "radio" . $x . $y;
 									$iddetallesrespuesta = $this->con->generarClave(2);
 									$respuesta = $aInputRespuesta[$y];
 									if ($radio == $radioTemporal) {
@@ -178,7 +177,7 @@ class Cursos
 								$tipoPregunta = $aTipoPregunta[$x];
 								$autoCalificar = "SI";
 								$contador = $aContadorRespuestas[$x];
-								for ($y=0; $y <= $contador; $y++) {
+								for ($y = 0; $y <= $contador; $y++) {
 									$iddetallesrespuesta = $this->con->generarClave(2);
 									$respuesta = $aInputRespuesta[$y];
 									$correcto = $aCheckboxRespuesta[$y];
@@ -193,15 +192,15 @@ class Cursos
 								$tipoPregunta = $aTipoPregunta[$x];
 								$autoCalificar = "NO";
 								break;
-							
+
 							default:
-							$pregunta = "_eliminado";
-							$tipoPregunta = "_eliminado";
+								$pregunta = "_eliminado";
+								$tipoPregunta = "_eliminado";
 								break;
 						}
 						if ($contenido != "_eliminado" && $aTipoPregunta[$x] != "_eliminado" && $pregunta != "_eliminado") {
 							mysqli_query($this->con->conect, "INSERT INTO preguntas (idpregunta,idexamen,tipopregunta,pregunta,valor,autocalificar) VALUES ('$idpregunta','$idexamen','$tipoPregunta','$pregunta','$valorPregunta','$autoCalificar')");
-						} 
+						}
 					}
 
 					//BITACORA
@@ -217,47 +216,48 @@ class Cursos
 		}
 	}
 
-	function guardarInscribir($curso, $docente, $alumno){
+	function guardarInscribir($curso, $docente, $alumno)
+	{
 		/////PERMISOS////////////////
-		if (!isset($_SESSION['permisos']['empleados']['guardar'])){
+		if (!isset($_SESSION['permisos']['empleados']['guardar'])) {
 			return "denegado";
 			exit;
 		}
 		//Avance Cursos
-		$idavancecurso= $this->con->generarClave(2); //se genera aqui
+		$idavancecurso = $this->con->generarClave(2); //se genera aqui
 		if ($curso) {
 			$idcurso = $curso; //se traen de id curso
 		} else {
 			$idcurso = 000;
-		} 
-		if($alumno){
-			$idalumno= $alumno; //se trae desde variables de session
-		} else {
-			$idalumno= 000;
 		}
-		$iddocente= $docente; // se trae de docente
-		$iddetalleexamen= $this->con->generarClave(2); // Se genera aqui
-		$avance=""; // se deja asi
-		$fechainicio= date('d-m-Y'); // se genera aqui
-		$fechafin=""; //se deja asi
-		$finalizado=false; // se genera aqui
+		if ($alumno) {
+			$idalumno = $alumno; //se trae desde variables de session
+		} else {
+			$idalumno = 000;
+		}
+		$iddocente = $docente; // se trae de docente
+		$iddetalleexamen = $this->con->generarClave(2); // Se genera aqui
+		$avance = ""; // se deja asi
+		$fechainicio = date('d-m-Y'); // se genera aqui
+		$fechafin = ""; //se deja asi
+		$finalizado = false; // se genera aqui
 
 		//Detalle Examenes
 		$examen = mysqli_query($this->con->conect, "SELECT * FROM examenes WHERE idcurso='$idcurso'");
 		$extractor = mysqli_fetch_array($examen);
-  	$idexamen=$extractor["idexamen"]; // Se trae desde idcurso
+		$idexamen = $extractor["idexamen"]; // Se trae desde idcurso
 		// $iddetalleexamen; //se genera aqui
-		$calificacion=""; // Deja asi
-		$examenPDF=""; // temporalmente asi
+		$calificacion = ""; // Deja asi
+		$examenPDF = ""; // temporalmente asi
 
 		/////FIN  DE PERMISOS////////
-		$avancecursos = mysqli_query($this->con->conect,"INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, finalizado) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$finalizado')");
-		$detallesexamen = mysqli_query($this->con->conect,"INSERT INTO detalleexamenes (iddetalleexamen, idexamen, calificacion	, examenpdf	) VALUES ('$iddetalleexamen', '$idexamen', '$calificacion', '$examenPDF')");
-		if ($this->con->conectar()==true) {
+		$avancecursos = mysqli_query($this->con->conect, "INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, finalizado) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$finalizado')");
+		$detallesexamen = mysqli_query($this->con->conect, "INSERT INTO detalleexamenes (iddetalleexamen, idexamen, calificacion	, examenpdf	) VALUES ('$iddetalleexamen', '$idexamen', '$calificacion', '$examenPDF')");
+		if ($this->con->conectar() == true) {
 			if ($avancecursos && $detallesexamen) {
-				if ($_SESSION['bitacora']=="si"){
-					$descripcionB="agreg&oacute; un nuevo registro en la tabla empleados ";
-					$this->registrarBitacora("guardar",$descripcionB);
+				if ($_SESSION['bitacora'] == "si") {
+					$descripcionB = "agreg&oacute; un nuevo registro en la tabla empleados ";
+					$this->registrarBitacora("guardar", $descripcionB);
 				}
 				return "exito";
 			} else {
@@ -383,9 +383,9 @@ class Cursos
 			$consultarCategoria = "";
 		}
 
-		$consultarCursos ="";
+		$consultarCursos = "";
 		if ($cursosBusqueda != "") {
-			$consultarCursos = "AND cursos.nombre LIKE '%".$cursosBusqueda."%'";
+			$consultarCursos = "AND cursos.nombre LIKE '%" . $cursosBusqueda . "%'";
 		} else {
 			$consultarCursos = "";
 		}
@@ -410,6 +410,57 @@ class Cursos
 			return $resultado = mysqli_query($this->con->conect, $consulta);
 		}
 	}
+
+	function mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias, $cursosTerminados)
+	{
+		/////PERMISOS////////////////
+		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
+			return "denegado";
+			exit;
+		}
+		$idalumno= $_SESSION['idusuario'];
+		
+		$consultarCategoria = "";
+		if ($categorias != "todos") {
+			$consultarCategoria = "AND cursos.categoria='$categorias'";
+		} else {
+			$consultarCategoria = "";
+		}
+
+		if ($cursosTerminados == false) {
+			$consultaTerminados = "AND avancecursos.finalizado = 0";
+		} else {
+			$consultaTerminados = "";
+		}
+
+		$where = "
+			WHERE idalumno='$idalumno'
+			$consultarCategoria
+			$consultaTerminados
+		";
+		/* INNER JOIN empresasgarantias ON garantias.idempresa=empresasgarantias.idempresa */
+		/* $consulta = " SELECT 
+					*
+					FROM avancecursos 
+					INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso
+					$where
+					ORDER BY $campoOrden $orden
+					LIMIT $inicial, $cantidadamostrar
+					"; */
+		// $consulta = "SELECT * FROM `avancecursos` INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso WHERE avancecursos.idalumno = 0";consulta que si funcionan
+		$consulta = "SELECT * 
+		FROM `avancecursos` 
+		INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso 
+		$where
+		-- ORDER BY $campoOrden $orden
+		-- LIMIT $inicial, $cantidadamostrar
+		";
+
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, $consulta);
+		}
+	}
+
 
 
 	function consultaGeneral($condicion)
