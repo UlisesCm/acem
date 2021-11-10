@@ -236,27 +236,7 @@ const menuFiltro = () => {
 
 // Autor: Armando Viera Rodríguez
 // Onixbm 2014
-function load_tablas (campoOrden, orden, cantidadamostrar, paginacion, busqueda, tipoVista, archivo="consultar.php"){
-	//alert (orden);
-	//alert (campoOrden);
-	//alert (limit);
-	xmlhttp=new XMLHttpRequest();
-	xmlhttp.onreadystatechange=function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			document.getElementById("muestra_contenido_ajax").innerHTML=xmlhttp.responseText;
-			comprobarReglas();
-			$("#loading").hide();
-		}
-		else{
-			$("#loading").show();
-		}
-	}
-	var variables=$("#formularioFiltro").serialize();
-	xmlhttp.open("POST",archivo+"?campoOrden="+campoOrden+"&orden="+orden+"&cantidadamostrar="+cantidadamostrar+"&paginacion="+paginacion+"&busqueda="+busqueda+"&tipoVista="+tipoVista+"&papelera="+papelera+"&"+variables, true);
-	xmlhttp.send();
-}
-
-/* function load_tablas (campoOrden, orden, cantidadamostrar, paginacion, busqueda, tipoVista, archivo){
+function load_tablas (campoOrden, orden, cantidadamostrar, paginacion, busqueda, tipoVista ){
 	//alert (orden);
 	//alert (campoOrden);
 	//alert (limit);
@@ -274,8 +254,7 @@ function load_tablas (campoOrden, orden, cantidadamostrar, paginacion, busqueda,
 	var variables=$("#formularioFiltro").serialize();
 	xmlhttp.open("POST","consultar.php?campoOrden="+campoOrden+"&orden="+orden+"&cantidadamostrar="+cantidadamostrar+"&paginacion="+paginacion+"&busqueda="+busqueda+"&tipoVista="+tipoVista+"&papelera="+papelera+"&"+variables, true);
 	xmlhttp.send();
-} */
-
+}
 
 function eliminar_registros(ids){
 		
