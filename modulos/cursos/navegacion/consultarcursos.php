@@ -25,6 +25,7 @@ if (isset($_REQUEST['papelera']) && $_REQUEST['papelera'] == "si") {
 } else {
 	$papelera = false;
 }
+
 if (isset($_REQUEST['campoOrden']) && $_REQUEST['campoOrden'] != "") {
 	if ($_REQUEST['campoOrden'] != "undefined") {
 		$campoOrden = htmlentities($_REQUEST['campoOrden']);
@@ -34,6 +35,7 @@ if (isset($_REQUEST['campoOrden']) && $_REQUEST['campoOrden'] != "") {
 } else {
 	$campoOrden = "idavancecursos";
 }
+
 
 if (isset($_REQUEST['orden']) && $_REQUEST['orden'] != "") {
 	if ($_REQUEST['orden'] != "undefined") {
@@ -73,6 +75,13 @@ if (isset($_REQUEST['id-categorias-select']) && $_REQUEST['id-categorias-select'
 	$categorias = "";
 }
 
+if (isset($_REQUEST['idcurso'])) {
+	$idcurso = htmlentities($_REQUEST['idcurso']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$idcurso = "no existe";
+}
+
 if (isset($_REQUEST['cursosTerminados'])) {
 	$cursosTerminados = true;
 } else {
@@ -84,6 +93,7 @@ $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
 // $resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
 $resultado = $Ocursos->mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosTerminados);
+// $resultado = $Ocursos->navegacionCurso($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosTerminados, $idcurso);
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
@@ -213,9 +223,9 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 					</div>
 				</div>
 
-				<form class="d-flex centrar-elementos margen-bot" action="../navegacion/nuevoinscribirme.php?n1=cursos&n2=nuevocursos" method="post">
+				<form class="d-flex centrar-elementos margen-bot" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
-					<button class="btn btn-default boton-curso "> Ver Curso </button>
+					<button class="btn btn-default boton-curso "><?php echo $idcurso?> </button>
 				</form>
 				
 			</div>

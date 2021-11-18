@@ -2,6 +2,7 @@
 ///MIS CURSOS////////////////////////
 include("../../seguridad/comprobar_login.php");
 ?>
+
 <!DOCTYPE html>
 <html>
 

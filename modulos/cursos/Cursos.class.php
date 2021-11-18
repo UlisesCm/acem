@@ -461,6 +461,54 @@ class Cursos
 		}
 	}
 
+	function navegacionCurso($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias, $cursosTerminados, $idcurso)
+	{
+		/////PERMISOS////////////////
+		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
+			return "denegado";
+			exit;
+		}
+		$idalumno= $_SESSION['idusuario'];
+		
+		$consultarCategoria = "";
+		if ($categorias != "todos") {
+			$consultarCategoria = "AND cursos.categoria='$categorias'";
+		} else {
+			$consultarCategoria = "";
+		}
+
+		if ($cursosTerminados == false) {
+			$consultaTerminados = "AND avancecursos.finalizado = 0";
+		} else {
+			$consultaTerminados = "";
+		}
+
+		$where = "
+			WHERE idcurso='$idcurso'
+		";
+		/* INNER JOIN empresasgarantias ON garantias.idempresa=empresasgarantias.idempresa */
+		/* $consulta = " SELECT 
+					*
+					FROM avancecursos 
+					INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso
+					$where
+					ORDER BY $campoOrden $orden
+					LIMIT $inicial, $cantidadamostrar
+					"; */
+		// $consulta = "SELECT * FROM `avancecursos` INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso WHERE avancecursos.idalumno = 0";consulta que si funcionan
+		$consulta = "SELECT * 
+		FROM `avancecursos` 
+		INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso 
+		$where
+		-- ORDER BY $campoOrden $orden
+		-- LIMIT $inicial, $cantidadamostrar
+		";
+
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, $consulta);
+		}
+	}
+
 
 
 	function consultaGeneral($condicion)

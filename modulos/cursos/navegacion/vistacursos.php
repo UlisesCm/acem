@@ -1,7 +1,19 @@
 <?php
 ///MIS CURSOS////////////////////////
 include("../../seguridad/comprobar_login.php");
+require("../Cursos.class.php");
+if (isset($_POST['id'])){
+	$id=htmlentities(trim($_POST['id']));
+	$Ocursos= new Cursos;
+	$resultado=$Ocursos->mostrarIndividual($id);
+	$extractor = mysqli_fetch_array($resultado);
+  $idcurso=$extractor["idcurso"];
+	$nombre=$extractor["nombre"];
+	$categoria=$extractor["categoria"];
+	$icono=$extractor["icono"];
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -42,7 +54,10 @@ include("../../seguridad/comprobar_login.php");
 		<div class="content-wrapper">
 			<!-- Contenido de la cabecera -->
 			<section class="content-header">
-				<h1>Cursos<small> Consulta</small>
+				<h1>Cursos
+					<small> 
+						<?php echo $nombre ?>
+					</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="../../inicio/inicio/inicio.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -103,6 +118,7 @@ include("../../seguridad/comprobar_login.php");
 								<div class="form-group ">
 									<label for="selectidcategoria_ajax" class="col-sm-1 control-label"> Categoria:</label>
 									<div class="col-sm-2">
+										<input type="text" name="idcurso" id="idcurso" value="<?php echo $idcurso ?>">
 										<select id="idcategoria_ajax" name="id-categorias-select" class="form-control">
 											<option value="todos">Todos mis Cursos</option>
 											<option value="informatica">Informatica</option>
@@ -130,6 +146,7 @@ include("../../seguridad/comprobar_login.php");
 				<div class="box box-info" style="border-color:#000000">
 					<div class="box-header with-border">
 						<h3 class="box-title">Consultar Cursos</h3>
+						
 					</div><!-- /.box-header -->
 					<div id="muestra_contenido_ajax" style="min-height:100px;">
 					</div><!-- /din contenido ajax -->
