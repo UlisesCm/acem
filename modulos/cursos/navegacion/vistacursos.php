@@ -90,8 +90,8 @@ if (isset($_POST['id'])){
 				<?php include("../../../componentes/avisos.php"); ?>
 
 				<!-- FILTRO -->
-				<!-- HEADER FILTRO -->
-				<div class="box box-info" style="border-color:#13A44D">
+					<!-- HEADER FILTRO -->
+					<div class="box box-info" style="border-color:#13A44D">
 					<div class="box-header with-border">
 						<h3 class="box-title col-sm-10">
 							<i class="fa fa-filter text-green"></i>
@@ -118,7 +118,7 @@ if (isset($_POST['id'])){
 								<div class="form-group ">
 									<label for="selectidcategoria_ajax" class="col-sm-1 control-label"> Categoria:</label>
 									<div class="col-sm-2">
-										<input type="text" name="idcurso" id="idcurso" value="<?php echo $idcurso ?>">
+									<input type="text" name="idcurso" id="idcurso" value="<?php echo $idcurso ?>">
 										<select id="idcategoria_ajax" name="id-categorias-select" class="form-control">
 											<option value="todos">Todos mis Cursos</option>
 											<option value="informatica">Informatica</option>

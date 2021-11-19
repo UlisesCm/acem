@@ -1,4 +1,4 @@
-formularioFiltro// JavaScript Document
+// JavaScript Document
 var orden, campoOrden, cantidadamostrar, paginacion;
 orden="DESC";
 campoOrden="idavancecursos";
