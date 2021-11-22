@@ -91,7 +91,8 @@ class Cursos
 					/* FALTA GUARDAR ARCHIVOS */
 					for ($i = 0; $i <= $contadorLecciones; $i++) {
 						$contenido = "";
-						$iddetallecurso = $this->con->generarClave(2);
+						// $iddetallecurso = $this->con->generarClave(2);
+						$idleccion = $this->con->generarClave(2);
 						switch ($aTipoLecciones[$i]) {
 							case 'texto':
 								$contenido = $aTextareaLecciones[$i];
@@ -104,17 +105,17 @@ class Cursos
 								break;
 
 							case 'imagen':
-								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "jpg", "detallecurso", 500, 500, "archivo", "center");
+								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "jpg", "leccion", 500, 500, "archivo", "center");
 								$contenido = $aRecurso[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 							case 'video':
-								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "mp4", "detallecurso", 0, 0, "archivo", "center");
+								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "mp4", "leccion", 0, 0, "archivo", "center");
 								$contenido = $aRecurso[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 							case 'documento':
-								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "pdf", "detallecurso", 0, 0, "archivo", "center");
+								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "pdf", "leccion", 0, 0, "archivo", "center");
 								$contenido = $aRecurso[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
@@ -125,7 +126,7 @@ class Cursos
 								break;
 						}
 						if ($contenido != "_eliminado" && $tipo != "_eliminado") {
-							mysqli_query($this->con->conect, "INSERT INTO detallecurso (iddetallecurso,tipo,contenido,idcurso) VALUES ('$iddetallecurso','$tipo','$contenido','$idcurso')");
+							mysqli_query($this->con->conect, "INSERT INTO lecciones (idleccion,tipo,contenido,idcurso) VALUES ('$idleccion','$tipo','$contenido','$idcurso')");
 						}
 					}
 
