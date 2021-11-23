@@ -250,6 +250,14 @@ class Cursos
 		// $iddetalleexamen; //se genera aqui
 		$calificacion = ""; // Deja asi
 		$examenPDF = ""; // temporalmente asi
+
+		$resultados = mysqli_query($this->con->conect, "SELECT * FROM lecciones WHERE idcurso = '$idcurso'");
+		foreach($resultados as $resultado){
+			$idleccion = $resultado["idleccion"];
+			$iddetalleleccion = $this->con->generarClave(2);
+			$visto = "NO";
+			mysqli_query($this->con->conect, "INSERT INTO detallelecciones (iddetalleleccion, idavancecurso, idleccion, visto) VALUES ('$iddetalleleccion', '$idavancecurso', '$idleccion', '$visto')");
+		}
 		
 		/////FIN  DE PERMISOS////////
 		$avancecursos = mysqli_query($this->con->conect, "INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, finalizado) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$finalizado')");
@@ -470,15 +478,15 @@ class Cursos
 			exit;
 		}
 
-		$idalumno= $_SESSION['idusuario'];
-	
 		$where = "
-			WHERE idcurso='$idcurso'
+			WHERE idcurso='3202120211140'
 		";
-		/* select from detalle leecciones, innerjoin lecciones where idcurso */
+
+		//SELECT * FROM lecciones INNER JOIN detallelecciones ON lecciones.idleccion = detallelecciones.idleccion WHERE idcurso = "3202120211140"
+		//SELECT * FROM `detallelecciones` INNER JOIN lecciones ON detallelecciones.idleccion = lecciones.idleccion WHERE idcurso='3202120211140'
 		$consulta = "SELECT * 
-		FROM `avancecursos` 
-		INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso 
+		FROM `detallelecciones` 
+		INNER JOIN lecciones ON detallelecciones.idleccion=lecciones.idleccion
 		$where
 		";
 
@@ -486,8 +494,6 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
-
-
 
 	function consultaGeneral($condicion)
 	{
