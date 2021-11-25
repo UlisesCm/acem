@@ -2,15 +2,17 @@
 ///MIS CURSOS////////////////////////
 include("../../seguridad/comprobar_login.php");
 require("../Cursos.class.php");
-if (isset($_POST['id'])){
-	$id=htmlentities(trim($_POST['id']));
-	$Ocursos= new Cursos;
-	$resultado=$Ocursos->mostrarIndividual($id);
-	$extractor = mysqli_fetch_array($resultado);
-  $idcurso=$extractor["idcurso"];
-	$nombre=$extractor["nombre"];
-	$categoria=$extractor["categoria"];
-	$icono=$extractor["icono"];
+
+if (isset($_POST['id-curso'])) {
+	$idcurso = htmlentities($_POST['id-curso']);
+} else {
+	$idcurso = 'no existe';
+}
+
+if (isset($_POST['id-leccion'])) {
+	$idleccion = htmlentities($_POST['id-leccion']);
+} else {
+	$idleccion = 'no existe';
 }
 ?>
 
@@ -90,8 +92,9 @@ if (isset($_POST['id'])){
 				<?php include("../../../componentes/avisos.php"); ?>
 				
 				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
-						<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $idcurso ?>">
-					</form>
+					<input type="hidden" name="id-curso" id="idcurso" value="<?php echo $idcurso?>">
+					<input type="hidden" name="id-leccion" id="idleccion" value="<?php echo $idleccion?>">
+				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#000000">
 					<div class="box-header with-border">

@@ -91,8 +91,7 @@ if (isset($_REQUEST['cursosTerminados'])) {
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
-// $resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
-// $resultado = $Ocursos->mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosTerminados);
+
 $resultado = $Ocursos->navegacionCurso($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso);
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
@@ -247,13 +246,15 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				Tipo de leccion: <?php echo $filas['tipo'] ?>
 				</h3>
 
+				
 				<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
-					<input type="hidden" name="id" value="<?php echo $filas['iddetalleleccion'] ?>"/>
+					<input type="hidden" name="id-leccion" value="<?php echo $filas['idleccion']?>"/>
+					<input type="hidden" name="id-curso" value="<?php echo $filas['idcurso']?>"/>
 					<?php 
 					if ($filas['visto'] === "NO") {
-						?><button class="btn btn-success boton-curso"> Cursar </button><?php
+						?><button class="btn btn-success boton-curso"> Cursar</button><?php
 					}else{
-						?><button class="btn btn-default boton-curso"> Volver a Cursar </button><?php
+						?><button class="btn btn-default boton-curso"> Volver a Cursar</button><?php
 					}
 					?>
 				</form>

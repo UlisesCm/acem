@@ -75,8 +75,15 @@ if (isset($_REQUEST['id-categorias-select']) && $_REQUEST['id-categorias-select'
 	$categorias = "";
 }
 
-if (isset($_REQUEST['idcurso'])) {
-	$idcurso = htmlentities($_REQUEST['idcurso']);
+if (isset($_REQUEST['id-leccion'])) {
+	$idleccion = htmlentities($_REQUEST['id-leccion']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$idleccion = "no existe";
+}
+
+if (isset($_REQUEST['id-curso'])) {
+	$idcurso = htmlentities($_REQUEST['id-curso']);
 	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
 	$idcurso = "no existe";
@@ -100,7 +107,6 @@ if ($resultado == "denegado") {
 	exit;
 }
 
-
 $filasTotales = mysqli_num_rows($resultado);
 $filas = mysqli_fetch_array($resultado)
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
@@ -114,7 +120,10 @@ $filas = mysqli_fetch_array($resultado)
 			<h2>
 				Leccion de tipo: <?php echo $filas['tipo']?>
 			</h2>
-			<button>Volver a Curso</button>
+			<form class="d-flex" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
+					<button class="btn btn-default"> Volver a Curso </button>
+				</form>
 		</div>
 		<hr>
 		<h3>
@@ -122,8 +131,8 @@ $filas = mysqli_fetch_array($resultado)
 		</h3>
 		<hr>
 		<div class="botones-curso">
-			<button>Leccion Anterior</button>
-			<button>Leccion Siguiente</button>
+			<button class="btn btn-default">Leccion Anterior</button>
+			<button class="btn btn-default">Leccion Siguiente</button>
 		</div>
 	</div>
 		

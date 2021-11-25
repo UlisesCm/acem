@@ -90,8 +90,8 @@ if (isset($_POST['id'])){
 				<?php include("../../../componentes/avisos.php"); ?>
 				
 				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
-						<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $idcurso ?>">
-					</form>
+					<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $idcurso ?>">
+				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#000000">
 					<div class="box-header with-border">

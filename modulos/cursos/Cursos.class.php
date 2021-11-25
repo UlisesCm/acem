@@ -350,6 +350,13 @@ class Cursos
 		}
 	}
 
+	function mostrarIndividualLeccion($idleccion)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM leccion WHERE idleccion='$idleccion'");
+		}
+	}
+
 	function mostrarExamen($idcurso)
 	{
 		if ($this->con->conectar() == true) {
@@ -479,7 +486,7 @@ class Cursos
 		}
 
 		$where = "
-			WHERE idcurso='3202120211140'
+			WHERE idcurso='$idcurso'
 		";
 
 		//SELECT * FROM lecciones INNER JOIN detallelecciones ON lecciones.idleccion = detallelecciones.idleccion WHERE idcurso = "3202120211140"
@@ -502,15 +509,16 @@ class Cursos
 			return "denegado";
 			exit;
 		}
-		
 
 		$where = "
-			WHERE idcurso ='3202120211140'
-			AND lecciones.idleccion = '3202120211174'
+			WHERE idcurso ='$idcurso'
+			AND lecciones.idleccion ='$idleccion'
 		";
+		/* $where = "
+			WHERE idcurso ='3202120211140'
+			AND lecciones.idleccion ='3202120211174'
+		"; */
 
-		//SELECT * FROM lecciones INNER JOIN detallelecciones ON lecciones.idleccion = detallelecciones.idleccion WHERE idcurso = "3202120211140"
-		//SELECT * FROM `detallelecciones` INNER JOIN lecciones ON detallelecciones.idleccion = lecciones.idleccion WHERE idcurso='3202120211140'
 		$consulta = "SELECT * 
 		FROM lecciones INNER JOIN detallelecciones 
 		ON lecciones.idleccion = detallelecciones.idleccion
