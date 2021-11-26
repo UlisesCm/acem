@@ -88,11 +88,12 @@ for ($i=0; $i <= $contadorLecciones; $i++) { //recorremos el arreglo en base a l
 	switch (isset($_POST[$concatenacion])) {
 		case true:
 			$contenidoTextArea=htmlentities(trim($_POST[$concatenacion]));
+			// $contenidoTextArea=trim($_POST[$concatenacion]);
 		array_push($aTextareaLecciones,$contenidoTextArea);
 			break;
 		
 		default:
-		array_push($aTextareaLecciones,"");
+		array_push($aTextareaLecciones,"Switch default");
 			break;
 	}
 }
@@ -339,5 +340,5 @@ if($validacion){
 echo utf8_encode($mensaje);
 // echo utf8_encode(" - "."Value Radio :".$radio." - ");
 // echo utf8_encode(" - "."Contador inputRespuesta :".$inputRespuesta." - ");
-// echo utf8_encode(print_r($aRadioRespuesta));
+// echo utf8_encode(print_r($aTextareaLecciones));
 

@@ -3,16 +3,10 @@
 include("../../seguridad/comprobar_login.php");
 require("../Cursos.class.php");
 
-if (isset($_POST['id-curso'])) {
-	$idcurso = htmlentities($_POST['id-curso']);
+if (isset($_POST['id-detalleleccion'])) {
+	$iddetalleleccion = htmlentities($_POST['id-detalleleccion']);
 } else {
-	$idcurso = 'no existe';
-}
-
-if (isset($_POST['id-leccion'])) {
-	$idleccion = htmlentities($_POST['id-leccion']);
-} else {
-	$idleccion = 'no existe';
+	$iddetalleleccion = 'no existe';
 }
 ?>
 
@@ -92,8 +86,7 @@ if (isset($_POST['id-leccion'])) {
 				<?php include("../../../componentes/avisos.php"); ?>
 				
 				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
-					<input type="hidden" name="id-curso" id="idcurso" value="<?php echo $idcurso?>">
-					<input type="hidden" name="id-leccion" id="idleccion" value="<?php echo $idleccion?>">
+					<input type="hidden" name="id-detalleleccion" id="idleccion" value="<?php echo $iddetalleleccion?>">
 				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#000000">

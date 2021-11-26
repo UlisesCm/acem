@@ -93,10 +93,12 @@ $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
 
 $resultado = $Ocursos->navegacionCurso($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso);
+$resultadoExamen = $Ocursos-> mostrarExamen($idcurso);
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
 }
+
 
 $filasTotales = mysqli_num_rows($resultado);
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
@@ -248,8 +250,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 
 				
 				<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
-					<input type="hidden" name="id-leccion" value="<?php echo $filas['idleccion']?>"/>
-					<input type="hidden" name="id-curso" value="<?php echo $filas['idcurso']?>"/>
+					<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
 					<?php 
 					if ($filas['visto'] === "NO") {
 						?><button class="btn btn-success boton-curso"> Cursar</button><?php
@@ -258,10 +259,27 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 					}
 					?>
 				</form>
-				
 			</div>
 	<?php
-		} //Fin de while
+		} //Fin de while?> 
+		<div class="col-sm-3 carta-cursos">
+			<h4 class="d-flex centrar-elementos">
+				Examen	
+			</h4>
+			<hr class="d-flex centrar-elementos">
+			<div class="d-flex centrar-elementos">
+				<i class="fa fa-archive icono-curso text-success"></i>
+			</div>
+			<hr>
+			<h3 class="d-flex centrar-elementos">
+				Nombre del EXAMEN
+			</h3>
+			<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+					<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
+						<button class="btn btn-success boton-curso">Presentar</button>
+				</form>
+		</div>
+		<?php
 	} // Fin de sis es lista
 	?>
 

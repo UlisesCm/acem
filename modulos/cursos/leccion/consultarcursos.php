@@ -75,18 +75,11 @@ if (isset($_REQUEST['id-categorias-select']) && $_REQUEST['id-categorias-select'
 	$categorias = "";
 }
 
-if (isset($_REQUEST['id-leccion'])) {
-	$idleccion = htmlentities($_REQUEST['id-leccion']);
+if (isset($_REQUEST['id-detalleleccion'])) {
+	$iddetalleleccion = htmlentities($_REQUEST['id-detalleleccion']);
 	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
-	$idleccion = "no existe";
-}
-
-if (isset($_REQUEST['id-curso'])) {
-	$idcurso = htmlentities($_REQUEST['id-curso']);
-	// $busqueda=mysql_real_escape_string($busqueda);
-} else {
-	$idcurso = "no existe";
+	$iddetalleleccion = "no existe";
 }
 
 if (isset($_REQUEST['cursosTerminados'])) {
@@ -101,7 +94,8 @@ $Ocursos = new Cursos;
 // $resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
 // $resultado = $Ocursos->mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosTerminados);
 // $resultado = $Ocursos->navegacionCurso($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso);
-$resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso ,$idleccion);
+$resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $iddetalleleccion);
+$Ocursos->cambiarVisto($iddetalleleccion);
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
