@@ -126,6 +126,7 @@ class Cursos
 								$tipo = "_eliminado";
 								break;
 						}
+						$orden=$i+1;
 						if ($contenido != "_eliminado" && $tipo != "_eliminado") {
 							mysqli_query($this->con->conect, "INSERT INTO lecciones (idleccion,tipo,contenido,orden,idcurso) VALUES ('$idleccion','$tipo','$contenido','$orden','$idcurso')");
 						}
@@ -481,6 +482,7 @@ class Cursos
 		$where = "
 			WHERE idcurso='$idcurso'
 		";
+		$order="ORDER BY `lecciones`.`orden` ASC";
 
 		//SELECT * FROM lecciones INNER JOIN detallelecciones ON lecciones.idleccion = detallelecciones.idleccion WHERE idcurso = "3202120211140"
 		//SELECT * FROM `detallelecciones` INNER JOIN lecciones ON detallelecciones.idleccion = lecciones.idleccion WHERE idcurso='3202120211140'
@@ -488,6 +490,7 @@ class Cursos
 		FROM `detallelecciones` 
 		INNER JOIN lecciones ON detallelecciones.idleccion=lecciones.idleccion
 		$where
+		$order
 		";
 
 		if ($this->con->conectar() == true) {
@@ -495,7 +498,31 @@ class Cursos
 		}
 	}
 
-	function mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $iddetalleleccion)
+	function mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $idcurso, $ordenLeccion)
+	{
+		/////PERMISOS////////////////
+		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
+			return "denegado";
+			exit;
+		}
+
+		$where = "
+		WHERE lecciones.idcurso = '$idcurso'
+		AND lecciones.orden = '$ordenLeccion'
+		";
+
+		$consulta = "SELECT * 
+		FROM lecciones INNER JOIN detallelecciones 
+		ON lecciones.idleccion = detallelecciones.idleccion
+		$where
+		";
+
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, $consulta);
+		}
+	}
+	
+	/* function mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $iddetalleleccion)
 	{
 		/////PERMISOS////////////////
 		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
@@ -515,7 +542,56 @@ class Cursos
 		if ($this->con->conectar() == true) {
 			return mysqli_query($this->con->conect, $consulta);
 		}
+	} */
+
+	function siguienteLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $idcurso, $ordenLeccion)
+	{
+		/////PERMISOS////////////////
+		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
+			return "denegado";
+			exit;
+		}
+
+		$siguienteLeccion=$ordenLeccion+1;
+		$where = "
+			WHERE lecciones.idcurso = '$idcurso'
+			AND lecciones.orden = '$siguienteLeccion'
+		";
+
+		$consulta = "SELECT * 
+		FROM lecciones INNER JOIN detallelecciones 
+		ON lecciones.idleccion = detallelecciones.idleccion
+		$where
+		";
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, $consulta);
+		}
 	}
+	function siguienteAnterior($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $idcurso, $ordenLeccion)
+	{
+		/////PERMISOS////////////////
+		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
+			return "denegado";
+			exit;
+		}
+
+		$siguienteLeccion=$ordenLeccion-1;
+		$where = "
+			WHERE lecciones.idcurso = '$idcurso'
+			AND lecciones.orden = '$siguienteLeccion'
+		";
+
+		$consulta = "SELECT * 
+		FROM lecciones INNER JOIN detallelecciones 
+		ON lecciones.idleccion = detallelecciones.idleccion
+		$where
+		";
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, $consulta);
+		}
+	}
+
+	
 
 	function mostrarExamen2($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $iddetalleleccion)
 	{
@@ -633,7 +709,3 @@ class Cursos
 		}
 	}
 }
-
-/* 
-
-*/

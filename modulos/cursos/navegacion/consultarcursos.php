@@ -98,7 +98,7 @@ if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
 }
-
+// $filasExamen = mysqli_fetch_array($esultadoExamen);
 
 $filasTotales = mysqli_num_rows($resultado);
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
@@ -250,6 +250,9 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 
 				
 				<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+					<input type="hidden" name="contador" value="<?php echo $filasTotales?>"/>
+					<input type="hidden" name="id" value="<?php echo $filas['idcurso']?>"/>
+					<input type="hidden" name="orden" value="<?php echo $filas['orden']?>"/>
 					<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
 					<?php 
 					if ($filas['visto'] === "NO") {
@@ -261,10 +264,11 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				</form>
 			</div>
 	<?php
-		} //Fin de while?> 
-		<div class="col-sm-3 carta-cursos">
+		} //Fin de while
+		while ($filasExamen = mysqli_fetch_array($resultadoExamen)) {?>
+			<div class="col-sm-3 carta-cursos">
 			<h4 class="d-flex centrar-elementos">
-				Examen	
+				Evaluacion
 			</h4>
 			<hr class="d-flex centrar-elementos">
 			<div class="d-flex centrar-elementos">
@@ -272,14 +276,18 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 			</div>
 			<hr>
 			<h3 class="d-flex centrar-elementos">
-				Nombre del EXAMEN
+				<?php echo $filasExamen['nombreExamen']?>	
 			</h3>
 			<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 					<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
+					<input type="hidden" name="id" value="<?php echo $filas['idcurso']?>"/>
+					<input type="hidden" name="orden" value="<?php echo $filas['orden']?>"/>
 						<button class="btn btn-success boton-curso">Presentar</button>
 				</form>
 		</div>
 		<?php
+		} 
+		
 	} // Fin de sis es lista
 	?>
 

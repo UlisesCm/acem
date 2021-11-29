@@ -82,6 +82,27 @@ if (isset($_REQUEST['id-detalleleccion'])) {
 	$iddetalleleccion = "no existe";
 }
 
+if (isset($_REQUEST['orden'])) {
+	$ordenLeccion = htmlentities($_REQUEST['orden']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$ordenLeccion = "no existe";
+}
+
+if (isset($_REQUEST['id'])) {
+	$idcurso = htmlentities($_REQUEST['id']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$idcurso = "no existe";
+}
+
+if (isset($_REQUEST['contador'])) {
+	$contador = htmlentities($_REQUEST['contador']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$contador = 0;
+}
+
 if (isset($_REQUEST['cursosTerminados'])) {
 	$cursosTerminados = true;
 } else {
@@ -91,10 +112,8 @@ if (isset($_REQUEST['cursosTerminados'])) {
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
-// $resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
-// $resultado = $Ocursos->mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosTerminados);
-// $resultado = $Ocursos->navegacionCurso($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso);
-$resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $iddetalleleccion);
+
+$resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso, $ordenLeccion);
 $Ocursos->cambiarVisto($iddetalleleccion);
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
@@ -115,18 +134,55 @@ $filas = mysqli_fetch_array($resultado)
 				Leccion de tipo: <?php echo $filas['tipo']?>
 			</h2>
 			<form class="d-flex" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
-					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
-					<button class="btn btn-default"> Volver a Curso </button>
-				</form>
+				<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
+				<button class="btn btn-default"> Volver a Curso </button>
+			</form>
 		</div>
 		<hr>
 		<h3>
-			<?php echo $filas['contenido']?>
+			<?php
+			if ($filas['tipo'] == 'enlace') {
+				?> 
+			<a href="<?php echo $filas['contenido']?>" target="_blank">
+				<?php echo $filas['contenido']?>
+			</a> <?php
+			} else {
+				echo $filas['contenido'];
+			}
+			?>
 		</h3>
 		<hr>
 		<div class="botones-curso">
-			<button class="btn btn-default">Leccion Anterior</button>
-			<button class="btn btn-default">Leccion Siguiente</button>
+		<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+			<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
+			<input type="hidden" name="orden" value="<?php echo $filas['orden']-1?>"/>
+			<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion'] ?>"/>
+			<input type="hidden" name="contador" id="contador" value="<?php echo $contador?>">
+			<?php 
+			 if ($filas['orden'] == 1) {
+				?><button class="btn btn-default" disabled>Anterior</button><?php
+			 } else {
+				 ?><button class="btn btn-default">Anterior</button><?php
+			 }
+			?>
+			
+		</form>
+
+		<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+			<input type="hidden" name="id" value="<?php echo $filas['idcurso']?>"/>
+			<input type="hidden" name="orden" value="<?php echo $filas['orden']+1?>"/>
+			<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
+			<input type="hidden" name="contador" value="<?php echo $contador?>">
+			<?php 
+			 if ($filas['orden'] == $contador) {
+				?><button class="btn btn-default" disabled>Siguiente</button><?php
+			 } else {
+				 ?><button class="btn btn-default">Siguiente</button><?php
+			 }
+			?>
+		</form>
+			
+			
 		</div>
 	</div>
 		

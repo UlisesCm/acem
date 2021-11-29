@@ -8,6 +8,27 @@ if (isset($_POST['id-detalleleccion'])) {
 } else {
 	$iddetalleleccion = 'no existe';
 }
+
+if (isset($_POST['orden'])) {
+	$ordenLeccion = htmlentities($_POST['orden']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$ordenLeccion = "no existe";
+}
+
+if (isset($_POST['id'])) {
+	$idcurso = htmlentities($_POST['id']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$idcurso = "no existe";
+}
+
+if (isset($_POST['contador'])) {
+	$contador = htmlentities($_POST['contador']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$contador = 0;
+}
 ?>
 
 <!DOCTYPE html>
@@ -87,6 +108,9 @@ if (isset($_POST['id-detalleleccion'])) {
 				
 				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
 					<input type="hidden" name="id-detalleleccion" id="idleccion" value="<?php echo $iddetalleleccion?>">
+					<input type="hidden" name="id" id="id" value="<?php echo $idcurso?>">
+					<input type="hidden" name="orden" id="orden" value="<?php echo $ordenLeccion?>">
+					<input type="hidden" name="contador" id="contador" value="<?php echo $contador?>">
 				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#000000">

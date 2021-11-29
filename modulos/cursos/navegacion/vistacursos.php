@@ -95,8 +95,7 @@ if (isset($_POST['id'])){
 				<!-- box -->
 				<div class="box box-info" style="border-color:#000000">
 					<div class="box-header with-border">
-						<h3 class="box-title">Consultar Cursos</h3>
-						
+						<h3 class="box-title">Consultar Cursos</h3>						
 					</div><!-- /.box-header -->
 					<div id="muestra_contenido_ajax" style="min-height:100px;">
 					</div><!-- /din contenido ajax -->
