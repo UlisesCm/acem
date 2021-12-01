@@ -12,6 +12,9 @@ if (isset($_POST['id'])){
 	$categoria=$extractor["categoria"];
 	$icono=$extractor["icono"];
 }
+if (isset($_POST['id-avancecurso'])) {
+	$idavancecurso= htmlentities(trim($_POST['id-avancecurso']));
+}
 ?>
 
 <!DOCTYPE html>
@@ -91,6 +94,7 @@ if (isset($_POST['id'])){
 				
 				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
 					<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $idcurso ?>">
+					<input type="hidden" name="idavancecurso" id="idavancecurso" value="<?php echo $idavancecurso ?>">
 				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#000000">

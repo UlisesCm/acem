@@ -408,18 +408,17 @@ class Cursos
 			$consultarCursos = "";
 		}
 		$condicion = trim($condicion);
+
+		$join ="LEFT OUTER JOIN avancecursos ON cursos.idcurso = avancecursos.idcurso";
 		$where = "
-			WHERE cursos.idcurso <>'0'
+			WHERE avancecursos.idavancecurso IS null
 			$consultarCategoria
 			$consultarCursos
 		";
 
-		$consulta = "SELECT 
-					cursos.idcurso,
-					cursos.nombre,
-					cursos.categoria,
-					cursos.icono
-					FROM cursos 
+		$consulta = "SELECT cursos.idcurso, cursos.nombre, cursos.categoria, cursos.icono, cursos.descripcion
+					FROM cursos
+					$join
 					$where
 					ORDER BY $campoOrden $orden
 					LIMIT $inicial, $cantidadamostrar
@@ -590,7 +589,6 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
-
 	
 
 	function mostrarExamen2($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $iddetalleleccion)
@@ -707,5 +705,16 @@ class Cursos
 				}
 			}
 		}
+	}
+
+	function agregarAvance($valor, $idavancecurso)
+	{
+		/////PERMISOS////////////////
+		if (!isset($_SESSION['permisos']['cursos']['modificar'])) {
+			return "denegado";
+			exit;
+		}
+		/////FIN  DE PERMISOS////////
+		mysqli_query($this->con->conect,"UPDATE avancecursos SET avance = avance+'$valor' WHERE idavancecurso = '$idavancecurso'");
 	}
 }

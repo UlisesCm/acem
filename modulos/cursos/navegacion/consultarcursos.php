@@ -82,6 +82,13 @@ if (isset($_REQUEST['idcurso'])) {
 	$idcurso = "no existe";
 }
 
+if (isset($_REQUEST['idavancecurso'])) {
+	$idavancecurso = htmlentities($_REQUEST['idavancecurso']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$idavancecurso = "no existe";
+}
+
 if (isset($_REQUEST['cursosTerminados'])) {
 	$cursosTerminados = true;
 } else {
@@ -253,6 +260,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 					<input type="hidden" name="contador" value="<?php echo $filasTotales?>"/>
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso']?>"/>
 					<input type="hidden" name="orden" value="<?php echo $filas['orden']?>"/>
+					<input type="text" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 					<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
 					<?php 
 					if ($filas['visto'] === "NO") {
