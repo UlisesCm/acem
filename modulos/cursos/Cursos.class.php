@@ -352,6 +352,13 @@ class Cursos
 		}
 	}
 
+	function mostrarIndividualAvance($idavancecurso)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM avancecursos WHERE idavancecurso='$idavancecurso'");
+		}
+	}
+
 	function mostrarIndividualLeccion($idleccion)
 	{
 		if ($this->con->conectar() == true) {

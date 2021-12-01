@@ -82,6 +82,13 @@ if (isset($_REQUEST['id-detalleleccion'])) {
 	$iddetalleleccion = "no existe";
 }
 
+if (isset($_REQUEST['id-avancecurso'])) {
+	$idavancecurso = htmlentities($_REQUEST['id-avancecurso']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$idavancecurso = "no existe";
+}
+
 if (isset($_REQUEST['orden'])) {
 	$ordenLeccion = htmlentities($_REQUEST['orden']);
 	// $busqueda=mysql_real_escape_string($busqueda);
@@ -109,19 +116,36 @@ if (isset($_REQUEST['cursosTerminados'])) {
 	$cursosTerminados = false;
 }
 
+if (isset($_REQUEST['avance'])) {
+	$avance = htmlentities($_REQUEST['avance']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$avance = "no existe";
+}
+
+if (isset($_REQUEST['nombre'])) {
+	$nombre = htmlentities($_REQUEST['nombre']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombre  = "no existe";
+}
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
 
 $resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso, $ordenLeccion);
-$Ocursos->cambiarVisto($iddetalleleccion);
+
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
 }
 
 $filasTotales = mysqli_num_rows($resultado);
-$filas = mysqli_fetch_array($resultado)
+$filas = mysqli_fetch_array($resultado);
+$Ocursos->cambiarVisto($filas['iddetalleleccion']);
+if ($filas['visto']=='NO') {
+	$Ocursos->agregarAvance($filas['valor'], $idavancecurso);
+}
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
 ?>
 <div class="container">
@@ -135,6 +159,7 @@ $filas = mysqli_fetch_array($resultado)
 			</h2>
 			<form class="d-flex" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 				<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
+				<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 				<button class="btn btn-default"> Volver a Curso </button>
 			</form>
 		</div>
@@ -158,6 +183,9 @@ $filas = mysqli_fetch_array($resultado)
 			<input type="hidden" name="orden" value="<?php echo $filas['orden']-1?>"/>
 			<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion'] ?>"/>
 			<input type="hidden" name="contador" id="contador" value="<?php echo $contador?>">
+			<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
+			<input type="hidden" name="avance" value="<?php echo $avance?>"/>
+			<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
 			<?php 
 			 if ($filas['orden'] == 1) {
 				?><button class="btn btn-default" disabled>Anterior</button><?php
@@ -173,6 +201,9 @@ $filas = mysqli_fetch_array($resultado)
 			<input type="hidden" name="orden" value="<?php echo $filas['orden']+1?>"/>
 			<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
 			<input type="hidden" name="contador" value="<?php echo $contador?>">
+			<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
+			<input type="hidden" name="avance" value="<?php echo $avance?>"/>
+			<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
 			<?php 
 			 if ($filas['orden'] == $contador) {
 				?><button class="btn btn-default" disabled>Siguiente</button><?php

@@ -2,19 +2,29 @@
 ///MIS CURSOS////////////////////////
 include("../../seguridad/comprobar_login.php");
 require("../Cursos.class.php");
-if (isset($_POST['id'])){
-	$id=htmlentities(trim($_POST['id']));
-	$Ocursos= new Cursos;
-	$resultado=$Ocursos->mostrarIndividual($id);
+if (isset($_POST['id'])) {
+	$id = htmlentities(trim($_POST['id']));
+	$Ocursos = new Cursos;
+	$resultado = $Ocursos->mostrarIndividual($id);
 	$extractor = mysqli_fetch_array($resultado);
-  $idcurso=$extractor["idcurso"];
-	$nombre=$extractor["nombre"];
-	$categoria=$extractor["categoria"];
-	$icono=$extractor["icono"];
+	$idcurso = $extractor["idcurso"];
+	$nombre = $extractor["nombre"];
+	$categoria = $extractor["categoria"];
+	$icono = $extractor["icono"];
 }
+/* if (isset($_POST['id-avancecurso'])) {
+	$idavancecurso = htmlentities(trim($_POST['id-avancecurso']));
+} */
 if (isset($_POST['id-avancecurso'])) {
-	$idavancecurso= htmlentities(trim($_POST['id-avancecurso']));
+	$id2 = htmlentities(trim($_POST['id-avancecurso']));
+	$Ocursos2 = new Cursos;
+	$resultado2 = $Ocursos2->mostrarIndividualAvance($id2);
+	$extractor2 = mysqli_fetch_array($resultado2);
+	$idavancecurso = $extractor2["idavancecurso"];
+	$avance = $extractor2["avance"];
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +68,7 @@ if (isset($_POST['id-avancecurso'])) {
 			<!-- Contenido de la cabecera -->
 			<section class="content-header">
 				<h1>Cursos
-					<small> 
+					<small>
 						<?php echo $nombre ?>
 					</small>
 				</h1>
@@ -91,15 +101,49 @@ if (isset($_POST['id-avancecurso'])) {
 				<?php $herramientas = "consultar";
 				include("../componentes/herramientas.php"); ?>
 				<?php include("../../../componentes/avisos.php"); ?>
-				
+
 				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
 					<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $idcurso ?>">
 					<input type="hidden" name="idavancecurso" id="idavancecurso" value="<?php echo $idavancecurso ?>">
+					<input type="hidden" name="nombre" id="nombre" value="<?php echo $nombre ?>">
+					<input type="hidden" name="avance" id="avance" value="<?php echo $avance ?>">
 				</form>
+				<div class="box box-info" style="border-color:#68983A">
+					<div class="box-header with-border contenedor alineacion-centro">
+						<div class="col-sm-2 margen-bot2">
+							<h2><?php echo $nombre ?></h2>
+						</div>
+						<div class="col-sm-7">
+							<div class="progress alineacion-centro-texto">
+								<div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avance ?>%;">
+									<span class="sr-only"><?php echo $avance?>% Complete</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<h4>
+							<?php 
+						if ($avance != 100) {
+							echo $avance?>% de Progreso<?php
+						} else {
+							?>Lecciones Terminadas <?php
+						}
+					?>
+							</h4>
+						</div>
+						<div class="col-sm-1">
+							<form action="../miscursos/vistacursos.php?n1=cursos&n2=miscursos" method="post">
+								<button class="btn btn-default pull-right">
+									Volver a mis Cursos
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
 				<!-- box -->
-				<div class="box box-info" style="border-color:#000000">
+				<div class="box box-info" style="border-color:#9AC491">
 					<div class="box-header with-border">
-						<h3 class="box-title">Consultar Cursos</h3>						
+						<h3 class="box-title">Lecciones</h3>
 					</div><!-- /.box-header -->
 					<div id="muestra_contenido_ajax" style="min-height:100px;">
 					</div><!-- /din contenido ajax -->

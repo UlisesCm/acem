@@ -215,7 +215,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 
 				<form class="d-flex centrar-elementos margen-bot" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
-					<input type="text" name="id-avancecurso" value="<?php echo $filas['idavancecurso'] ?>"/>
+					<input type="hidden" name="id-avancecurso" value="<?php echo $filas['idavancecurso'] ?>"/>
 					<button class="btn btn-default boton-curso "> Ver Curso </button>
 				</form>
 				

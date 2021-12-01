@@ -88,6 +88,18 @@ if (isset($_REQUEST['idavancecurso'])) {
 } else {
 	$idavancecurso = "no existe";
 }
+if (isset($_REQUEST['avance'])) {
+	$avance = htmlentities($_REQUEST['avance']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$avance = "no existe";
+}
+if (isset($_REQUEST['nombre'])) {
+	$nombre = htmlentities($_REQUEST['nombre']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombre = "no existe";
+}
 
 if (isset($_REQUEST['cursosTerminados'])) {
 	$cursosTerminados = true;
@@ -252,7 +264,27 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				</div>
 				<hr>
 				<h3 class="d-flex centrar-elementos">
-				Tipo de leccion: <?php echo $filas['tipo'] ?>
+				<?php switch ($filas['tipo']) {
+					case 'texto':
+						echo "Texto";
+						break;
+					case 'enlace':
+						echo "Enlace";
+						break;
+					case 'imagen':
+						echo "Imagen";
+						break;
+					case 'video':
+						echo "Video";
+						break;
+					case 'documento':
+						echo "Documento";
+						break;
+					
+					default:
+						echo "Leccion sin Tipo";
+						break;
+				} ?>
 				</h3>
 
 				
@@ -260,8 +292,10 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 					<input type="hidden" name="contador" value="<?php echo $filasTotales?>"/>
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso']?>"/>
 					<input type="hidden" name="orden" value="<?php echo $filas['orden']?>"/>
-					<input type="text" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
+					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 					<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
+					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
+					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
 					<?php 
 					if ($filas['visto'] === "NO") {
 						?><button class="btn btn-success boton-curso"> Cursar</button><?php

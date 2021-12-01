@@ -67,6 +67,9 @@
 .margen-bot{
   margin-bottom: 8px;
 }
+.margen-bot2{
+  margin-bottom: 10px;
+}
 
 .boton-eliminar{
   margin-right: 25px;
@@ -74,4 +77,16 @@
 
 .cabecera-cursos{
   justify-content: space-around;
+}
+
+.contenedor{
+  display: flex;
+}
+
+.alineacion-centro{
+  align-items: center;
+}
+
+.alineacion-centro-texto{
+  margin-top: 20px;
 }
