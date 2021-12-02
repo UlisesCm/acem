@@ -90,3 +90,33 @@
 .alineacion-centro-texto{
   margin-top: 20px;
 }
+.margen-lateral-texto{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.justify-content-spacebetween{
+  justify-content: space-between;
+}
+
+.justify-content-center{
+  justify-content: center;
+}
+
+.margen-bot50{
+  margin-bottom: 50px;
+}
+
+.margen-top50{
+  margin-top: 50px;
+}
+.margen-5{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.margin-top20{
+  margin-top: 20px;
+}
+
+.margin-bot20{
+  margin-bottom: 20px;
+}

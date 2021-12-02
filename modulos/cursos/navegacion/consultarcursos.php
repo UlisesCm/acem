@@ -319,17 +319,19 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 			<hr>
 			<h3 class="d-flex centrar-elementos">
 				<?php echo $filasExamen['nombreExamen']?>	
+				
 			</h3>
-			<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+			<form class="d-flex centrar-elementos margen-bot" action="../examen/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 					<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso']?>"/>
+					<input type="hidden" name="idexamen" value="<?php echo $filasExamen['idexamen']?>"/>
 					<input type="hidden" name="orden" value="<?php echo $filas['orden']?>"/>
 						<button class="btn btn-success boton-curso">Presentar</button>
 				</form>
 		</div>
 		<?php
 		} 
-		
+	
 	} // Fin de sis es lista
 	?>
 

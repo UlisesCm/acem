@@ -573,7 +573,7 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
-	function siguienteAnterior($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $idcurso, $ordenLeccion)
+	function anteriorLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $idcurso, $ordenLeccion)
 	{
 		/////PERMISOS////////////////
 		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
@@ -724,4 +724,25 @@ class Cursos
 		/////FIN  DE PERMISOS////////
 		mysqli_query($this->con->conect,"UPDATE avancecursos SET avance = avance+'$valor' WHERE idavancecurso = '$idavancecurso'");
 	}
+
+	function mostrarAvance($idavancecurso)
+	{
+		/////PERMISOS////////////////
+		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
+			return "denegado";
+			exit;
+		}
+
+		$where = "
+			WHERE avancecursos.idavancecurso = '$idavancecurso'
+		";
+
+		$consulta = "SELECT avance FROM avancecursos
+		$where
+		";
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, $consulta);
+		}
+	}
+	
 }
