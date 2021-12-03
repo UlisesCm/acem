@@ -162,7 +162,7 @@ class Cursos
 								$radio = $aRadioRespuesta[$x];
 								for ($y = 0; $y <= $contador; $y++) {
 									$radioTemporal = "radio" . $x . $y;
-									$iddetallesrespuesta = $this->con->generarClave(2);
+									$idrespuesta = $this->con->generarClave(2);
 									$respuesta = $aInputRespuesta[$y];
 									if ($radio == $radioTemporal) {
 										$correcto = "on";
@@ -170,7 +170,7 @@ class Cursos
 										$correcto = "off";
 									}
 									if ($respuesta != "_eliminado") {
-										mysqli_query($this->con->conect, "INSERT INTO detallesrespuestas (iddetallesrespuesta, idpregunta, respuesta, correcto) VALUES ('$iddetallesrespuesta','$idpregunta','$respuesta','$correcto')");
+										mysqli_query($this->con->conect, "INSERT INTO respuestas (idrespuesta, idpregunta, respuesta, correcto) VALUES ('$idrespuesta','$idpregunta','$respuesta','$correcto')");
 									}
 								}
 								break;
@@ -181,11 +181,11 @@ class Cursos
 								$autoCalificar = "SI";
 								$contador = $aContadorRespuestas[$x];
 								for ($y = 0; $y <= $contador; $y++) {
-									$iddetallesrespuesta = $this->con->generarClave(2);
+									$idrespuesta = $this->con->generarClave(2);
 									$respuesta = $aInputRespuesta[$y];
 									$correcto = $aCheckboxRespuesta[$y];
 									if ($respuesta != "_eliminado") {
-										mysqli_query($this->con->conect, "INSERT INTO detallesrespuestas (iddetallesrespuesta, idpregunta, respuesta, correcto) VALUES ('$iddetallesrespuesta','$idpregunta','$respuesta','$correcto')");
+										mysqli_query($this->con->conect, "INSERT INTO respuestas (idrespuesta, idpregunta, respuesta, correcto) VALUES ('$idrespuesta','$idpregunta','$respuesta','$correcto')");
 									}
 								}
 								break;
@@ -370,6 +370,13 @@ class Cursos
 	{
 		if ($this->con->conectar() == true) {
 			return mysqli_query($this->con->conect, "SELECT * FROM examenes WHERE idcurso='$idcurso'");
+		}
+	}
+
+	function mostrarPreguntas($idexamen)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM preguntas WHERE idexamen = '$idexamen'");
 		}
 	}
 

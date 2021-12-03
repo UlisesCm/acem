@@ -133,22 +133,23 @@ if (isset($_REQUEST['nombre'])) {
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
 
-$resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso, $ordenLeccion);
+// $resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso, $ordenLeccion);
+$resultadoExamen = $Ocursos->mostrarExamen($idcurso);
 
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
 }
 
-$filasTotales = mysqli_num_rows($resultado);
-$filas = mysqli_fetch_array($resultado);
+// $filasTotales = mysqli_num_rows($resultadoExamen);
+$filasExamen = mysqli_fetch_array($resultadoExamen);
 $Ocursos->cambiarVisto($filas['iddetalleleccion']);
 if ($filas['visto'] == 'NO') {
 	$Ocursos->agregarAvance($filas['valor'], $idavancecurso);
 }
+$idexamen = $filasExamen['idexamen'];
+$preguntas = $Ocursos->mostrarPreguntas($idexamen)
 
-$avanceActualizado = $Ocursos->mostrarAvance($idavancecurso);
-$filaAvance = mysqli_fetch_array($avanceActualizado);
 // $filaAvance['avance']
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
 ?>
@@ -156,91 +157,37 @@ $filaAvance = mysqli_fetch_array($avanceActualizado);
 	<div class="carta-cursos margin-top20 margin-bot20">
 		<div class="contenedor justify-content-spacebetween">
 			<h1 class="margen-lateral-texto">
-				Lección #<?php echo $filas['orden'] ?>
-				<small>
-				<?php switch ($filas['tipo']) {
-					case 'texto':
-						echo "Texto";
-						break;
-					case 'enlace':
-						echo "Enlace";
-						break;
-					case 'imagen':
-						echo "Imagen";
-						break;
-					case 'video':
-						echo "Video";
-						break;
-					case 'documento':
-						echo "Documento";
-						break;
-					
-					default:
-						echo "Leccion sin Tipo";
-						break;
-				} ?>
-				</small>
+				<?php echo $filasExamen['nombreExamen'] ?>
 			</h1>
 				<form class="alineacion-centro-texto margen-lateral-texto" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
-					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>" />
+					<input type="hidden" name="id" value="<?php echo $filasExamen['idcurso'] ?>" />
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
 					<button class="btn btn-default"> Volver al Curso </button>
 		</div>
 		<hr>
-		<h2 class="margen-lateral-texto margen-top50">
-			Contenido:
-		</h2>
-		<h3 class="margen-lateral-texto  margen-bot50">
+		<?php
+		while ($filas = mysqli_fetch_array($preguntas)) {
+			?> 
+			<h3 class="margen-lateral-texto">
+				<?php echo $filas['pregunta'] ?>
+				<small>
+				 <?php echo $filas['valor']?> puntos
+				</small>
+			</h3>
+			<input type="text" class="form-control" name="" id="">
 			<?php
-			if ($filas['tipo'] == 'enlace') {
-			?>
-				<a href="<?php echo $filas['contenido'] ?>" target="_blank">
-					<?php echo $filas['contenido'] ?>
-				</a> <?php
-						} else {
-							echo $filas['contenido'];
-						}
-							?>
-		</h3>
+		}
+		?>
 		<hr>
 		<div class="contenedor justify-content-center margen-bot2">
 
 		<form class="margen-5" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
-				<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>" />
-				<input type="hidden" name="orden" value="<?php echo $filas['orden'] - 1 ?>" />
-				<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion'] ?>" />
-				<input type="hidden" name="contador" id="contador" value="<?php echo $contador ?>">
-				<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
-				<input type="hidden" name="avance" value="<?php echo $filaAvance['avance'] ?>" />
-				<input type="hidden" name="nombre" value="<?php echo $nombre ?>" />
-				<?php
-				if ($filas['orden'] == 1) {
-				?><button class="btn btn-default" disabled>Anterior</button><?php
-					} else {
-				?><button class="btn btn-default">Anterior</button><?php
-				}	?>
-			</form>
-
-			<form class="margen-5" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
-				<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>" />
-				<input type="hidden" name="orden" value="<?php echo $filas['orden'] + 1 ?>" />
-				<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion'] ?>" />
-				<input type="hidden" name="contador" value="<?php echo $contador ?>">
-				<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
-				<input type="hidden" name="avance" value="<?php echo $filaAvance['avance'] ?>" />
-				<input type="hidden" name="nombre" value="<?php echo $nombre ?>" />
-				<?php
-				if ($filas['orden'] == $contador) {
-				?><button class="btn btn-default" disabled>Siguiente</button><?php
-					} else {
-				?><button class="btn btn-default">Siguiente</button><?php
-				}	?>
-			</form>
+			<button class="btn btn-success">Enviar Examen</button>
+		</form>
 		</div>
 	</div>
 
 </div>
-
 
 <?php
 // Fin de sis es lista
