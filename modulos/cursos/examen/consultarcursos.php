@@ -148,7 +148,7 @@ if ($filas['visto'] == 'NO') {
 	$Ocursos->agregarAvance($filas['valor'], $idavancecurso);
 }
 $idexamen = $filasExamen['idexamen'];
-$preguntas = $Ocursos->mostrarPreguntas($idexamen)
+$preguntas = $Ocursos->mostrarPreguntas($idexamen);
 
 // $filaAvance['avance']
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
@@ -171,10 +171,57 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen)
 			<h3 class="margen-lateral-texto">
 				<?php echo $filas['pregunta'] ?>
 				<small>
-				 <?php echo $filas['valor']?> puntos
+				 <?php echo $filas['valor']?> puntos -
+				</small>
+				<small>
+				 tipo: <?php echo $filas['tipopregunta']?> 
 				</small>
 			</h3>
-			<input type="text" class="form-control" name="" id="">
+			<div class="margen-lateral-texto">
+				<?php 
+					switch ($filas['tipopregunta']) {
+						case 'abierta':
+							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
+							break;
+						case 'casilla':
+							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
+							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
+								?>
+								<div class="margen-lateral-texto">
+									<label class="control-label">
+										<?php echo $filasRespuestas['respuesta']?>
+									</label>
+									<input type="checkbox"  class="" name="" id="">
+								</div>
+								
+								<?php
+							}
+							break;
+						case 'multiple':
+							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
+							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
+								?> 
+								<div class="margen-lateral-texto">
+									<label class="control-label">
+										<?php echo $filasRespuestas['respuesta']?>
+									</label>
+									<input type="radio"  class="" name="1" id="1">
+								</div>
+								<?php
+							}
+							break;
+
+						case 'practica':
+							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
+							break;
+						
+						default:
+							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
+							break;
+					}
+				?>
+				
+			</div>
 			<?php
 		}
 		?>

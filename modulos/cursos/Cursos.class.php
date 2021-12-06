@@ -380,6 +380,13 @@ class Cursos
 		}
 	}
 
+	function mostrarRespuestas($idpregunta)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM respuestas WHERE idpregunta = '$idpregunta'");
+		}
+	}
+
 	function contar($condicion, $papelera)
 	{
 		$condicion = trim($condicion);
