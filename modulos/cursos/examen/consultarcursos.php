@@ -163,6 +163,7 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 					<input type="hidden" name="id" value="<?php echo $filasExamen['idcurso'] ?>" />
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
 					<button class="btn btn-default"> Volver al Curso </button>
+				</form>
 		</div>
 		<hr>
 		<?php
@@ -171,10 +172,32 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 			<h3 class="margen-lateral-texto">
 				<?php echo $filas['pregunta'] ?>
 				<small>
-				 <?php echo $filas['valor']?> puntos -
+				 <?php 
+				 switch ($filas['tipopregunta']) {
+					 case 'abierta':
+						echo "Pregunta Abierta -";
+						break;
+
+					 case 'casilla':
+						echo "Casilla de Verificación -";
+						break;
+
+					 case 'multiple':
+						echo "Opcion Multiple -";
+						break;
+
+					 case 'practica':
+						echo "Practica -";
+						break;
+					 
+					 default:
+						 echo " ";
+						 break;
+				 }
+				 ?>
 				</small>
 				<small>
-				 tipo: <?php echo $filas['tipopregunta']?> 
+				 <?php echo $filas['valor']?> puntos
 				</small>
 			</h3>
 			<div class="margen-lateral-texto">
@@ -187,11 +210,11 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
 								?>
-								<div class="margen-lateral-texto">
-									<label class="control-label">
+								<div class="margen-lateral-texto contenedor alineacion-center">
+									<p class="margin-right">
 										<?php echo $filasRespuestas['respuesta']?>
-									</label>
-									<input type="checkbox"  class="" name="" id="">
+									</p>
+									<input type="checkbox"  class="" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>">
 								</div>
 								
 								<?php
@@ -201,11 +224,11 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
 								?> 
-								<div class="margen-lateral-texto">
-									<label class="control-label">
+								<div class="margen-lateral-texto contenedor alineacion-center">
+									<p class="margin-right">
 										<?php echo $filasRespuestas['respuesta']?>
-									</label>
-									<input type="radio"  class="" name="1" id="1">
+									</p>
+									<input type="radio"  class="margin-negativo-bot" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>">
 								</div>
 								<?php
 							}

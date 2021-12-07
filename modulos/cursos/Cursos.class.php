@@ -758,5 +758,28 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
+
+	function guardarDetalleExamen($idexamen)
+	{
+		// Detalle examen
+		$iddetalleexamen =$this->con->generarClave(2);
+		$idexamen ="";
+		$calificacion ="";
+		$examenPDF ="";
+		$consultaExamen="";
+		//Detalle Preguntas
+		$iddetallepregunta =$this->con->generarClave(2);
+		$iddetalleexamen ="";
+		$idpregunta ="";
+		$calificacion ="";
+		$consultaPregunta="";
+		//Detalle Respuestas
+		$iddetallerespuesta=$this->con->generarClave(2);
+		$iddetallepregunta="";
+		$idrespuesta="";
+		$respuesta="";
+		$consultaRespuesta="";
+
+	}
 	
 }
