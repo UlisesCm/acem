@@ -9,11 +9,11 @@ function fileinput(nombre) {
 }
 
 const objetoContador = [0];
+const contadorRespuesta = [];
 
 $(document).ready(function () {
 
-  let contadorLeccion = 0;
-  let contadorExamen = 0;
+  
 
   /* Mostrar y Ocultar tipo de Leccion y Examen */
   contenidoLecciones(contadorLeccion);

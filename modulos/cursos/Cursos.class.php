@@ -366,6 +366,13 @@ class Cursos
 		}
 	}
 
+	function mostrarIndividualPregunta($idpregunta)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM preguntas WHERE idpregunta = '$idpregunta'");
+		}
+	}
+
 	function mostrarExamen($idcurso)
 	{
 		if ($this->con->conectar() == true) {
@@ -779,7 +786,38 @@ class Cursos
 		$idrespuesta="";
 		$respuesta="";
 		$consultaRespuesta="";
+	}
 
+	function recibirPregunta($idpregunta)
+	{
+		$resultadoPregunta = mysqli_query($this->con->conect, "SELECT * FROM preguntas WHERE idpregunta = '$idpregunta'");
+		switch ($resultadoPregunta['tipopregunta']) {
+			case 'abierta':
+				$respuesta = $_POST[$idpregunta];
+				break;
+
+			case 'casilla':
+				$resultadoPregunta = mysqli_query($this->con->conect, "SELECT * FROM respuestas WHERE idpregunta = '$idpregunta'");
+				while ($resultadoPregunta) {
+					$idrespuesta = $resultadoPregunta['idrespuesta'];
+					$respuesta = $_POST[$idrespuesta];
+				}
+				break;
+
+			case 'multiple':
+				$respuesta = $_POST[$idpregunta];
+				break;
+
+			case 'practica':
+				$respuesta = $_POST[$idpregunta];
+				break;
+			
+			default:
+			$respuesta = $_POST[$idpregunta];
+				break;
+		}
+		$iddetallepregunta = $this->con->generarClave(2);
+		$iddetallerespuesta = $this->con->generarClave(2);
 	}
 	
 }

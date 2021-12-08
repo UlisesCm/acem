@@ -41,7 +41,30 @@ if (isset($_POST['descripcion'])){
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo descripcion no es correcto</p>";
 }
+
+//VARIABLES RESPUESTAS DE EXAMEN ///////////////////////////////////////////////////////
+if (isset($_POST['contadorPregunta'])){ //INT
+	$contadorPreguntas=htmlentities(trim($_POST['contadorPregunta']));
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo contador de Preguntas no es correcto</p>";
+}
+
+if (isset($_POST['contadorRespuesta'])){ //ARREGLO
+	$contadorRespuesta=htmlentities(trim($_POST['contadorRespuesta']));
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo contador de Preguntas no es correcto</p>";
+}
+$aContadorRespuestas = array();
+$aContadorRespuestas = explode(",",$contadorRespuesta); 
+
+$aRespuesta = array();
+for ($i=0; $i < $contadorPreguntas; $i++) { 
+	$concatenacion ="respuesta".$i;
+}
 // VARIABLES LECCIONES /////////////////////////////////////////////////////////////////
+
 //Input input Contador Lecciones
 if (isset($_POST['inputContadorLecciones'])){ //select tipo leccion
 	$contadorLecciones=htmlentities(trim($_POST['inputContadorLecciones']));
@@ -50,6 +73,8 @@ if (isset($_POST['inputContadorLecciones'])){ //select tipo leccion
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo Contador-Lecciones no es correcto</p>";
 }
+
+
 // select tipo leccion
 $aTipoLecciones = array(); //se declara el arreglo que contiene todos elementos
 for ($i=0; $i <= $contadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
@@ -111,46 +136,6 @@ $aRecursoNombre = array();
 $aExtencionRecurso = array();
 $aRecurso = array();
 $aRecursoExtencion = array();
-
-/* for ($i=0; $i <= $ContadorLecciones ; $i++) { 
-	$recursoContador = "recurso".$i;
-	$clave = generarClave2(5);
-	if (isset($_FILES['recurso0']['name'])){
-		$recursotemporal=$_FILES['recurso0']['tmp_name'];
-		$recursonombre=$_FILES['recurso0']['name'];
-		$extencionrecurso=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
-		$recurso=basename($_FILES['recurso0']['name'],".".$extencionrecurso)."_".$clave;
-		$recursoExtencion= $recurso.".".$extencionrecurso;
-			if($recursotemporal==""){
-				$recurso="";
-			}
-		array_push($aRecursoTemporal,$recursotemporal); //pendiente saber que objeto es el que pusheo al array 
-		array_push($aRecursoNombre,$recursonombre); //pendiente saber que objeto es el que pusheo al array 
-		array_push($aExtencionRecurso,$extencionrecurso); //pendiente saber que objeto es el que pusheo al array 
-		array_push($aRecurso,$recurso); //pendiente saber que objeto es el que pusheo al array 
-		array_push($aRecursoExtencion,$recursoExtencion); //pendiente saber que objeto es el que pusheo al array 
-		}else{
-		array_push($aRecursoTemporal,$recurso); 
-		array_push($aRecursoNombre,$recurso); 
-		array_push($aExtencionRecurso,$recurso); 
-		array_push($aRecurso,$recurso); 
-		array_push($aRecursoExtencion,$recurso);
-	}
-} */
-/* if (isset($_FILES['recurso0']['name'])){
-	$recursotemporal=$_FILES['recurso0']['tmp_name'];
-	$recursonombre=$_FILES['recurso0']['name'];
-	$extencionrecurso=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
-	$recurso=basename($_FILES['recurso0']['name'],".".$extencionfactura)."_".generarClave(5);
-	$recursoExtencion= $recurso.".".$extencionrecurso;	
-	if($recursotemporal==""){
-		$frecurso="";
-	}
-}else{
-	$recursonombre = "No se encontro";
-	// $validacion=false;
-	// $mensaje=$mensaje."<p>El campo recurso no es correcto</p>";
-} */
 
 // VARIABLES EXAMEN /////////////////////////////////////////////////////////////////////////////////////
 /* Contador Preguntas */

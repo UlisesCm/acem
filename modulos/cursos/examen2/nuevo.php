@@ -94,8 +94,11 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 		<hr>
     <form  name="formulario" id="formulario" method="post" enctype ="multipart/form-data">
 		<?php
+		$contadorPreguntas = 0;
+		$arregloContadorRespuesta = "";
+		
 		while ($filas = mysqli_fetch_array($preguntas)) {
-
+			$contadorPreguntas++;
 			?> 
 			<h3 class="margen-lateral-texto">
 				<?php echo $filas['pregunta'] ?>
@@ -128,48 +131,56 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 				 <?php echo $filas['valor']?> puntos
 				</small>
 			</h3>
-			<div class="margen-lateral-texto">
-				<?php 
+			<div div="div-respuesta"class="margen-lateral-texto">
+				<?php
+					
 					switch ($filas['tipopregunta']) {
 						case 'abierta':
-							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
+							$arregloContadorRespuesta = $arregloContadorRespuesta.",0";
+							?><textarea name="respuesta<?php echo $contadorPreguntas?>" id="respuesta<?php echo $contadorPreguntas?>" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 
 						case 'casilla':
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
+							$contadorRespuestas = 0;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
+								$contadorRespuestas++;
 								?>
 								<div class="margen-lateral-texto contenedor alineacion-center">
 									<p class="margin-right">
 										<?php echo $filasRespuestas['respuesta']?>
 									</p>
-									<input type="checkbox"  class="" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>">
+									<input type="checkbox" name="respuesta<?php echo $contadorPreguntas.$contadorRespuestas?>" id="respuesta<?php echo $contadorPreguntas?>">
 								</div>
-								
 								<?php
 							}
+							$arregloContadorRespuesta = $arregloContadorRespuesta.",".$contadorRespuestas;
 							break;
 
 						case 'multiple':
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
+							$contadorRespuestas = 0;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
+								$contadorRespuestas++;
 								?> 
 								<div class="margen-lateral-texto contenedor alineacion-center">
 									<p class="margin-right">
 										<?php echo $filasRespuestas['respuesta']?>
 									</p>
-									<input type="radio"  class="margin-negativo-bot" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>">
+									<input type="radio"  class="margin-negativo-bot" name="respuesta<?php echo $contadorPreguntas.$contadorRespuestas?>" id="respuesta<?php echo $contadorPreguntas?>">
 								</div>
 								<?php
 							}
+							$arregloContadorRespuesta = $arregloContadorRespuesta.",".$contadorRespuestas;
 							break;
 
 						case 'practica':
-							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
+							$arregloContadorRespuesta = $arregloContadorRespuesta.",0";
+							?><textarea name="respuesta<?php echo $contadorPreguntas?>" id="respuesta<?php echo $contadorPreguntas?>" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 						
 						default:
-							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
+							?><textarea name="respuesta<?php echo $contadorPreguntas?>" id="respuesta<?php echo $contadorPreguntas?>" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 					}
 				?>	
@@ -178,6 +189,9 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 		}
 		?>
 		<hr>
+		<input id="contadorPregunta" name="contadorPregunta" type="text" value="<?php echo $contadorPreguntas?>">
+		<input id="contadorRespuesta" name="contadorRespuesta" type="text" value="<?php echo $arregloContadorRespuesta?>">
+
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Examen</button>
 		</div>
