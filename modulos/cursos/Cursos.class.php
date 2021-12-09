@@ -91,7 +91,7 @@ class Cursos
 					/* FALTA GUARDAR ARCHIVOS */
 					for ($i = 0; $i <= $contadorLecciones; $i++) {
 						$contenido = "";
-						$orden=0;
+						$orden = 0;
 						// $iddetallecurso = $this->con->generarClave(2);
 						$idleccion = $this->con->generarClave(2);
 						switch ($aTipoLecciones[$i]) {
@@ -126,7 +126,7 @@ class Cursos
 								$tipo = "_eliminado";
 								break;
 						}
-						$orden=$i+1;
+						$orden = $i + 1;
 						if ($contenido != "_eliminado" && $tipo != "_eliminado") {
 							mysqli_query($this->con->conect, "INSERT INTO lecciones (idleccion,tipo,contenido,orden,idcurso) VALUES ('$idleccion','$tipo','$contenido','$orden','$idcurso')");
 						}
@@ -254,13 +254,13 @@ class Cursos
 		$examenPDF = ""; // temporalmente asi
 
 		$resultados = mysqli_query($this->con->conect, "SELECT * FROM lecciones WHERE idcurso = '$idcurso'");
-		foreach($resultados as $resultado){
+		foreach ($resultados as $resultado) {
 			$idleccion = $resultado["idleccion"];
 			$iddetalleleccion = $this->con->generarClave(2);
 			$visto = "NO";
 			mysqli_query($this->con->conect, "INSERT INTO detallelecciones (iddetalleleccion, idavancecurso, idleccion, visto) VALUES ('$iddetalleleccion', '$idavancecurso', '$idleccion', '$visto')");
 		}
-		
+
 		/////FIN  DE PERMISOS////////
 		$avancecursos = mysqli_query($this->con->conect, "INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, finalizado) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$finalizado')");
 		$detallesexamen = mysqli_query($this->con->conect, "INSERT INTO detalleexamenes (iddetalleexamen, idexamen, calificacion	, examenpdf	) VALUES ('$iddetalleexamen', '$idexamen', '$calificacion', '$examenPDF')");
@@ -437,7 +437,7 @@ class Cursos
 		}
 		$condicion = trim($condicion);
 
-		$join ="LEFT OUTER JOIN avancecursos ON cursos.idcurso = avancecursos.idcurso";
+		$join = "LEFT OUTER JOIN avancecursos ON cursos.idcurso = avancecursos.idcurso";
 		$where = "
 			WHERE avancecursos.idavancecurso IS null
 			$consultarCategoria
@@ -463,8 +463,8 @@ class Cursos
 			return "denegado";
 			exit;
 		}
-		$idalumno= $_SESSION['idusuario'];
-		
+		$idalumno = $_SESSION['idusuario'];
+
 		$consultarCategoria = "";
 		if ($categorias != "todos") {
 			$consultarCategoria = "AND cursos.categoria='$categorias'";
@@ -483,7 +483,7 @@ class Cursos
 			$consultarCategoria
 			$consultaTerminados
 		";
-		
+
 		$consulta = "SELECT * 
 		FROM `avancecursos` 
 		INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso 
@@ -509,7 +509,7 @@ class Cursos
 		$where = "
 			WHERE idcurso='$idcurso'
 		";
-		$order="ORDER BY `lecciones`.`orden` ASC";
+		$order = "ORDER BY `lecciones`.`orden` ASC";
 
 		//SELECT * FROM lecciones INNER JOIN detallelecciones ON lecciones.idleccion = detallelecciones.idleccion WHERE idcurso = "3202120211140"
 		//SELECT * FROM `detallelecciones` INNER JOIN lecciones ON detallelecciones.idleccion = lecciones.idleccion WHERE idcurso='3202120211140'
@@ -548,7 +548,7 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
-	
+
 	/* function mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $iddetalleleccion)
 	{
 		/////PERMISOS////////////////
@@ -579,7 +579,7 @@ class Cursos
 			exit;
 		}
 
-		$siguienteLeccion=$ordenLeccion+1;
+		$siguienteLeccion = $ordenLeccion + 1;
 		$where = "
 			WHERE lecciones.idcurso = '$idcurso'
 			AND lecciones.orden = '$siguienteLeccion'
@@ -602,7 +602,7 @@ class Cursos
 			exit;
 		}
 
-		$siguienteLeccion=$ordenLeccion-1;
+		$siguienteLeccion = $ordenLeccion - 1;
 		$where = "
 			WHERE lecciones.idcurso = '$idcurso'
 			AND lecciones.orden = '$siguienteLeccion'
@@ -617,7 +617,7 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
-	
+
 
 	function mostrarExamen2($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $iddetalleleccion)
 	{
@@ -743,7 +743,7 @@ class Cursos
 			exit;
 		}
 		/////FIN  DE PERMISOS////////
-		mysqli_query($this->con->conect,"UPDATE avancecursos SET avance = avance+'$valor' WHERE idavancecurso = '$idavancecurso'");
+		mysqli_query($this->con->conect, "UPDATE avancecursos SET avance = avance+'$valor' WHERE idavancecurso = '$idavancecurso'");
 	}
 
 	function mostrarAvance($idavancecurso)
@@ -769,31 +769,66 @@ class Cursos
 	function guardarDetalleExamen($idexamen)
 	{
 		// Detalle examen
-		$iddetalleexamen =$this->con->generarClave(2);
-		$idexamen ="";
-		$calificacion ="";
-		$examenPDF ="";
-		$consultaExamen="";
+		$iddetalleexamen = $this->con->generarClave(2);
+		$idexamen = "";
+		$calificacion = "";
+		$examenPDF = "";
+		$consultaExamen = "";
 		//Detalle Preguntas
-		$iddetallepregunta =$this->con->generarClave(2);
-		$iddetalleexamen ="";
-		$idpregunta ="";
-		$calificacion ="";
-		$consultaPregunta="";
+		$iddetallepregunta = $this->con->generarClave(2);
+		$iddetalleexamen = "";
+		$idpregunta = "";
+		$calificacion = "";
+		$consultaPregunta = "";
 		//Detalle Respuestas
-		$iddetallerespuesta=$this->con->generarClave(2);
-		$iddetallepregunta="";
-		$idrespuesta="";
-		$respuesta="";
-		$consultaRespuesta="";
+		$iddetallerespuesta = $this->con->generarClave(2);
+		$iddetallepregunta = "";
+		$idrespuesta = "";
+		$respuesta = "";
+		$consultaRespuesta = "";
 	}
 
-	function recibirPregunta($idpregunta)
+	function enviarExamen($idpregunta)
 	{
 		$resultadoPregunta = mysqli_query($this->con->conect, "SELECT * FROM preguntas WHERE idpregunta = '$idpregunta'");
+		$idexamen = $resultadoPregunta['idexamen'];
+		$resultadoDetalleExamen = mysqli_query($this->con->conect, "SELECT * FROM detalleexamenes WHERE idexamen = '$idexamen'");
+		//Detalle Preguntas
+		$iddetallepregunta = $this->con->generarClave(2);
+		$iddetalleexamen = $resultadoDetalleExamen['iddetalleexamen'];
+		// $idpregunta -> viene por parametro de la funcion
+		$calificacion = ""; // ->  se deja sin dato
+		mysqli_query($this->con->conect, "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacion')");
+
+		//Detalles Respuesta
+		$iddetallerespuesta = $this->con->generarClave(2);
+		// $iddetallepregunta -> se crea arriba en la parte de detalle pregunta.
+		$idrespuesta = "null";
+		$respuesta = $_POST[$idpregunta];
+		mysqli_query($this->con->conect, "INSERT INTO detallerepuestas (iddetallerespuesta,iddetallepregunta,idrespuesta,respuesta ) VALUES ('$iddetallerespuesta','$iddetallepregunta','$idrespuesta','$respuesta')");
+	}
+
+	/* function enviarExamen($idpregunta)
+	{
+		$resultadoPregunta = mysqli_query($this->con->conect, "SELECT * FROM preguntas WHERE idpregunta = '$idpregunta'");
+		$idexamen = $resultadoPregunta['idexamen'];
+		$resultadoDetalleExamen = mysqli_query($this->con->conect, "SELECT * FROM detalleexamenes WHERE idexamen = '$idexamen'");
 		switch ($resultadoPregunta['tipopregunta']) {
+			
 			case 'abierta':
+				//Detalle Preguntas
+				$iddetallepregunta = $this->con->generarClave(2);
+				$iddetalleexamen = $resultadoDetalleExamen['iddetalleexamen'];
+				// $idpregunta -> viene por parametro de la funcion
+				$calificacion = ""; // ->  se deja sin dato
+				mysqli_query($this->con->conect, "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacion')");
+
+				//Detalles Respuesta
+				$iddetallerespuesta = $this->con->generarClave(2);
+				// $iddetallepregunta -> se crea arriba en la parte de detalle pregunta.
+				$idrespuesta="null";
 				$respuesta = $_POST[$idpregunta];
+				mysqli_query($this->con->conect, "INSERT INTO detallerepuestas (iddetallerespuesta,iddetallepregunta,idrespuesta,respuesta ) VALUES ('$iddetallerespuesta','$iddetallepregunta','$idrespuesta','$respuesta')");
 				break;
 
 			case 'casilla':
@@ -816,8 +851,5 @@ class Cursos
 			$respuesta = $_POST[$idpregunta];
 				break;
 		}
-		$iddetallepregunta = $this->con->generarClave(2);
-		$iddetallerespuesta = $this->con->generarClave(2);
-	}
-	
+	} */
 }

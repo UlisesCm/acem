@@ -96,9 +96,10 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 		<?php
 		$contadorPreguntas = 0;
 		$arregloContadorRespuesta = "";
+		$arregloIdPreguntas ="";
+		$arregloIdRespuestas = "";
 		
 		while ($filas = mysqli_fetch_array($preguntas)) {
-			$contadorPreguntas++;
 			?> 
 			<h3 class="margen-lateral-texto">
 				<?php echo $filas['pregunta'] ?>
@@ -133,24 +134,30 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 			</h3>
 			<div div="div-respuesta"class="margen-lateral-texto">
 				<?php
-					
+					$contadorPreguntas++;
+
 					switch ($filas['tipopregunta']) {
 						case 'abierta':
-							$arregloContadorRespuesta = $arregloContadorRespuesta.",0";
-							?><textarea name="respuesta<?php echo $contadorPreguntas?>" id="respuesta<?php echo $contadorPreguntas?>" class="form-control" cols="100" rows="4"></textarea><?php
+							$arregloIdPreguntas = $arregloIdPreguntas.",".$filas['idpregunta'];
+							$arregloIdRespuestas = $arregloIdRespuestas.",null";
+							$arregloContadorRespuesta = $arregloContadorRespuesta.",1";
+							?><textarea name="<?php echo $filas['idpregunta']?>" id="<?php echo $filas['idpregunta']?>" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 
 						case 'casilla':
+							
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							$contadorRespuestas = 0;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
 								$contadorRespuestas++;
+								$arregloIdPreguntas = $arregloIdPreguntas.",".$filas['idpregunta'];
+							$arregloIdRespuestas = $arregloIdRespuestas.",".$filasRespuestas['idrespuesta'];;
 								?>
 								<div class="margen-lateral-texto contenedor alineacion-center">
 									<p class="margin-right">
 										<?php echo $filasRespuestas['respuesta']?>
 									</p>
-									<input type="checkbox" name="respuesta<?php echo $contadorPreguntas.$contadorRespuestas?>" id="respuesta<?php echo $contadorPreguntas?>">
+									<input type="checkbox" name="<?php echo $filas['idpregunta']?>" id="respuesta<?php echo $contadorPreguntas?>">
 								</div>
 								<?php
 							}
@@ -158,10 +165,13 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 							break;
 
 						case 'multiple':
+							
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							$contadorRespuestas = 0;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
 								$contadorRespuestas++;
+								$arregloIdPreguntas = $arregloIdPreguntas.",".$filas['idpregunta'];
+								$arregloIdRespuestas = $arregloIdRespuestas.",".$filasRespuestas['idrespuesta'];
 								?> 
 								<div class="margen-lateral-texto contenedor alineacion-center">
 									<p class="margin-right">
@@ -175,11 +185,14 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 							break;
 
 						case 'practica':
-							$arregloContadorRespuesta = $arregloContadorRespuesta.",0";
+							$arregloIdPreguntas = $arregloIdPreguntas.",".$filas['idpregunta'];
+							$arregloIdRespuestas = $arregloIdRespuestas."- Respuesta";
+							$arregloContadorRespuesta = $arregloContadorRespuesta.",1";
 							?><textarea name="respuesta<?php echo $contadorPreguntas?>" id="respuesta<?php echo $contadorPreguntas?>" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 						
 						default:
+							$arregloIdPreguntas = $arregloIdPreguntas.",".$filas['idpregunta'];
 							?><textarea name="respuesta<?php echo $contadorPreguntas?>" id="respuesta<?php echo $contadorPreguntas?>" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 					}
@@ -191,7 +204,8 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 		<hr>
 		<input id="contadorPregunta" name="contadorPregunta" type="text" value="<?php echo $contadorPreguntas?>">
 		<input id="contadorRespuesta" name="contadorRespuesta" type="text" value="<?php echo $arregloContadorRespuesta?>">
-
+		<input id="contadorPregunta" name="arregloPregunta" type="text" value="<?php echo $arregloIdPreguntas?>">
+		<input id="contadorRespuesta" name="arregloRespuesta" type="text" value="<?php echo $arregloIdRespuestas?>">
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Examen</button>
 		</div>
