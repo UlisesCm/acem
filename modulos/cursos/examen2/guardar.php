@@ -50,19 +50,33 @@ if (isset($_POST['contadorPregunta'])){ //INT
 	$mensaje=$mensaje."<p>El campo contador de Preguntas no es correcto</p>";
 }
 
-if (isset($_POST['contadorRespuesta'])){ //ARREGLO
-	$contadorRespuesta=htmlentities(trim($_POST['contadorRespuesta']));
+if (isset($_POST['idexamen'])){ //INT
+	$idexamen=htmlentities(trim($_POST['idexamen']));
 }else{
 	$validacion=false;
-	$mensaje=$mensaje."<p>El campo contador de Preguntas no es correcto</p>";
+	$mensaje=$mensaje."<p>El campo contador de idexamen no es correcto</p>";
 }
-$aContadorRespuestas = array();
-$aContadorRespuestas = explode(",",$contadorRespuesta); 
 
-$aRespuesta = array();
-for ($i=0; $i < $contadorPreguntas; $i++) { 
-	$concatenacion ="respuesta".$i;
+if (isset($_POST['arregloPregunta'])){ //INT
+	$arregloPreguntas=htmlentities(trim($_POST['arregloPregunta']));
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo contador de arreglo pregunta no es correcto</p>";
 }
+$aPreguntas = array();
+$aPreguntas = explode(",",$arregloPreguntas); 
+
+
+if (isset($_POST['arregloRespuesta'])){ //INT
+	$arregloRespuestas=htmlentities(trim($_POST['arregloRespuesta']));
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo contador de arreglo pregunta no es correcto</p>";
+}
+$aRespuestas = array();
+$aRespuestas = explode(",",$arregloRespuestas); 
+
+
 //REFERENCIA
 /* $aTipoLecciones = array(); //se declara el arreglo que contiene todos elementos
 for ($i=0; $i <= $contadorLecciones; $i++) { //recorremos el arreglo en base a la variable contador
@@ -81,31 +95,7 @@ for ($i=0; $i <= $contadorLecciones; $i++) { //recorremos el arreglo en base a l
 
 
 if($validacion){
-	$resultado=$Ocursos->guardar(
-		$nombre,// datos generales del curso
-		$categoria,
-		$icono,
-		$descripcion,
-		$contadorLecciones,// Lecciones
-		$aTipoLecciones,
-		$aInputLecciones,
-		$aTextareaLecciones,
-		$aRecursoTemporal,
-		$aRecursoNombre,
-		$aExtencionRecurso,
-		$aRecurso,
-		$aRecursoExtencion,
-		$contadorExamen,// Examen
-		$nombreExamen,
-		$aValorPregunta, // PREGUNTAS
-		$aTipoPregunta,
-		$aTextareaPregunta,
-		$aInputPregunta,
-		$aContadorRespuestas,// Respuestas
-		$aRadioRespuesta,
-		$aaInputRespuesta,
-		$aaCheckboxRespuesta
-	);
+	$resultado=$Ocursos->enviarExamen($contadorPreguntas, $aPreguntas, $aRespuestas, $idexamen);
 	if($resultado=="exito"){
 	
 		$mensaje="exito@Operaci&oacute;n exitosa@El registro ha sido guardado";

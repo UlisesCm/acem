@@ -13,7 +13,6 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <?php include("../../../componentes/cabecera.php") ?>
   <link href="../../../librerias/js/Spry/SpryValidationTextField.css" rel="stylesheet" type="text/css" />
@@ -134,10 +133,11 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 			</h3>
 			<div div="div-respuesta"class="margen-lateral-texto">
 				<?php
-					$contadorPreguntas++;
+					
 
 					switch ($filas['tipopregunta']) {
 						case 'abierta':
+							$contadorPreguntas++;
 							$arregloIdPreguntas = $arregloIdPreguntas.",".$filas['idpregunta'];
 							$arregloIdRespuestas = $arregloIdRespuestas.",null";
 							$arregloContadorRespuesta = $arregloContadorRespuesta.",1";
@@ -149,6 +149,7 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							$contadorRespuestas = 0;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
+								$contadorPreguntas++;
 								$contadorRespuestas++;
 								$arregloIdPreguntas = $arregloIdPreguntas.",".$filas['idpregunta'];
 							$arregloIdRespuestas = $arregloIdRespuestas.",".$filasRespuestas['idrespuesta'];;
@@ -157,7 +158,7 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 									<p class="margin-right">
 										<?php echo $filasRespuestas['respuesta']?>
 									</p>
-									<input type="checkbox" name="<?php echo $filas['idpregunta']?>" id="respuesta<?php echo $contadorPreguntas?>">
+									<input type="checkbox" name="<?php echo $filas['idrespuesta']?>" id="<?php echo $filas['idpregunta']?>">
 								</div>
 								<?php
 							}
@@ -169,6 +170,7 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							$contadorRespuestas = 0;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
+								$contadorPreguntas++;
 								$contadorRespuestas++;
 								$arregloIdPreguntas = $arregloIdPreguntas.",".$filas['idpregunta'];
 								$arregloIdRespuestas = $arregloIdRespuestas.",".$filasRespuestas['idrespuesta'];
@@ -177,7 +179,7 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 									<p class="margin-right">
 										<?php echo $filasRespuestas['respuesta']?>
 									</p>
-									<input type="radio"  class="margin-negativo-bot" name="respuesta<?php echo $contadorPreguntas.$contadorRespuestas?>" id="respuesta<?php echo $contadorPreguntas?>">
+									<input type="radio"  class="margin-negativo-bot" name="<?php echo $filas['idpregunta']?>" id="<?php echo $filas['idrespuesta']?>">
 								</div>
 								<?php
 							}
@@ -185,6 +187,7 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 							break;
 
 						case 'practica':
+							$contadorPreguntas++;
 							$arregloIdPreguntas = $arregloIdPreguntas.",".$filas['idpregunta'];
 							$arregloIdRespuestas = $arregloIdRespuestas."- Respuesta";
 							$arregloContadorRespuesta = $arregloContadorRespuesta.",1";
@@ -204,14 +207,14 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 		<hr>
 		<input id="contadorPregunta" name="contadorPregunta" type="text" value="<?php echo $contadorPreguntas?>">
 		<input id="contadorRespuesta" name="contadorRespuesta" type="text" value="<?php echo $arregloContadorRespuesta?>">
-		<input id="contadorPregunta" name="arregloPregunta" type="text" value="<?php echo $arregloIdPreguntas?>">
-		<input id="contadorRespuesta" name="arregloRespuesta" type="text" value="<?php echo $arregloIdRespuestas?>">
+		<input id="arregloPregunta" name="arregloPregunta" type="text" value="<?php echo $arregloIdPreguntas?>">
+		<input id="arregloRespuesta" name="arregloRespuesta" type="text" value="<?php echo $arregloIdRespuestas?>">
+		<input id="idexamen" name="idexamen" type="text" value="<?php echo $idexamen?>">
 		<div class="contenedor justify-content-center margen-bot2">
-			<button class="btn btn-success">Enviar Examen</button>
+			<button class="btn btn-success" id="botonGuardar">Enviar Examen</button>
 		</div>
     </form>
 	</div>
-
 </div>
           
             
