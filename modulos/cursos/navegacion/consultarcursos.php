@@ -321,7 +321,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				<?php echo $filasExamen['nombreExamen']?>	
 				
 			</h3>
-			<form class="d-flex centrar-elementos margen-bot" action="../examen2/nuevo.php?n1=cursos&n2=nuevocursos" method="post">
+			<form class="d-flex centrar-elementos margen-bot" action="../examen/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 					<input type="hidden" name="contador" value="<?php echo $filasTotales?>"/>
 					<input type="hidden" name="id" value="<?php echo $filasExamen['idcurso']?>"/>
 					<input type="hidden" name="orden" value="<?php echo $filas['orden']?>"/>

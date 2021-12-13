@@ -168,7 +168,7 @@ $total = 0;
 				</form>
 		</div>
 		<hr>
-		<form class="margen-5" action="../examen/vista.php?n1=cursos&n2=nuevocursos" method="post">
+		<form class="margen-5" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 		<?php
 		while ($filas = mysqli_fetch_array($preguntas)) {
 			$contadorPreguntas++;
@@ -264,20 +264,13 @@ $total = 0;
 		}
 		?>
 		<hr>
-		<h3>Numero de Preguntas:</h3>
-		<input type="text" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
-		<h3>Arreglo de Respuestas:</h3>
-		<input type="text" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
+		<h3>Numero de Preguntas: <?php echo $contadorPreguntas?></h3>
+		<h3>Arreglo de Respuestas: <?php echo $contadorRespuestas?></h3>
 		<h3>Totales: <?php echo $total?></h3>
-		<input type="text" name="total" id="total" value="<?php echo $total?>">
-		<h3>idcurso:</h3>
-		<input type="text" name="idcurso" id="idcurso" value="<?php echo $filasExamen['idcurso']?>">
-		<h3>idexamen:</h3>
-		<input type="text" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Examen</button>
-		</div>
 		</form>
+		</div>
 	</div>
 
 </div>
