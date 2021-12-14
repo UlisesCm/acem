@@ -96,13 +96,6 @@ if (isset($_REQUEST['orden'])) {
 	$ordenLeccion = "no existe";
 }
 
-if (isset($_REQUEST['id'])) {
-	$idcurso = htmlentities($_REQUEST['id']);
-	// $busqueda=mysql_real_escape_string($busqueda);
-} else {
-	$idcurso = "no existe";
-}
-
 if (isset($_REQUEST['contador'])) {
 	$contador = htmlentities($_REQUEST['contador']);
 	// $busqueda=mysql_real_escape_string($busqueda);
@@ -129,6 +122,35 @@ if (isset($_REQUEST['nombre'])) {
 } else {
 	$nombre  = "no existe";
 }
+
+if (isset($_REQUEST['cadenaTipo'])) {
+	$cadenaTipo = htmlentities($_REQUEST['cadenaTipo']);
+} else {
+	$cadenaTipo  = "no existe";
+}
+
+if (isset($_REQUEST['cadenaRespuestas'])) {
+	$cadenaRespuestas = htmlentities($_REQUEST['cadenaRespuestas']);
+} else {
+	$cadenaRespuestas  = "no existe";
+}
+
+if (isset($_REQUEST['cadenaRespuestas'])) {
+	$cadenaRespuestas = htmlentities($_REQUEST['cadenaRespuestas']);
+} else {
+	$cadenaRespuestas  = "no existe";
+}
+
+if (isset($_REQUEST['idcurso'])) {
+	$idcurso = htmlentities($_REQUEST['idcurso']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$idcurso = "no existe";
+}
+
+
+
+
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
@@ -164,107 +186,11 @@ $total = 0;
 				<form class="alineacion-centro-texto margen-lateral-texto" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 					<input type="hidden" name="id" value="<?php echo $filasExamen['idcurso'] ?>" />
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
-					<button class="btn btn-default"> Volver al Curso </button>
+					<button class="btn btn-default"> Volver al Curso</button>
 				</form>
 		</div>
 		<hr>
-		<form class="margen-5" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
-		<?php
-		while ($filas = mysqli_fetch_array($preguntas)) {
-			$contadorPreguntas++;
-			?> 
-			<h3 class="margen-lateral-texto">
-				<?php echo $filas['pregunta'] ?>
-				<small>
-				 <?php 
-				 switch ($filas['tipopregunta']) {
-					 case 'abierta':
-						echo "Pregunta Abierta -";
-						break;
-
-					 case 'casilla':
-						echo "Casilla de Verificación -";
-						break;
-
-					 case 'multiple':
-						echo "Opcion Multiple -";
-						break;
-
-					 case 'practica':
-						echo "Practica -";
-						break;
-					 
-					 default:
-						 echo " ";
-						 break;
-				 }
-				 ?>
-				</small>
-				<small>
-				 <?php echo $filas['valor']?> puntos
-				</small>
-			</h3>
-			<div class="margen-lateral-texto">
-				<?php 
-					switch ($filas['tipopregunta']) {
-						case 'abierta':
-							$total++;
-							$contadorRespuestas = $contadorRespuestas.",1";
-							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
-							break;
-						case 'casilla':
-							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
-							$contadorRespuestaTemp = 0;
-							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
-								$contadorRespuestaTemp++;
-								$total++;
-								?>
-								<div class="margen-lateral-texto contenedor alineacion-center">
-									<p class="margin-right">
-										<?php echo $filasRespuestas['respuesta']?>
-									</p>
-									<input type="checkbox"  class="" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>">
-								</div>
-								<?php
-							}
-							$contadorRespuestas = $contadorRespuestas.",".$contadorRespuestaTemp;
-							break;
-						case 'multiple':						
-							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
-							$contadorRespuestaTemp = 0;
-							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
-								$contadorRespuestaTemp++;
-								$total++;
-								?> 
-								<div class="margen-lateral-texto contenedor alineacion-center">
-									<p class="margin-right">
-										<?php echo $filasRespuestas['respuesta']?>
-									</p>
-									<input type="radio"  class="margin-negativo-bot" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>">
-								</div>
-								<?php
-							}
-							$contadorRespuestas = $contadorRespuestas.",".$contadorRespuestaTemp;
-							break;
-
-						case 'practica':
-							$total++;
-							$contadorRespuestas = $contadorRespuestas.",1";
-							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
-							break;
-						
-						default:
-							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
-							break;
-					}
-				?>
-				
-			</div>
-			<?php
-		}
-		?>
-		<hr>
-		<h3>Numero de Preguntas: <?php echo $contadorPreguntas?></h3>
+		<h3>Numero de Preguntas: -<?php echo $contadorPreguntas?></h3>
 		<h3>Arreglo de Respuestas: <?php echo $contadorRespuestas?></h3>
 		<h3>Totales: <?php echo $total?></h3>
 		<div class="contenedor justify-content-center margen-bot2">

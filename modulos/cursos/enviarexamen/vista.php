@@ -78,6 +78,28 @@ if (isset($_POST['idexamen'])) {
 } else {
 	$idexamen = 0;
 }
+
+if (isset($_POST['cadenaPreguntas'])) {
+	$cadenaPreguntas = htmlentities($_POST['cadenaPreguntas']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$cadenaPreguntas = 0;
+}
+
+if (isset($_POST['cadenaRespuestas'])) {
+	$cadenaRespuestas = htmlentities($_POST['cadenaRespuestas']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$cadenaRespuestas = 0;
+}
+
+if (isset($_POST['cadenaTipo'])) {
+	$cadenaTipo = htmlentities($_POST['cadenaTipo']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$cadenaTipo = 0;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -166,6 +188,9 @@ if (isset($_POST['idexamen'])) {
 					<input type="text" name="nombre" value="<?php echo $contadorRespuestas?>"/>
 					<input type="text" name="nombre" value="<?php echo $total?>"/>
 					<input type="text" name="idcurso" id="idcurso" value="<?php echo $idcurso?>">
+					<input type="text" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
+					<input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
+					<input type="text" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
 				</form>
 				<div class="box box-info" style="border-color:#68983A">
 					<div class="box-header with-border contenedor alineacion-centro">

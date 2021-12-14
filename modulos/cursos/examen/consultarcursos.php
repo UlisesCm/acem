@@ -153,7 +153,9 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 $contadorPreguntas = 0;
 $contadorRespuestas = "";
 $total = 0;
-
+$cadenaPreguntas = "";
+$cadenaRespuestas = "";
+$cadenaTipo = "";
 ?>
 <div class="container ">
 	<div class="carta-cursos margin-top20 margin-bot20">
@@ -168,7 +170,7 @@ $total = 0;
 				</form>
 		</div>
 		<hr>
-		<form class="margen-5" action="../examen/vista.php?n1=cursos&n2=nuevocursos" method="post">
+		<form class="margen-5" action="../enviarexamen/vista.php?n1=cursos&n2=nuevocursos" method="post">
 		<?php
 		while ($filas = mysqli_fetch_array($preguntas)) {
 			$contadorPreguntas++;
@@ -210,12 +212,18 @@ $total = 0;
 						case 'abierta':
 							$total++;
 							$contadorRespuestas = $contadorRespuestas.",1";
+							$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
+							$cadenaRespuestas = $cadenaRespuestas.",null";
+							$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
 							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 						case 'casilla':
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							$contadorRespuestaTemp = 0;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
+								$cadenaRespuestas = $cadenaRespuestas.",".$filasRespuestas['idrespuesta'];
+								$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
+								$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
 								$contadorRespuestaTemp++;
 								$total++;
 								?>
@@ -232,6 +240,9 @@ $total = 0;
 						case 'multiple':						
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							$contadorRespuestaTemp = 0;
+							$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
+							$cadenaRespuestas = $cadenaRespuestas.",null";
+							$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
 								$contadorRespuestaTemp++;
 								$total++;
@@ -250,6 +261,9 @@ $total = 0;
 						case 'practica':
 							$total++;
 							$contadorRespuestas = $contadorRespuestas.",1";
+							$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
+							$cadenaRespuestas = $cadenaRespuestas.",null";
+							$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
 							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 						
@@ -264,7 +278,7 @@ $total = 0;
 		}
 		?>
 		<hr>
-		<h3>Numero de Preguntas:</h3>
+		<h3>Numero de Preguntas: </h3>
 		<input type="text" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
 		<h3>Arreglo de Respuestas:</h3>
 		<input type="text" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
@@ -274,6 +288,12 @@ $total = 0;
 		<input type="text" name="idcurso" id="idcurso" value="<?php echo $filasExamen['idcurso']?>">
 		<h3>idexamen:</h3>
 		<input type="text" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
+		<h3>Cadena Preguntas:</h3>
+		<input type="text" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
+		<h3>cadena Respuestas</h3>
+		<input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
+		<h3>cadena Tipo</h3>
+		<input type="text" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Examen</button>
 		</div>
@@ -296,5 +316,25 @@ if (mysqli_num_rows($resultado) == 0) {
 ?>
 <!-- 
 
+3392117302226,
+3392117302235,
+3392117302235,
+3392117302235,
+3392117302245,
+3392117302270
 
- -->
+null,
+3392117302263,
+3392117302322,
+3392117302359,
+null,
+null
+
+abierta,
+casilla,
+casilla,
+casilla,
+multiple,
+abierta
+
+-->
