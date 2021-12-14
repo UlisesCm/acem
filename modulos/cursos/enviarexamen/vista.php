@@ -85,6 +85,8 @@ if (isset($_POST['cadenaPreguntas'])) {
 } else {
 	$cadenaPreguntas = 0;
 }
+$arregloPregunta = array(); 
+$arregloPregunta = explode(",", $cadenaPreguntas ); 
 
 if (isset($_POST['cadenaRespuestas'])) {
 	$cadenaRespuestas = htmlentities($_POST['cadenaRespuestas']);
@@ -98,6 +100,13 @@ if (isset($_POST['cadenaTipo'])) {
 	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
 	$cadenaTipo = 0;
+}
+
+if (isset($_POST['3392117302226'])) {
+	$prueba = htmlentities($_POST['3392117302226']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$prueba = 0;
 }
 
 ?>
@@ -184,44 +193,22 @@ if (isset($_POST['cadenaTipo'])) {
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
-					<input type="text" name="nombre" value="<?php echo $contadorPreguntas?>"/>
-					<input type="text" name="nombre" value="<?php echo $contadorRespuestas?>"/>
-					<input type="text" name="nombre" value="<?php echo $total?>"/>
+					<input type="text" name="contadorPreguntas" value="<?php echo $contadorPreguntas?>"/>
+					<input type="text" name="contadorRespuestas" value="<?php echo $contadorRespuestas?>"/>
+					<input type="text" name="total" value="<?php echo $total?>"/>
 					<input type="text" name="idcurso" id="idcurso" value="<?php echo $idcurso?>">
 					<input type="text" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
 					<input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
 					<input type="text" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
+					<input type="text" name="prueba" id="prueba" value="<?php echo $prueba?>">
+					<input type="text" name="arregloPregunta" id="arregloPregunta" value="<?php echo $arregloPregunta?>">
+					
 				</form>
 				<div class="box box-info" style="border-color:#68983A">
 					<div class="box-header with-border contenedor alineacion-centro">
-						<div class="col-sm-2 margen-bot2">
-							<h2><?php echo $nombre ?></h2>
-						</div>
-						<div class="col-sm-7">
-							<div class="progress alineacion-centro-texto">
-								<div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avance ?>%;">
-									<span class="sr-only"><?php echo $avance?>% Complete</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-2">
-							<h4>
-							<?php 
-						if ($avance != 100) {
-							echo $avance?>% de Progreso<?php
-						} else {
-							?>Lecciones Terminadas <?php
-						}
-					?>
-							</h4>
-						</div>
-						<div class="col-sm-1">
-							<form action="../miscursos/vistacursos.php?n1=cursos&n2=miscursos" method="post">
-								<button class="btn btn-default pull-right">
-									Volver a mis Cursos
-								</button>
-							</form>
-						</div>
+						<h1>
+							<?php echo print_r($arregloPregunta)?>
+						</h1>
 					</div>
 				</div>
 				<!-- box -->

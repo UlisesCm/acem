@@ -129,10 +129,10 @@ if (isset($_REQUEST['cadenaTipo'])) {
 	$cadenaTipo  = "no existe";
 }
 
-if (isset($_REQUEST['cadenaRespuestas'])) {
-	$cadenaRespuestas = htmlentities($_REQUEST['cadenaRespuestas']);
+if (isset($_REQUEST['cadenaPreguntas'])) {
+	$cadenaPreguntas = htmlentities($_REQUEST['cadenaPreguntas']);
 } else {
-	$cadenaRespuestas  = "no existe";
+	$cadenaPreguntas  = "no existe";
 }
 
 if (isset($_REQUEST['cadenaRespuestas'])) {
@@ -146,6 +146,27 @@ if (isset($_REQUEST['idcurso'])) {
 	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
 	$idcurso = "no existe";
+}
+
+if (isset($_REQUEST['total'])) {
+	$total = htmlentities($_REQUEST['total']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$total = "no existe";
+}
+
+if (isset($_REQUEST['contadorRespuestas'])) {
+	$contadorRespuestas = htmlentities($_REQUEST['contadorRespuestas']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$contadorRespuestas = "no existe";
+}
+
+if (isset($_REQUEST['contadorPreguntas'])) {
+	$contadorPreguntas = htmlentities($_REQUEST['contadorPreguntas']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$contadorPreguntas = "no existe";
 }
 
 
@@ -172,9 +193,6 @@ if ($filas['visto'] == 'NO') {
 $idexamen = $filasExamen['idexamen'];
 $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 
-$contadorPreguntas = 0;
-$contadorRespuestas = "";
-$total = 0;
 
 ?>
 <div class="container ">
@@ -193,6 +211,11 @@ $total = 0;
 		<h3>Numero de Preguntas: -<?php echo $contadorPreguntas?></h3>
 		<h3>Arreglo de Respuestas: <?php echo $contadorRespuestas?></h3>
 		<h3>Totales: <?php echo $total?></h3>
+		<h3>Id Curso: <?php echo $idcurso?></h3>
+		<h3>Id Examen: <?php echo $total?></h3>
+		<h3>Cadena Preguntas: <?php echo $cadenaPreguntas?></h3>
+		<h3>Cadena Respuestas: <?php echo $cadenaRespuestas?></h3>
+		<h3>Cadena Tipo: <?php echo $cadenaTipo?></h3>
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Examen</button>
 		</form>

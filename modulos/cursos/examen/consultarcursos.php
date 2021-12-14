@@ -215,17 +215,18 @@ $cadenaTipo = "";
 							$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
 							$cadenaRespuestas = $cadenaRespuestas.",null";
 							$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
-							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
+							?><textarea name="<?php echo $filas['idpregunta']?>" id="<?php echo $filas['idpregunta']?>" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 						case 'casilla':
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							$contadorRespuestaTemp = 0;
+							$total++;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
 								$cadenaRespuestas = $cadenaRespuestas.",".$filasRespuestas['idrespuesta'];
 								$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
 								$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
 								$contadorRespuestaTemp++;
-								$total++;
+								
 								?>
 								<div class="margen-lateral-texto contenedor alineacion-center">
 									<p class="margin-right">
