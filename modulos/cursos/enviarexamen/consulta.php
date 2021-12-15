@@ -169,6 +169,20 @@ if (isset($_REQUEST['contadorPreguntas'])) {
 	$contadorPreguntas = "no existe";
 }
 
+if (isset($_REQUEST['arregloPregunta'])) {
+	$arregloPregunta = htmlentities($_REQUEST['arregloPregunta']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$arregloPregunta = "no existe";
+}
+
+if (isset($_REQUEST['arregloRespuesta'])) {
+	$arregloRespuesta = htmlentities($_REQUEST['arregloRespuesta']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$arregloRespuesta = "no existe";
+}
+
 
 
 
@@ -208,14 +222,7 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 				</form>
 		</div>
 		<hr>
-		<h3>Numero de Preguntas: -<?php echo $contadorPreguntas?></h3>
-		<h3>Arreglo de Respuestas: <?php echo $contadorRespuestas?></h3>
-		<h3>Totales: <?php echo $total?></h3>
-		<h3>Id Curso: <?php echo $idcurso?></h3>
-		<h3>Id Examen: <?php echo $total?></h3>
-		<h3>Cadena Preguntas: <?php echo $cadenaPreguntas?></h3>
-		<h3>Cadena Respuestas: <?php echo $cadenaRespuestas?></h3>
-		<h3>Cadena Tipo: <?php echo $cadenaTipo?></h3>
+		
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Examen</button>
 		</form>

@@ -766,7 +766,7 @@ class Cursos
 	}
 
 
-	function enviarExamen($contadorPreguntas, $aPreguntas, $aRespuestas, $idexamen)
+	function enviarExamen2($contadorPreguntas, $aPreguntas, $aRespuestas, $idexamen)
 	{
 		for ($i=0; $i < $contadorPreguntas; $i++) {		
 			$temporalRespuesta = $aRespuestas[$i];
@@ -806,6 +806,31 @@ class Cursos
 			mysqli_query($this->con->conect, $consultaRespuesta);
 		}
 			return "exito";
+	}
+	function enviarExamen()
+	{
+		//Detalle de Examenes
+		$iddetalleexamen = $this->con->generarClave(2);
+		$idexamen = "";
+		$calificacion = "";
+		$examenpdf = "";
+		$consultaExamen = "INSERT INTO detalleexamenes (iddetalleexamen,idexamen,calificacion,examenpdf) VALUES ('$iddetalleexamen','$idexamen','$calificacion','$examenpdf')";
+		mysqli_query($this->con->conect, $consultaExamen);
+
+		//Detalle de Preguntas ////////////////////////////////
+		$iddetallepregunta = $this->con->generarClave(2);
+		// $detalleexamen
+		$idpregunta= ""; // no hay
+		// $calificacion
+		$consultaPregunta = "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacion')";
+		mysqli_query($this->con->conect, $consultaPregunta);
+
+		//Detalle de Respuestas ///////////////////////////////
+		$idrespuesta = "";
+		$respuesta = "";
+		$iddetallerespuestas = $this->con->generarClave(2);
+		$consultaRespuesta = "INSERT INTO detallerepuestas (iddetallerespuesta,iddetallepregunta,idrespuesta,respuesta) VALUES ('$iddetallerespuestas','$iddetallepregunta','$idrespuesta','$respuesta')";
+			mysqli_query($this->con->conect, $consultaRespuesta);
 	}
 
 	/* function enviarExamen($idpregunta)

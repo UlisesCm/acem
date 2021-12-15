@@ -86,7 +86,8 @@ if (isset($_POST['cadenaPreguntas'])) {
 	$cadenaPreguntas = 0;
 }
 $arregloPregunta = array(); 
-$arregloPregunta = explode(",", $cadenaPreguntas ); 
+$arregloPregunta = explode(":::", $cadenaPreguntas); 
+$arregloPregunta = array_filter($arregloPregunta); 
 
 if (isset($_POST['cadenaRespuestas'])) {
 	$cadenaRespuestas = htmlentities($_POST['cadenaRespuestas']);
@@ -94,6 +95,9 @@ if (isset($_POST['cadenaRespuestas'])) {
 } else {
 	$cadenaRespuestas = 0;
 }
+$arregloRespuesta = array(); 
+$arregloRespuesta = explode(":::", $cadenaRespuestas ); 
+$arregloRespuesta = array_filter($arregloRespuesta);
 
 if (isset($_POST['cadenaTipo'])) {
 	$cadenaTipo = htmlentities($_POST['cadenaTipo']);
@@ -102,12 +106,32 @@ if (isset($_POST['cadenaTipo'])) {
 	$cadenaTipo = 0;
 }
 
-if (isset($_POST['3392117302226'])) {
-	$prueba = htmlentities($_POST['3392117302226']);
-	// $busqueda=mysql_real_escape_string($busqueda);
-} else {
-	$prueba = 0;
+$arregloTipo = array(); 
+$arregloTipo = explode(":::", $cadenaTipo ); 
+$arregloTipo = array_filter($arregloTipo);
+//LECTURA DE RESPUESTAS
+//contador - $total
+//Arreglo de id preguntas - $arregloPregunta
+//Arreglo de id respuestas - $arregloRespuesta
+//Arreglo de Tipo - $cadenaTipo
+$arregloRespuestasAlumno = array();
+
+for ($i=1; $i < $total+1; $i++) { 
+	if ($arregloTipo[$i] == "casilla") {
+		$nameTemporal = $arregloRespuesta[$i];
+		$respuestaTemporal = htmlentities(trim($_POST[$nameTemporal]));
+		if ($respuestaTemporal == null) {
+			$respuestaTemporal = "SinSeleccionar";
+		}
+	} else {
+		$nameTemporal = $arregloPregunta[$i];
+		$respuestaTemporal = htmlentities(trim($_POST[$nameTemporal]));
+	}
+	array_push($arregloRespuestasAlumno,$respuestaTemporal);
 }
+
+// $tipoPregunta=htmlentities(trim($_POST[$concatenacion]));
+// array_push($aTipoPregunta,$tipoPregunta);
 
 ?>
 
@@ -201,15 +225,25 @@ if (isset($_POST['3392117302226'])) {
 					<input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
 					<input type="text" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
 					<input type="text" name="prueba" id="prueba" value="<?php echo $prueba?>">
-					<input type="text" name="arregloPregunta" id="arregloPregunta" value="<?php echo $arregloPregunta?>">
-					
+					<input type="text" name="arregloPregunta" id="arregloPregunta" value="<?php echo print_r($arregloPregunta)?>">
+					<input type="text" name="arregloRespuesta" id="arregloRespuesta" value="<?php echo print_r($arregloRespuesta)?>">
 				</form>
 				<div class="box box-info" style="border-color:#68983A">
 					<div class="box-header with-border contenedor alineacion-centro">
 						<h1>
-							<?php echo print_r($arregloPregunta)?>
+							<?php echo print_r($arregloRespuestasAlumno)?>
 						</h1>
 					</div>
+					<hr>
+					<h1>
+							<?php echo print_r($arregloPregunta)?>
+					</h1>
+					<h1>
+							<?php echo print_r($arregloRespuesta)?>
+					</h1>
+					<h1>
+							<?php echo print_r($arregloTipo)?>
+					</h1>
 				</div>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#3A6D98">

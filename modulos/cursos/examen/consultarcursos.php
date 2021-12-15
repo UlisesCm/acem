@@ -211,10 +211,10 @@ $cadenaTipo = "";
 					switch ($filas['tipopregunta']) {
 						case 'abierta':
 							$total++;
-							$contadorRespuestas = $contadorRespuestas.",1";
-							$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
-							$cadenaRespuestas = $cadenaRespuestas.",null";
-							$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
+							$contadorRespuestas = $contadorRespuestas.":::1";
+							$cadenaPreguntas = $cadenaPreguntas.":::".$filas['idpregunta']; //PREGUNTAS
+							$cadenaRespuestas = $cadenaRespuestas.":::SinRespuesta";
+							$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
 							?><textarea name="<?php echo $filas['idpregunta']?>" id="<?php echo $filas['idpregunta']?>" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 						case 'casilla':
@@ -222,28 +222,27 @@ $cadenaTipo = "";
 							$contadorRespuestaTemp = 0;
 							$total++;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
-								$cadenaRespuestas = $cadenaRespuestas.",".$filasRespuestas['idrespuesta'];
-								$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
-								$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
-								$contadorRespuestaTemp++;
-								
+								$cadenaPreguntas = $cadenaPreguntas.":::".$filas['idpregunta'];  //PREGUNTAS
+								$cadenaRespuestas = $cadenaRespuestas.":::".$filasRespuestas['idrespuesta'];
+								$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
+								$contadorRespuestaTemp++
 								?>
 								<div class="margen-lateral-texto contenedor alineacion-center">
 									<p class="margin-right">
 										<?php echo $filasRespuestas['respuesta']?>
 									</p>
-									<input type="checkbox"  class="" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>">
+									<input type="checkbox" name="<?php echo $filasRespuestas['idrespuesta']?>" id="<?php echo $filasRespuestas['idrespuesta']?>" value="<?php echo $filasRespuestas['respuesta']?>">
 								</div>
 								<?php
 							}
-							$contadorRespuestas = $contadorRespuestas.",".$contadorRespuestaTemp;
+							$contadorRespuestas = $contadorRespuestas.$contadorRespuestaTemp;
 							break;
 						case 'multiple':						
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							$contadorRespuestaTemp = 0;
-							$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
-							$cadenaRespuestas = $cadenaRespuestas.",null";
-							$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
+							$cadenaPreguntas = $cadenaPreguntas.":::".$filas['idpregunta'];  //PREGUNTAS
+							$cadenaRespuestas = $cadenaRespuestas.":::SinRespuesta";
+							$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
 								$contadorRespuestaTemp++;
 								$total++;
@@ -252,19 +251,19 @@ $cadenaTipo = "";
 									<p class="margin-right">
 										<?php echo $filasRespuestas['respuesta']?>
 									</p>
-									<input type="radio"  class="margin-negativo-bot" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>">
+									<input type="radio"  class="margin-negativo-bot" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>" value="<?php echo $filasRespuestas['respuesta']?>">
 								</div>
 								<?php
 							}
-							$contadorRespuestas = $contadorRespuestas.",".$contadorRespuestaTemp;
+							$contadorRespuestas = $contadorRespuestas.$contadorRespuestaTemp;
 							break;
 
 						case 'practica':
 							$total++;
-							$contadorRespuestas = $contadorRespuestas.",1";
-							$cadenaPreguntas = $cadenaPreguntas.",".$filas['idpregunta'];
-							$cadenaRespuestas = $cadenaRespuestas.",null";
-							$cadenaTipo = $cadenaTipo.",".$filas['tipopregunta'];
+							$contadorRespuestas = $contadorRespuestas.":::1";
+							$cadenaPreguntas = $cadenaPreguntas.$filas['idpregunta'];
+							$cadenaRespuestas = $cadenaRespuestas.":::SinRespuesta";
+							$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
 							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
 							break;
 						
@@ -338,4 +337,24 @@ casilla,
 multiple,
 abierta
 
+:::3392117302226
+:::3392117302235
+:::3392117302235
+:::3392117302235
+:::3392117302245
+:::3392117302270
+
+:::SinRespuesta
+:::3392117302263
+:::3392117302322
+:::3392117302359
+:::SinRespuesta
+:::SinRespuesta
+
+:::abierta
+:::casilla
+:::casilla
+:::casilla
+:::multiple
+:::abierta
 -->
