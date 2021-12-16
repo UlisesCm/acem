@@ -114,7 +114,7 @@ $arregloTipo = array_filter($arregloTipo);
 //Arreglo de id preguntas - $arregloPregunta
 //Arreglo de id respuestas - $arregloRespuesta
 //Arreglo de Tipo - $cadenaTipo
-$arregloRespuestasAlumno = array();
+$cadenaRespuestasAlumno = "";
 
 for ($i=1; $i < $total+1; $i++) { 
 	if ($arregloTipo[$i] == "casilla") {
@@ -127,11 +127,12 @@ for ($i=1; $i < $total+1; $i++) {
 		$nameTemporal = $arregloPregunta[$i];
 		$respuestaTemporal = htmlentities(trim($_POST[$nameTemporal]));
 	}
-	array_push($arregloRespuestasAlumno,$respuestaTemporal);
+	$cadenaRespuestasAlumno = $cadenaRespuestasAlumno.":::".$respuestaTemporal;
 }
 
 // $tipoPregunta=htmlentities(trim($_POST[$concatenacion]));
 // array_push($aTipoPregunta,$tipoPregunta);
+
 
 ?>
 
@@ -217,33 +218,24 @@ for ($i=1; $i < $total+1; $i++) {
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
-					<input type="text" name="contadorPreguntas" value="<?php echo $contadorPreguntas?>"/>
-					<input type="text" name="contadorRespuestas" value="<?php echo $contadorRespuestas?>"/>
-					<input type="text" name="total" value="<?php echo $total?>"/>
-					<input type="text" name="idcurso" id="idcurso" value="<?php echo $idcurso?>">
-					<input type="text" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
-					<input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
-					<input type="text" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
-					<input type="text" name="prueba" id="prueba" value="<?php echo $prueba?>">
-					<input type="text" name="arregloPregunta" id="arregloPregunta" value="<?php echo print_r($arregloPregunta)?>">
-					<input type="text" name="arregloRespuesta" id="arregloRespuesta" value="<?php echo print_r($arregloRespuesta)?>">
+					<input type="hidden" name="contadorPreguntas" value="<?php echo $contadorPreguntas?>"/>
+					<input type="hidden" name="contadorRespuestas" value="<?php echo $contadorRespuestas?>"/>
+					<input type="hidden" name="total" value="<?php echo $total?>"/>
+					<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $idcurso?>">
+					<input type="hidden" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
+					<input type="hidden" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
+					<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
+					<input type="hidden" name="cadenaRespuestasAlumno" id="cadenaRespuestasAlumno" value="<?php echo $cadenaRespuestasAlumno?>">
+					<input type="hidden" name="prueba" id="prueba" value="<?php echo $prueba?>">
+					<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
 				</form>
 				<div class="box box-info" style="border-color:#68983A">
 					<div class="box-header with-border contenedor alineacion-centro">
 						<h1>
-							<?php echo print_r($arregloRespuestasAlumno)?>
+							<?php
+								echo $cadenaRespuestasAlumno
+							?>
 						</h1>
-					</div>
-					<hr>
-					<h1>
-							<?php echo print_r($arregloPregunta)?>
-					</h1>
-					<h1>
-							<?php echo print_r($arregloRespuesta)?>
-					</h1>
-					<h1>
-							<?php echo print_r($arregloTipo)?>
-					</h1>
 				</div>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#3A6D98">

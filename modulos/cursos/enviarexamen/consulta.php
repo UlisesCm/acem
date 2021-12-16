@@ -134,12 +134,20 @@ if (isset($_REQUEST['cadenaPreguntas'])) {
 } else {
 	$cadenaPreguntas  = "no existe";
 }
+$arregloPregunta = array(); 
+$arregloPregunta = explode(":::", $cadenaPreguntas); 
+$arregloPregunta = array_filter($arregloPregunta); 
 
 if (isset($_REQUEST['cadenaRespuestas'])) {
 	$cadenaRespuestas = htmlentities($_REQUEST['cadenaRespuestas']);
 } else {
 	$cadenaRespuestas  = "no existe";
 }
+
+$arregloRespuesta = array(); 
+$arregloRespuesta = explode(":::", $cadenaRespuestas ); 
+$arregloRespuesta = array_filter($arregloRespuesta);
+
 
 if (isset($_REQUEST['idcurso'])) {
 	$idcurso = htmlentities($_REQUEST['idcurso']);
@@ -169,18 +177,25 @@ if (isset($_REQUEST['contadorPreguntas'])) {
 	$contadorPreguntas = "no existe";
 }
 
-if (isset($_REQUEST['arregloPregunta'])) {
-	$arregloPregunta = htmlentities($_REQUEST['arregloPregunta']);
+
+if (isset($_REQUEST['cadenaRespuestasAlumno'])) {
+	$cadenaRespuestasAlumno = $_REQUEST['cadenaRespuestasAlumno'];
 	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
-	$arregloPregunta = "no existe";
+	$cadenaRespuestasAlumno = "no existe";
 }
 
-if (isset($_REQUEST['arregloRespuesta'])) {
-	$arregloRespuesta = htmlentities($_REQUEST['arregloRespuesta']);
+$arregloRespuestasAlumno = array(); 
+$arregloRespuestasAlumno = explode(":::", $cadenaRespuestasAlumno ); 
+$arregloRespuestasAlumno = array_filter($arregloRespuestasAlumno);
+
+
+
+if (isset($_REQUEST['idexamen'])) {
+	$idexamen = htmlentities($_REQUEST['idexamen']);
 	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
-	$arregloRespuesta = "no existe";
+	$idexamen = "no existe";
 }
 
 
@@ -198,13 +213,19 @@ if ($resultado == "denegado") {
 	exit;
 }
 
+for ($i=0; $i < $total ; $i++) { 
+	$idpreguntaTemp = $arregloPregunta[$i+1];
+	$idRespuestaTemp = $arregloRespuesta[$i+1];
+	$respuestaTemp = $arregloRespuestasAlumno[$i];
+	$Ocursos->enviarExamen($idexamen,$idpreguntaTemp,$idRespuestaTemp,$respuestaTemp);
+}
+
 // $filasTotales = mysqli_num_rows($resultadoExamen);
 $filasExamen = mysqli_fetch_array($resultadoExamen);
 $Ocursos->cambiarVisto($filas['iddetalleleccion']);
 if ($filas['visto'] == 'NO') {
 	$Ocursos->agregarAvance($filas['valor'], $idavancecurso);
 }
-$idexamen = $filasExamen['idexamen'];
 $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 
 
@@ -222,9 +243,26 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 				</form>
 		</div>
 		<hr>
-		
+		<h2>
+			Examen enviado, Espera que tu docente evalue el examen y te asigne una calificacion.
+		</h2>
+		<h1>
+			<?php 
+				if (is_array($arregloRespuestasAlumno)) {
+					echo "si es arreglo";
+				} else {
+					echo "no es arreglo";
+				}
+			?>
+		</h1>
+		<h1>
+			<?php echo $cadenaRespuestasAlumno?>
+		</h1>
+		<h1>
+			<?php echo print_r($arregloRespuestasAlumno)?>
+		</h1>
 		<div class="contenedor justify-content-center margen-bot2">
-			<button class="btn btn-success">Enviar Examen</button>
+			<button class="btn btn-success">Volver al Curso</button>
 		</form>
 		</div>
 	</div>
