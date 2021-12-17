@@ -235,16 +235,16 @@ $cadenaTipo = "";
 								</div>
 								<?php
 							}
-							$contadorRespuestas = $contadorRespuestas.$contadorRespuestaTemp;
+							$contadorRespuestas = $contadorRespuestas.":::".$contadorRespuestaTemp;
 							break;
 						case 'multiple':						
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
-							$contadorRespuestaTemp = 0;
 							$cadenaPreguntas = $cadenaPreguntas.":::".$filas['idpregunta'];  //PREGUNTAS
 							$cadenaRespuestas = $cadenaRespuestas.":::SinRespuesta";
 							$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
+							$contadorRespuestas = $contadorRespuestas.":::1";
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
-								$contadorRespuestaTemp++;
+								
 								$total++;
 								?> 
 								<div class="margen-lateral-texto contenedor alineacion-center">
@@ -255,7 +255,6 @@ $cadenaTipo = "";
 								</div>
 								<?php
 							}
-							$contadorRespuestas = $contadorRespuestas.$contadorRespuestaTemp;
 							break;
 
 						case 'practica':

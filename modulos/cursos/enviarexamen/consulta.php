@@ -128,6 +128,9 @@ if (isset($_REQUEST['cadenaTipo'])) {
 } else {
 	$cadenaTipo  = "no existe";
 }
+$arregloTipo = array(); 
+$arregloTipo = explode(":::", $cadenaTipo); 
+$arregloTipo = array_filter($arregloTipo); 
 
 if (isset($_REQUEST['cadenaPreguntas'])) {
 	$cadenaPreguntas = htmlentities($_REQUEST['cadenaPreguntas']);
@@ -168,7 +171,11 @@ if (isset($_REQUEST['contadorRespuestas'])) {
 	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
 	$contadorRespuestas = "no existe";
-}
+} 
+
+$arregloContadorRespuesta = array(); 
+$arregloContadorRespuesta = explode(":::", $contadorRespuestas ); 
+$arregloContadorRespuesta = array_filter($$arregloContadorRespuesta);
 
 if (isset($_REQUEST['contadorPreguntas'])) {
 	$contadorPreguntas = htmlentities($_REQUEST['contadorPreguntas']);
@@ -213,13 +220,7 @@ if ($resultado == "denegado") {
 	exit;
 }
 
-for ($i=0; $i < $total ; $i++) { 
-	$idpreguntaTemp = $arregloPregunta[$i+1];
-	$idRespuestaTemp = $arregloRespuesta[$i+1];
-	$respuestaTemp = $arregloRespuestasAlumno[$i];
-	$Ocursos->enviarExamen($idexamen,$idpreguntaTemp,$idRespuestaTemp,$respuestaTemp);
-}
-
+$Ocursos->enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo, $contadorPreguntas, $total, $contadorRespuestas, $arregloContadorRespuesta);
 // $filasTotales = mysqli_num_rows($resultadoExamen);
 $filasExamen = mysqli_fetch_array($resultadoExamen);
 $Ocursos->cambiarVisto($filas['iddetalleleccion']);
