@@ -142,11 +142,11 @@ if ($resultado == "denegado") {
 }
 
 // $filasTotales = mysqli_num_rows($resultadoExamen);
-$filasExamen = mysqli_fetch_array($resultadoExamen);
 $Ocursos->cambiarVisto($filas['iddetalleleccion']);
 if ($filas['visto'] == 'NO') {
 	$Ocursos->agregarAvance($filas['valor'], $idavancecurso);
 }
+$filasExamen = mysqli_fetch_array($resultadoExamen);
 $idexamen = $filasExamen['idexamen'];
 $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 
@@ -244,7 +244,6 @@ $cadenaTipo = "";
 							$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
 							$contadorRespuestas = $contadorRespuestas.":::1";
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
-								
 								$total++;
 								?> 
 								<div class="margen-lateral-texto contenedor alineacion-center">
@@ -277,7 +276,7 @@ $cadenaTipo = "";
 		}
 		?>
 		<hr>
-		<h3>Numero de Preguntas: </h3>
+		<h3>Contador Preguntas: </h3>
 		<input type="text" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
 		<h3>Arreglo de Respuestas:</h3>
 		<input type="text" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
@@ -314,28 +313,7 @@ if (mysqli_num_rows($resultado) == 0) {
 }
 ?>
 <!-- 
-
-3392117302226,
-3392117302235,
-3392117302235,
-3392117302235,
-3392117302245,
-3392117302270
-
-null,
-3392117302263,
-3392117302322,
-3392117302359,
-null,
-null
-
-abierta,
-casilla,
-casilla,
-casilla,
-multiple,
-abierta
-
+CADENA PREGUNTAS
 :::3392117302226
 :::3392117302235
 :::3392117302235
@@ -343,6 +321,7 @@ abierta
 :::3392117302245
 :::3392117302270
 
+CADENA RESPUESTAS
 :::SinRespuesta
 :::3392117302263
 :::3392117302322
@@ -350,6 +329,7 @@ abierta
 :::SinRespuesta
 :::SinRespuesta
 
+CADENA TIPO
 :::abierta
 :::casilla
 :::casilla

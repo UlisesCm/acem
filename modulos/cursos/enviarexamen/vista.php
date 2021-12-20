@@ -41,7 +41,7 @@ if (isset($_POST['nombre'])) {
 	$nombre = htmlentities($_POST['nombre']);
 	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
-	$nombre  = "no existe";
+	$nombre  = "";
 }
 
 if (isset($_POST['contador'])) {
@@ -176,7 +176,7 @@ for ($i=1; $i < $total+1; $i++) {
 		<div class="content-wrapper">
 			<!-- Contenido de la cabecera -->
 			<section class="content-header">
-				<h1>Cursos
+				<h1>EXAMEN
 					<small> 
 						<?php echo $nombre ?>
 					</small>
@@ -218,16 +218,16 @@ for ($i=1; $i < $total+1; $i++) {
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
-					<input type="hidden" name="contadorPreguntas" value="<?php echo $contadorPreguntas?>"/>
-					<input type="hidden" name="contadorRespuestas" value="<?php echo $contadorRespuestas?>"/>
+					<input type="text" name="contadorPreguntas" value="<?php echo $contadorPreguntas?>"/>
+					<input type="text" name="contadorRespuestas" value="<?php echo $contadorRespuestas?>"/>
 					<input type="hidden" name="total" value="<?php echo $total?>"/>
 					<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $idcurso?>">
 					<input type="hidden" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
 					<input type="hidden" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
-					<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
+					<input type="text" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
 					<input type="hidden" name="cadenaRespuestasAlumno" id="cadenaRespuestasAlumno" value="<?php echo $cadenaRespuestasAlumno?>">
 					<input type="hidden" name="prueba" id="prueba" value="<?php echo $prueba?>">
-					<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
+					<input type="text" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
 				</form>
 				<div class="box box-info" style="border-color:#68983A">
 					<div class="box-header with-border contenedor alineacion-centro">

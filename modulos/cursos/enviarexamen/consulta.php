@@ -175,7 +175,7 @@ if (isset($_REQUEST['contadorRespuestas'])) {
 
 $arregloContadorRespuesta = array(); 
 $arregloContadorRespuesta = explode(":::", $contadorRespuestas ); 
-$arregloContadorRespuesta = array_filter($$arregloContadorRespuesta);
+$arregloContadorRespuesta = array_filter($arregloContadorRespuesta);
 
 if (isset($_REQUEST['contadorPreguntas'])) {
 	$contadorPreguntas = htmlentities($_REQUEST['contadorPreguntas']);
@@ -186,7 +186,7 @@ if (isset($_REQUEST['contadorPreguntas'])) {
 
 
 if (isset($_REQUEST['cadenaRespuestasAlumno'])) {
-	$cadenaRespuestasAlumno = $_REQUEST['cadenaRespuestasAlumno'];
+	$cadenaRespuestasAlumno = htmlentities($_REQUEST['cadenaRespuestasAlumno']);
 	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
 	$cadenaRespuestasAlumno = "no existe";
@@ -212,34 +212,32 @@ if (isset($_REQUEST['idexamen'])) {
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
 
-// $resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso, $ordenLeccion);
-$resultadoExamen = $Ocursos->mostrarExamen($idcurso);
-
+$resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso, $ordenLeccion);
+// $resultadoExamen = $Ocursos->mostrarExamen($idcurso);
+/* 
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
-}
+} */
 
 $Ocursos->enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo, $contadorPreguntas, $total, $contadorRespuestas, $arregloContadorRespuesta);
 // $filasTotales = mysqli_num_rows($resultadoExamen);
-$filasExamen = mysqli_fetch_array($resultadoExamen);
-$Ocursos->cambiarVisto($filas['iddetalleleccion']);
-if ($filas['visto'] == 'NO') {
+// $filasExamen = mysqli_fetch_array($resultadoExamen);
+// $Ocursos->cambiarVisto($filas['iddetalleleccion']);
+/* if ($filas['visto'] == 'NO') {
 	$Ocursos->agregarAvance($filas['valor'], $idavancecurso);
-}
-$preguntas = $Ocursos->mostrarPreguntas($idexamen);
-
+} */
 
 ?>
 <div class="container ">
 	<div class="carta-cursos margin-top20 margin-bot20">
 		<div class="contenedor justify-content-spacebetween">
 			<h1 class="margen-lateral-texto">
-				<?php echo $filasExamen['nombreExamen'] ?>
+				PRUEBA TEXT H1
 			</h1>
 				<form class="alineacion-centro-texto margen-lateral-texto" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
-					<input type="hidden" name="id" value="<?php echo $filasExamen['idcurso'] ?>" />
-					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
+					<input type="hidden" name="id" value="2"/>
+					<input type="hidden" name="id-avancecurso" value="2" />
 					<button class="btn btn-default"> Volver al Curso</button>
 				</form>
 		</div>
@@ -248,19 +246,19 @@ $preguntas = $Ocursos->mostrarPreguntas($idexamen);
 			Examen enviado, Espera que tu docente evalue el examen y te asigne una calificacion.
 		</h2>
 		<h1>
-			<?php 
-				if (is_array($arregloRespuestasAlumno)) {
-					echo "si es arreglo";
-				} else {
-					echo "no es arreglo";
-				}
-			?>
+				prueba
 		</h1>
 		<h1>
-			<?php echo $cadenaRespuestasAlumno?>
+			<?php echo $arregloContadorRespuesta[1]?>
 		</h1>
 		<h1>
-			<?php echo print_r($arregloRespuestasAlumno)?>
+			<?php echo $arregloContadorRespuesta[2]?>
+		</h1>
+		<h1>
+			<?php echo $arregloContadorRespuesta[3]?>
+		</h1>
+		<h1>
+			<?php echo print_r($arregloContadorRespuesta)?>
 		</h1>
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Volver al Curso</button>

@@ -807,9 +807,9 @@ class Cursos
 		}
 			return "exito";
 	} */
-	function enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo,$contadorPreguntas,$total, $arregloContadorRespuesta)
+	function enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo,$contadorPreguntas,$total, $contadorRespuestas, $arregloContadorRespuesta)
 	{
-		$contadorTotal = 0;
+		$contadorTotal = 1;
 		// DETALLE EXAMEN //////////////////////////////////////////////////////////////////
 		$iddetalleexamen = $this->con->generarClave(2);
 		// $idexamen = "";
@@ -817,31 +817,69 @@ class Cursos
 		$examenpdf = "";
 		$consultaExamen = "INSERT INTO detalleexamenes (iddetalleexamen,idexamen,calificacion,examenpdf) VALUES ('$iddetalleexamen','$idexamen','$calificacion','$examenpdf')";
 		mysqli_query($this->con->conect, $consultaExamen);
-
 		for ($i=0; $i < $contadorPreguntas; $i++) { 
-			$preguntaTemporal = $arregloPregunta[$i+1]; //REVISAR POR QUE SOLO SE VAN A LEER 4 datos
-			$respuestaTemporal = $arregloRespuesta[$i+1]; //REVISAR POR QUE SOLO SE VAN A LEER 4 datos
-			$respuestaAlumnoTemporal = $arregloRespuestasAlumno[$i]; //REVISAR POR QUE SOLO SE VAN A LEER 4 datos
-
 			//Detalle de Preguntas /////////////////////////////////////////////////////////////
+			$calificacionPregunta = $arregloContadorRespuesta[$i+1];
 			$iddetallepregunta = $this->con->generarClave(2);
-			$idpregunta = $preguntaTemporal; 
-			$consultaPregunta = "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacion')";
+			$idpregunta = $arregloPregunta[$contadorTotal]; 
+			$consultaPregunta = "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacionPregunta')";
 			mysqli_query($this->con->conect, $consultaPregunta);
-
-			for ($j=0; $j < $arregloContadorRespuesta[$i]; $j++) {
-				$contadorTotal++; 
+			for ($j=0; $j < 1; $j++) {
 				// DETALLE RESPUESTAS //////////////////////////////////////////////
-				$iddetallerespuesta	="";
+				$iddetallerespuesta	= $this->con->generarClave(2);
 				// $iddetallepregunta = "";
-				$idrespuesta = "";
+				$idrespuesta = $arregloRespuesta[$contadorTotal];
 				$respuesta = $arregloRespuestasAlumno[$contadorTotal];
 				$consultaRespuesta = "INSERT INTO detallerespuestas (iddetallerespuesta,iddetallepregunta,idrespuesta,respuesta ) VALUES ('$iddetallerespuesta','$iddetallepregunta','$idrespuesta','$respuesta')";
 				mysqli_query($this->con->conect, $consultaRespuesta);
+				$contadorTotal++;
 			}
+		
 		}
-		
-
-		
 	}
 }
+
+/* 
+ 	for ($j=0; $j <= 1; $j++) {
+				// DETALLE RESPUESTAS //////////////////////////////////////////////
+				$iddetallerespuesta	= $this->con->generarClave(2);
+				// $iddetallepregunta = "";
+				$idrespuesta = $arregloRespuesta[$contadorTotal];
+				$respuesta = $arregloRespuestasAlumno[$contadorTotal];
+				$consultaRespuesta = "INSERT INTO detallerespuestas (iddetallerespuesta,iddetallepregunta,idrespuesta,respuesta ) VALUES ('$iddetallerespuesta','$iddetallepregunta','$idrespuesta','$respuesta')";
+				mysqli_query($this->con->conect, $consultaRespuesta);
+				
+			}
+*/
+
+/* CADENA PREGUNTAS
+:::3392117302226
+:::3392117302235
+:::3392117302235
+:::3392117302235
+:::3392117302245
+:::3392117302270
+
+CADENA RESPUESTAS
+:::SinRespuesta
+:::3392117302263
+:::3392117302322
+:::3392117302359
+:::SinRespuesta
+:::SinRespuesta
+
+CADENA TIPO
+:::abierta
+:::casilla
+:::casilla
+:::casilla
+:::multiple
+:::abierta 
+
+CONTADOR RESPUESTAS
+:::1
+:::3
+:::1
+:::1
+
+*/
