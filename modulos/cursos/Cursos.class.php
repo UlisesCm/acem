@@ -824,7 +824,8 @@ class Cursos
 			$idpregunta = $arregloPregunta[$contadorTotal]; 
 			$consultaPregunta = "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacionPregunta')";
 			mysqli_query($this->con->conect, $consultaPregunta);
-			for ($j=0; $j < 1; $j++) {
+			// for ($j=0; $j < 1; $j++) {
+			for ($j=0; $j < $arregloContadorRespuesta[$i+1]; $j++) {
 				// DETALLE RESPUESTAS //////////////////////////////////////////////
 				$iddetallerespuesta	= $this->con->generarClave(2);
 				// $iddetallepregunta = "";
@@ -882,4 +883,10 @@ CONTADOR RESPUESTAS
 :::1
 :::1
 
+[1] => 1 
+[2] => 1 
+[3] => 1 
+[4] => 3 
+[5] => 1 
+[6] => 1
 */

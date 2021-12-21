@@ -176,7 +176,13 @@ $cadenaTipo = "";
 			$contadorPreguntas++;
 			?> 
 			<h3 class="margen-lateral-texto">
-				<?php echo $filas['pregunta'] ?>
+				<?php 
+				if ($filas['tipopregunta'] == 'practica') {
+					?> Practica:<?php
+				} else {				
+					echo $filas['pregunta'];
+				}
+				?>
 				<small>
 				 <?php 
 				 switch ($filas['tipopregunta']) {
@@ -257,12 +263,9 @@ $cadenaTipo = "";
 							break;
 
 						case 'practica':
-							$total++;
-							$contadorRespuestas = $contadorRespuestas.":::1";
-							$cadenaPreguntas = $cadenaPreguntas.$filas['idpregunta'];
-							$cadenaRespuestas = $cadenaRespuestas.":::SinRespuesta";
-							$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
-							?><textarea name="" id="" class="form-control" cols="100" rows="4"></textarea><?php
+							?><h4>
+								<?php echo $filas['pregunta']; ?> 
+						</h4><?php 
 							break;
 						
 						default:
@@ -336,4 +339,48 @@ CADENA TIPO
 :::casilla
 :::multiple
 :::abierta
+
+
+:::SinRespuesta
+:::SinRespuesta
+:::SinRespuesta
+:::3542118213718
+:::3542118213860
+:::3542118213867
+:::SinRespuesta
+:::SinRespuesta
+
+:::3542118213711
+:::3542118213735
+:::3542118213740
+:::3542118213762
+:::3542118213762
+:::3542118213762
+:::35421182137813542118213871
+
+:::3542118213711
+:::3542118213735
+:::3542118213740
+:::3542118213762
+:::3542118213762
+:::3542118213762
+:::3542118213781
+:::3542118213871
+
+
+[1] => 12312313 
+[2] => 12313123 
+[3] => multiple 1 
+[4] => verificacion 1 
+[5] => SinSeleccionar 
+[6] => verificacion 2 
+[7] => 123131231
+
+[1] => PREGUNTA 3 
+[2] => PREGUNTA 1 
+[3] => multiple 2 
+[4] => verificacion 1 
+[5] => SinSeleccionar 
+[6] => verificacion 2 
+[7] => PREGUNTA 2
 -->

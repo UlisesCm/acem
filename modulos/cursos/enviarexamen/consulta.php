@@ -233,37 +233,38 @@ $Ocursos->enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloResp
 	<div class="carta-cursos margin-top20 margin-bot20">
 		<div class="contenedor justify-content-spacebetween">
 			<h1 class="margen-lateral-texto">
-				PRUEBA TEXT H1
+				PRUEBA TEXT EXAMEN ENVIADO
 			</h1>
-				<form class="alineacion-centro-texto margen-lateral-texto" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+				<!-- <form class="alineacion-centro-texto margen-lateral-texto" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 					<input type="hidden" name="id" value="2"/>
 					<input type="hidden" name="id-avancecurso" value="2" />
 					<button class="btn btn-default"> Volver al Curso</button>
-				</form>
+				</form> -->	
 		</div>
 		<hr>
-		<h2>
-			Examen enviado, Espera que tu docente evalue el examen y te asigne una calificacion.
+		<h1 class="d-flex centrar-elementos">
+			¡Examen Enviado!
+		</h1>
+		<h2 class="d-flex centrar-elementos">
+			Espera que tu docente evalue el examen y te asigne una calificación.
 		</h2>
-		<h1>
-				prueba
-		</h1>
-		<h1>
-			<?php echo $arregloContadorRespuesta[1]?>
-		</h1>
-		<h1>
-			<?php echo $arregloContadorRespuesta[2]?>
-		</h1>
-		<h1>
-			<?php echo $arregloContadorRespuesta[3]?>
-		</h1>
-		<h1>
+		<h3>
 			<?php echo print_r($arregloContadorRespuesta)?>
-		</h1>
-		<div class="contenedor justify-content-center margen-bot2">
-			<button class="btn btn-success">Volver al Curso</button>
-		</form>
+		</h3>
+		<h3>
+			<?php echo print_r($arregloRespuestasAlumno)?>
+		</h3>
+		<div class="d-flex centrar-elementos">
+				<i class="fa fa-check-circle icono-curso2 text-success"></i>
 		</div>
+		<hr>
+		<form action="../miscursos/vistacursos.php?n1=cursos&n2=miscursos" method="post">
+			<div class="contenedor justify-content-center margen-bot2">
+				<button class="btn btn-default pull-right">
+					Volver a mis Cursos
+				</button>
+			</div>
+		</form>
 	</div>
 
 </div>
@@ -276,9 +277,9 @@ $Ocursos->enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloResp
 <?php
 paginar($pg, $cantidadamostrar, $filasTotales, $campoOrden, $orden, $busqueda, $tipoVista);
 //FIN DEL CODIGO DE PAGINACION
-if (mysqli_num_rows($resultado) == 0) {
+/* if (mysqli_num_rows($resultado) == 0) {
 	include("../../../componentes/mensaje_no_hay_registros.php");
-}
+} */
 ?>
 <!-- 
 
