@@ -89,6 +89,9 @@ class Cursos
 
 					/* GUARDAR LECCION */ ////////////////////////////////////////////////////////////////////////////////////////////////
 					/* FALTA GUARDAR ARCHIVOS */
+					$valorTemp1 = $contadorLecciones+1;
+					$valorTemp2 = 100/$valorTemp1;
+					$valor= ceil($valorTemp2);
 					for ($i = 0; $i <= $contadorLecciones; $i++) {
 						$contenido = "";
 						$orden = 0;
@@ -128,7 +131,7 @@ class Cursos
 						}
 						$orden = $i + 1;
 						if ($contenido != "_eliminado" && $tipo != "_eliminado") {
-							mysqli_query($this->con->conect, "INSERT INTO lecciones (idleccion,tipo,contenido,orden,idcurso) VALUES ('$idleccion','$tipo','$contenido','$orden','$idcurso')");
+							mysqli_query($this->con->conect, "INSERT INTO lecciones (idleccion,tipo,contenido,orden,idcurso,valor) VALUES ('$idleccion','$tipo','$contenido','$orden','$idcurso','$valor')");
 						}
 					}
 
@@ -807,7 +810,7 @@ class Cursos
 		}
 			return "exito";
 	} */
-	function enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo,$contadorPreguntas,$total, $contadorRespuestas, $arregloContadorRespuesta)
+	function enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo,$contadorPreguntas,$total, $contadorRespuestas, $arregloContadorRespuesta, $idavancecurso)
 	{
 		$contadorTotal = 1;
 		// DETALLE EXAMEN //////////////////////////////////////////////////////////////////
@@ -823,7 +826,7 @@ class Cursos
 			$iddetallepregunta = $this->con->generarClave(2);
 			$idpregunta = $arregloPregunta[$contadorTotal]; 
 			$consultaPregunta = "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacionPregunta')";
-			mysqli_query($this->con->conect, $consultaPregunta);
+			mysqli_query($this->con->conect, $consultaPregunta);	
 			// for ($j=0; $j < 1; $j++) {
 			for ($j=0; $j < $arregloContadorRespuesta[$i+1]; $j++) {
 				// DETALLE RESPUESTAS //////////////////////////////////////////////
@@ -835,8 +838,9 @@ class Cursos
 				mysqli_query($this->con->conect, $consultaRespuesta);
 				$contadorTotal++;
 			}
-		
 		}
+		$actualizarAvance = "UPDATE avancecursos SET iddetalleexamen='$iddetalleexamen' WHERE idavancecurso='$idavancecurso'";
+		mysqli_query($this->con->conect, $actualizarAvance);
 	}
 }
 

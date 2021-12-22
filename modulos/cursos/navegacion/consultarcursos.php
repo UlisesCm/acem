@@ -113,6 +113,8 @@ $Ocursos = new Cursos;
 
 $resultado = $Ocursos->navegacionCurso($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso);
 $resultadoExamen = $Ocursos-> mostrarExamen($idcurso);
+$resultadoAvance = $Ocursos-> mostrarIndividualAvance($idavancecurso);
+$filasAvance = mysqli_fetch_array($resultadoAvance);
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
@@ -314,7 +316,13 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 			</h4>
 			<hr class="d-flex centrar-elementos">
 			<div class="d-flex centrar-elementos">
-				<i class="fa fa-archive icono-curso text-success"></i>
+				<?php
+					if ($filasAvance['iddetalleexamen'] == 0) {
+						?> <i class="fa fa-archive icono-curso text-success"></i> <?php
+					} else {
+						?> <i class="fa fa-archive icono-curso text-muted"></i> <?php
+					}?>
+				
 			</div>
 			<hr>
 			<h3 class="d-flex centrar-elementos">
@@ -329,7 +337,15 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 					<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
-					<button class="btn btn-success boton-curso">Presentar</button>
+					<input type="hidden" name="nombre" value="<?php echo $filasAvance['iddetalleexamen']?>"/>
+					<?php
+							if ($filasAvance['iddetalleexamen'] == 0) {
+								?> <button class="btn btn-success boton-curso">Presentar</button> <?php
+							} else {
+								?> <button class="btn btn-default boton-curso " disabled>Examen Enviado</button> <?php
+							}
+						?>
+					
 			</form>
 		</div>
 		<?php

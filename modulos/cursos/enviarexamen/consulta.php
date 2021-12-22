@@ -220,7 +220,7 @@ if ($resultado == "denegado") {
 	exit;
 } */
 
-$Ocursos->enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo, $contadorPreguntas, $total, $contadorRespuestas, $arregloContadorRespuesta);
+$Ocursos->enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo, $contadorPreguntas, $total, $contadorRespuestas, $arregloContadorRespuesta, $idavancecurso);
 // $filasTotales = mysqli_num_rows($resultadoExamen);
 // $filasExamen = mysqli_fetch_array($resultadoExamen);
 // $Ocursos->cambiarVisto($filas['iddetalleleccion']);
@@ -248,12 +248,6 @@ $Ocursos->enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloResp
 		<h2 class="d-flex centrar-elementos">
 			Espera que tu docente evalue el examen y te asigne una calificación.
 		</h2>
-		<h3>
-			<?php echo print_r($arregloContadorRespuesta)?>
-		</h3>
-		<h3>
-			<?php echo print_r($arregloRespuestasAlumno)?>
-		</h3>
 		<div class="d-flex centrar-elementos">
 				<i class="fa fa-check-circle icono-curso2 text-success"></i>
 		</div>
