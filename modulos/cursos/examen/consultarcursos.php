@@ -279,24 +279,24 @@ $cadenaTipo = "";
 		}
 		?>
 		<hr>
-		<h3>Contador Preguntas: </h3>
-		<input type="text" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
-		<h3>Arreglo de Respuestas:</h3>
-		<input type="text" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
-		<h3>Totales: <?php echo $total?></h3>
-		<input type="text" name="total" id="total" value="<?php echo $total?>">
-		<h3>idcurso:</h3>
-		<input type="text" name="idcurso" id="idcurso" value="<?php echo $filasExamen['idcurso']?>">
-		<h3>idexamen:</h3>
-		<input type="text" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
-		<h3>Cadena Preguntas:</h3>
-		<input type="text" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
-		<h3>cadena Respuestas</h3>
-		<input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
-		<h3>cadena Tipo</h3>
-		<input type="text" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
-		<h3>ID avance curso</h3>
-		<input type="text" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>">
+		<!-- <h3>Contador Preguntas: </h3> -->
+		<input type="hidden" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
+		<!-- <h3>Arreglo de Respuestas:</h3> -->
+		<input type="hidden" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
+		<!-- <h3>Totales:</h3> -->
+		<input type="hidden" name="total" id="total" value="<?php echo $total?>">
+		<!-- <h3>idcurso:</h3> -->
+		<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $filasExamen['idcurso']?>">
+		<!-- <h3>idexamen:</h3> -->
+		<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
+		<!-- <h3>Cadena Preguntas:</h3> -->
+		<input type="hidden" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
+		<!-- <h3>cadena Respuestas</h3> -->
+		<input type="hidden" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
+		<!-- <h3>cadena Tipo</h3> -->
+		<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
+		<!-- <h3>ID avance curso</h3> -->
+		<input type="hidden" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>">
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Examen</button>
 		</div>

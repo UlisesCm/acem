@@ -89,7 +89,7 @@ class Cursos
 
 					/* GUARDAR LECCION */ ////////////////////////////////////////////////////////////////////////////////////////////////
 					/* FALTA GUARDAR ARCHIVOS */
-					$valorTemp1 = $contadorLecciones+1;
+					$valorTemp1 = $contadorLecciones;
 					$valorTemp2 = 100/$valorTemp1;
 					$valor= ceil($valorTemp2);
 					for ($i = 0; $i <= $contadorLecciones; $i++) {
@@ -498,6 +498,47 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
+	function mostrarEvaluaciones($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias, $cursosTerminados)
+	{
+		/////PERMISOS////////////////
+		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
+			return "denegado";
+			exit;
+		}
+		$idalumno = $_SESSION['idusuario'];
+
+		$consultarCategoria = "";
+		if ($categorias != "todos") {
+			$consultarCategoria = "AND cursos.categoria='$categorias'";
+		} else {
+			$consultarCategoria = "";
+		}
+
+		if ($cursosTerminados == false) {
+			$consultaTerminados = "AND avancecursos.finalizado = 0";
+		} else {
+			$consultaTerminados = "";
+		}
+
+		$where = "
+			WHERE iddocente='2442121464915'
+			$consultarCategoria
+			$consultaTerminados
+		";
+
+		$consulta = "SELECT * 
+		FROM `avancecursos` 
+		INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso
+		INNER JOIN examenes ON avancecursos.idcurso=examenes.idcurso 
+		$where
+		-- ORDER BY $campoOrden $orden
+		-- LIMIT $inicial, $cantidadamostrar
+		";
+
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, $consulta);
+		}
+	}
 
 
 	function navegacionCurso($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $idcurso)
@@ -768,48 +809,6 @@ class Cursos
 		}
 	}
 
-
-	/* function enviarExamen2($contadorPreguntas, $aPreguntas, $aRespuestas, $idexamen)
-	{
-		for ($i=0; $i < $contadorPreguntas; $i++) {		
-			$temporalRespuesta = $aRespuestas[$i];
-			$temporalPregunta = $aPreguntas[$i]; 
-
-			if ($temporalRespuesta == 'null') {
-				$respuesta = $_POST[$temporalPregunta];
- 			} else {
-				$respuesta = $_POST[$temporalRespuesta];
-			}
-			//Detalle de Examenes
-			$iddetalleexamen = $this->con->generarClave(2);
-			// $idexamen
-			$calificacion = "";
-			$examenpdf = "";
-			$consultaExamen = "INSERT INTO detalleexamenes (iddetalleexamen,idexamen,calificacion,examenpdf) VALUES ('$iddetalleexamen','$idexamen','$calificacion','$examenpdf')";
-			mysqli_query($this->con->conect, $consultaExamen);
-
-			//Detalle de Preguntas ////////////////////////////////
-			$iddetallepregunta = $this->con->generarClave(2);
-			// $detalleexamen
-			$idpregunta= $temporalPregunta; // no hay
-			// $calificacion
-			$consultaPregunta = "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacion')";
-			mysqli_query($this->con->conect, $consultaPregunta);
-
-			//Detalle de Respuestas ///////////////////////////////
-			$iddetallerespuestas = $this->con->generarClave(2);
-			// $iddetallepregunta
-			if ($temporalRespuesta == 'null') {
-				$idrespuesta = "null"; // no hay
-			} else {
-				$idrespuesta = $temporalRespuesta;
-			}
-			// $respuesta
-			$consultaRespuesta = "INSERT INTO detallerepuestas (iddetallerespuesta,iddetallepregunta,idrespuesta,respuesta) VALUES ('$iddetallerespuestas','$iddetallepregunta','$idrespuesta','$respuesta')";
-			mysqli_query($this->con->conect, $consultaRespuesta);
-		}
-			return "exito";
-	} */
 	function enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo,$contadorPreguntas,$total, $contadorRespuestas, $arregloContadorRespuesta, $idavancecurso)
 	{
 		$contadorTotal = 1;
@@ -822,7 +821,7 @@ class Cursos
 		mysqli_query($this->con->conect, $consultaExamen);
 		for ($i=0; $i < $contadorPreguntas; $i++) { 
 			//Detalle de Preguntas /////////////////////////////////////////////////////////////
-			$calificacionPregunta = $arregloContadorRespuesta[$i+1];
+			$calificacionPregunta = 0;
 			$iddetallepregunta = $this->con->generarClave(2);
 			$idpregunta = $arregloPregunta[$contadorTotal]; 
 			$consultaPregunta = "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacionPregunta')";

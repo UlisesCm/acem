@@ -66,6 +66,15 @@ function checarLink($nivel,$base){
                  <?php }?>
 
               	<?php 
+			  	/////PERMISOS////////////////
+			  	if (isset($_SESSION['permisos']['cursos']['consultar'])){
+			  	?>
+                <li class="<?php echo checarLink("n2","evaluar"); ?>">
+                  <a href="../../../modulos/cursos/evaluacion/vistacursos.php?n1=cursos&n2=evaluar"><i class="fa fa-circle-o text-green"></i> Evaluar</i></a>
+                </li>
+                 <?php }?>
+
+              	<?php 
 				/////PERMISOS////////////////
 				if (isset($_SESSION['permisos']['cursos']['guardar'])){
 				?>
