@@ -159,6 +159,13 @@ if (isset($_REQUEST['idcurso'])) {
 	$idcurso = "no existe";
 }
 
+if (isset($_REQUEST['nombreExamen'])) {
+	$nombreExamen = htmlentities($_REQUEST['nombreExamen']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombreExamen = "no existe";
+}
+
 if (isset($_REQUEST['total'])) {
 	$total = htmlentities($_REQUEST['total']);
 	// $busqueda=mysql_real_escape_string($busqueda);
@@ -232,15 +239,15 @@ $Ocursos->enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloResp
 <div class="container ">
 	<div class="carta-cursos margin-top20 margin-bot20">
 		<div class="contenedor justify-content-spacebetween">
-			<h1 class="margen-lateral-texto">
-				PRUEBA TEXT EXAMEN ENVIADO
-			</h1>
 				<!-- <form class="alineacion-centro-texto margen-lateral-texto" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 					<input type="hidden" name="id" value="2"/>
 					<input type="hidden" name="id-avancecurso" value="2" />
 					<button class="btn btn-default"> Volver al Curso</button>
 				</form> -->	
 		</div>
+		<h1 class="d-flex centrar-elementos">
+			<?php echo $nombreExamen?>
+		</h1>
 		<hr>
 		<h1 class="d-flex centrar-elementos">
 			¡Examen Enviado!

@@ -136,38 +136,6 @@ if (isset($_POST['contador'])) {
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
 				</form>
-				<div class="box box-info" style="border-color:#68983A">
-					<div class="box-header with-border contenedor alineacion-centro">
-						<div class="col-sm-2 margen-bot2">
-							<h2><?php echo $nombre ?></h2>
-						</div>
-						<div class="col-sm-7">
-							<div class="progress alineacion-centro-texto">
-								<div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avance ?>%;">
-									<span class="sr-only"><?php echo $avance?>% Complete</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-2">
-							<h4>
-							<?php 
-						if ($avance != 100) {
-							echo $avance?>% de Progreso<?php
-						} else {
-							?>Lecciones Terminadas <?php
-						}
-					?>
-							</h4>
-						</div>
-						<div class="col-sm-1">
-							<form action="../miscursos/vistacursos.php?n1=cursos&n2=miscursos" method="post">
-								<button class="btn btn-default pull-right">
-									Volver a mis Cursos
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#3A6D98">
 					<div class="box-header with-border">

@@ -113,7 +113,7 @@ include("../../seguridad/comprobar_login.php");
                 <!-- HEADER LECCIONES -->
                 <div class="box-header ">
                   <h3 class="box-title">Lecciones</h3>
-                  <input type="text" name="inputContadorLecciones" id="input-contador-lecciones" value="0">
+                  <input type="hidden" name="inputContadorLecciones" id="input-contador-lecciones" value="0">
                   <button type="button" class="btn btn btn-default pull-right" id="mostrarLeccion" onclick="mostrarLecciones()"> Mostrar</button>
                   <button type="button" class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar</button>
                   <button type="button" class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion</button>
@@ -224,8 +224,8 @@ include("../../seguridad/comprobar_login.php");
                 <!-- HEADER EXAMEN -->
                 <div class="box-header">
                   <h3 class="box-title">Examen</h3>
-                  <input type="text" name="inputContadorExamen" id="input-contador-examen" value="0">
-                  <input type="text" name="inputContadorRespuestas" id="input-contador-respuesta" value="0">
+                  <input type="hidden" name="inputContadorExamen" id="input-contador-examen" value="0">
+                  <input type="hidden" name="inputContadorRespuestas" id="input-contador-respuesta" value="0">
                   <button type="button" class="btn btn btn-default pull-right" id="mostrarExamen" onclick="mostrarExamenes()">Mostrar </button>
                   <button type="button" class="btn btn btn-default pull-right" id="ocultarExamen" onclick="ocultarExamenes()">Ocultar </button>
                   <button type="button" class="btn btn-success pull-right margen-right" id="agregar-pregunta">Agregar Pregunta</button>

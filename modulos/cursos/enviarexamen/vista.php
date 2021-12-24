@@ -79,6 +79,13 @@ if (isset($_POST['idexamen'])) {
 	$idexamen = 0;
 }
 
+if (isset($_POST['nombreExamen'])) {
+	$nombreExamen = htmlentities($_POST['nombreExamen']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombreExamen = 0;
+}
+
 if (isset($_POST['cadenaPreguntas'])) {
 	$cadenaPreguntas = htmlentities($_POST['cadenaPreguntas']);
 	// $busqueda=mysql_real_escape_string($busqueda);
@@ -228,11 +235,12 @@ for ($i=1; $i < $total+1; $i++) {
 					<input type="hidden" name="cadenaRespuestasAlumno" id="cadenaRespuestasAlumno" value="<?php echo $cadenaRespuestasAlumno?>">
 					<input type="hidden" name="prueba" id="prueba" value="<?php echo $prueba?>">
 					<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
+					<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>">
 				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#3A6D98">
 					<div class="box-header with-border">
-						<h3 class="box-title">Navegacion Examen</h3>
+						<h3 class="box-title">Examen</h3>
 						
 					</div><!-- /.box-header -->
 					<div id="muestra_contenido_ajax" style="min-height:100px;">

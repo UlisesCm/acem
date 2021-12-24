@@ -297,6 +297,7 @@ $cadenaTipo = "";
 		<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
 		<!-- <h3>ID avance curso</h3> -->
 		<input type="hidden" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>">
+		<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $filasExamen['nombreExamen']?>">
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Examen</button>
 		</div>
