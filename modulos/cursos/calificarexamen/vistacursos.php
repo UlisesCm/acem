@@ -1,6 +1,55 @@
 <?php
 ///MIS CURSOS////////////////////////
 include("../../seguridad/comprobar_login.php");
+require("../Cursos.class.php");
+
+if (isset($_POST['id-detalleleccion'])) {
+	$iddetalleleccion = htmlentities($_POST['id-detalleleccion']);
+} else {
+	$iddetalleleccion = 'no existe';
+}
+
+if (isset($_POST['orden'])) {
+	$ordenLeccion = htmlentities($_POST['orden']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$ordenLeccion = "no existe";
+}
+
+if (isset($_POST['id'])) {
+	$idcurso = htmlentities($_POST['id']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$idcurso = "no existe";
+}
+
+if (isset($_POST['id-avancecurso'])) {
+	$idavancecurso = htmlentities($_POST['id-avancecurso']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$idavancecurso = "no existe";
+}
+
+if (isset($_POST['avance'])) {
+	$avance = htmlentities($_POST['avance']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$avance = "no existe";
+}
+
+if (isset($_POST['nombre'])) {
+	$nombre = htmlentities($_POST['nombre']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombre  = "no existe";
+}
+
+if (isset($_POST['contador'])) {
+	$contador = htmlentities($_POST['contador']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$contador = 0;
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,11 +92,14 @@ include("../../seguridad/comprobar_login.php");
 		<div class="content-wrapper">
 			<!-- Contenido de la cabecera -->
 			<section class="content-header">
-				<h1>Cursos<small> Consulta</small>
+				<h1>Cursos
+					<small> 
+						<?php echo $nombre ?>
+					</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="../../inicio/inicio/inicio.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
-					<li><a href="#">Evaluar</a></li>
+					<li><a href="#">Consultar cursos</a></li>
 				</ol>
 			</section>
 
@@ -74,63 +126,21 @@ include("../../seguridad/comprobar_login.php");
 				<?php $herramientas = "consultar";
 				include("../componentes/herramientas.php"); ?>
 				<?php include("../../../componentes/avisos.php"); ?>
-
-				<!-- FILTRO -->
-				<!-- HEADER FILTRO -->
-				<div class="box box-info" style="border-color:#13A44D">
-					<div class="box-header with-border">
-						<h3 class="box-title col-sm-10">
-							<i class="fa fa-filter text-green"></i>
-							Filtrar Resultados
-						</h3>
-						<div class="col-sm-2">
-							<button class="botonMostrarFiltro none btn btn-default pull-right" id="botonMenuFiltro">
-								<div id="mostrarFiltro">
-									Mostrar Filtro
-									<i class="fa fa-angle-down" id="flechaAbajo"></i>
-								</div>
-							</button>
-							<button class="botonOcultarFiltro btn btn-default pull-right" id="botonMenuFiltro">
-								<div id="mostrarFiltro">
-									Ocultar Filtro
-									<i class="fa fa-angle-up" id="flechaArriba"></i>
-								</div>
-							</button>
-						</div>
-					</div>
-					<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
-						<div class="box-body">
-							<div class="row" style="padding-left:20px; padding-right:20px; padding-bottom:0px; margin-bottom:0px;">
-								<div class="form-group ">
-									<label for="selectidcategoria_ajax" class="col-sm-1 control-label"> Categoria:</label>
-									<div class="col-sm-2">
-										<select id="idcategoria_ajax" name="id-categorias-select" class="form-control">
-											<option value="todos">Todos mis Cursos</option>
-											<option value="informatica">Informatica</option>
-											<option value="logistica">Logistica</option>
-											<option value="inventarios">Inventarios</option>
-										</select>
-									</div>
-									<label for="inputcurso_ajax" class="col-sm-2 control-label">Mostra Cursos terminados:</label>
-									<div class="checkbox col-sm-1">
-										<!-- <input type="text" class="form-control" id="idcurso_ajax" name="id-cursos-input"> -->
-										<input type="checkbox" name="cursosTerminados" id="cursos-terminados">
-									</div>
-									<div class='col-sm-2 pull-right' style="margin-right: 30px;">
-										<div class="form-group">
-											<label for="cempresa">&nbsp;</label>
-											<button type="button" class="btn btn-success pull-right form-control" id="botonFiltrar"><i class="fa fa-filter"></i>&nbsp;&nbsp;&nbsp;Filtrar</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
+				
+				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
+					<input type="hidden" name="id-detalleleccion" id="idleccion" value="<?php echo $iddetalleleccion?>">
+					<input type="text" name="id" id="id" value="<?php echo $idcurso?>">
+					<input type="hidden" name="orden" id="orden" value="<?php echo $ordenLeccion?>">
+					<input type="hidden" name="contador" id="contador" value="<?php echo $contador?>">
+					<input type="text" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
+					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
+					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
+				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#3A6D98">
 					<div class="box-header with-border">
-						<h3 class="box-title">Evaluar</h3>
+						<h3 class="box-title">Navegacion Examen</h3>
+						
 					</div><!-- /.box-header -->
 					<div id="muestra_contenido_ajax" style="min-height:100px;">
 					</div><!-- /din contenido ajax -->

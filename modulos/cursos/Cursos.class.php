@@ -382,6 +382,7 @@ class Cursos
 		}
 	}
 
+	
 	function mostrarPreguntas($idexamen)
 	{
 		if ($this->con->conectar() == true) {
@@ -389,10 +390,30 @@ class Cursos
 		}
 	}
 
+	function mostrarPreguntas2($idpregunta)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM preguntas WHERE idpregunta = '$idpregunta'");
+		}
+	}
+	function mostrarDetallePreguntas($iddetalleexamen )
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM detallepreguntas WHERE iddetalleexamen  = '$iddetalleexamen '");
+		}
+	}
+
 	function mostrarRespuestas($idpregunta)
 	{
 		if ($this->con->conectar() == true) {
 			return mysqli_query($this->con->conect, "SELECT * FROM respuestas WHERE idpregunta = '$idpregunta'");
+		}
+	}
+
+	function mostrarDetalleRespuestas($iddetallepregunta)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM detallerespuestas WHERE iddetallepregunta = '$iddetallepregunta'");
 		}
 	}
 
