@@ -233,10 +233,12 @@ $cadenaTipo = "";
 								$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
 								$contadorRespuestaTemp++
 								?>
-								<div class="margen-lateral-texto contenedor alineacion-center">
-									<p class="margin-right">
-										<?php echo $filasRespuestas['respuesta']?>
-									</p>
+								<div class="margen-lateral-texto contenedor alineacion-center ">
+									<div class="col-md-3">
+										<p class="margin-right">
+											<?php echo $filasRespuestas['respuesta']?>
+										</p>
+									</div>
 									<input type="checkbox" name="<?php echo $filasRespuestas['idrespuesta']?>" id="<?php echo $filasRespuestas['idrespuesta']?>" value="<?php echo $filasRespuestas['respuesta']?>">
 								</div>
 								<?php
@@ -252,10 +254,13 @@ $cadenaTipo = "";
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
 								$total++;
 								?> 
-								<div class="margen-lateral-texto contenedor alineacion-center">
-									<p class="margin-right">
-										<?php echo $filasRespuestas['respuesta']?>
-									</p>
+								<div class="margen-lateral-texto contenedor alineacion-center row">
+									<div class="col-md-3">
+										<p class="margin-right">
+											<?php echo $filasRespuestas['respuesta']?>
+										</p>
+									</div>
+									
 									<input type="radio"  class="margin-negativo-bot" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>" value="<?php echo $filasRespuestas['respuesta']?>">
 								</div>
 								<?php

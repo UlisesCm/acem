@@ -89,7 +89,7 @@ class Cursos
 
 					/* GUARDAR LECCION */ ////////////////////////////////////////////////////////////////////////////////////////////////
 					/* FALTA GUARDAR ARCHIVOS */
-					$valorTemp1 = $contadorLecciones;
+					$valorTemp1 = $contadorLecciones+1;
 					$valorTemp2 = 100/$valorTemp1;
 					$valor= ceil($valorTemp2);
 					for ($i = 0; $i <= $contadorLecciones; $i++) {
@@ -838,6 +838,7 @@ class Cursos
 		// $idexamen = "";
 		$calificacion = 0;
 		$examenpdf = "";
+		$fechafin = date('d-m-Y'); 
 		$consultaExamen = "INSERT INTO detalleexamenes (iddetalleexamen,idexamen,calificacion,examenpdf) VALUES ('$iddetalleexamen','$idexamen','$calificacion','$examenpdf')";
 		mysqli_query($this->con->conect, $consultaExamen);
 		for ($i=0; $i < $contadorPreguntas; $i++) { 
@@ -847,7 +848,7 @@ class Cursos
 			$idpregunta = $arregloPregunta[$contadorTotal]; 
 			$consultaPregunta = "INSERT INTO detallepreguntas (iddetallepregunta,iddetalleexamen,idpregunta,calificacion ) VALUES ('$iddetallepregunta','$iddetalleexamen','$idpregunta','$calificacionPregunta')";
 			mysqli_query($this->con->conect, $consultaPregunta);	
-			// for ($j=0; $j < 1; $j++) {
+
 			for ($j=0; $j < $arregloContadorRespuesta[$i+1]; $j++) {
 				// DETALLE RESPUESTAS //////////////////////////////////////////////
 				$iddetallerespuesta	= $this->con->generarClave(2);
@@ -859,7 +860,7 @@ class Cursos
 				$contadorTotal++;
 			}
 		}
-		$actualizarAvance = "UPDATE avancecursos SET iddetalleexamen='$iddetalleexamen' WHERE idavancecurso='$idavancecurso'";
+		$actualizarAvance = "UPDATE avancecursos SET iddetalleexamen='$iddetalleexamen', fechafin='$fechafin' WHERE idavancecurso='$idavancecurso'";
 		mysqli_query($this->con->conect, $actualizarAvance);
 	}
 }

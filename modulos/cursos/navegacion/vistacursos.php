@@ -123,7 +123,7 @@ if (isset($_POST['id-avancecurso'])) {
 						<div class="col-sm-2">
 							<h4>
 							<?php 
-						if ($avance != 100) {
+						if ($avance < 100) {
 							echo $avance?>% de Progreso<?php
 						} else {
 							?>Lecciones Terminadas <?php

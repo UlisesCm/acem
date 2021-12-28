@@ -129,10 +129,10 @@ if (isset($_POST['contador'])) {
 				
 				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
 					<input type="hidden" name="id-detalleleccion" id="idleccion" value="<?php echo $iddetalleleccion?>">
-					<input type="text" name="id" id="id" value="<?php echo $idcurso?>">
+					<input type="hidden" name="id" id="id" value="<?php echo $idcurso?>">
 					<input type="hidden" name="orden" id="orden" value="<?php echo $ordenLeccion?>">
 					<input type="hidden" name="contador" id="contador" value="<?php echo $contador?>">
-					<input type="text" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
+					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
 				</form>
