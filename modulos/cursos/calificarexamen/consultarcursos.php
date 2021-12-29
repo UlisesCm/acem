@@ -164,15 +164,59 @@ $resultado = $Ocursos->mostrarDetallePreguntas($iddetalleexamen);
 				<div class="margen-lateral-texto">
 					<h1> 
 						<?php echo $filaPregunta['pregunta'] ?>
-						<small><?php echo $filaPregunta['valor']?> puntos</small>
+						<small><?php echo $filaPregunta['tipopregunta']." - ".$filaPregunta['valor']?> puntos</small>
 					</h1>
-					<textarea class="form-control" name="" id="" cols="100" rows="3"><?php echo $filaRespuesta['respuesta']?></textarea>
+					<?php 
+					switch ($filaPregunta['tipopregunta']) {
+						case 'abierta':
+							?><textarea class="form-control" name="" id="" cols="100" rows="3"><?php echo $filaRespuesta['respuesta']?></textarea><?php
+							break;
+						case 'casilla'://checkboxk
+							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
+							while ($filasRespuestas = mysqli_fetch_array($respuestas)) {
+								?>
+								<div class="margen-lateral-texto contenedor alineacion-center ">
+									<div class="col-md-3">
+										<p class="margin-right">
+											<?php echo $filasRespuestas['respuesta']?>
+										</p>
+									</div>
+									<input type="checkbox" name="<?php echo $filasRespuestas['idrespuesta']?>" id="<?php echo $filasRespuestas['idrespuesta']?>" value="<?php echo $filasRespuestas['respuesta']?>">
+								</div>
+								<?php
+							}
+							break;
+						case 'multiple'://radio
+							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
+							while ($filasRespuestas = mysqli_fetch_array($respuestas)) {
+								?>
+								<div class="margen-lateral-texto contenedor alineacion-center ">
+									<div class="col-md-3">
+										<p class="margin-right">
+											<?php echo $filasRespuestas['respuesta']?>
+										</p>
+									</div>
+									<input type="radio" name="<?php echo $filasRespuestas['idrespuesta']?>" id="<?php echo $filasRespuestas['idrespuesta']?>" value="<?php echo $filasRespuestas['respuesta']?>">
+								</div>
+								<?php
+							}
+							break;
+
+						case 'practica':
+							
+							break;
+						
+						default:
+							# code...
+							break;
+					}					
+					?>
 				</div>
+				<hr>
 				<?php
 				
 			}	
 			?>
-		<hr>
 		<input type="hidden" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
 		<input type="hidden" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
 		<input type="hidden" name="total" id="total" value="<?php echo $total?>">

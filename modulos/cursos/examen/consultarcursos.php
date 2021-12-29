@@ -268,6 +268,10 @@ $cadenaTipo = "";
 							break;
 
 						case 'practica':
+							$cadenaPreguntas = $cadenaPreguntas.":::".$filas['idpregunta'];
+							$cadenaRespuestas = $cadenaRespuestas.":::SinRespuesta";
+							$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
+							$total++;
 							?><h4>
 								<?php echo $filas['pregunta']; ?> 
 						</h4><?php 
@@ -324,71 +328,46 @@ if (mysqli_num_rows($resultado) == 0) {
 }
 ?>
 <!-- 
-CADENA PREGUNTAS
-:::3392117302226
-:::3392117302235
-:::3392117302235
-:::3392117302235
-:::3392117302245
-:::3392117302270
+	6
+PREGUNTAS
+:::3612121514200
+:::3612121514268
+:::3612121514385
+:::3612121514385
+:::3612121514385
+BUG
+:::3612121514200
+:::3612121514268
+:::3612121514327
+:::3612121514385
+:::3612121514385
+:::3612121514385
 
-CADENA RESPUESTAS
-:::SinRespuesta
-:::3392117302263
-:::3392117302322
-:::3392117302359
+RESPUESTAS
 :::SinRespuesta
 :::SinRespuesta
+:::3612121514310
+:::3612121514351
+:::3612121514392
+BUG
+:::SinRespuesta
+:::SinRespuesta
+:::SinRespuesta
+:::3612121514310
+:::3612121514351
+:::3612121514392
 
-CADENA TIPO
-:::abierta
-:::casilla
-:::casilla
-:::casilla
+TIPO
 :::multiple
 :::abierta
-
-
-:::SinRespuesta
-:::SinRespuesta
-:::SinRespuesta
-:::3542118213718
-:::3542118213860
-:::3542118213867
-:::SinRespuesta
-:::SinRespuesta
-
-:::3542118213711
-:::3542118213735
-:::3542118213740
-:::3542118213762
-:::3542118213762
-:::3542118213762
-:::35421182137813542118213871
-
-:::3542118213711
-:::3542118213735
-:::3542118213740
-:::3542118213762
-:::3542118213762
-:::3542118213762
-:::3542118213781
-:::3542118213871
-
-
-[1] => 12312313 
-[2] => 12313123 
-[3] => multiple 1 
-[4] => verificacion 1 
-[5] => SinSeleccionar 
-[6] => verificacion 2 
-[7] => 123131231
-
-[1] => PREGUNTA 3 
-[2] => PREGUNTA 1 
-[3] => multiple 2 
-[4] => verificacion 1 
-[5] => SinSeleccionar 
-[6] => verificacion 2 
-[7] => PREGUNTA 2
+:::casilla
+:::casilla
+:::casilla
+BUG
+:::multiple
+:::abierta
+:::practica
+:::casilla
+:::casilla
+:::casilla
 -->

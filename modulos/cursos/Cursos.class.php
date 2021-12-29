@@ -542,7 +542,7 @@ class Cursos
 		}
 
 		$where = "
-			WHERE iddocente='2442121464915'
+			WHERE iddocente='2482121472328'
 			$consultarCategoria
 			$consultaTerminados
 		";
