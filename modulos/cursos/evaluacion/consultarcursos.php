@@ -204,6 +204,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				<form class="d-flex centrar-elementos margen-bot" action="../calificarexamen/vistacursos.php?n1=cursos&n2=evaluar" method="post">
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
 					<input type="hidden" name="id-avancecurso" value="<?php echo $filas['idavancecurso'] ?>"/>
+					<input type="hidden" name="nombre-examen" value="<?php echo $filas['nombreExamen'] ?>">
 					<button class="btn btn-default boton-curso "> Evaluar Examen </button>
 				</form>
 				

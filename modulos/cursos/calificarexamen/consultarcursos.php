@@ -129,6 +129,13 @@ if (isset($_REQUEST['nombre'])) {
 } else {
 	$nombre  = "no existe";
 }
+
+if (isset($_REQUEST['nombreExamen'])) {
+	$nombreExamen = htmlentities($_REQUEST['nombreExamen']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombreExamen  = "no existe";
+}
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
@@ -138,22 +145,23 @@ $Ocursos = new Cursos;
 $resultadoAvance = $Ocursos->mostrarIndividualAvance($idavancecurso);
 $filasAvance = mysqli_fetch_array($resultadoAvance);
 $iddetalleexamen = $filasAvance['iddetalleexamen'];
-
 $resultado = $Ocursos->mostrarDetallePreguntas($iddetalleexamen);
-
+$resultadoAlumno = $Ocursos->mostrarIndividualAlumno($filasAvance['idalumno']);
+$filasAlumno = mysqli_fetch_array($resultadoAlumno);
+$alumno = $filasAlumno['nombre'];
 ?>
 <div class="container ">
 	<div class="carta-cursos margin-top20 margin-bot20">
 		<div class="contenedor justify-content-spacebetween">
 			<h1 class="margen-lateral-texto">
-				text prueba
+				<?php echo $nombreExamen?>
+				<small>
+					<?php echo $alumno?>
+				</small>
 			</h1>
 		</div>
 		<hr>
 		<form class="margen-5" action="../enviarexamen/vista.php?n1=cursos&n2=nuevocursos" method="post">
-			<h1>
-				test: <?php echo $filasAvance['idavancecurso']?>
-			</h1>
 			<?php 
 			while ($filas = mysqli_fetch_array($resultado)) {
 				$resultadoPregunta2 = $Ocursos->mostrarPreguntas2($filas['idpregunta']);
@@ -169,11 +177,13 @@ $resultado = $Ocursos->mostrarDetallePreguntas($iddetalleexamen);
 					<?php 
 					switch ($filaPregunta['tipopregunta']) {
 						case 'abierta':
-							?><textarea class="form-control" name="" id="" cols="100" rows="3"><?php echo $filaRespuesta['respuesta']?></textarea><?php
+							?><textarea class="form-control" name="" id="" cols="100" rows="3" disabled><?php echo $filaRespuesta['respuesta']?></textarea><?php
 							break;
 						case 'casilla'://checkboxk
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)) {
+								$respuestas2 = $Ocursos->mostrarDetalleRespuestas2($filasRespuestas['idrespuesta']);
+								$filasDetallesRespuestas = mysqli_fetch_array($respuestas2);
 								?>
 								<div class="margen-lateral-texto contenedor alineacion-center ">
 									<div class="col-md-3">
@@ -181,7 +191,18 @@ $resultado = $Ocursos->mostrarDetallePreguntas($iddetalleexamen);
 											<?php echo $filasRespuestas['respuesta']?>
 										</p>
 									</div>
-									<input type="checkbox" name="<?php echo $filasRespuestas['idrespuesta']?>" id="<?php echo $filasRespuestas['idrespuesta']?>" value="<?php echo $filasRespuestas['respuesta']?>">
+									<input 
+										type="checkbox" 
+										name="<?php echo $filasRespuestas['idrespuesta']?>" 
+										id="<?php echo $filasRespuestas['idrespuesta']?>" 
+										value="<?php echo $filasRespuestas['respuesta']?>"
+										<?php 
+											if ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta']) {
+												?> checked <?php
+											}
+										?>
+										disabled
+									>
 								</div>
 								<?php
 							}
@@ -189,6 +210,8 @@ $resultado = $Ocursos->mostrarDetallePreguntas($iddetalleexamen);
 						case 'multiple'://radio
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)) {
+								$respuestas2 = $Ocursos->mostrarDetalleRespuestas2($filasRespuestas['idrespuesta']);
+								$filasDetallesRespuestas = mysqli_fetch_array($respuestas2);
 								?>
 								<div class="margen-lateral-texto contenedor alineacion-center ">
 									<div class="col-md-3">
@@ -196,21 +219,36 @@ $resultado = $Ocursos->mostrarDetallePreguntas($iddetalleexamen);
 											<?php echo $filasRespuestas['respuesta']?>
 										</p>
 									</div>
-									<input type="radio" name="<?php echo $filasRespuestas['idrespuesta']?>" id="<?php echo $filasRespuestas['idrespuesta']?>" value="<?php echo $filasRespuestas['respuesta']?>">
+									<input 
+										type="radio" 
+										name="<?php echo $filasRespuestas['idrespuesta']?>"
+										id="<?php echo $filasRespuestas['idrespuesta']?>"
+										value="<?php echo $filasRespuestas['respuesta']?>"
+										<?php 
+											if ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta']) {
+												?> checked <?php
+											}
+										?>
+										disabled
+									>
 								</div>
 								<?php
 							}
 							break;
 
 						case 'practica':
-							
 							break;
 						
 						default:
-							# code...
 							break;
 					}					
 					?>
+				</div>
+				<div class="margen-lateral-texto contenedor margin-top20 row">
+					<label class="label-alinear2"> Calificacion: </label>
+					<div class="col-md-2">
+						<input type="text" class="form-control" name="<?php echo $filas['idpregunta']?>">
+					</div>
 				</div>
 				<hr>
 				<?php

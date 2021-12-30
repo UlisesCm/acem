@@ -44,6 +44,13 @@ if (isset($_POST['nombre'])) {
 	$nombre  = "no existe";
 }
 
+if (isset($_POST['nombre-examen'])) {
+	$nombreExamen = htmlentities($_POST['nombre-examen']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombreExamen  = "no existe";
+}
+
 if (isset($_POST['contador'])) {
 	$contador = htmlentities($_POST['contador']);
 	// $busqueda=mysql_real_escape_string($busqueda);
@@ -135,6 +142,7 @@ if (isset($_POST['contador'])) {
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
+					<input type="hidden" name="nombreExamen" value="<?php echo $nombreExamen?>"/>
 				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#3A6D98">

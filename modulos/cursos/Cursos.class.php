@@ -354,6 +354,13 @@ class Cursos
 		}
 	}
 
+	function mostrarIndividualAlumno($idusuario)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT nombre FROM usuarios WHERE idusuario='$idusuario'");
+		}
+	}
+
 	function mostrarIndividualAvance($idavancecurso)
 	{
 		if ($this->con->conectar() == true) {
@@ -414,6 +421,13 @@ class Cursos
 	{
 		if ($this->con->conectar() == true) {
 			return mysqli_query($this->con->conect, "SELECT * FROM detallerespuestas WHERE iddetallepregunta = '$iddetallepregunta'");
+		}
+	}
+
+	function mostrarDetalleRespuestas2($idrespuesta)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM detallerespuestas WHERE idrespuesta = '$idrespuesta'");
 		}
 	}
 

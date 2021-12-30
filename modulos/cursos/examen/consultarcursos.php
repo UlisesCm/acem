@@ -248,7 +248,6 @@ $cadenaTipo = "";
 						case 'multiple':						
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
 							$cadenaPreguntas = $cadenaPreguntas.":::".$filas['idpregunta'];  //PREGUNTAS
-							$cadenaRespuestas = $cadenaRespuestas.":::SinRespuesta";
 							$cadenaTipo = $cadenaTipo.":::".$filas['tipopregunta'];
 							$contadorRespuestas = $contadorRespuestas.":::1";
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)){
@@ -260,10 +259,12 @@ $cadenaTipo = "";
 											<?php echo $filasRespuestas['respuesta']?>
 										</p>
 									</div>
-									
 									<input type="radio"  class="margin-negativo-bot" name="<?php echo $filasRespuestas['idpregunta']?>" id="<?php echo $filasRespuestas['idpregunta']?>" value="<?php echo $filasRespuestas['respuesta']?>">
 								</div>
 								<?php
+								if ($filasRespuestas['correcto'] == "on") {
+									$cadenaRespuestas = $cadenaRespuestas.":::".$filasRespuestas['idrespuesta'];
+								}
 							}
 							break;
 
@@ -301,7 +302,7 @@ $cadenaTipo = "";
 		<!-- <h3>Cadena Preguntas:</h3> -->
 		<input type="hidden" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
 		<!-- <h3>cadena Respuestas</h3> -->
-		<input type="hidden" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
+		<input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
 		<!-- <h3>cadena Tipo</h3> -->
 		<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
 		<!-- <h3>ID avance curso</h3> -->
@@ -328,46 +329,17 @@ if (mysqli_num_rows($resultado) == 0) {
 }
 ?>
 <!-- 
-	6
-PREGUNTAS
-:::3612121514200
-:::3612121514268
-:::3612121514385
-:::3612121514385
-:::3612121514385
-BUG
-:::3612121514200
-:::3612121514268
-:::3612121514327
-:::3612121514385
-:::3612121514385
-:::3612121514385
+:::SinRespuesta
+:::3622119461697
+:::3622119461718
+:::3622119461745
+:::SinRespuesta
+:::SinRespuesta
 
-RESPUESTAS
 :::SinRespuesta
+:::3622119461697
+:::3622119461718
+:::3622119461745
+:::3622119461619
 :::SinRespuesta
-:::3612121514310
-:::3612121514351
-:::3612121514392
-BUG
-:::SinRespuesta
-:::SinRespuesta
-:::SinRespuesta
-:::3612121514310
-:::3612121514351
-:::3612121514392
-
-TIPO
-:::multiple
-:::abierta
-:::casilla
-:::casilla
-:::casilla
-BUG
-:::multiple
-:::abierta
-:::practica
-:::casilla
-:::casilla
-:::casilla
 -->
