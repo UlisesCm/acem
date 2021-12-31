@@ -164,6 +164,7 @@ $alumno = $filasAlumno['nombre'];
 		<form class="margen-5" action="../enviarexamen/vista.php?n1=cursos&n2=nuevocursos" method="post">
 			<?php 
 			while ($filas = mysqli_fetch_array($resultado)) {
+				$calificacionTemp = 0;
 				$resultadoPregunta2 = $Ocursos->mostrarPreguntas2($filas['idpregunta']);
 				$filaPregunta = mysqli_fetch_array($resultadoPregunta2);
 				$resultadoRespuesta2 = $Ocursos->mostrarDetalleRespuestas($filas['iddetallepregunta']);
@@ -181,6 +182,9 @@ $alumno = $filasAlumno['nombre'];
 							break;
 						case 'casilla'://checkboxk
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
+							$cantidadRespuestas = mysqli_num_rows($respuestas);
+							$operacion = $filaPregunta['valor']/$cantidadRespuestas;
+							$respuestasTemp = 0;
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)) {
 								$respuestas2 = $Ocursos->mostrarDetalleRespuestas2($filasRespuestas['idrespuesta']);
 								$filasDetallesRespuestas = mysqli_fetch_array($respuestas2);
@@ -205,7 +209,14 @@ $alumno = $filasAlumno['nombre'];
 									>
 								</div>
 								<?php
+								if (($filasRespuestas['correcto'] == "on") && ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta'])) {
+									$respuestasTemp = $respuestasTemp + $operacion;
+								}
+								if (($filasRespuestas['correcto'] == "off") && ($filasRespuestas['respuesta'] != $filasDetallesRespuestas['respuesta'])) {
+									$respuestasTemp = $respuestasTemp + $operacion;
+								}
 							}
+							$calificacionTemp = round($respuestasTemp);
 							break;
 						case 'multiple'://radio
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
@@ -233,6 +244,9 @@ $alumno = $filasAlumno['nombre'];
 									>
 								</div>
 								<?php
+								if (($filasRespuestas['correcto'] == "on") && ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta'])) {
+									$calificacionTemp = $filaPregunta['valor'];
+								}
 							}
 							break;
 
@@ -247,7 +261,12 @@ $alumno = $filasAlumno['nombre'];
 				<div class="margen-lateral-texto contenedor margin-top20 row">
 					<label class="label-alinear2"> Calificacion: </label>
 					<div class="col-md-2">
-						<input type="text" class="form-control" name="<?php echo $filas['idpregunta']?>">
+						<input 
+							type="text" 
+							class="form-control" 
+							name="<?php echo $filas['idpregunta']?>"
+							value="<?php echo $calificacionTemp?>"
+						>
 					</div>
 				</div>
 				<hr>
