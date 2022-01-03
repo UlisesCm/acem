@@ -844,6 +844,7 @@ class Cursos
 		}
 	}
 
+
 	function enviarExamen($idexamen,$arregloPregunta,$arregloRespuesta,$arregloRespuestasAlumno,$arregloTipo,$contadorPreguntas,$total, $contadorRespuestas, $arregloContadorRespuesta, $idavancecurso)
 	{
 		$contadorTotal = 1;
@@ -877,20 +878,20 @@ class Cursos
 		$actualizarAvance = "UPDATE avancecursos SET iddetalleexamen='$iddetalleexamen', fechafin='$fechafin' WHERE idavancecurso='$idavancecurso'";
 		mysqli_query($this->con->conect, $actualizarAvance);
 	}
+
+	function enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas)
+	{
+		for ($i=1; $i <= $contadorCalificaciones ; $i++) { 
+			$calificacion = $arregloCalificacion[$i];
+			$idpregunta = $arregloIdRespuestas[$i];
+			$actualizarCalificacion = "UPDATE detallepreguntas SET calificacion='$calificacion' WHERE idpregunta='$idpregunta'";
+			mysqli_query($this->con->conect, $actualizarCalificacion);
+		}
+	}
+	
 }
 
-/* 
- 	for ($j=0; $j <= 1; $j++) {
-				// DETALLE RESPUESTAS //////////////////////////////////////////////
-				$iddetallerespuesta	= $this->con->generarClave(2);
-				// $iddetallepregunta = "";
-				$idrespuesta = $arregloRespuesta[$contadorTotal];
-				$respuesta = $arregloRespuestasAlumno[$contadorTotal];
-				$consultaRespuesta = "INSERT INTO detallerespuestas (iddetallerespuesta,iddetallepregunta,idrespuesta,respuesta ) VALUES ('$iddetallerespuesta','$iddetallepregunta','$idrespuesta','$respuesta')";
-				mysqli_query($this->con->conect, $consultaRespuesta);
-				
-			}
-*/
+
 
 /* CADENA PREGUNTAS
 :::3392117302226

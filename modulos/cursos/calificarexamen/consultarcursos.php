@@ -148,7 +148,9 @@ $iddetalleexamen = $filasAvance['iddetalleexamen'];
 $resultado = $Ocursos->mostrarDetallePreguntas($iddetalleexamen);
 $resultadoAlumno = $Ocursos->mostrarIndividualAlumno($filasAvance['idalumno']);
 $filasAlumno = mysqli_fetch_array($resultadoAlumno);
+$cadenaCalificaciones = "";
 $alumno = $filasAlumno['nombre'];
+$contadorCalificaciones = 0;
 ?>
 <div class="container ">
 	<div class="carta-cursos margin-top20 margin-bot20">
@@ -161,7 +163,8 @@ $alumno = $filasAlumno['nombre'];
 			</h1>
 		</div>
 		<hr>
-		<form class="margen-5" action="../enviarexamen/vista.php?n1=cursos&n2=nuevocursos" method="post">
+		<!-- <form class="margen-5" action="../enviarexamen/vista.php?n1=cursos&n2=nuevocursos" method="post"> -->
+		<form class="margen-5" action="../enviarcalificacion/vista.php?n1=cursos&n2=evaluar" method="post">
 			<?php 
 			while ($filas = mysqli_fetch_array($resultado)) {
 				$calificacionTemp = 0;
@@ -271,21 +274,15 @@ $alumno = $filasAlumno['nombre'];
 				</div>
 				<hr>
 				<?php
-				
+				$cadenaCalificaciones = $cadenaCalificaciones.":::".$filas['idpregunta'];
+				$contadorCalificaciones++;
 			}	
 			?>
-		<input type="hidden" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
-		<input type="hidden" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
-		<input type="hidden" name="total" id="total" value="<?php echo $total?>">
-		<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $filasExamen['idcurso']?>">
-		<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
-		<input type="hidden" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
-		<input type="hidden" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
-		<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
-		<input type="hidden" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>">
-		<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $filasExamen['nombreExamen']?>">
+		<input type="text" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>"> <!-- SI EXISTE -->
+		<input type="text" name="cadenaCalificacion" id="cadenaCalificacion" value="<?php echo $cadenaCalificaciones?>"> <!-- SI EXISTE -->
+		<input type="text" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>"> <!-- SI EXISTE -->
 		<div class="contenedor justify-content-center margen-bot2">
-			<button class="btn btn-success">Enviar Examen</button>
+			<button class="btn btn-success">Enviar Calificación</button>
 		</div>
 		</form>
 	</div>
@@ -305,71 +302,8 @@ if (mysqli_num_rows($resultado) == 0) {
 }
 ?>
 <!-- 
-CADENA PREGUNTAS
-:::3392117302226
-:::3392117302235
-:::3392117302235
-:::3392117302235
-:::3392117302245
-:::3392117302270
-
-CADENA RESPUESTAS
-:::SinRespuesta
-:::3392117302263
-:::3392117302322
-:::3392117302359
-:::SinRespuesta
-:::SinRespuesta
-
-CADENA TIPO
-:::abierta
-:::casilla
-:::casilla
-:::casilla
-:::multiple
-:::abierta
-
-
-:::SinRespuesta
-:::SinRespuesta
-:::SinRespuesta
-:::3542118213718
-:::3542118213860
-:::3542118213867
-:::SinRespuesta
-:::SinRespuesta
-
-:::3542118213711
-:::3542118213735
-:::3542118213740
-:::3542118213762
-:::3542118213762
-:::3542118213762
-:::35421182137813542118213871
-
-:::3542118213711
-:::3542118213735
-:::3542118213740
-:::3542118213762
-:::3542118213762
-:::3542118213762
-:::3542118213781
-:::3542118213871
-
-
-[1] => 12312313 
-[2] => 12313123 
-[3] => multiple 1 
-[4] => verificacion 1 
-[5] => SinSeleccionar 
-[6] => verificacion 2 
-[7] => 123131231
-
-[1] => PREGUNTA 3 
-[2] => PREGUNTA 1 
-[3] => multiple 2 
-[4] => verificacion 1 
-[5] => SinSeleccionar 
-[6] => verificacion 2 
-[7] => PREGUNTA 2
+:::3622119461631
+:::3622119461659
+:::3622119461723
+:::3622119461638
 -->
