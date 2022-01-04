@@ -163,6 +163,12 @@ for ($i=1; $i <= $contadorCalificaciones; $i++) {
 	$cadenaCalificacion = $cadenaCalificacion.":::".$calificacionTemp;
 }
 
+if (isset($_POST['calificacionMaxima'])) {
+	$calificacionMaxima = htmlentities($_POST['calificacionMaxima']);
+} else {
+	$calificacionMaxima = "no existe";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -205,10 +211,7 @@ for ($i=1; $i <= $contadorCalificaciones; $i++) {
 		<div class="content-wrapper">
 			<!-- Contenido de la cabecera -->
 			<section class="content-header">
-				<h1>EXAMEN
-					<small> 
-						<?php echo $nombre ?>
-					</small>
+				<h1>Examen
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="../../inicio/inicio/inicio.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -258,14 +261,15 @@ for ($i=1; $i <= $contadorCalificaciones; $i++) {
 					<input type="hidden" name="prueba" id="prueba" value="<?php echo $prueba?>">
 					<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
 					<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>">
-					<input type="text" name="cadenaIdRespuestas" id="cadenaIdRespuestas" value="<?php echo $cadenaIdRespuestas?>">
-					<input type="text" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>">
-					<input type="text" name="cadenaCalificacion" id="cadenaCalificacion" value="<?php echo $cadenaCalificacion?>">
+					<input type="hidden" name="cadenaIdRespuestas" id="cadenaIdRespuestas" value="<?php echo $cadenaIdRespuestas?>">
+					<input type="hidden" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>">
+					<input type="hidden" name="cadenaCalificacion" id="cadenaCalificacion" value="<?php echo $cadenaCalificacion?>">
+					<input type="hidden" name="calificacionMaxima" id="calificacionMaxima" value="<?php echo $calificacionMaxima?>">
 				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#3A6D98">
 					<div class="box-header with-border">
-						<h3 class="box-title">Examen</h3>
+						<h3 class="box-title">Examen Enviado</h3>
 						
 					</div><!-- /.box-header -->
 					<div id="muestra_contenido_ajax" style="min-height:100px;">

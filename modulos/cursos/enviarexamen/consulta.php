@@ -166,6 +166,13 @@ if (isset($_REQUEST['nombreExamen'])) {
 	$nombreExamen = "no existe";
 }
 
+if (isset($_REQUEST['calificacionMaxima'])) {
+	$calificacionMaxima = htmlentities($_REQUEST['calificacionMaxima']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$calificacionMaxima = "no existe";
+}
+
 if (isset($_REQUEST['total'])) {
 	$total = htmlentities($_REQUEST['total']);
 	// $busqueda=mysql_real_escape_string($busqueda);

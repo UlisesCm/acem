@@ -836,7 +836,7 @@ class Cursos
 			WHERE avancecursos.idavancecurso = '$idavancecurso'
 		";
 
-		$consulta = "SELECT avance FROM avancecursos
+		$consulta = "SELECT avance,iddetalleexamen FROM avancecursos
 		$where
 		";
 		if ($this->con->conectar() == true) {
@@ -879,14 +879,20 @@ class Cursos
 		mysqli_query($this->con->conect, $actualizarAvance);
 	}
 
-	function enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas)
+	function enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas, $calificacionMaxima ,$iddetalleexamen)
 	{
+		$sumaCalificacion = 0;
 		for ($i=1; $i <= $contadorCalificaciones ; $i++) { 
 			$calificacion = $arregloCalificacion[$i];
 			$idpregunta = $arregloIdRespuestas[$i];
 			$actualizarCalificacion = "UPDATE detallepreguntas SET calificacion='$calificacion' WHERE idpregunta='$idpregunta'";
 			mysqli_query($this->con->conect, $actualizarCalificacion);
+			$sumaCalificacion = $sumaCalificacion + $calificacion;
 		}
+		$calculoCalificacion = round(($sumaCalificacion/$calificacionMaxima)*100);
+		$actualizarDetalleExamenes = "UPDATE detalleexamenes SET calificacion='$calculoCalificacion' WHERE iddetalleexamen='$iddetalleexamen'";
+		mysqli_query($this->con->conect, $actualizarDetalleExamenes);
+		return $calculoCalificacion;
 	}
 	
 }

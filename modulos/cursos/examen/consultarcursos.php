@@ -163,14 +163,14 @@ $cadenaTipo = "";
 			<h1 class="margen-lateral-texto">
 				<?php echo $filasExamen['nombreExamen'] ?>
 			</h1>
-				<form class="alineacion-centro-texto margen-lateral-texto" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+				<form class="alineacion-centro-texto margen-lateral-texto" action="../navegacion/vistacursos.php?n1=cursos&n2=miscursos" method="post">
 					<input type="hidden" name="id" value="<?php echo $filasExamen['idcurso'] ?>" />
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
 					<button class="btn btn-default"> Volver al Curso </button>
 				</form>
 		</div>
 		<hr>
-		<form class="margen-5" action="../enviarexamen/vista.php?n1=cursos&n2=nuevocursos" method="post">
+		<form class="margen-5" action="../enviarexamen/vista.php?n1=cursos&n2=miscursos" method="post">
 		<?php
 		while ($filas = mysqli_fetch_array($preguntas)) {
 			$contadorPreguntas++;
@@ -302,7 +302,7 @@ $cadenaTipo = "";
 		<!-- <h3>Cadena Preguntas:</h3> -->
 		<input type="hidden" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
 		<!-- <h3>cadena Respuestas</h3> -->
-		<input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
+		<input type="hidden" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
 		<!-- <h3>cadena Tipo</h3> -->
 		<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
 		<!-- <h3>ID avance curso</h3> -->

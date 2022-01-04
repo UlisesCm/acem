@@ -165,7 +165,8 @@ $contadorCalificaciones = 0;
 		<hr>
 		<!-- <form class="margen-5" action="../enviarexamen/vista.php?n1=cursos&n2=nuevocursos" method="post"> -->
 		<form class="margen-5" action="../enviarcalificacion/vista.php?n1=cursos&n2=evaluar" method="post">
-			<?php 
+			<?php
+			$calificacionMaxima = 0; 
 			while ($filas = mysqli_fetch_array($resultado)) {
 				$calificacionTemp = 0;
 				$resultadoPregunta2 = $Ocursos->mostrarPreguntas2($filas['idpregunta']);
@@ -276,11 +277,13 @@ $contadorCalificaciones = 0;
 				<?php
 				$cadenaCalificaciones = $cadenaCalificaciones.":::".$filas['idpregunta'];
 				$contadorCalificaciones++;
+				$calificacionMaxima = $calificacionMaxima + $filaPregunta['valor'];
 			}	
 			?>
-		<input type="text" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>"> <!-- SI EXISTE -->
-		<input type="text" name="cadenaCalificacion" id="cadenaCalificacion" value="<?php echo $cadenaCalificaciones?>"> <!-- SI EXISTE -->
-		<input type="text" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="cadenaCalificacion" id="cadenaCalificacion" value="<?php echo $cadenaCalificaciones?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="calificacionMaxima" id="calificacionMaxima" value="<?php echo $calificacionMaxima?>"> <!-- SI EXISTE -->
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Calificación</button>
 		</div>

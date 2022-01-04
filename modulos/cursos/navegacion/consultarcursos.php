@@ -172,7 +172,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 						/////PERMISOS////////////////
 						if (isset($_SESSION['permisos']['cursos']['modificar'])) {
 						?>
-							<form action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+							<form action="../navegacion/vistacursos.php?n1=cursos&n2=miscursos" method="post">
 								<input type="hidden" name="id" value="<?php echo $filas['iddetalleleccion'] ?>" />
 								<?php 
 								if ($filas['visto'] === "NO") {
@@ -290,7 +290,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				</h3>
 
 				
-				<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+				<form class="d-flex centrar-elementos margen-bot" action="../leccion/vistacursos.php?n1=cursos&n2=miscursos" method="post">
 					<input type="hidden" name="contador" value="<?php echo $filasTotales?>"/>
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso']?>"/>
 					<input type="hidden" name="orden" value="<?php echo $filas['orden']?>"/>
@@ -321,15 +321,13 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 						?> <i class="fa fa-archive icono-curso text-success"></i> <?php
 					} else {
 						?> <i class="fa fa-archive icono-curso text-muted"></i> <?php
-					}?>
-				
+					}?>				
 			</div>
 			<hr>
 			<h3 class="d-flex centrar-elementos">
-				<?php echo $filasExamen['nombreExamen']?>	
-				
+				<?php echo $filasExamen['nombreExamen']?>				
 			</h3>
-			<form class="d-flex centrar-elementos margen-bot" action="../examen/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+			<form class="d-flex centrar-elementos margen-bot" action="../examen/vistacursos.php?n1=cursos&n2=miscursos" method="post">
 					<input type="hidden" name="contador" value="<?php echo $filasTotales?>"/>
 					<input type="hidden" name="id" value="<?php echo $filasExamen['idcurso']?>"/>
 					<input type="hidden" name="orden" value="<?php echo $filas['orden']?>"/>
@@ -342,7 +340,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 							if ($filasAvance['iddetalleexamen'] == 0) {
 								?> <button class="btn btn-success boton-curso">Presentar</button> <?php
 							} else {
-								?> <button class="btn btn-default boton-curso " disabled>Examen Enviado</button> <?php
+								?> <button class="btn btn-default boton-curso" disabled>Examen Enviado</button> <?php
 							}
 						?>
 					

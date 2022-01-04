@@ -86,6 +86,13 @@ if (isset($_POST['nombreExamen'])) {
 	$nombreExamen = 0;
 }
 
+if (isset($_POST['calificacionMaxima'])) {
+	$calificacionMaxima = htmlentities($_POST['calificacionMaxima']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$calificacionMaxima = 0;
+}
+
 if (isset($_POST['cadenaPreguntas'])) {
 	$cadenaPreguntas = htmlentities($_POST['cadenaPreguntas']);
 	// $busqueda=mysql_real_escape_string($busqueda);
@@ -236,6 +243,7 @@ for ($i=1; $i < $total+1; $i++) {
 					<input type="hidden" name="prueba" id="prueba" value="<?php echo $prueba?>">
 					<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
 					<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>">
+					<input type="hidden" name="calificacionMaxima" id="calificacionMaxima" value="<?php echo $calificacionMaxima?>">
 				</form>
 				<!-- box -->
 				<div class="box box-info" style="border-color:#3A6D98">

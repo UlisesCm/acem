@@ -206,7 +206,7 @@ $filaAvance = mysqli_fetch_array($avanceActualizado);
 		<hr>
 		<div class="contenedor justify-content-center margen-bot2">
 
-			<form class="margen-5" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+			<form class="margen-5" action="../leccion/vistacursos.php?n1=cursos&n2=miscursos" method="post">
 				<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>" />
 				<input type="hidden" name="orden" value="<?php echo $filas['orden'] - 1 ?>" />
 				<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion'] ?>" />
@@ -222,7 +222,7 @@ $filaAvance = mysqli_fetch_array($avanceActualizado);
 				}	?>
 			</form>
 
-			<form class="margen-5" action="../leccion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
+			<form class="margen-5" action="../leccion/vistacursos.php?n1=cursos&n2=miscursos" method="post">
 				<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>" />
 				<input type="hidden" name="orden" value="<?php echo $filas['orden'] + 1 ?>" />
 				<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion'] ?>" />

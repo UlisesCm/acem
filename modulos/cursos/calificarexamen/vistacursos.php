@@ -99,9 +99,9 @@ if (isset($_POST['contador'])) {
 		<div class="content-wrapper">
 			<!-- Contenido de la cabecera -->
 			<section class="content-header">
-				<h1>Cursos
+				<h1>Examen
 					<small> 
-						<?php echo $nombre ?>
+						Calificar
 					</small>
 				</h1>
 				<ol class="breadcrumb">

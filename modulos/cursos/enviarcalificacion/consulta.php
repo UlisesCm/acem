@@ -239,6 +239,12 @@ $arregloCalificacion = array();
 $arregloCalificacion = explode(":::",$cadenaCalificacion); 
 $arregloCalificacion = array_filter($arregloCalificacion);
 
+if (isset($_REQUEST['calificacionMaxima'])) {
+	$calificacionMaxima = htmlentities($_REQUEST['calificacionMaxima']);
+} else {
+	$calificacionMaxima = 0;
+}
+
 
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
@@ -246,7 +252,10 @@ $Ocursos = new Cursos;
 
 $resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $idcurso, $ordenLeccion);
 // $Ocursos->enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas);
-	$Ocursos->enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas);
+$resultadoAvance = $Ocursos->mostrarAvance($idavancecurso);
+$filas = mysqli_fetch_array($resultadoAvance);
+$iddetalleexamen = $filas['iddetalleexamen'];
+$calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas, $calificacionMaxima, $iddetalleexamen);
 
 ?>
 <div class="container ">
@@ -255,23 +264,20 @@ $resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadam
 			¡Examen Calificado!
 		</h1>
 		<hr>
-		<!-- <h1 class="d-flex centrar-elementos">
-		</h1> -->
 		<h2 class="d-flex centrar-elementos">
-			La calificacion fue enviada a la plataforma.
+			El Total fue de: <strong>&nbsp<?php echo $calificacionFinal?> puntos.</strong>
 		</h2>
-		<h3><?php echo $arregloCalificacion[1]." - ".$arregloIdRespuestas[1]?></h3>
-		<h3><?php echo $arregloCalificacion[2]." - ".$arregloIdRespuestas[2]?></h3>
-		<h3><?php echo $arregloCalificacion[3]." - ".$arregloIdRespuestas[3]?></h3>
-		<h3><?php echo $arregloCalificacion[4]." - ".$arregloIdRespuestas[4]?></h3>
+		<h2 class="d-flex centrar-elementos">
+			La Calificación fue enviada a la plataforma.
+		</h2>
 		<div class="d-flex centrar-elementos">
 				<i class="fa fa-check-circle icono-curso2 text-success"></i>
 		</div>
 		<hr>
-		<form action="../miscursos/vistacursos.php?n1=cursos&n2=miscursos" method="post">
+		<form action="../evaluacion/vistacursos.php?n1=cursos&n2=evaluar" method="post">
 			<div class="contenedor justify-content-center margen-bot2">
 				<button class="btn btn-default pull-right">
-					Volver a mis Cursos
+					Volver a Evaluaciones
 				</button>
 			</div>
 		</form>
