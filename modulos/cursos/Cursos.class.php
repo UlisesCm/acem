@@ -555,10 +555,13 @@ class Cursos
 			$consultaTerminados = "";
 		}
 
+		$examenEnviado = "AND avancecursos.iddetalleexamen <> 0";
+
 		$where = "
 			WHERE iddocente='2482121472328'
 			$consultarCategoria
 			$consultaTerminados
+			$examenEnviado
 		";
 
 		$consulta = "SELECT * 
@@ -566,8 +569,6 @@ class Cursos
 		INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso
 		INNER JOIN examenes ON avancecursos.idcurso=examenes.idcurso 
 		$where
-		-- ORDER BY $campoOrden $orden
-		-- LIMIT $inicial, $cantidadamostrar
 		";
 
 		if ($this->con->conectar() == true) {
@@ -868,8 +869,18 @@ class Cursos
 				// DETALLE RESPUESTAS //////////////////////////////////////////////
 				$iddetallerespuesta	= $this->con->generarClave(2);
 				// $iddetallepregunta = "";
-				$idrespuesta = $arregloRespuesta[$contadorTotal];
+				// $idrespuesta = $arregloRespuesta[$contadorTotal];
 				$respuesta = $arregloRespuestasAlumno[$contadorTotal];
+
+				if ($arregloTipo[$contadorTotal] == "multiple") {
+					$idpreguntaTemp = $arregloPregunta[$contadorTotal];
+					$consultaRadio = "SELECT idrespuesta FROM respuestas WHERE idpregunta = '$idpreguntaTemp' AND respuesta = '$respuesta'";
+					$peticionRadio = mysqli_query($this->con->conect, $consultaRadio);
+					$filasRadio = mysqli_fetch_array($peticionRadio);
+					$idrespuesta = $filasRadio['idrespuesta'];
+				} else {
+					$idrespuesta = $arregloRespuesta[$contadorTotal];
+				}
 				$consultaRespuesta = "INSERT INTO detallerespuestas (iddetallerespuesta,iddetallepregunta,idrespuesta,respuesta ) VALUES ('$iddetallerespuesta','$iddetallepregunta','$idrespuesta','$respuesta')";
 				mysqli_query($this->con->conect, $consultaRespuesta);
 				$contadorTotal++;
@@ -935,4 +946,16 @@ CONTADOR RESPUESTAS
 [4] => 3 
 [5] => 1 
 [6] => 1
+:::casilla:::casilla:::casilla:::casilla:::casilla:::multiple:::abierta:::practica
+
+
+:::42218291135 -1
+:::42218291135
+:::42218291135
+:::42218291135
+:::42218291135
+
+:::42218291136
+:::42218291165
+:::42218291268
 */

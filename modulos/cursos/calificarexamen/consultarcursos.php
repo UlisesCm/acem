@@ -224,6 +224,7 @@ $contadorCalificaciones = 0;
 							break;
 						case 'multiple'://radio
 							$respuestas = $Ocursos->mostrarRespuestas($filas['idpregunta']);
+
 							while ($filasRespuestas = mysqli_fetch_array($respuestas)) {
 								$respuestas2 = $Ocursos->mostrarDetalleRespuestas2($filasRespuestas['idrespuesta']);
 								$filasDetallesRespuestas = mysqli_fetch_array($respuestas2);

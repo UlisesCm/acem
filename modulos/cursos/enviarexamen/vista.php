@@ -239,7 +239,7 @@ for ($i=1; $i < $total+1; $i++) {
 					<input type="hidden" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
 					<input type="hidden" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
 					<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
-					<input type="hidden" name="cadenaRespuestasAlumno" id="cadenaRespuestasAlumno" value="<?php echo $cadenaRespuestasAlumno?>">
+					<input class="form-control" type="text" name="cadenaRespuestasAlumno" id="cadenaRespuestasAlumno" value="<?php echo $cadenaRespuestasAlumno?>">
 					<input type="hidden" name="prueba" id="prueba" value="<?php echo $prueba?>">
 					<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
 					<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>">

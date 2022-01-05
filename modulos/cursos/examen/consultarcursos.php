@@ -264,6 +264,7 @@ $cadenaTipo = "";
 								<?php
 								if ($filasRespuestas['correcto'] == "on") {
 									$cadenaRespuestas = $cadenaRespuestas.":::".$filasRespuestas['idrespuesta'];
+									// $cadenaRespuestas = $cadenaRespuestas.":::radio";
 								}
 							}
 							break;
@@ -289,25 +290,25 @@ $cadenaTipo = "";
 		}
 		?>
 		<hr>
-		<!-- <h3>Contador Preguntas: </h3> -->
-		<input type="hidden" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
-		<!-- <h3>Arreglo de Respuestas:</h3> -->
-		<input type="hidden" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
-		<!-- <h3>Totales:</h3> -->
-		<input type="hidden" name="total" id="total" value="<?php echo $total?>">
-		<!-- <h3>idcurso:</h3> -->
-		<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $filasExamen['idcurso']?>">
-		<!-- <h3>idexamen:</h3> -->
-		<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
-		<!-- <h3>Cadena Preguntas:</h3> -->
-		<input type="hidden" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
-		<!-- <h3>cadena Respuestas</h3> -->
-		<input type="hidden" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
-		<!-- <h3>cadena Tipo</h3> -->
-		<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
-		<!-- <h3>ID avance curso</h3> -->
-		<input type="hidden" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>">
-		<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $filasExamen['nombreExamen']?>">
+		<h3>Contador Preguntas: </h3>
+		<input type="text" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
+		<h3>Arreglo de Respuestas:</h3>
+		<input type="text" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
+		<h3>Totales:</h3>
+		<input type="text" name="total" id="total" value="<?php echo $total?>">
+		<h3>idcurso:</h3>
+		<input type="text" name="idcurso" id="idcurso" value="<?php echo $filasExamen['idcurso']?>">
+		<h3>idexamen:</h3>
+		<input type="text" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
+		<h3>Cadena Preguntas:</h3>
+		<input type="text" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
+		<h3>cadena Respuestas</h3>
+		<input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
+		<h3>cadena Tipo</h3>
+		<input type="text" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
+		<h3>ID avance curso</h3>
+		<input type="text" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>">
+		<input type="text" name="nombreExamen" id="nombreExamen" value="<?php echo $filasExamen['nombreExamen']?>">
 		<div class="contenedor justify-content-center margen-bot2">
 			<button class="btn btn-success">Enviar Examen</button>
 		</div>
@@ -329,17 +330,33 @@ if (mysqli_num_rows($resultado) == 0) {
 }
 ?>
 <!-- 
-:::SinRespuesta
-:::3622119461697
-:::3622119461718
-:::3622119461745
+:::RESPUESTA -42218291105
+:::RESPUESTA -42218291132
+:::RESPUESTA -42218291140
+:::RESPUESTA -42218291180
+:::RESPUESTA -42218291214
+:::42218291114
 :::SinRespuesta
 :::SinRespuesta
 
+
+:::42218291135 -1
+:::42218291135 -2
+:::42218291135 -3
+:::42218291135 -4
+:::42218291135 -5
+:::42218291136 -6
+:::42218291165 -7
+:::42218291268 -8
+
+:::42218291105
+:::42218291132
+:::42218291140
+:::42218291180
+:::42218291214
+:::42218291133
 :::SinRespuesta
-:::3622119461697
-:::3622119461718
-:::3622119461745
-:::3622119461619
 :::SinRespuesta
+
+:::42218291105:::42218291132:::42218291140:::42218291180:::42218291214:::radio:::SinRespuesta:::SinRespuesta
 -->
