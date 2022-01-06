@@ -340,7 +340,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 							if ($filasAvance['iddetalleexamen'] == 0) {
 								?> <button class="btn btn-success boton-curso">Presentar</button> <?php
 							} else {
-								?> <button class="btn btn-default boton-curso" >Examen Enviado</button> <?php //disabled
+								?> <button class="btn btn-default boton-curso" disabled>Examen Enviado</button> <?php //disabled
 							}
 						?>
 					

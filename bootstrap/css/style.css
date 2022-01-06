@@ -102,6 +102,11 @@
   margin-left: 20px;
   margin-right: 20px;
 }
+
+.margen-lateral{
+  margin-left: 10px;
+  margin-right: 10px;
+}
 .justify-content-spacebetween{
   justify-content: space-between;
 }
@@ -127,6 +132,10 @@
 
 .margin-bot20{
   margin-bottom: 20px;
+}
+
+.margin-bot5{
+  margin-bottom: 5px;
 }
 
 .margin-top3{

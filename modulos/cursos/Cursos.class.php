@@ -492,6 +492,40 @@ class Cursos
 			return $resultado = mysqli_query($this->con->conect, $consulta);
 		}
 	}
+	function mostrarTodoCursos( $campoOrden, $orden, $inicial, $cantidadamostrar, $categorias, $cursosBusqueda)
+	{
+			/////PERMISOS////////////////
+			if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
+				return "denegado";
+				exit;
+			}
+	
+			$consultarCategoria = "";
+			if ($categorias != "todos") {
+				$consultarCategoria = "AND cursos.categoria='$categorias'";
+			} else {
+				$consultarCategoria = "";
+			}
+	
+			$consultarCursos = "";
+			if ($cursosBusqueda != "") {
+				$consultarCursos = "AND cursos.nombre LIKE '%" . $cursosBusqueda . "%'";
+			} else {
+				$consultarCursos = "";
+			}
+	
+			$where = "";
+	
+			$consulta = "SELECT *
+						FROM cursos
+						$where
+						ORDER BY $campoOrden $orden
+						LIMIT $inicial, $cantidadamostrar
+						";
+			if ($this->con->conectar() == true) {
+				return $resultado = mysqli_query($this->con->conect, $consulta);
+			}
+	}
 
 	function mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias, $cursosTerminados)
 	{
@@ -871,7 +905,6 @@ class Cursos
 				// $iddetallepregunta = "";
 				// $idrespuesta = $arregloRespuesta[$contadorTotal];
 				$respuesta = $arregloRespuestasAlumno[$contadorTotal];
-
 				if ($arregloTipo[$contadorTotal] == "multiple") {
 					$idpreguntaTemp = $arregloPregunta[$contadorTotal];
 					$consultaRadio = "SELECT idrespuesta FROM respuestas WHERE idpregunta = '$idpreguntaTemp' AND respuesta = '$respuesta'";
@@ -886,7 +919,7 @@ class Cursos
 				$contadorTotal++;
 			}
 		}
-		$actualizarAvance = "UPDATE avancecursos SET iddetalleexamen='$iddetalleexamen', fechafin='$fechafin' WHERE idavancecurso='$idavancecurso'";
+		$actualizarAvance = "UPDATE avancecursos SET iddetalleexamen='$iddetalleexamen', fechafin='$fechafin', finalizado='1' WHERE idavancecurso='$idavancecurso'";
 		mysqli_query($this->con->conect, $actualizarAvance);
 	}
 

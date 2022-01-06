@@ -1,4 +1,3 @@
-
 <?php
 ///INSCRIBIRME////////////////////////
 include("../../seguridad/comprobar_login.php");
@@ -84,7 +83,7 @@ if (isset($_REQUEST['id-cursos-input']) && $_REQUEST['id-cursos-input'] != "") {
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
-$resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
+$resultado = $Ocursos->mostrarTodoCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $categorias, $cursosBusqueda);
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
@@ -200,11 +199,18 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				<h3 class="d-flex centrar-elementos">
 					<?php echo $filas['nombre'] ?>
 				</h3>
-
-				<form class="d-flex centrar-elementos margen-bot" action="../nuevo/nuevoinscribirme.php?n1=cursos&n2=nuevocursos" method="post">
-					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
-					<button class="btn btn-default boton-curso "> Incribirme </button>
-				</form>
+				<hr>
+				<div class="d-flex centrar-elementos margin-bot5">
+					<div class="margen-lateral">
+						<form action="../modificar/actualizar.php?n1=cursos&n2=consultarcursos" method="post">
+							<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
+							<button class="btn btn-success">Modificar</button>
+						</form>
+					</div>
+					<div class="margen-lateral">
+						<button class="btn btn-danger" onclick="(eliminarIndividual(<?php echo $filas['idcurso'] ?>))">Eliminar</button>
+					</div>
+				</div>
 
 			</div>
 	<?php

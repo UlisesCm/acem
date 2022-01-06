@@ -1,5 +1,6 @@
+
 <?php
-///MIS CURSOS////////////////////////
+///INSCRIBIRME////////////////////////
 include("../../seguridad/comprobar_login.php");
 /////PERMISOS////////////////
 if (!isset($_SESSION['permisos']['cursos']['acceso'])) {
@@ -29,10 +30,10 @@ if (isset($_REQUEST['campoOrden']) && $_REQUEST['campoOrden'] != "") {
 	if ($_REQUEST['campoOrden'] != "undefined") {
 		$campoOrden = htmlentities($_REQUEST['campoOrden']);
 	} else {
-		$campoOrden = "idavancecursos";
+		$campoOrden = "idcurso";
 	}
 } else {
-	$campoOrden = "idavancecursos";
+	$campoOrden = "idcurso";
 }
 
 if (isset($_REQUEST['orden']) && $_REQUEST['orden'] != "") {
@@ -73,24 +74,26 @@ if (isset($_REQUEST['id-categorias-select']) && $_REQUEST['id-categorias-select'
 	$categorias = "";
 }
 
-if (isset($_REQUEST['cursosTerminados'])) {
-	$cursosTerminados = true;
+if (isset($_REQUEST['id-cursos-input']) && $_REQUEST['id-cursos-input'] != "") {
+	$cursosBusqueda = htmlentities($_REQUEST['id-cursos-input']);
+	// $busqueda=mysql_real_escape_string($busqueda);
 } else {
-	$cursosTerminados = false;
+	$cursosBusqueda = "";
 }
 
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
-// $resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
-$resultado = $Ocursos->mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosTerminados);
+$resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
 }
-
-$filasTotales = mysqli_num_rows($resultado);
+$filasTotales = $Ocursos->contar($busqueda, $papelera);
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
+
+
+
 
 if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla 
 ?>
@@ -109,19 +112,19 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 			</tr>
 			<?php
 			while ($filas = mysqli_fetch_array($resultado)) { ?>
-				<tr id="iregistro<?php echo $filas['idavancecurso'] ?>">
+				<tr id="iregistro<?php echo $filas['idcurso'] ?>">
 					<td class="checksEliminar" width="30" valign="middle">
 						<?php /////PERMISOS////////////////
 						if (isset($_SESSION['permisos']['cursos']['eliminar'])) { ?>
-							<?php if ($filas['idavancecurso'] != 0) { ?>
-								<input id="registroEliminar<?php echo $filas['idavancecurso'] ?>" type="checkbox" name="registroEliminar[]" value="<?php echo $filas['idavancecurso'] ?>" class="checkEliminar">
+							<?php if ($filas['idcurso'] != 0) { ?>
+								<input id="registroEliminar<?php echo $filas['idcurso'] ?>" type="checkbox" name="registroEliminar[]" value="<?php echo $filas['idcurso'] ?>" class="checkEliminar">
 							<?php } ?>
 						<?php
 						}
 						?>
 					</td>
 					<td class="columnaDecorada" style="background:#000000;"></td>
-					<td class="Cidcurso"><?php echo $filas['idavancecurso']; ?></td>
+					<td class="Cidcurso"><?php echo $filas['idcurso']; ?></td>
 					<td class="Cnombre"><?php echo $filas['nombre']; ?></td>
 					<td class="Ccategoria"><?php echo $filas['categoria']; ?></td>
 					<td class="Cicono"><?php echo $filas['icono']; ?></td>
@@ -132,10 +135,10 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 							<?php /////PERMISOS////////////////
 							if (isset($_SESSION['permisos']['cursos']['eliminar'])) {
 							?>
-								<?php if ($filas['idavancecurso'] == 0) { ?>
+								<?php if ($filas['idcurso'] == 0) { ?>
 									<a class="btn btn-danger btn-xs disabled"><i class="fa fa-trash-o"></i></a>
 								<?php } else { ?>
-									<a class="btn btn-danger btn-xs" title="Eliminar" onclick="(eliminarIndividual(<?php echo $filas['idavancecurso'] ?>))">
+									<a class="btn btn-danger btn-xs" title="Eliminar" onclick="(eliminarIndividual(<?php echo $filas['idcurso'] ?>))">
 										<li class="fa fa-trash"></li>
 									</a>
 								<?php } ?>
@@ -147,7 +150,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 							?>
 						<?php
 						} else { ?>
-							<a class="btn btn-primary btn-xs" title="Restaurar Registro" onclick="(restaurarIndividual(<?php echo $filas['idavancecurso'] ?>))">
+							<a class="btn btn-primary btn-xs" title="Restaurar Registro" onclick="(restaurarIndividual(<?php echo $filas['idcurso'] ?>))">
 								<li class="fa fa-recycle"></li>
 							</a>
 						<?php
@@ -160,7 +163,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 						if (isset($_SESSION['permisos']['cursos']['modificar'])) {
 						?>
 							<form action="../modificar/actualizar.php?n1=cursos&n2=consultarcursos" method="post">
-								<input type="hidden" name="id" value="<?php echo $filas['idavancecurso'] ?>" />
+								<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>" />
 								<button type="submit" class="btn btn-success btn-xs" value="" title="Modificar">
 									<li class="fa fa-pencil"></li>
 								</button>
@@ -185,7 +188,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 		<?php
 		while ($filas = mysqli_fetch_array($resultado)) {
 		?>
-			<div class="col-sm-3 carta-cursos" id="iregistro<?php echo $filas['idavancecurso'] ?>">
+			<div class="col-sm-3 carta-cursos" id="iregistro<?php echo $filas['idcurso'] ?>">
 				<h4 class="d-flex centrar-elementos">
 					<?php echo $filas['categoria'] ?>
 				</h4>
@@ -197,28 +200,12 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				<h3 class="d-flex centrar-elementos">
 					<?php echo $filas['nombre'] ?>
 				</h3>
-				<h5 class="d-flex centrar-elementos">
-					<?php 
-						if ($filas['avance'] < 100) {
-							echo $filas['avance']?>% de Progreso<?php
-						} else {
-							?> Curso Terminado <?php
-						}
-					?>
-				</h5>
-				
-				<div class="progress">
-					<div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $filas['avance']?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $filas['avance']?>%;">
-						<span class="sr-only"><?php echo $filas['avance']?>% Complete</span>
-					</div>
-				</div>
 
-				<form class="d-flex centrar-elementos margen-bot" action="../navegacion/vistacursos.php?n1=cursos&n2=miscursos" method="post">
+				<form class="d-flex centrar-elementos margen-bot" action="../nuevo/nuevoinscribirme.php?n1=cursos&n2=nuevocursos" method="post">
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
-					<input type="hidden" name="id-avancecurso" value="<?php echo $filas['idavancecurso'] ?>"/>
-					<button class="btn btn-default boton-curso "> Ver Curso </button>
+					<button class="btn btn-default boton-curso "> Incribirme </button>
 				</form>
-				
+
 			</div>
 	<?php
 		} //Fin de while

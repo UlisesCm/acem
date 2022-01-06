@@ -44,7 +44,7 @@ function checarLink($nivel,$base){
             
              <li class="header">MENU PRINCIPAL</li>
              
-             <!-- Inicio de Bloque de Cursos -->
+      <!-- Inicio de Bloque de Cursos -->
             <?php 
 			/////PERMISOS////////////////
 			if (isset($_SESSION['permisos']['cursos']['acceso'])){
@@ -70,7 +70,7 @@ function checarLink($nivel,$base){
 			  	if (isset($_SESSION['permisos']['cursos']['consultar'])){
 			  	?>
                 <li class="<?php echo checarLink("n2","evaluar"); ?>">
-                  <a href="../../../modulos/cursos/evaluacion/vistacursos.php?n1=cursos&n2=evaluar"><i class="fa fa-circle-o text-green"></i> Evaluar</i></a>
+                  <a href="../../../modulos/cursos/evaluacion/vistacursos.php?n1=cursos&n2=evaluar"><i class="fa fa-circle-o text-yellow"></i> Evaluar</i></a>
                 </li>
                  <?php }?>
 
@@ -87,9 +87,19 @@ function checarLink($nivel,$base){
 			  	if (isset($_SESSION['permisos']['cursos']['consultar'])){
 			  	?>
                 <li class="<?php echo checarLink("n2","consultarcursos"); ?>">
-                  <a href="../../../modulos/cursos/consultar/vista.php?n1=cursos&n2=consultarcursos"><i class="fa fa-circle-o text-red"></i>Inscribirme</i></a>
+                  <a href="../../../modulos/cursos/inscribir/vista.php?n1=cursos&n2=consultarcursos"><i class="fa fa-circle-o text-yellow"></i>Inscribirme</i></a>
                 </li>
                  <?php }?>
+          <?php
+			  	/////PERMISOS////////////////
+			  	if (isset($_SESSION['permisos']['cursos']['consultar'])){
+			  	?>
+                <li class="<?php echo checarLink("n2","consultarcursos"); ?>">
+                  <a href="../../../modulos/cursos/consultar/vista.php?n1=cursos&n2=consultarcursos"><i class="fa fa-circle-o text-red"></i>Consultar Cursos</i></a>
+                </li>
+                 <?php }?>
+
+
               </ul>
             </li>
 
