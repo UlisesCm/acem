@@ -662,27 +662,19 @@ class Cursos
 		}
 	}
 
-	/* function mostrarLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $iddetalleleccion)
+	function mostrarLeccion2($idcurso)
 	{
 		/////PERMISOS////////////////
 		if (!isset($_SESSION['permisos']['cursos']['consultar'])) {
 			return "denegado";
 			exit;
 		}
-
-		$where = "
-			WHERE detallelecciones.iddetalleleccion ='$iddetalleleccion'
-		";
-
-		$consulta = "SELECT * 
-		FROM lecciones INNER JOIN detallelecciones 
-		ON lecciones.idleccion = detallelecciones.idleccion
-		$where
-		";
+		$consulta = "SELECT * FROM lecciones WHERE lecciones.idcurso = '$idcurso'";
+	
 		if ($this->con->conectar() == true) {
 			return mysqli_query($this->con->conect, $consulta);
 		}
-	} */
+	}
 
 	function siguienteLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $idcurso, $ordenLeccion)
 	{
