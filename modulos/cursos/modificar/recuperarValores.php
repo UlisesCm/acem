@@ -7,6 +7,12 @@ if (isset($_POST['id'])){
 	$resultado=$Ocursos->mostrarIndividual($id);
 	$resultadoLeccion=$Ocursos->mostrarLeccion2($id);
 	$resultadoExamen=$Ocursos->mostrarExamen($id);
+	$resultadoExamen2=$Ocursos->mostrarExamen($id);
+	
+	$extractorExamen = mysqli_fetch_array($resultadoExamen2);
+	$idexamen = $extractorExamen['idexamen'];
+	$resultadoPreguntas=$Ocursos->mostrarPreguntas($idexamen); //preguntas
+	
 	$extractor = mysqli_fetch_array($resultado);
 	$nombre=$extractor["nombre"];
 	$categoria=$extractor["categoria"];

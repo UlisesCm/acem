@@ -119,42 +119,120 @@ include("recuperarValores.php");
               <hr>
               <div>
                 <h3>Lecciones:</h3>
-                <?php 
+                <?php
+                $contadorLecciones=0;
+                $cadenaLecciones="";
+                $contadorPreguntas=0;
+                $cadenaPreguntas="";
+                $contadorRespuestas="";
+                $cadenaRespuestas="";
                 while ($filasLecciones = mysqli_fetch_array($resultadoLeccion)) {
-                  ?>
+                  $contadorLecciones++;
+                ?>
                   <div class="form-group ">
                     <label for="cicono" class="col-sm-2 control-label">Leccion <?php echo $filasLecciones['orden']; ?>:</label>
-                    <div class="col-sm-5 row" >
-                    <?php 
-                    if ($filasLecciones['orden'] == "enlace") {
-                      ?><input value="<?php echo $filasLecciones['contenido']; ?>" name="icono" type="text" class="form-control" id="cicono" /><?php
-                    } else {
-                      ?><textarea class="form-control" name="" id="" cols="80" rows="4" value=""><?php echo $filasLecciones['contenido'];?></textarea><?php
-                    }
-                    ?>
+                    <div class="col-sm-5 row">
+                      <?php
+                      if ($filasLecciones['orden'] == "enlace") {
+                      ?><input value="<?php echo $filasLecciones['contenido'];?>" name="<?php echo $filasLecciones['idleccion'];?>" type="text" class="form-control" id="<?php echo $filasLecciones['idleccion'];?>" /><?php
+                      } else {                                              
+                      ?><textarea class="form-control" name="<?php echo $filasLecciones['idleccion'];?>" id="<?php echo $filasLecciones['idleccion'];?>" cols="80" rows="4" value=""><?php echo $filasLecciones['contenido']; ?></textarea><?php                                                                                                                                                        }                                                                                                                                                                                                                                    ?>
                     </div>
                   </div>
-                  <?php
+                <?php
+                $cadenaLecciones=$cadenaLecciones.":::".$filasLecciones['idleccion'];
                 }
                 ?>
               </div>
               <hr>
               <div>
                 <h3>Examen:</h3>
-                <?php 
-                while ($filasExamen = mysqli_fetch_array($resultadoExamen)) {
-                  ?>                  
-                  <div class="form-group ">
-                  <label for="cicono" class="col-sm-2 control-label">Nombre del Examen:</label>
-                  <div class="col-sm-5 row" >
-                  <input value="<?php echo $filasExamen['nombreExamen']; ?>" name="icono" type="text" class="form-control" id="cicono"/>
-                  </div>
-                </div>
                 <?php
+                while ($filasExamen = mysqli_fetch_array($resultadoExamen)) {
+                 
+                ?>
+                  <div class="form-group ">
+                    <label for="cicono" class="col-sm-2 control-label">Nombre del Examen:</label>
+                    <div class="col-sm-5 row">
+                      <input value="<?php echo $filasExamen['nombreExamen']; ?>" name="<?php echo $filasExamen['idexamen']?>" type="text" class="form-control" id="<?php echo $filasExamen['idexamen']?>" />
+                    </div>
+                  </div>
+                <?php
+                $idexamen = $filasExamen['idexamen'];
                 }
                 ?>
               </div>
-
+              <hr>
+              <div>
+                <h3>Preguntas:</h3>
+                <?php
+                while ($filasPreguntas = mysqli_fetch_array($resultadoPreguntas)) {
+                  $contadorPreguntas++;
+                  
+                ?>
+                  <div class="form-group ">
+                    <label for="cicono" class="col-sm-2 control-label">Pregunta:</label>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <input value="<?php echo $filasPreguntas['pregunta']; ?>" name="<?php echo $filasPreguntas['idpregunta']; ?>" type="text" class="form-control" id="<?php echo $filasPreguntas['idpregunta'];?>" />
+                      </div>
+                      <div class="col-sm-1">
+                        <input value="Tipo: <?php echo $filasPreguntas['tipopregunta']; ?>" name="icono" type="text" class="form-control" id="cicono" disabled />
+                      </div>
+                    </div>
+                  </div>
+                  <?php
+                  $contadorRespuestasTemp=0;
+                  if (($filasPreguntas['tipopregunta'] == "multiple") || ($filasPreguntas['tipopregunta'] == "casilla")) {
+                    $resultadoRespuestas=$Ocursos->mostrarRespuestas($filasPreguntas['idpregunta']);
+                    while ($filasRespuestas= mysqli_fetch_array($resultadoRespuestas)) {
+                      $contadorRespuestasTemp++;
+                      ?>
+                      <div class="form-group">
+                        <label for="cicono" class="col-sm-2 control-label">Respuesta:</label>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <input value="<?php echo $filasRespuestas['respuesta']; ?>" name="<?php echo $filasRespuestas['idrespuesta']; ?>" type="text" class="form-control" id="1" />
+                          </div>
+                          <div class="col-sm-2 row">
+                            <label for="cicono" class="control-label">Correcto:</label>
+                            <?php 
+                            if ($filasPreguntas['tipopregunta'] == "casilla") {
+                              ?><input type="checkbox" name="" id=""><?php
+                            } else {
+                              ?><input type="radio" name="" id=""><?php
+                            }
+                            ?>                          
+                          </div>
+                        </div>
+                      </div>
+                    <?php
+                    $cadenaRespuestas = $cadenaRespuestas.":::".$filasRespuestas['idrespuesta'];
+                    }
+                  }
+                  $contadorRespuestas=$contadorRespuestas.":::".$contadorRespuestasTemp;
+                  $cadenaPreguntas = $cadenaPreguntas.":::".$filasPreguntas['idpregunta'];
+                  ?>
+                
+                <?php
+                }
+                ?>
+                
+              </div>
+                <h1><?php echo $contadorLecciones?></h1>
+                <h1><?php echo $cadenaLecciones?></h1>
+                <h1><?php echo $contadorPreguntas?></h1>
+                <h1><?php echo $cadenaPreguntas?></h1>
+                <h1><?php echo $contadorRespuestas?></h1>
+                <h1><?php echo $cadenaRespuestas?></h1>
+                  <!-- 
+                $contadorLecciones=0;
+                $cadenaLecciones="";
+                $contadorPreguntas=0;
+                $cadenaPreguntas="";
+                $contadorRespuestas="";
+                $cadenaRespuestas="";
+                 -->
             </div><!-- /.box-body -->
 
             <div class="box-footer">

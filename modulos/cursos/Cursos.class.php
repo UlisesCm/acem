@@ -492,6 +492,7 @@ class Cursos
 			return $resultado = mysqli_query($this->con->conect, $consulta);
 		}
 	}
+
 	function mostrarTodoCursos( $campoOrden, $orden, $inicial, $cantidadamostrar, $categorias, $cursosBusqueda)
 	{
 			/////PERMISOS////////////////
@@ -567,6 +568,7 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
+
 	function mostrarEvaluaciones($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias, $cursosTerminados)
 	{
 		/////PERMISOS////////////////
@@ -609,7 +611,6 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
-
 
 	function navegacionCurso($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $idcurso)
 	{
@@ -699,6 +700,7 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
+
 	function anteriorLeccion($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $idcurso, $ordenLeccion)
 	{
 		/////PERMISOS////////////////
@@ -722,7 +724,6 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
-
 
 	function mostrarExamen2($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $iddetalleleccion)
 	{
