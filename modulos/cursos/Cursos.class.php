@@ -932,56 +932,50 @@ class Cursos
 		return $calculoCalificacion;
 	}
 	
+	function modificarLeccion($contadorLecciones, $aIdLecciones, $aContenidoLecciones)
+	{
+		for ($i=0; $i < $contadorLecciones; $i++) { 
+			$idleccion = $aIdLecciones[$i+1];
+			$contenido = $aContenidoLecciones[$i];
+			$consulta = "UPDATE lecciones SET contenido='$contenido' WHERE idleccion='$idleccion'";
+			mysqli_query($this->con->conect, $consulta);
+		}
+	}
+
+	function modificarPregunta($contadorPreguntas, $aIdPreguntas, $aContenidoPreguntas)
+	{
+		for ($i=0; $i < $contadorPreguntas; $i++) { 
+			$idpregunta = $aIdPreguntas[$i+1];
+			$pregunta = $aContenidoPreguntas[$i];
+			$consulta = "UPDATE preguntas SET pregunta='$pregunta' WHERE idpregunta='$idpregunta'";
+			mysqli_query($this->con->conect, $consulta);
+		}
+	}
+
+	function modificarRespuesta($contadorRespuestas, $aIdRespuestas, $aContenidoRespuestas)
+	{
+		for ($i=0; $i < $contadorRespuestas; $i++) { 
+			$idrespuesta = $aIdRespuestas[$i+1];
+			$respuesta = $aContenidoRespuestas[$i];
+			$consulta = "UPDATE respuestas SET respuesta='$respuesta' WHERE idrespuesta='$idrespuesta'";
+			mysqli_query($this->con->conect, $consulta);
+		}
+	}
+
+	function modificarNombreExamen($idexamen, $nombreExamen)
+	{
+			$consulta = "UPDATE examenes SET nombreExamen='$nombreExamen' WHERE idexamen='$idexamen'";
+			mysqli_query($this->con->conect, $consulta);
+	}
 }
 
 
 
-/* CADENA PREGUNTAS
-:::3392117302226
-:::3392117302235
-:::3392117302235
-:::3392117302235
-:::3392117302245
-:::3392117302270
-
-CADENA RESPUESTAS
-:::SinRespuesta
-:::3392117302263
-:::3392117302322
-:::3392117302359
-:::SinRespuesta
-:::SinRespuesta
-
-CADENA TIPO
-:::abierta
-:::casilla
-:::casilla
-:::casilla
-:::multiple
-:::abierta 
-
-CONTADOR RESPUESTAS
-:::1
-:::3
-:::1
-:::1
-
-[1] => 1 
-[2] => 1 
-[3] => 1 
-[4] => 3 
-[5] => 1 
-[6] => 1
-:::casilla:::casilla:::casilla:::casilla:::casilla:::multiple:::abierta:::practica
-
-
-:::42218291135 -1
-:::42218291135
-:::42218291135
-:::42218291135
-:::42218291135
-
-:::42218291136
-:::42218291165
-:::42218291268
+/* 
+:::102218460900
+:::102218460981
+:::102218461014
+:::102218461017
+:::102218461027
+:::102218461048
 */

@@ -154,7 +154,7 @@ include("recuperarValores.php");
                   <div class="form-group ">
                     <label for="cicono" class="col-sm-2 control-label">Nombre del Examen:</label>
                     <div class="col-sm-5 row">
-                      <input value="<?php echo $filasExamen['nombreExamen']; ?>" name="<?php echo $filasExamen['idexamen']?>" type="text" class="form-control" id="<?php echo $filasExamen['idexamen']?>" />
+                      <input value="<?php echo $filasExamen['nombreExamen']; ?>" name="nombreExamen" type="text" class="form-control" id="nombreExamen" />
                     </div>
                   </div>
                 <?php
@@ -180,13 +180,13 @@ include("recuperarValores.php");
                         <input value="Tipo: <?php echo $filasPreguntas['tipopregunta']; ?>" name="icono" type="text" class="form-control" id="cicono" disabled />
                       </div>
                     </div>
+
                   </div>
                   <?php
-                  $contadorRespuestasTemp=0;
                   if (($filasPreguntas['tipopregunta'] == "multiple") || ($filasPreguntas['tipopregunta'] == "casilla")) {
                     $resultadoRespuestas=$Ocursos->mostrarRespuestas($filasPreguntas['idpregunta']);
                     while ($filasRespuestas= mysqli_fetch_array($resultadoRespuestas)) {
-                      $contadorRespuestasTemp++;
+                      $contadorRespuestas++;
                       ?>
                       <div class="form-group">
                         <label for="cicono" class="col-sm-2 control-label">Respuesta:</label>
@@ -198,9 +198,9 @@ include("recuperarValores.php");
                             <label for="cicono" class="control-label">Correcto:</label>
                             <?php 
                             if ($filasPreguntas['tipopregunta'] == "casilla") {
-                              ?><input type="checkbox" name="" id=""><?php
+                              ?><input type="checkbox" name="<?php echo "s".$filasRespuestas['idrespuesta']; ?>" value="<?php echo $filasRespuestas['idrespuesta']; ?>" id="" <?php echo ($filasRespuestas['correcto'] == "on") ? 'checked': ''?>><?php //se utiliza un operador ternario para validar si se pre-selecciona o no
                             } else {
-                              ?><input type="radio" name="" id=""><?php
+                              ?><input type="radio" name="<?php echo "s".$filasPreguntas['idpregunta']; ?>" value="<?php echo $filasRespuestas['idrespuesta']; ?>" id="" <?php echo ($filasRespuestas['correcto'] == "on") ? 'checked': ''?>><?php //se utiliza un operador ternario para validar si se pre-selecciona o no
                             }
                             ?>                          
                           </div>
@@ -210,21 +210,20 @@ include("recuperarValores.php");
                     $cadenaRespuestas = $cadenaRespuestas.":::".$filasRespuestas['idrespuesta'];
                     }
                   }
-                  $contadorRespuestas=$contadorRespuestas.":::".$contadorRespuestasTemp;
                   $cadenaPreguntas = $cadenaPreguntas.":::".$filasPreguntas['idpregunta'];
                   ?>
                 
                 <?php
                 }
                 ?>
-                
               </div>
-                <h1><?php echo $contadorLecciones?></h1>
-                <h1><?php echo $cadenaLecciones?></h1>
-                <h1><?php echo $contadorPreguntas?></h1>
-                <h1><?php echo $cadenaPreguntas?></h1>
-                <h1><?php echo $contadorRespuestas?></h1>
-                <h1><?php echo $cadenaRespuestas?></h1>
+                <input type="text" name="contadorLecciones" id="contadorLecciones" value="<?php echo $contadorLecciones?>">
+                <input type="text" name="cadenaLecciones" id="cadenaLecciones" value="<?php echo $cadenaLecciones?>">
+                <input type="text" name="contadorPreguntas" id="contadorPreguntas" value="<?php echo $contadorPreguntas?>">
+                <input type="text" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
+                <input type="text" name="contadorRespuestas" id="contadorRespuestas" value="<?php echo $contadorRespuestas?>">
+                <input type="text" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
+                <input type="text" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
                   <!-- 
                 $contadorLecciones=0;
                 $cadenaLecciones="";
