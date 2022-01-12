@@ -105,7 +105,7 @@ for ($i=1; $i < $contadorPreguntas+1 ; $i++) {
 			break;
 		
 		default:
-		array_push($aContenidoPreguntas,"Switch default");
+		array_push($aContenidoPreguntas,  "Switch default");
 			break;
 		}
 }
@@ -115,6 +115,7 @@ if (isset($_POST['contadorRespuestas'])){
 }else{
 	$contadorRespuestas="sin nombre";
 }
+
 if (isset($_POST['cadenaRespuestas'])){
 	$cadenaRespuestas=htmlentities(trim($_POST['cadenaRespuestas']));
 }else{
@@ -139,19 +140,50 @@ for ($i=1; $i < $contadorRespuestas+1 ; $i++) {
 			break;
 		}
 }
+//RESPUESTA - CHECKBOX Y RADIO///////////////////////////////
 
-/* <input type="text" name="s102218461027" id="s102218461027" value="<?php echo $idexamen?>"> */
-if (isset($_POST['s102218461027'])){
-	$temp=htmlentities(trim($_POST['s102218461027']));
+if (isset($_POST['cadenaCheckbox'])){
+	$cadenaCheckbox=htmlentities(trim($_POST['cadenaCheckbox']));
 }else{
-	$temp="sin nombre";
+	$cadenaCheckbox="sin nombre";
 }
+$aRespuestasCheck = array(); 
+$aRespuestasCheck = explode(":::", $cadenaCheckbox); 
+$aRespuestasCheck = array_filter($aRespuestasCheck);
+
+$aContenidoCheck = array(); 
+for ($i=1; $i < $contadorRespuestas+1 ; $i++) { 
+	$respuestasCheckTemp = $aRespuestasCheck[$i];
+/* 	$respuestasTemp = $aIdRespuestas[$i];
+	if (isset($_POST[$respuestasCheckTemp]) && ($respuestasCheckTemp == $respuestasTemp)) {
+		# code...
+	} */
+	switch (isset($_POST[$respuestasCheckTemp])) {
+		case true:
+		$contenidoRespuesta=htmlentities(trim($_POST[$respuestasCheckTemp]));
+		array_push($aContenidoCheck, $contenidoRespuesta);
+			break;
+		
+		default:
+		array_push($aContenidoCheck,"Switch default");
+			break;
+		}
+	}
+$aRespuestasCorrecto = array();
+for ($i=0; $i < $contadorRespuestas; $i++) { 
+	if ($aContenidoCheck[$i] == $aIdRespuestas[$i+1]) {
+		array_push($aRespuestasCorrecto, "on");
+	} else {
+		array_push($aRespuestasCorrecto, "off");
+	}
+}
+
 if($validacion){
 
 	$resultado=$Ocursos->actualizar($nombre,$categoria,$icono, $idcurso);
 	$Ocursos->modificarLeccion($contadorLecciones, $aIdLecciones, $aContenidoLecciones);
 	$Ocursos->modificarPregunta($contadorPreguntas, $aIdPreguntas, $aContenidoPreguntas);
-	$Ocursos->modificarRespuesta($contadorRespuestas, $aIdRespuestas, $aContenidoRespuestas);
+	$Ocursos->modificarRespuesta($contadorRespuestas, $aIdRespuestas, $aContenidoRespuestas, $aRespuestasCorrecto);
 	$Ocursos->modificarNombreExamen($idexamen, $nombreExamen);
 	if($resultado=="exito"){
 		
@@ -169,37 +201,12 @@ if($validacion){
 }else{
 	$mensaje="fracaso@Operaci&oacute;n fallida@ $mensaje";
 }
-/* 
-$aIdLecciones;
-$aContenidoLecciones;
-$contadorLecciones; */
 
 echo utf8_encode($mensaje);
-echo utf8_encode($temp);
-
 // echo utf8_encode(" - "."Contador LECCION :".$contadorLecciones);
 // echo utf8_encode(" - "."Contador CADENA LECCIONES :".$cadenaLecciones." - ");
-// echo utf8_encode(print_r($aContenidoLecciones));
+// echo utf8_encode(print_r($aContenidoCheck));
+// echo utf8_encode(print_r($aRespuestasCorrecto));
 // echo utf8_encode(print_r($aIdLecciones));
 
 ?>
-<!-- Contador LECCION :3 - 
-Contador CADENA LECCIONES ::::102218460819:::102218460857:::102218460874 - 
-
-Array ( 
-	[1] => 102218460819 
-	[2] => 102218460857 
-	[3] => 102218460874 
-) 1
-
-Array ( 
-	[0] => Leccion 2 
-	[1] => Leccion 1 
-	[2] => Enlace 3 
-) 1
-
-LECCION 1:102218460819 - 
-LECCION 2:102218460857 - 
-LECCION 3:102218460874
-
--->

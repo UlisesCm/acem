@@ -952,12 +952,13 @@ class Cursos
 		}
 	}
 
-	function modificarRespuesta($contadorRespuestas, $aIdRespuestas, $aContenidoRespuestas)
+	function modificarRespuesta($contadorRespuestas, $aIdRespuestas, $aContenidoRespuestas, $aRespuestasCorrecto)
 	{
 		for ($i=0; $i < $contadorRespuestas; $i++) { 
 			$idrespuesta = $aIdRespuestas[$i+1];
 			$respuesta = $aContenidoRespuestas[$i];
-			$consulta = "UPDATE respuestas SET respuesta='$respuesta' WHERE idrespuesta='$idrespuesta'";
+			$correcto = $aRespuestasCorrecto[$i];
+			$consulta = "UPDATE respuestas SET respuesta='$respuesta', correcto='$correcto' WHERE idrespuesta='$idrespuesta'";
 			mysqli_query($this->con->conect, $consulta);
 		}
 	}
