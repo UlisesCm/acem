@@ -186,26 +186,43 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 		while ($filas = mysqli_fetch_array($resultado)) {
 		?>
 			<div class="col-sm-3 carta-cursos" id="iregistro<?php echo $filas['idavancecurso'] ?>">
-				<h4 class="d-flex centrar-elementos">
+				<h3 class="d-flex marger-left">
 					<?php echo $filas['categoria'] ?>
+				</h3>
+				<hr>
+				<h4 class="d-flex marger-left">
+					<strong>Alumno:</strong>	
+					<?php echo $filas['idalumno'] ?>
+				</h4>
+				<h4 class="d-flex marger-left">
+					<strong>Curso:</strong>
+					 <?php echo $filas['nombre'] ?>
+				</h4>
+				<h4 class="d-flex marger-left">
+					<strong>Examen:</strong>
+					<?php echo $filas['nombreExamen'] ?>
 				</h4>
 				<hr class="d-flex centrar-elementos">
-				<div class="d-flex centrar-elementos">
+				<h4 class="d-flex marger-left">
+					<strong>Calificacion:</strong>
+					<?php echo $filas['calificacion'] ?>
+				</h4>
+
+<!-- 				<div class="d-flex centrar-elementos">
 					<i class="fa fa-pencil icono-curso"></i>
-				</div>
-				<hr>
-				<h3 class="d-flex centrar-elementos">
-					<?php echo $filas['nombre'] ?>
-				</h3>
-				<h3 class="d-flex centrar-elementos">
-					<?php echo $filas['nombreExamen'] ?>
-				</h3>
+				</div> -->
 				<hr>
 				<form class="d-flex centrar-elementos margen-bot" action="../calificarexamen/vistacursos.php?n1=cursos&n2=evaluar" method="post">
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
 					<input type="hidden" name="id-avancecurso" value="<?php echo $filas['idavancecurso'] ?>"/>
 					<input type="hidden" name="nombre-examen" value="<?php echo $filas['nombreExamen'] ?>">
-					<button class="btn btn-default boton-curso "> Evaluar Examen </button>
+					<?php 
+					if ($filas['calificacion'] < 0) {
+						?><button class="btn btn-default boton-curso "> Evaluar Examen </button><?php
+					} else {
+						?><button class="btn btn-success boton-curso "> Volver a Evaluar </button><?php
+					}
+					?>
 				</form>
 				
 			</div>

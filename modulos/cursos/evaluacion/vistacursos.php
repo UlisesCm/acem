@@ -43,7 +43,7 @@ include("../../seguridad/comprobar_login.php");
 		<div class="content-wrapper">
 			<!-- Contenido de la cabecera -->
 			<section class="content-header">
-				<h1>Cursos<small> Consulta</small>
+				<h1>Calificar Examenes<small> Consulta</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="../../inicio/inicio/inicio.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -111,7 +111,7 @@ include("../../seguridad/comprobar_login.php");
 											<option value="inventarios">Inventarios</option>
 										</select>
 									</div>
-									<label for="inputcurso_ajax" class="col-sm-2 control-label">Mostra Cursos terminados:</label>
+									<label for="inputcurso_ajax" class="col-sm-2 control-label">Mostra Examenes Calificados:</label>
 									<div class="checkbox col-sm-1">
 										<!-- <input type="text" class="form-control" id="idcurso_ajax" name="id-cursos-input"> -->
 										<input type="checkbox" name="cursosTerminados" id="cursos-terminados">

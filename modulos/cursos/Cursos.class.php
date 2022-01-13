@@ -569,6 +569,14 @@ class Cursos
 		}
 	}
 
+	function mostrarAlumno($idalumno)
+	{
+		$consulta = "SELECT * FROM `usuarios` WHERE idalumno = '$idalumno'";
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, $consulta);
+		}
+	}
+
 	function mostrarEvaluaciones($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias, $cursosTerminados)
 	{
 		/////PERMISOS////////////////
@@ -576,7 +584,7 @@ class Cursos
 			return "denegado";
 			exit;
 		}
-		$idalumno = $_SESSION['idusuario'];
+		$iddocente = $_SESSION['idusuario'];
 
 		$consultarCategoria = "";
 		if ($categorias != "todos") {
@@ -586,7 +594,7 @@ class Cursos
 		}
 
 		if ($cursosTerminados == false) {
-			$consultaTerminados = "AND avancecursos.finalizado = 0";
+			$consultaTerminados = "AND detalleexamenes.calificacion = 0";
 		} else {
 			$consultaTerminados = "";
 		}
@@ -604,6 +612,7 @@ class Cursos
 		FROM `avancecursos` 
 		INNER JOIN cursos ON avancecursos.idcurso=cursos.idcurso
 		INNER JOIN examenes ON avancecursos.idcurso=examenes.idcurso 
+		INNER JOIN detalleexamenes ON avancecursos.iddetalleexamen=detalleexamenes.iddetalleexamen 
 		$where
 		";
 
@@ -927,6 +936,9 @@ class Cursos
 			$sumaCalificacion = $sumaCalificacion + $calificacion;
 		}
 		$calculoCalificacion = round(($sumaCalificacion/$calificacionMaxima)*100);
+		if ($calculoCalificacion == 0) {
+			$calculoCalificacion = 1;
+		}
 		$actualizarDetalleExamenes = "UPDATE detalleexamenes SET calificacion='$calculoCalificacion' WHERE iddetalleexamen='$iddetalleexamen'";
 		mysqli_query($this->con->conect, $actualizarDetalleExamenes);
 		return $calculoCalificacion;
