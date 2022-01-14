@@ -571,10 +571,8 @@ class Cursos
 
 	function mostrarAlumno($idalumno)
 	{
-		$consulta = "SELECT * FROM `usuarios` WHERE idalumno = '$idalumno'";
-		if ($this->con->conectar() == true) {
-			return mysqli_query($this->con->conect, $consulta);
-		}
+		$consulta = "SELECT * FROM `usuarios` WHERE idusuario = '$idalumno'";
+		return mysqli_query($this->con->conect, $consulta);
 	}
 
 	function mostrarEvaluaciones($campoOrden, $orden, $inicial, $cantidadamostrar, $condicion, $papelera, $categorias, $cursosTerminados)

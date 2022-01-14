@@ -184,6 +184,9 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 	<div class="box-body">
 		<?php
 		while ($filas = mysqli_fetch_array($resultado)) {
+			$resuladoNombre = $Ocursos->mostrarAlumno($filas['idalumno']);
+			$filasNombre = mysqli_fetch_array($resuladoNombre);
+			$nombreAlumno = $filasNombre['nombre'];
 		?>
 			<div class="col-sm-3 carta-cursos" id="iregistro<?php echo $filas['idavancecurso'] ?>">
 				<h3 class="d-flex marger-left">
@@ -192,7 +195,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				<hr>
 				<h4 class="d-flex marger-left">
 					<strong>Alumno:</strong>	
-					<?php echo $filas['idalumno'] ?>
+					<?php echo $nombreAlumno?>
 				</h4>
 				<h4 class="d-flex marger-left">
 					<strong>Curso:</strong>
@@ -217,7 +220,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 					<input type="hidden" name="id-avancecurso" value="<?php echo $filas['idavancecurso'] ?>"/>
 					<input type="hidden" name="nombre-examen" value="<?php echo $filas['nombreExamen'] ?>">
 					<?php 
-					if ($filas['calificacion'] < 0) {
+					if ($filas['calificacion'] <= 0) {
 						?><button class="btn btn-default boton-curso "> Evaluar Examen </button><?php
 					} else {
 						?><button class="btn btn-success boton-curso "> Volver a Evaluar </button><?php
