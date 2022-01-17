@@ -3,9 +3,13 @@ function vaciarCampos() {
   $("#cnombre").focus();
 }
 
-function fileinput(nombre) {
+/* function fileinput(nombre) {
   $("#n" + nombre).val($("#c" + nombre).val());
   // guardarArchivo()
+} */
+function fileinput(nombre,idform){
+	$('#n'+nombre).val($('#c'+nombre).val());
+	guardarArchivo(idform);
 }
 
 const objetoContador = [0];
@@ -535,13 +539,15 @@ const actualizarContadorRespuesta = (index) => {
   $("#input-contador-respuesta").val(index);
 };
 
-const guardarArchivo = () => {
-  var formData = new FormData($("#formulario-recurso0")[0]);
+const guardarArchivo = (idform) => {
+  var formulario = "formularioArchivos";
+  variables=$("#"+formulario).serialize();
+  var formData = new FormData($("#"+formulario)[0]);
   $("#botonGuardar").hide();
   $("#botonSave").hide();
   $("#loading").show();
   $.ajax({
-    url: "guardararchivoscurso.php",
+    url: "../../archivos/nuevo/guardararchivogastos.php",
     type: "POST",
     data: formData,
     cache: false,
@@ -614,6 +620,70 @@ function guardar(variables) {
   });
   return false;
 }
+  /* function guardar(variables){
+    var formData = new FormData($("#formulario")[0]);
+    $("#botonGuardar").hide();
+    $("#botonSave").hide();
+    $("#loading").show();
+    $.ajax({
+      url: 'guardar.php',
+      type: "POST",
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function(mensaje){
+        $("#botonGuardar").show();
+        $("#botonSave").show();
+        $("#loading").hide();
+        mostrarMensaje(mensaje);
+      }
+    });
+    return false;
+  } */
+/*   function guardarArchivo(idform){
+    var formulario = "formularioArchivos"+idform;
+    //alert(formulario);
+    variables=$("#"+formulario).serialize();
+    var formData = new FormData($("#"+formulario)[0]);
+    $("#botonGuardar").hide();
+    $("#botonSave").hide();
+    $("#loading2").show();
+    $.ajax({
+      url: '../../archivos/nuevo/guardararchivogastos.php',
+      type: "POST",
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function(mensaje){
+        mensaje = $.trim(mensaje);
+        if(mensaje == "fracaso"){
+          //intente nuevamente y pintar de rojo
+          $("#cajaArchivo"+idFilaArchivo).html("ERROR AL SUBIR");
+          $("#botonArchivo"+idFilaArchivo).html("INTENTE NUEVAMENTE");
+          //$("#botonArchivo"+idform).css("background-color","#C00");
+          $("#botonArchivo"+idFilaArchivo).removeClass("btn-warning");
+          $("#botonArchivo"+idFilaArchivo).removeClass("btn-success");
+          $("#botonArchivo"+idFilaArchivo).addClass("btn-danger");
+        }
+        else{
+          //archivo subido y pintar de verde
+          $("#cajaArchivo"+idFilaArchivo).html(mensaje);
+          $("#botonArchivo"+idFilaArchivo).html("ARCHIVO SUBIDO");
+          //$("#botonArchivo"+idform).css("background-color","#C00");
+          $("#botonArchivo"+idFilaArchivo).removeClass("btn-warning");
+          $("#botonArchivo"+idFilaArchivo).removeClass("btn-danger");
+          $("#botonArchivo"+idFilaArchivo).addClass("btn-success");
+          
+        }
+        $("#botonGuardar").show();
+        $("#botonSave").show();
+        $("#loading2").hide();
+      }
+    });
+    return false;
+  } */
 
 function mostrarMensaje(mensaje) {
   //alert(mensaje);

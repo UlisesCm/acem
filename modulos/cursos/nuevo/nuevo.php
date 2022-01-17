@@ -122,7 +122,7 @@ include("../../seguridad/comprobar_login.php");
                 <!-- Padre para clonacion -->
                 <!-- Agregar Contenidos -->
                 <div id="padre-lecciones">
-                  <div style="display: none;">
+                  <div ><!-- style="display: none;" -->
                     <div class="carta-lecciones" id="nodo-padre-leccion">
                       <div class="form-group" id="div-principal">
                         <!-- div1 -->
@@ -153,6 +153,20 @@ include("../../seguridad/comprobar_login.php");
                         </div>
                         <!-- archivo -->
                         <div class="form-group" id="div-contenido-archivo">
+                          <form name="formularioArchivos" id="formularioArchivos" method="POST" enctype="multipart/form-data">
+                          <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
+                          <div class="col-sm-4" id="div-contenido-archivo-hijo">
+                            <div class="input-group" id="div-contenido-archivo-nieto">
+                              <input type="file" name="archivo" style="display:none;" id="carchivo" accept=".pdf" onChange="fileinput('archivo')" />
+                              <input type="text" name="narchivo" id="narchivo" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                              <span class="input-group-btn">
+                                <a class="btn btn-warning" id="botornArchivo" onclick="$('#carchivo').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                              </span>
+                            </div>
+                          </div>
+                          </form>
+                        </div>
+       <!--                  <div class="form-group" id="div-contenido-archivo">
                           <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
                           <div class="col-sm-4" id="div-contenido-archivo-hijo">
                             <div class="input-group" id="div-contenido-archivo-nieto">
@@ -163,7 +177,7 @@ include("../../seguridad/comprobar_login.php");
                               </span>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
