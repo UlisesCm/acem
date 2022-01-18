@@ -7,14 +7,15 @@ function vaciarCampos() {
   $("#n" + nombre).val($("#c" + nombre).val());
   // guardarArchivo()
 } */
-function fileinput(nombre,idform){
+
+function fileinput(nombre,idform=""){
 	$('#n'+nombre).val($('#c'+nombre).val());
 	guardarArchivo(idform);
 }
 
 const objetoContador = [0];
 
-$(document).ready(function () {
+$(document).ready(function () {   
 
   let contadorLeccion = 0;
   let contadorExamen = 0;
@@ -63,6 +64,7 @@ $(document).ready(function () {
       }
     }
   });
+  
 
   $("#botonGuardarInscribir").click(function () {
         var variables = $("#formulario-inscribirme").serialize();
@@ -553,12 +555,31 @@ const guardarArchivo = (idform) => {
     cache: false,
     contentType: false,
     processData: false,
-    success: function (mensaje) {
-      $("#botonGuardar").show();
-      $("#botonSave").show();
-      $("#loading").hide();
-      console.log(mensaje);
-    },
+    success: function(mensaje){
+			mensaje = $.trim(mensaje);
+			if(mensaje == "fracaso"){
+				//intente nuevamente y pintar de rojo
+				$("#cajaArchivo").html("ERROR AL SUBIR");
+				$("#botonArchivo").html("INTENTE NUEVAMENTE");
+				//$("#botonArchivo"+idform).css("background-color","#C00");
+				$("#botonArchivo").removeClass("btn-warning");
+				$("#botonArchivo").removeClass("btn-success");
+				$("#botonArchivo").addClass("btn-danger");
+			}
+			else{
+				//archivo subido y pintar de verde
+				$("#cajaArchivo").html(mensaje);
+				$("#botonArchivo").html("ARCHIVO SUBIDO");
+				//$("#botonArchivo"+idform).css("background-color","#C00");
+				$("#botonArchivo").removeClass("btn-warning");
+				$("#botonArchivo").removeClass("btn-danger");
+				$("#botonArchivo").addClass("btn-success");
+				
+			}
+			$("#botonGuardar").show();
+			$("#botonSave").show();
+			$("#loading").hide();
+		}
   });
   return false;
 };

@@ -152,6 +152,20 @@ $aRecursoExtencion = array();
 	// $mensaje=$mensaje."<p>El campo recurso no es correcto</p>";
 } */
 
+if (isset($_FILES['archivo']['name'])){
+	$facturatemporal=$_FILES['archivo']['tmp_name'];
+	$facturanombre=$_FILES['archivo']['name'];
+	$extencionfactura=pathinfo($_FILES['archivo']['name'], PATHINFO_EXTENSION);
+	$factura=basename($_FILES['archivo']['name'],".".$extencionfactura)."_".generarClave(5);
+	$facturaExtencion= $factura.".".$extencionfactura;	
+	if($facturatemporal==""){
+		$factura="";
+	}
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo factura no es correcto</p>";
+}
+
 // VARIABLES EXAMEN /////////////////////////////////////////////////////////////////////////////////////
 /* Contador Preguntas */
 if (isset($_POST['inputContadorExamen'])){ //select tipo leccion

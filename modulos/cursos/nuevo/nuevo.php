@@ -69,7 +69,7 @@ include("../../seguridad/comprobar_login.php");
             <h3 class="box-title">Formulario de registro</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
-          <form class="form-horizontal" name="formulario" id="formulario" method="post" enctype ="multipart/form-data">
+          <form class="form-horizontal" name="formulario" id="formulario" method="post" enctype="multipart/form-data">
             <div class="box-body">
 
               <div class="form-group">
@@ -122,7 +122,8 @@ include("../../seguridad/comprobar_login.php");
                 <!-- Padre para clonacion -->
                 <!-- Agregar Contenidos -->
                 <div id="padre-lecciones">
-                  <div ><!-- style="display: none;" -->
+                  <div>
+                    <!-- style="display: none;" -->
                     <div class="carta-lecciones" id="nodo-padre-leccion">
                       <div class="form-group" id="div-principal">
                         <!-- div1 -->
@@ -152,32 +153,32 @@ include("../../seguridad/comprobar_login.php");
                           </div>
                         </div>
                         <!-- archivo -->
-                        <div class="form-group" id="div-contenido-archivo">
-                          <form name="formularioArchivos" id="formularioArchivos" method="POST" enctype="multipart/form-data">
-                          <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
+                        <!-- <div class="form-group" id="div-contenido-archivo">
+                          <form name="formularioArchivos" id="formularioArchivos" method="post" enctype="multipart/form-data">
+                          <label for="x" class="col-sm-2 control-label">Adjuntar Recurso 1:</label>
                           <div class="col-sm-4" id="div-contenido-archivo-hijo">
                             <div class="input-group" id="div-contenido-archivo-nieto">
-                              <input type="file" name="archivo" style="display:none;" id="carchivo" accept=".pdf" onChange="fileinput('archivo')" />
+                              <input type="file" name="archivo" style="display:none;" id="carchivo" accept=".pdf" onchange="fileinput('archivo')" />
                               <input type="text" name="narchivo" id="narchivo" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
                               <span class="input-group-btn">
-                                <a class="btn btn-warning" id="botornArchivo" onclick="$('#carchivo').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                                <a class="btn btn-warning" id="botonArchivo" onclick="$('#carchivo').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
                               </span>
                             </div>
                           </div>
                           </form>
-                        </div>
-       <!--                  <div class="form-group" id="div-contenido-archivo">
+                        </div> -->
+                        <div class="form-group" id="div-contenido-archivo">
                           <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
                           <div class="col-sm-4" id="div-contenido-archivo-hijo">
                             <div class="input-group" id="div-contenido-archivo-nieto">
-                              <input type="file" name="recurso" style="display:none;" id="crecurso" accept=".pdf" onChange="fileinput('recurso')" />
+                              <input type="file" name="recurso" style="display:none;" id="crecurso" accept=".pdf" onchange="fileinput('recurso')" />
                               <input type="text" name="nrecurso" id="nrecurso" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
                               <span class="input-group-btn">
                                 <a class="btn btn-warning" onclick="$('#crecurso').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
                               </span>
                             </div>
                           </div>
-                        </div> -->
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -212,21 +213,21 @@ include("../../seguridad/comprobar_login.php");
                         </div>
                       </div>
                       <!-- archivo -->
-                      
-                        <div class="form-group" id="div-contenido-archivo0">
-                          <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
-                          <div class="col-sm-4" id="div-contenido-archivo-hijo0">
-                            <div class="input-group" id="div-contenido-archivo-nieto0">
-                              <form class="form-horizontal" id="formulario-recurso0" name="formularioRecurso0" method="post" enctype ="multipart/form-data">
-                                <input type="file" name="recurso0" style="display:none;" id="crecurso0" accept=".pdf" onchange="fileinput('recurso0')" />
-                                <input type="text" name="nrecurso0" id="nrecurso0" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
-                                <span class="input-group-btn">
-                                  <a class="btn btn-warning" onclick="$('#crecurso0').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
-                                </span>
-                              </form>                           
-                            </div>
+
+                      <div class="form-group" id="div-contenido-archivo0">
+                        <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
+                        <div class="col-sm-4" id="div-contenido-archivo-hijo0">
+                          <div class="input-group" id="div-contenido-archivo-nieto0">
+                            <form class="form-horizontal" id="formulario-recurso0" name="formularioRecurso0" method="post" enctype="multipart/form-data">
+                              <input type="file" name="recurso0" style="display:none;" id="crecurso0" accept=".pdf" onchange="fileinput('recurso0')" />
+                              <input type="text" name="nrecurso0" id="nrecurso0" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                              <span class="input-group-btn">
+                                <a class="btn btn-warning" onclick="$('#crecurso0').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                              </span>
+                            </form>
                           </div>
                         </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -270,8 +271,8 @@ include("../../seguridad/comprobar_login.php");
                           <button type="button" class="btn btn btn-danger pull-right boton-eliminar" id="boton-borrar-pregunta" onclick="borrarPregunta(0)">x</button>
                         </div>
                         <label class="col-sm-1 control-label" id="label-cambiante">
-                        <span id="label-pregunta">Pregunta:</span>
-                        <span id="label-respuesta">Practica:</span>
+                          <span id="label-pregunta">Pregunta:</span>
+                          <span id="label-respuesta">Practica:</span>
                         </label>
                         <div class="col-sm-4" id="div-preguntaX">
                           <input class="form-control" type="text" name="inputPregunta" id="input-pregunta">
@@ -313,7 +314,7 @@ include("../../seguridad/comprobar_login.php");
                           <option value="practica">Practica</option>
                         </select>
                       </div>
-                      <label class="col-sm-1 control-label" id="label-pregunta"> 
+                      <label class="col-sm-1 control-label" id="label-pregunta">
                         <span id="label-pregunta0">Pregunta:</span>
                         <span id="label-respuesta0">Practica:</span>
                       </label>
@@ -351,6 +352,36 @@ include("../../seguridad/comprobar_login.php");
                 <button type="button" class="btn btn-default" id="botonCancelar" onclick="vaciarCampos();">Limpiar</button>
                 <button type="button" class="btn btn-primary pull-right" id="botonGuardar"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
               </div><!-- /.box-footer -->
+          </form>
+          <!--     <div class="form-group" id="div-contenido-archivo">
+                          <form name="formularioArchivos" id="formularioArchivos" method="post" enctype="multipart/form-data">
+                          <label for="x" class="col-sm-2 control-label">Adjuntar Recurso 1:</label>
+                          <div class="col-sm-4" id="div-contenido-archivo-hijo">
+                            <div class="input-group" id="div-contenido-archivo-nieto">
+                              <input type="file" name="archivo" style="display:none;" id="carchivo" accept=".pdf" onchange="fileinput('archivo')" />
+                              <input type="text" name="narchivo" id="narchivo" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                              <span class="input-group-btn">
+                                <a class="btn btn-warning" id="botonArchivo" onclick="$('#carchivo').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                              </span>
+                            </div>
+                          </div>
+                          </form>
+                        </div> -->
+          <form class="form-horizontal" name="formularioArchivos" id="formularioArchivos" method="post" enctype="multipart/form-data">
+            <div class="form-group ">
+              <div class="col-sm-5">
+                <div class="input-group">
+                  <input type="file" name="archivo" style="display:none;" id="carchivo" accept=".pdf" onchange="fileinput('archivo')">
+                  <input type="text" name="narchivo" id="narchivo" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled" >
+                  <span class="input-group-btn">
+                    <a class="btn btn-warning" id="botonArchivo" onclick="$('#carchivo').click();">Seleccionar Archivo</a>
+                  </span>
+                </div>
+              </div>
+              <span data-placement="bottom" data-toggle="tooltip" data-html="true" title="" data-original-title="<b>Adjunte el archivo .pdf de la representación impresa del comprobante fiscal</b>\">
+                <i class="fa fa-question-circle text-blue ayuda"></i>
+              </span>
+            </div>
           </form>
           <div id="loading" class="overlay" style="display:none">
             <i class="fa fa-cog fa-spin" style="color:#000000"></i>
