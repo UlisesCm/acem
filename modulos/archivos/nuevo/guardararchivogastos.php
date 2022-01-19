@@ -20,13 +20,14 @@ if (isset($_FILES['archivo']['name'])){
 		$mensaje=$mensaje."<p>El campo archivo es obligatorio</p>";
 	}
 	
+	
 }else{
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo archivo no es correcto</p>";
 }
 
 if($archivotemporal!=""){
-	$estadoArchivo=cargarArchivo($archivonombre,$extencionarchivo, $archivotemporal, $archivo,"jpg,doc,docx,xls,xlsx,csv,pdf,rar,zip,txt","gastos",0,0,"archivo","center");
+	$estadoArchivo=cargarArchivo($archivonombre,$extencionarchivo, $archivotemporal, $archivo,"jpg,doc,docx,xls,xlsx,csv,pdf,rar,zip,txt","cursos",0,0,"archivo","center");
 	if ($estadoArchivo=="exito"){
 		echo utf8_encode($archivo);
 	}else if ($estadoArchivo=="extencionInvalida"){

@@ -1,3 +1,4 @@
+
 // JS MODULA Autor: Armando Viera Rodriguez 2016
 function vaciarCampos() {
   $("#cnombre").focus();
@@ -5,7 +6,7 @@ function vaciarCampos() {
 
 /* function fileinput(nombre) {
   $("#n" + nombre).val($("#c" + nombre).val());
-  // guardarArchivo()
+  guardarArchivo();
 } */
 
 function fileinput(nombre,idform=""){
