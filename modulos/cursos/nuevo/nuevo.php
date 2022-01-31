@@ -124,7 +124,7 @@ include("../../seguridad/comprobar_login.php");
                 <div id="padre-lecciones">
                   <div>
                     <!-- style="display: none;" -->
-                    <div class="carta-lecciones" id="nodo-padre-leccion">
+                    <div class="carta-lecciones" id="nodo-padre-leccion" style="display: none;">
                       <div class="form-group" id="div-principal">
                         <!-- div1 -->
                         <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
@@ -367,7 +367,7 @@ include("../../seguridad/comprobar_login.php");
                           </div>
                           </form>
                         </div> -->
-          <form class="form-horizontal" name="formularioArchivos" id="formularioArchivos" method="post" enctype="multipart/form-data">
+<!--           <form class="form-horizontal" name="formularioArchivos" id="formularioArchivos" method="post" enctype="multipart/form-data">
             <div class="form-group ">
               <div class="col-sm-5">
                 <div class="input-group">
@@ -382,7 +382,7 @@ include("../../seguridad/comprobar_login.php");
                 <i class="fa fa-question-circle text-blue ayuda"></i>
               </span>
             </div>
-          </form>
+          </form> -->
           <div id="loading" class="overlay" style="display:none">
             <i class="fa fa-cog fa-spin" style="color:#000000"></i>
           </div>
