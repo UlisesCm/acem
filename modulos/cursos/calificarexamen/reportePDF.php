@@ -1,19 +1,20 @@
 <?php
 
 include("../../../librerias/php/mpdf/vendor/autoload.php");
-require('../Asignacionherramientas.class.php');
-include("../../../librerias/php/mpdf/indexgeneradorAuditoriaHerramienta.php");
+// require('../Asignacionherramientas.class.php');
+require('../Cursos.class.php');
+include("../../../librerias/php/mpdf/examencalificado.php");
 
+$nombreExamen=$_COOKIE["nombreExamen"];
+// $nombreExamen= "COOKIE NOMBRE DEL EXAMEN";
 
-function Reporte($idtrabajador){
+function Reporte($nombreExamen){
     $obtenerplantillacompleta = new clasegeneradorpdf;
-    $plantillacompleta=$obtenerplantillacompleta->GeneradorPdf($idtrabajador);
+    $plantillacompleta=$obtenerplantillacompleta->GeneradorPdf($nombreExamen);
     return $plantillacompleta;
 }
+// $nombreExamen= $_COOKIE["nombreExamen"];
 
 
-
-$idtrabajador=$_COOKIE["idtrabajador"];
-
-Reporte($idtrabajador);
+Reporte($nombreExamen);
  ?>

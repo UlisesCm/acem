@@ -258,16 +258,22 @@ $(document).ready(function () {
 });
 
 //***********************AJAX*********************
+
 //pdf INICIO
 function imprimirpdfs() {
-  var empleados = $("#idempleado_ajax").val();
+
+  /* var empleados = $("#idempleado_ajax").val();
   var tecnicos = $("#idtrabajador_ajax").val();
   var tipo = $(".tipo:checked").val();
   if (tipo == "empleados") {
     document.cookie = "idtrabajador=" + empleados;
   } else {
     document.cookie = "idtrabajador=" + tecnicos;
-  }
+  } */
+
+  var nombreExamen = $("#nombreExamen").val();
+  document.cookie = "nombreExamen=" + nombreExamen;
+  
   window.open(
     "reportePDF.php",
     "_blank",

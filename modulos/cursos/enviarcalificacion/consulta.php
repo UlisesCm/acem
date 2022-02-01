@@ -258,7 +258,7 @@ $iddetalleexamen = $filas['iddetalleexamen'];
 $calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas, $calificacionMaxima, $iddetalleexamen);
 
 ?>
-<div class="container ">
+<div class="container">
 	<div class="carta-cursos margin-top20 margin-bot20">
 		<h1 class="d-flex centrar-elementos">
 			¡Examen Calificado!

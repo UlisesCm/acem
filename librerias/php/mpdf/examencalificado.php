@@ -3,12 +3,12 @@ include("../../../librerias/php/mpdf/vendor/autoload.php");
 
 class clasegeneradorpdf
 {
-function GeneradorPdf(){
+function GeneradorPdf($nombreExamen){
   // Require composer autoload
   // require_once __DIR__ . '../../../librerias/php/mpdf/vendor/autoload.php';
-  include("../../../librerias/php/mpdf/PlantillaAuditoriaHerramienta/diseno.php");
+  include("../../../librerias/php/mpdf/examencalificado/diseno.php");
   //require_once __DIR__ . '../../../librerias/php/mpdf/plantilla/diseno.php';
-  $css = file_get_contents('../../../librerias/php/mpdf/PlantillaAuditoriaHerramienta/style.css');
+  $css = file_get_contents('../../../librerias/php/mpdf/examencalificado/style.css');
   date_default_timezone_set('America/Mexico_City');   //obtener la hora
   // clases necesarias
 
@@ -22,7 +22,7 @@ $mpdf = new \Mpdf\Mpdf([
 ]);
 
   $mpdf->SetAuthor('ACEM');
-  $valores = headerpdf();    //obtiene el encabezado con los datos y diseño
+  $valores = headerpdf($nombreExamen);    //obtiene el encabezado con los datos y diseño
   $headercondatos=$valores;
   $contenido = disenohtmlcss();    //obtiene el encabezado con los datos y diseño
   $obtenercontenido=$contenido;
