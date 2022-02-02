@@ -11,16 +11,17 @@ function disenohtmlcss()
   
 }
 
-function headerpdf($nombreExamen)
+function headerpdf($nombreExamen, $nombreAlumno, $calificacionFinal)
 {
 
     $headeridsenodos = '
       <header>
         <div>
           <h1>'.$nombreExamen.' </h1>
+          <h2>'.$nombreAlumno.' </h2>
+          <h2> Calificacion:'.$calificacionFinal.' </h2>
         </div>
       </header>';
-  
   return $headeridsenodos;
 }
 

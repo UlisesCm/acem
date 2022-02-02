@@ -3,7 +3,7 @@ include("../../../librerias/php/mpdf/vendor/autoload.php");
 
 class clasegeneradorpdf
 {
-function GeneradorPdf($nombreExamen){
+function GeneradorPdf($nombreExamen, $nombreAlumno, $calificacionFinal){
   // Require composer autoload
   // require_once __DIR__ . '../../../librerias/php/mpdf/vendor/autoload.php';
   include("../../../librerias/php/mpdf/examencalificado/diseno.php");
@@ -22,7 +22,7 @@ $mpdf = new \Mpdf\Mpdf([
 ]);
 
   $mpdf->SetAuthor('ACEM');
-  $valores = headerpdf($nombreExamen);    //obtiene el encabezado con los datos y diseño
+  $valores = headerpdf($nombreExamen, $nombreAlumno, $calificacionFinal);    //obtiene el encabezado con los datos y diseño
   $headercondatos=$valores;
   $contenido = disenohtmlcss();    //obtiene el encabezado con los datos y diseño
   $obtenercontenido=$contenido;

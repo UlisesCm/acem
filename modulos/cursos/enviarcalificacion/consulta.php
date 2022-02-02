@@ -123,6 +123,13 @@ if (isset($_REQUEST['nombre'])) {
 	$nombre  = "no existe";
 }
 
+if (isset($_REQUEST['nombreAlumno'])) {
+	$nombreAlumno = htmlentities($_REQUEST['nombreAlumno']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombreAlumno  = "no existe";
+}
+
 if (isset($_REQUEST['cadenaTipo'])) {
 	$cadenaTipo = htmlentities($_REQUEST['cadenaTipo']);
 } else {
@@ -276,9 +283,13 @@ $calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arre
 		<hr>
 		<form action="../evaluacion/vistacursos.php?n1=cursos&n2=evaluar" method="post">
 			<div class="contenedor justify-content-center margen-bot2">
-				<button class="btn btn-default pull-right">
+				<input class="btn btn-success pull-right margen-5" type="button" value="Imprimir Examen" onclick="imprimirpdfs()">
+				<button class="btn btn-default pull-right margen-5">
 					Volver a Evaluaciones
 				</button>
+				<input type="hidden" name="calificacionFinal" id="calificacionFinal" value="<?php echo $calificacionFinal?>">
+				<input type="hidden" name="nombreAlumno" id="nombreAlumno" value="<?php echo $nombreAlumno?>">
+				<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>">
 			</div>
 		</form>
 	</div>

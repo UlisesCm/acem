@@ -44,6 +44,20 @@ if (isset($_POST['nombre'])) {
 	$nombre  = "";
 }
 
+if (isset($_POST['nombreAlumno'])) {
+	$nombreAlumno = htmlentities($_POST['nombreAlumno']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombreAlumno  = "";
+}
+
+if (isset($_POST['nombreExamen'])) {
+	$nombreExamen = htmlentities($_POST['nombreExamen']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$nombreExamen  = "";
+}
+
 if (isset($_POST['contador'])) {
 	$contador = htmlentities($_POST['contador']);
 	// $busqueda=mysql_real_escape_string($busqueda);
@@ -250,6 +264,8 @@ if (isset($_POST['calificacionMaxima'])) {
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
+					<input type="hidden" name="nombreAlumno" value="<?php echo $nombreAlumno?>"/>
+					<input type="hidden" name="nombreExamen" value="<?php echo $nombreExamen?>"/>
 					<input type="hidden" name="contadorPreguntas" value="<?php echo $contadorPreguntas?>"/>
 					<input type="hidden" name="contadorRespuestas" value="<?php echo $contadorRespuestas?>"/>
 					<input type="hidden" name="total" value="<?php echo $total?>"/>

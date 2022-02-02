@@ -141,7 +141,7 @@ $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
 
 // $resultadoExamen = $Ocursos->mostrarExamen($idcurso);
-
+$calificacionFinal=0;
 $resultadoAvance = $Ocursos->mostrarIndividualAvance($idavancecurso);
 $filasAvance = mysqli_fetch_array($resultadoAvance);
 $iddetalleexamen = $filasAvance['iddetalleexamen'];
@@ -276,18 +276,21 @@ $contadorCalificaciones = 0;
 				</div>
 				<hr>
 				<?php
+				$calificacionFinal = $calificacionFinal + $calificacionTemp;
 				$cadenaCalificaciones = $cadenaCalificaciones.":::".$filas['idpregunta'];
 				$contadorCalificaciones++;
 				$calificacionMaxima = $calificacionMaxima + $filaPregunta['valor'];
 			}	
 			?>
-		<input type="text" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>"> <!-- SI EXISTE -->
-		<input type="text" name="cadenaCalificacion" id="cadenaCalificacion" value="<?php echo $cadenaCalificaciones?>"> <!-- SI EXISTE -->
-		<input type="text" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>"> <!-- SI EXISTE -->
-		<input type="text" name="calificacionMaxima" id="calificacionMaxima" value="<?php echo $calificacionMaxima?>"> <!-- SI EXISTE -->
-		<input type="text" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="cadenaCalificacion" id="cadenaCalificacion" value="<?php echo $cadenaCalificaciones?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="calificacionMaxima" id="calificacionMaxima" value="<?php echo $calificacionMaxima?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="nombreAlumno" id="nombreAlumno" value="<?php echo $alumno?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="calificacionFinal" id="calificacionFinal" value="<?php echo $calificacionFinal?>"> <!-- SI EXISTE -->
 		<div class="contenedor justify-content-center margen-bot2">
-			<button class="btn btn-success" id="enviarexamen" onclick="imprimirpdfs()">Enviar Calificación</button>
+			<button class="btn btn-success" id="enviarexamen">Enviar Calificación</button>
 		</div>
 		</form>
 	</div>

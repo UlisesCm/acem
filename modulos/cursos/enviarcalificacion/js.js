@@ -215,6 +215,26 @@ $(document).ready(function() {
 });
 
 //***********************AJAX*********************
+const imprimirpdfs = () => {
+	var nombreExamen = $("#nombreExamen").val();
+	var nombreAlumno = $("#nombreAlumno").val();
+	var calificacionFinal = $("#calificacionFinal").val();
+	var nombreDocente = ""
+	var fecha = ""
+
+  // var nombreExamen = $("#nombreExamen").val();
+  // var nombreAlumno = $("#nombreAlumno").val();
+  document.cookie = "nombreExamen=" + nombreExamen;
+  document.cookie = "nombreAlumno=" + nombreAlumno;
+  document.cookie = "calificacionFinal=" + calificacionFinal;
+  
+  window.open(
+    "reportePDF.php",
+    "_blank",
+    "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=900,height=900"
+  );
+}
+
 const menuFiltro = () => {
 	//MOSTRAR Y OCULTAR FILTRO GENERAL
 	const botonMostrarFiltro = $('.botonMostrarFiltro')

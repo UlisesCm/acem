@@ -260,19 +260,11 @@ $(document).ready(function () {
 //***********************AJAX*********************
 
 //pdf INICIO
-function imprimirpdfs() {
-
-  /* var empleados = $("#idempleado_ajax").val();
-  var tecnicos = $("#idtrabajador_ajax").val();
-  var tipo = $(".tipo:checked").val();
-  if (tipo == "empleados") {
-    document.cookie = "idtrabajador=" + empleados;
-  } else {
-    document.cookie = "idtrabajador=" + tecnicos;
-  } */
-
+const imprimirpdfs = () => {
   var nombreExamen = $("#nombreExamen").val();
+  var nombreAlumno = $("#nombreAlumno").val();
   document.cookie = "nombreExamen=" + nombreExamen;
+  document.cookie = "nombreAlumno=" + nombreAlumno;
   
   window.open(
     "reportePDF.php",
