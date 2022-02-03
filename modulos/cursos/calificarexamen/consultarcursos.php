@@ -282,7 +282,7 @@ $contadorCalificaciones = 0;
 				$calificacionMaxima = $calificacionMaxima + $filaPregunta['valor'];
 			}	
 			?>
-		<input type="hidden" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>"> <!-- SI EXISTE -->
+		<input type="text" name="id-avancecurso" id="id-avancecurso" value="<?php echo $idavancecurso?>"> <!-- SI EXISTE -->
 		<input type="hidden" name="cadenaCalificacion" id="cadenaCalificacion" value="<?php echo $cadenaCalificaciones?>"> <!-- SI EXISTE -->
 		<input type="hidden" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>"> <!-- SI EXISTE -->
 		<input type="hidden" name="calificacionMaxima" id="calificacionMaxima" value="<?php echo $calificacionMaxima?>"> <!-- SI EXISTE -->

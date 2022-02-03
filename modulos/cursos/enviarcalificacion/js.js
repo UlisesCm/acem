@@ -219,6 +219,7 @@ const imprimirpdfs = () => {
 	var nombreExamen = $("#nombreExamen").val();
 	var nombreAlumno = $("#nombreAlumno").val();
 	var calificacionFinal = $("#calificacionFinal").val();
+	var idavancecurso = $("#idavancecurso").val();
 	var nombreDocente = ""
 	var fecha = ""
 
@@ -227,6 +228,7 @@ const imprimirpdfs = () => {
   document.cookie = "nombreExamen=" + nombreExamen;
   document.cookie = "nombreAlumno=" + nombreAlumno;
   document.cookie = "calificacionFinal=" + calificacionFinal;
+  document.cookie = "idavancecurso=" + idavancecurso;
   
   window.open(
     "reportePDF.php",
