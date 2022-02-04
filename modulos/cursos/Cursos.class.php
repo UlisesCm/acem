@@ -403,6 +403,7 @@ class Cursos
 			return mysqli_query($this->con->conect, "SELECT * FROM preguntas WHERE idpregunta = '$idpregunta'");
 		}
 	}
+	
 	function mostrarDetallePreguntas($iddetalleexamen )
 	{
 		if ($this->con->conectar() == true) {

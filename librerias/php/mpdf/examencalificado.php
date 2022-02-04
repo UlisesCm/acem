@@ -9,6 +9,8 @@ function GeneradorPdf($nombreExamen, $nombreAlumno, $calificacionFinal, $idavanc
   include("../../../librerias/php/mpdf/examencalificado/diseno.php");
   //require_once __DIR__ . '../../../librerias/php/mpdf/plantilla/diseno.php';
   $css = file_get_contents('../../../librerias/php/mpdf/examencalificado/style.css');
+  $bootstrap = file_get_contents('../../../bootstrap/css/bootstrap.css');
+  $iconos = file_get_contents('../../../dist/iconos/css/font-awesome.css');
   date_default_timezone_set('America/Mexico_City');   //obtener la hora
   // clases necesarias
 
@@ -36,6 +38,8 @@ $mpdf = new \Mpdf\Mpdf([
   $mpdf->SetHTMLFooter($footer);
 
   //Dibuja tabla ya con los datos
+  $mpdf->WriteHTML($bootstrap, \Mpdf\HTMLParserMode::HEADER_CSS);
+  $mpdf->WriteHTML($iconos, \Mpdf\HTMLParserMode::HEADER_CSS);
    $mpdf->WriteHTML($css, \Mpdf\HTMLParserMode::HEADER_CSS);
    $mpdf->WriteHTML($obtenercontenido, \Mpdf\HTMLParserMode::HTML_BODY);
   // $mpdf->WriteHTML($datostotales, \Mpdf\HTMLParserMode::HTML_BODY);

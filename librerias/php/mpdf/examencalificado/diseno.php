@@ -18,18 +18,19 @@ function disenohtmlcss($idavancecurso)
   while ($filas = mysqli_fetch_array($resultado)) {
     $resultadoPregunta2 = $Ocursos->mostrarPreguntas2($filas['idpregunta']);
 		$filaPregunta = mysqli_fetch_array($resultadoPregunta2);
-		$resultadoRespuesta2 = $Ocursos->mostrarDetalleRespuestas($filas['iddetallepregunta']);
-		$filaRespuesta = mysqli_fetch_array($resultadoRespuesta2);
+		
  
 
     $contenidoPregunta = '
-      <h1> 
+      <h1 class="text-success"> 
         '.$filaPregunta['pregunta'].'
         <small>'.$filaPregunta['tipopregunta'].' - '.$filaPregunta['valor'].'puntos</small>
       </h1>
     ';
     switch ($filaPregunta['tipopregunta']) {
       case 'abierta':
+        $resultadoRespuesta2 = $Ocursos->mostrarDetalleRespuestas($filas['iddetallepregunta']);
+		    $filaRespuesta = mysqli_fetch_array($resultadoRespuesta2);
         $contenidoRespuestaTemp='
         <textarea class="form-control" name="" id="" cols="100" rows="3" disabled>'.$filaRespuesta['respuesta'].'</textarea>
         ';
@@ -46,22 +47,14 @@ function disenohtmlcss($idavancecurso)
 					$filasDetallesRespuestas = mysqli_fetch_array($respuestas2);
           $checked ="";
           if ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta']) {
-          $checked="checked";
+          $checked="subrayado";
           }
           $contenidoRespuestaTemp = $contenidoRespuestaTemp.'
-          <div class="margen-lateral-texto contenedor alineacion-center ">
+          <div class="margen-lateral-texto contenedor alineacion-center">
             <div class="col-md-3">
-              <p class="margin-right">
+              <p class="margin-right '.$checked.'">
                 '.$filasRespuestas['respuesta'].'
               </p>
-              <input 
-                type="checkbox" 
-                name="'.$filasRespuestas['idrespuesta'].'" 
-                id="'.$filasRespuestas['idrespuesta'].'" 
-                value="'.$filasRespuestas['respuesta'].'"
-                '.$checked.'
-                disabled
-              >
             </div>
           </div>
           ';
@@ -83,23 +76,16 @@ function disenohtmlcss($idavancecurso)
 					$filasDetallesRespuestas = mysqli_fetch_array($respuestas2);
           $checked ="";
           if ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta']) {
-          $checked="checked";
+          $checked="subrayado";
           }
           $contenidoRespuestaTemp = $contenidoRespuestaTemp.'
           <div class="margen-lateral-texto contenedor alineacion-center">
             <div class="col-md-3">
-							<p class="margin-right">
+							<p class="margin-right '.$checked.' label-control">
 								'.$filasRespuestas['respuesta'].'
 							</p>
 						</div>
-            <input 
-            type="radio" 
-            name="'.$filasRespuestas['idrespuesta'].'"
-            id="'.$filasRespuestas['idrespuesta'].'"
-            value="'.$filasRespuestas['respuesta'].'"
-            '.$checked.'
-            disabled
-          >
+
           </div>
           ';
           if (($filasRespuestas['correcto'] == "on") && ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta'])) {

@@ -171,8 +171,8 @@ $contadorCalificaciones = 0;
 				$calificacionTemp = 0;
 				$resultadoPregunta2 = $Ocursos->mostrarPreguntas2($filas['idpregunta']);
 				$filaPregunta = mysqli_fetch_array($resultadoPregunta2);
-				$resultadoRespuesta2 = $Ocursos->mostrarDetalleRespuestas($filas['iddetallepregunta']);
-				$filaRespuesta = mysqli_fetch_array($resultadoRespuesta2);
+				/* $resultadoRespuesta2 = $Ocursos->mostrarDetalleRespuestas($filas['iddetallepregunta']);
+				$filaRespuesta = mysqli_fetch_array($resultadoRespuesta2); */
 				?>
 				<div class="margen-lateral-texto">
 					<h1> 
@@ -182,6 +182,8 @@ $contadorCalificaciones = 0;
 					<?php 
 					switch ($filaPregunta['tipopregunta']) {
 						case 'abierta':
+							$resultadoRespuesta2 = $Ocursos->mostrarDetalleRespuestas($filas['iddetallepregunta']);
+							$filaRespuesta = mysqli_fetch_array($resultadoRespuesta2);
 							?><textarea class="form-control" name="" id="" cols="100" rows="3" disabled><?php echo $filaRespuesta['respuesta']?></textarea><?php
 							break;
 						case 'casilla'://checkboxk
