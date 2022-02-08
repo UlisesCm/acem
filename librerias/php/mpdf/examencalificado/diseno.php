@@ -46,13 +46,17 @@ function disenohtmlcss($idavancecurso)
           $respuestas2 = $Ocursos->mostrarDetalleRespuestas2($filasRespuestas['idrespuesta']);
 					$filasDetallesRespuestas = mysqli_fetch_array($respuestas2);
           $checked ="";
+          $under ="";
           if ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta']) {
           $checked="subrayado";
+          }
+          if ($filasRespuestas['correcto'] == "on") {
+            $under= "under";
           }
           $contenidoRespuestaTemp = $contenidoRespuestaTemp.'
           <div class="margen-lateral-texto contenedor alineacion-center">
             <div class="col-md-3">
-              <p class="margin-right '.$checked.'">
+              <p class="margin-right '.$checked.' '.$under.'">
                 '.$filasRespuestas['respuesta'].'
               </p>
             </div>
@@ -75,14 +79,19 @@ function disenohtmlcss($idavancecurso)
           $respuestas2 = $Ocursos->mostrarDetalleRespuestas2($filasRespuestas['idrespuesta']);
 					$filasDetallesRespuestas = mysqli_fetch_array($respuestas2);
           $checked ="";
+          $under ="";
           if ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta']) {
-          $checked="subrayado";
+            $under= "under";
+          }
+          if ($filasRespuestas['correcto'] == "on") {
+            $checked="subrayado";
           }
           $contenidoRespuestaTemp = $contenidoRespuestaTemp.'
           <div class="margen-lateral-texto contenedor alineacion-center">
             <div class="col-md-3">
-							<p class="margin-right '.$checked.' label-control">
-								'.$filasRespuestas['respuesta'].'
+							<p class="margin-right '.$checked.' '.$under.'">
+								'.$filasRespuestas['respuesta'].' 
+                
 							</p>
 						</div>
 

@@ -290,7 +290,7 @@ $calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arre
 				<input type="hidden" name="calificacionFinal" id="calificacionFinal" value="<?php echo $calificacionFinal?>">
 				<input type="hidden" name="nombreAlumno" id="nombreAlumno" value="<?php echo $nombreAlumno?>">
 				<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>">
-				<input type="text" name="idavancecurso" id="idavancecurso" value="<?php echo $idavancecurso?>">
+				<input type="hidden" name="idavancecurso" id="idavancecurso" value="<?php echo $idavancecurso?>">
 			</div>
 		</form>
 	</div>
