@@ -623,8 +623,6 @@ function buscar(busqueda) {
     "&n1=cursos&n2=consultarcursos";
 }
 
-
-
 function guardar(variables) {
   $("#botonGuardar").hide();
   $("#botonSave").hide();

@@ -122,9 +122,8 @@ include("../../seguridad/comprobar_login.php");
                 <!-- Padre para clonacion -->
                 <!-- Agregar Contenidos -->
                 <div id="padre-lecciones">
-                  <div>
-                    <!-- style="display: none;" -->
-                    <div class="carta-lecciones" id="nodo-padre-leccion" style="display: none;">
+                  <div style="display: none;">
+                    <div class="carta-lecciones" id="nodo-padre-leccion">
                       <div class="form-group" id="div-principal">
                         <!-- div1 -->
                         <label class="col-sm-2 control-label"> Tipo de Leccion:</label>
@@ -146,14 +145,14 @@ include("../../seguridad/comprobar_login.php");
                           <textarea name="contenidoTextArea" id="ccontenidoTextArea" cols="80" rows="6"></textarea>
                         </div>
                         <!-- input -->
-                        <div class="form-group" id="div-contenido-input">
+                        <div class="form-group" id="div-contenido-input" style="display: none;">
                           <label class="col-sm-2 control-label"> Enlace:</label>
                           <div class="col-sm-4" id="div-input">
                             <input name="contenidoInput" type="text" class="form-control" id="ccontenidoInput" />
                           </div>
                         </div>
                         <!-- archivo -->
-                        <!-- <div class="form-group" id="div-contenido-archivo">
+                        <div class="form-group" id="div-contenido-archivo">
                           <form name="formularioArchivos" id="formularioArchivos" method="post" enctype="multipart/form-data">
                           <label for="x" class="col-sm-2 control-label">Adjuntar Recurso 1:</label>
                           <div class="col-sm-4" id="div-contenido-archivo-hijo">
@@ -166,8 +165,8 @@ include("../../seguridad/comprobar_login.php");
                             </div>
                           </div>
                           </form>
-                        </div> -->
-                        <div class="form-group" id="div-contenido-archivo">
+                        </div>
+<!--                         <div class="form-group" id="div-contenido-archivo">
                           <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
                           <div class="col-sm-4" id="div-contenido-archivo-hijo">
                             <div class="input-group" id="div-contenido-archivo-nieto">
@@ -178,7 +177,7 @@ include("../../seguridad/comprobar_login.php");
                               </span>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>

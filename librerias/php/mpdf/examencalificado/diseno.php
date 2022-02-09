@@ -22,10 +22,10 @@ function disenohtmlcss($idavancecurso)
  
 
     $contenidoPregunta = '
-      <h1 class="text-success"> 
+      <h3> 
         '.$filaPregunta['pregunta'].'
-        <small>'.$filaPregunta['tipopregunta'].' - '.$filaPregunta['valor'].'puntos</small>
-      </h1>
+        <small>'.$filaPregunta['tipopregunta'].' - <strong>'.$filaPregunta['valor'].'</strong>/'.$filas['calificacion'].'</small>
+      </h3>
     ';
     switch ($filaPregunta['tipopregunta']) {
       case 'abierta':
@@ -136,7 +136,7 @@ function headerpdf($nombreExamen, $nombreAlumno, $calificacionFinal)
         <div>
           <h1>'.$nombreExamen.' </h1>
           <h2>'.$nombreAlumno.' </h2>
-          <h2> Calificacion:'.$calificacionFinal.' </h2>
+          <h2> Calificacion:'.$calificacionFinal.'</h2>
         </div>
       </header>';
   return $headeridsenodos;
