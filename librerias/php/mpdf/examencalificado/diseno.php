@@ -51,13 +51,13 @@ function disenohtmlcss($idavancecurso)
           $checked="subrayado";
           }
           if ($filasRespuestas['correcto'] == "on") {
-            $under= "under";
+            $under= " <small>(correcta)</small>";
           }
           $contenidoRespuestaTemp = $contenidoRespuestaTemp.'
           <div class="margen-lateral-texto contenedor alineacion-center">
             <div class="col-md-3">
-              <p class="margin-right '.$checked.' '.$under.'">
-                '.$filasRespuestas['respuesta'].'
+              <p class="margin-right '.$checked.' ">
+                '.$filasRespuestas['respuesta'].''.$under.'
               </p>
             </div>
           </div>
@@ -81,16 +81,16 @@ function disenohtmlcss($idavancecurso)
           $checked ="";
           $under ="";
           if ($filasRespuestas['respuesta'] == $filasDetallesRespuestas['respuesta']) {
-            $under= "under";
-          }
-          if ($filasRespuestas['correcto'] == "on") {
             $checked="subrayado";
+            }
+          if ($filasRespuestas['correcto'] == "on") {
+            $under= " <small>(correcta)</small>";
           }
           $contenidoRespuestaTemp = $contenidoRespuestaTemp.'
           <div class="margen-lateral-texto contenedor alineacion-center">
             <div class="col-md-3">
-							<p class="margin-right '.$checked.' '.$under.'">
-								'.$filasRespuestas['respuesta'].' 
+							<p class="margin-right '.$checked.'">
+								'.$filasRespuestas['respuesta'].' '.$under.' 
                 
 							</p>
 						</div>
