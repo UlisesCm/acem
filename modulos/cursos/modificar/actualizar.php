@@ -169,7 +169,6 @@ include("recuperarValores.php");
                 <?php
                 while ($filasPreguntas = mysqli_fetch_array($resultadoPreguntas)) {
                   $contadorPreguntas++;
-                  
                 ?>
                   <div class="form-group ">
                     <label for="cicono" class="col-sm-2 control-label">Pregunta:</label>

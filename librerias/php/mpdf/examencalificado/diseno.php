@@ -1,7 +1,7 @@
 <?php
 include("../../../../modulos/cursos/Cursos.class.php");
 
-function disenohtmlcss($idavancecurso)
+function disenohtmlcss($idavancecurso, $nombreExamen, $nombreAlumno, $calificacionFinal)
 {
   
   $Ocursos = new Cursos;
@@ -103,6 +103,7 @@ function disenohtmlcss($idavancecurso)
         }
       break;
       case 'practica':
+        $contenidoRespuestaTemp="";
       break;
       
       default:
@@ -119,36 +120,43 @@ function disenohtmlcss($idavancecurso)
     $contenidoTemp = $contenidoTemp.$contenidoGeneral;
   }
 
-  
-
   $contenido = '
+  <header>
+  <div class="">
+    <div class="box imagen-logo">
+      <img src="../../../librerias/php/mpdf/examencalificado/acem.png">
+    </div>
+    <div class="box2">
+      <h3><strong>Examen</strong></h3>
+      <h4><strong>Nombre del Examen:</strong> '.$nombreExamen.' </h4>
+      <h4><strong>Nombre del Alumno:</strong> '.$nombreAlumno.' </h4>
+      <h4><strong>Calificacion:</strong> '.$calificacionFinal.'</h4>  
+    </div>
+  </div>
+  </header >
   <body>'.$contenidoTemp.'</body>';
 
   return $contenido; 
   
 }
 
-function headerpdf($nombreExamen, $nombreAlumno, $calificacionFinal)
+function headerpdf()
 {
 
-    $headeridsenodos = '
-      <header>
-        <div>
-          <h1>'.$nombreExamen.' </h1>
-          <h2>'.$nombreAlumno.' </h2>
-          <h2> Calificacion:'.$calificacionFinal.'</h2>
-        </div>
-      </header>';
+    $headeridsenodos = '';
   return $headeridsenodos;
 }
+/* 
 
+*/
 
 function Footer()
 {
   $footer = '
   <div>
-    <h1> Footer PDF</h1>
+    <h4><strong>Evaluado por:</strong> Ulises Ciprés</h4>
+    <h4><strong>Fecha: </strong>11-02-2022</h4>
   </div>';
-
   return $footer;
 }
+?>

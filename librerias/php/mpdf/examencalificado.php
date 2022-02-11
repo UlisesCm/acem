@@ -24,9 +24,9 @@ $mpdf = new \Mpdf\Mpdf([
 ]);
 
   $mpdf->SetAuthor('ACEM');
-  $valores = headerpdf($nombreExamen, $nombreAlumno, $calificacionFinal);    //obtiene el encabezado con los datos y diseño
+  $valores = headerpdf();    //obtiene el encabezado con los datos y diseño
   $headercondatos=$valores;
-  $contenido = disenohtmlcss($idavancecurso);    //obtiene el encabezado con los datos y diseño
+  $contenido = disenohtmlcss($idavancecurso, $nombreExamen, $nombreAlumno, $calificacionFinal);    //obtiene el encabezado con los datos y diseño
   $obtenercontenido=$contenido;
 
 
