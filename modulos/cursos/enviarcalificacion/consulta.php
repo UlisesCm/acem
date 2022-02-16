@@ -262,6 +262,10 @@ $resultado = $Ocursos->mostrarLeccion($campoOrden, $orden, $inicial, $cantidadam
 $resultadoAvance = $Ocursos->mostrarAvance($idavancecurso);
 $filas = mysqli_fetch_array($resultadoAvance);
 $iddetalleexamen = $filas['iddetalleexamen'];
+$idempleado = $filas['iddocente'];
+$resultadoDocente = $Ocursos->mostrarDocente($idempleado);
+$filasDocente = mysqli_fetch_array($resultadoDocente);
+$nombreDocente = $filasDocente['nombre'];
 $calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas, $calificacionMaxima, $iddetalleexamen);
 
 ?>
@@ -291,6 +295,7 @@ $calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arre
 				<input type="hidden" name="nombreAlumno" id="nombreAlumno" value="<?php echo $nombreAlumno?>">
 				<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>">
 				<input type="hidden" name="idavancecurso" id="idavancecurso" value="<?php echo $idavancecurso?>">
+				<input type="hidden" name="nombreDocente" id="nombreDocente" value="<?php echo $nombreDocente?>">
 			</div>
 		</form>
 	</div>

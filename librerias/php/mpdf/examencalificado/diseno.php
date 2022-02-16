@@ -134,7 +134,8 @@ function disenohtmlcss($idavancecurso, $nombreExamen, $nombreAlumno, $calificaci
     </div>
   </div>
   </header >
-  <body>'.$contenidoTemp.'</body>';
+  <body>'.$contenidoTemp.'</body>'
+  ;
 
   return $contenido; 
   
@@ -150,13 +151,15 @@ function headerpdf()
 
 */
 
-function Footer()
+function Footer($nombreDocente)
 {
+  $fecha = date('d-m-Y');
   $footer = '
   <div>
-    <h4><strong>Evaluado por:</strong> Ulises Ciprés</h4>
-    <h4><strong>Fecha: </strong>11-02-2022</h4>
-  </div>';
+    <h4><strong>Evaluado por:</strong> '.$nombreDocente.'</h4>
+    <h4><strong>Fecha: </strong> '.$fecha.'</h4>
+  </div> 
+  ';
   return $footer;
 }
 ?>

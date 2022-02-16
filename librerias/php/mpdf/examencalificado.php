@@ -3,7 +3,7 @@ include("../../../librerias/php/mpdf/vendor/autoload.php");
 
 class clasegeneradorpdf
 {
-function GeneradorPdf($nombreExamen, $nombreAlumno, $calificacionFinal, $idavancecurso){
+function GeneradorPdf($nombreExamen, $nombreAlumno, $calificacionFinal, $idavancecurso, $nombreDocente){
   // Require composer autoload
   // require_once __DIR__ . '../../../librerias/php/mpdf/vendor/autoload.php';
   include("../../../librerias/php/mpdf/examencalificado/diseno.php");
@@ -31,7 +31,7 @@ $mpdf = new \Mpdf\Mpdf([
 
 
   //$header = headerpdf();  //esta en el index el diseño -> diseño del header
- $footer = Footer(); // esta en el index el diseño   -> diseño del footer
+ $footer = Footer($nombreDocente); // esta en el index el diseño   -> diseño del footer
 
   // Define the Headers before writing anything so they appear on the first page
   $mpdf->SetHTMLHeader($headercondatos, \Mpdf\HTMLParserMode::HTML_BODY,'O');

@@ -347,6 +347,13 @@ class Cursos
 		}
 	}
 
+	function mostrarDocente($idempleado)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT * FROM empleados WHERE idempleado='$idempleado'");
+		}
+	}
+
 	function mostrarIndividual($idcurso)
 	{
 		if ($this->con->conectar() == true) {
@@ -872,7 +879,7 @@ class Cursos
 			WHERE avancecursos.idavancecurso = '$idavancecurso'
 		";
 
-		$consulta = "SELECT avance,iddetalleexamen FROM avancecursos
+		$consulta = "SELECT avance,iddetalleexamen,iddocente FROM avancecursos
 		$where
 		";
 		if ($this->con->conectar() == true) {

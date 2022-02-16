@@ -220,15 +220,15 @@ const imprimirpdfs = () => {
 	var nombreAlumno = $("#nombreAlumno").val();
 	var calificacionFinal = $("#calificacionFinal").val();
 	var idavancecurso = $("#idavancecurso").val();
-	var nombreDocente = ""
+	var nombreDocente = $("#nombreDocente").val();
 	var fecha = ""
-
   // var nombreExamen = $("#nombreExamen").val();
   // var nombreAlumno = $("#nombreAlumno").val();
   document.cookie = "nombreExamen=" + nombreExamen;
   document.cookie = "nombreAlumno=" + nombreAlumno;
   document.cookie = "calificacionFinal=" + calificacionFinal;
   document.cookie = "idavancecurso=" + idavancecurso;
+  document.cookie = "nombreDocente=" + nombreDocente;
   
   window.open(
     "reportePDF.php",
