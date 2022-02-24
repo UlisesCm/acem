@@ -119,7 +119,7 @@ include("../../seguridad/comprobar_login.php");
                   <button type="button" class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion</button>
                 </div>
                 <!-- https://parzibyte.me/blog/2021/01/26/subir-varios-archivos-php-ajax/ -->
-<!--                 <div class="form-group input-group marger-left">
+                <!--                 <div class="form-group input-group marger-left">
                     <input multiple type="file" class="form-control" id="inputArchivos">
                     <input type="button" id="btnEnviar" class="btn btn-success" value="Enviar">
                 </div> -->
@@ -349,8 +349,21 @@ include("../../seguridad/comprobar_login.php");
 
                 </div>
                 <!-- Final Examen -->
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                      <h1>Transferir archivos</h1>
+                      <a href="//parzibyte.me/blog"></a>
+                      <div class="form-group">
+                        <input multiple type="file" class="form-control" id="inputArchivos">
+                        <br><br>
+                        <input type="button" value="Enviar" id="btnEnviar" class="btn btn-success">
+                      </div>
+                      <div class="alert alert-info" id="estado"></div>
+                    </div>
+                  </div>
+                </div>
               </div><!-- /.box-body -->
-
               <div class="box-footer">
                 <button type="button" class="btn btn-default" id="botonCancelar" onclick="vaciarCampos();">Limpiar</button>
                 <button type="button" class="btn btn-primary pull-right" id="botonGuardar"><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Guardar</button>
@@ -395,12 +408,14 @@ include("../../seguridad/comprobar_login.php");
 
     <?php include("../../../componentes/pie.php"); ?>
   </div><!-- ./wrapper -->
+  <script src="./subirArchivos/script.js" type="text/javascript"></script>
   <script type="text/javascript">
     var sprytextfield1 = new Spry.Widget.ValidationTextField("Vnombre", "none", {
       validateOn: ["blur"],
       minChars: 1
     });
   </script>
+  
 
 </body>
 
