@@ -118,7 +118,11 @@ include("../../seguridad/comprobar_login.php");
                   <button type="button" class="btn btn btn-default pull-right" id="ocultarLeccion" onclick="ocultarLecciones()">Ocultar</button>
                   <button type="button" class="btn btn-success pull-right margen-right" id="agregar-leccion">Agregar Leccion</button>
                 </div>
-
+                <!-- https://parzibyte.me/blog/2021/01/26/subir-varios-archivos-php-ajax/ -->
+<!--                 <div class="form-group input-group marger-left">
+                    <input multiple type="file" class="form-control" id="inputArchivos">
+                    <input type="button" id="btnEnviar" class="btn btn-success" value="Enviar">
+                </div> -->
                 <!-- Padre para clonacion -->
                 <!-- Agregar Contenidos -->
                 <div id="padre-lecciones">
@@ -154,19 +158,19 @@ include("../../seguridad/comprobar_login.php");
                         <!-- archivo -->
                         <div class="form-group" id="div-contenido-archivo">
                           <form name="formularioArchivos" id="formularioArchivos" method="post" enctype="multipart/form-data">
-                          <label for="x" class="col-sm-2 control-label">Adjuntar Recurso 1:</label>
-                          <div class="col-sm-4" id="div-contenido-archivo-hijo">
-                            <div class="input-group" id="div-contenido-archivo-nieto">
-                              <input type="file" name="archivo" style="display:none;" id="carchivo" accept=".pdf" onchange="fileinput('archivo')" />
-                              <input type="text" name="narchivo" id="narchivo" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
-                              <span class="input-group-btn">
-                                <a class="btn btn-warning" id="botonArchivo" onclick="$('#carchivo').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
-                              </span>
+                            <label for="x" class="col-sm-2 control-label">Adjuntar Recurso 1:</label>
+                            <div class="col-sm-4" id="div-contenido-archivo-hijo">
+                              <div class="input-group" id="div-contenido-archivo-nieto">
+                                <input type="file" name="archivo" style="display:none;" id="carchivo" accept=".pdf" onchange="fileinput('archivo')" />
+                                <input type="text" name="narchivo" id="narchivo" class="form-control" placeholder="Seleccionar Archivo" disabled="disabled">
+                                <span class="input-group-btn">
+                                  <a class="btn btn-warning" id="botonArchivo" onclick="$('#carchivo').click();">&nbsp;&nbsp;&nbsp;Seleccionar Archivo</a>
+                                </span>
+                              </div>
                             </div>
-                          </div>
                           </form>
                         </div>
-<!--                         <div class="form-group" id="div-contenido-archivo">
+                        <!--                         <div class="form-group" id="div-contenido-archivo">
                           <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
                           <div class="col-sm-4" id="div-contenido-archivo-hijo">
                             <div class="input-group" id="div-contenido-archivo-nieto">
@@ -366,7 +370,7 @@ include("../../seguridad/comprobar_login.php");
                           </div>
                           </form>
                         </div> -->
-<!--           <form class="form-horizontal" name="formularioArchivos" id="formularioArchivos" method="post" enctype="multipart/form-data">
+          <!--           <form class="form-horizontal" name="formularioArchivos" id="formularioArchivos" method="post" enctype="multipart/form-data">
             <div class="form-group ">
               <div class="col-sm-5">
                 <div class="input-group">
