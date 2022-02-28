@@ -194,7 +194,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				</h4>
 				<hr class="d-flex centrar-elementos">
 				<div class="d-flex centrar-elementos">
-					<i class="fa fa-pencil icono-curso"></i>
+					<i class="fa <?php echo $filas['icono'] ?> icono-curso"></i>
 				</div>
 				<hr>
 				<h3 class="d-flex centrar-elementos">

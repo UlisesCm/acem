@@ -72,7 +72,7 @@ include("../../seguridad/comprobar_login.php");
 				?>
 
 				<?php $herramientas = "consultar";
-				include("../componentes/herramientas.php"); ?>
+				// include("../componentes/herramientas.php"); ?>
 				<?php include("../../../componentes/avisos.php"); ?>
 
 				<!-- FILTRO -->

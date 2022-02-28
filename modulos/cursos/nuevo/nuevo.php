@@ -97,7 +97,35 @@ include("../../seguridad/comprobar_login.php");
               <div class="form-group">
                 <label for="cicono" class="col-sm-2 control-label">Icono:</label>
                 <div class="col-sm-5">
-                  <input name="icono" type="text" class="form-control" id="cicono" />
+                  <!-- <input name="icono" type="text" class="form-control" id="cicono" /> -->
+                  <select name="icono" class="form-control" id="cicono">
+                    <option value="fa-pencil">Lapiz</option>
+                    <option value="fa-battery-full">Bateria</option>
+                    <option value="fa-balance-scale">Balanza</option>
+                    <option value="fa-calendar-check-o">Calendario</option>
+                    <option value="fa-sticky-note">Nota</option>
+                    <option value="fa-map-o">Mapa</option>
+                    <option value="fa-commenting-o">Comentario</option>
+                    <option value="fa-map-o">Mapa</option>
+                    <option value="fa-anchor">Ancla</option>
+                    <option value="fa-automobile">Carro</option>
+                    <option value="fa-archive">Caja de Archivos</option>
+                    <option value="fa-bar-chart">Grafica de Barras</option>
+                    <option value="fa-bank">Banco</option>
+                    <option value="fa-at">Arroba</option>
+                    <option value="fa-bell-o">Campana</option>
+                    <option value="fa-bicycle">Bicicleta</option>
+                    <option value="fa-bolt">Rayo</option>
+                    <option value="fa-birthday-cake">Pastel de Cumpleaños</option>
+                    <option value="fa-calculator">Calculadora</option>
+                    <option value="fa-camera">Camara</option>
+                    <option value="fa-code">Simbolo de Codigo</option>
+                    <option value="fa-cogs">Engranes</option>
+                    <option value="fa-cloud">Nube</option>
+                    <option value="fa-folder">Folder</option>
+                    <option value="fa-feed">Señal</option>
+                    <option value="fa-envelope-o">Correo</option>
+                  </select>
                 </div>
               </div>
 
