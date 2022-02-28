@@ -58,11 +58,7 @@ class Cursos
 		$aTipoLecciones,
 		$aInputLecciones,
 		$aTextareaLecciones,
-		$aRecursoTemporal,
-		$aRecursoNombre,
-		$aExtencionRecurso,
-		$aRecurso,
-		$aRecursoExtencion,
+		$aInputArchivo,
 		$contadorExamen, // Examen
 		$nombreExamen,
 		$aValorPregunta,
@@ -109,18 +105,24 @@ class Cursos
 								break;
 
 							case 'imagen':
-								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "jpg", "leccion", 500, 500, "archivo", "center");
+/* 							cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "jpg", "leccion", 500, 500, "archivo", "center");
 								$contenido = $aRecurso[$i];
+								$tipo = $aTipoLecciones[$i]; */
+								$contenido = $aInputArchivo[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 							case 'video':
-								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "mp4", "leccion", 0, 0, "archivo", "center");
+/* 							cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "mp4", "leccion", 0, 0, "archivo", "center");
 								$contenido = $aRecurso[$i];
+								$tipo = $aTipoLecciones[$i]; */
+								$contenido = $aInputArchivo[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 							case 'documento':
-								cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "pdf", "leccion", 0, 0, "archivo", "center");
+/* 							cargarArchivo($aRecurso[$i], $aExtencionRecurso[$i], $aRecursoTemporal[$i], $aRecursoExtencion[$i], "pdf", "leccion", 0, 0, "archivo", "center");
 								$contenido = $aRecurso[$i];
+								$tipo = $aTipoLecciones[$i]; */
+								$contenido = $aInputArchivo[$i];
 								$tipo = $aTipoLecciones[$i];
 								break;
 

@@ -1,10 +1,12 @@
 
 // Elementos del DOM
-const $inputArchivos = document.querySelector("#inputArchivos"),
-  $btnEnviar = document.querySelector("#btnEnviar"),
-  $estado = document.querySelector("#estado");
-$btnEnviar.addEventListener("click", async () => {
 
+const subirDocumento = async (index) => {
+  const $inputArchivos = document.querySelector("#inputArchivos"+index)
+  const $btnEnviar = document.querySelector("#btnEnviar"+index)
+  const input = document.getElementById("inputArchivoText"+index);
+  // const btnEnviar = document.getElementById("btnEnviar"+index);
+  // $btnEnviar.addEventListener("click", async () => {
   const archivosParaSubir = $inputArchivos.files;
   if (archivosParaSubir.length <= 0) {
     // Si no hay archivos, no continuamos
@@ -17,15 +19,17 @@ $btnEnviar.addEventListener("click", async () => {
     formData.append("archivos[]", archivo);
   }
   // Los enviamos
-  $estado.textContent = "Enviando archivos...";
+  // $estado.textContent = "Enviando archivos...";
   const respuestaRaw = await fetch("./subirArchivos/guardarArchivos.php", {
     method: "POST",
     body: formData,
   });
   const respuesta = await respuestaRaw.json();
   // Puedes manejar la respuesta como tú quieras
-  console.log({ respuesta });
   // Finalmente limpiamos el campo
   $inputArchivos.value = null;
-  $estado.textContent = "Archivos enviados";
-});
+  // console.log(btnEnviar)
+  input.value = respuesta;
+  // $estado.textContent = "Archivos enviados";
+  // });
+}

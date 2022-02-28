@@ -280,6 +280,7 @@ const crearLeccion = (index) => {
   cloneChild[1].id = divPrincipal;
   //acceso a los div hijos y cambio de id a text area, Input y archivo
   let cloneChild2 = document.getElementById(divPrincipal).childNodes; //div-principal
+  /* console.log(cloneChild2) */ // PARA AGREGAR O QUITAR ELEMENTOS OCUPAS IR HACIENDO CONSOLE.LOG y ver que se afecta
   let divSelect = cloneChild2[5].id + index;
   let divBotonBorrar = cloneChild2[7].id + index;
   let divTextArea = cloneChild2[11].id + index;
@@ -321,15 +322,20 @@ const crearLeccion = (index) => {
   // Acceso al div Archivo Hijo
   let cloneChild331 = document.getElementById(divArchivoHijo).childNodes;
   let divArchivoNieto = cloneChild331[1].id + index;
+  let botonSubirArchivo = cloneChild331[3].id + index; //BOTON PARA 
   cloneChild331[1].id = divArchivoNieto;
+  cloneChild331[3].id = botonSubirArchivo;
+  cloneChild331[3].setAttribute("onclick", `subirDocumento(${index})`);
   //Accesso al div Archivo Nieto
   let cloneChild3311 = document.getElementById(divArchivoNieto).childNodes;
-  let inputArchivo1 = cloneChild3311[1].id + index;
-  let inputArchivo2 = cloneChild3311[3].id + index;
-  cloneChild3311[1].id = inputArchivo1;
-  cloneChild3311[3].id = inputArchivo2;
-  cloneChild3311[1].setAttribute("name", `recurso${index}`);
-  cloneChild3311[3].setAttribute("name", `nrecurso${index}`);
+  let inputArchivo = cloneChild3311[1].id + index;
+  let inputArchivoTexto = cloneChild3311[4].id + index;
+  cloneChild3311[1].id = inputArchivo;
+  cloneChild3311[4].id = inputArchivoTexto;
+  cloneChild3311[4].setAttribute("name", `inputArchivoText${index}`);
+
+  // cloneChild3311[3].id = inputArchivo2;
+  // cloneChild3311[3].setAttribute("name", `nrecurso${index}`);
   // Acceso al div de boton
   let cloneChild4 = document.getElementById(divBotonBorrar).childNodes;
   cloneChild4[1].id = cloneChild4[1].id + index;
@@ -640,70 +646,6 @@ function guardar(variables) {
   });
   return false;
 }
-  /* function guardar(variables){
-    var formData = new FormData($("#formulario")[0]);
-    $("#botonGuardar").hide();
-    $("#botonSave").hide();
-    $("#loading").show();
-    $.ajax({
-      url: 'guardar.php',
-      type: "POST",
-      data: formData,
-      cache: false,
-      contentType: false,
-      processData: false,
-      success: function(mensaje){
-        $("#botonGuardar").show();
-        $("#botonSave").show();
-        $("#loading").hide();
-        mostrarMensaje(mensaje);
-      }
-    });
-    return false;
-  } */
-/*   function guardarArchivo(idform){
-    var formulario = "formularioArchivos"+idform;
-    //alert(formulario);
-    variables=$("#"+formulario).serialize();
-    var formData = new FormData($("#"+formulario)[0]);
-    $("#botonGuardar").hide();
-    $("#botonSave").hide();
-    $("#loading2").show();
-    $.ajax({
-      url: '../../archivos/nuevo/guardararchivogastos.php',
-      type: "POST",
-      data: formData,
-      cache: false,
-      contentType: false,
-      processData: false,
-      success: function(mensaje){
-        mensaje = $.trim(mensaje);
-        if(mensaje == "fracaso"){
-          //intente nuevamente y pintar de rojo
-          $("#cajaArchivo"+idFilaArchivo).html("ERROR AL SUBIR");
-          $("#botonArchivo"+idFilaArchivo).html("INTENTE NUEVAMENTE");
-          //$("#botonArchivo"+idform).css("background-color","#C00");
-          $("#botonArchivo"+idFilaArchivo).removeClass("btn-warning");
-          $("#botonArchivo"+idFilaArchivo).removeClass("btn-success");
-          $("#botonArchivo"+idFilaArchivo).addClass("btn-danger");
-        }
-        else{
-          //archivo subido y pintar de verde
-          $("#cajaArchivo"+idFilaArchivo).html(mensaje);
-          $("#botonArchivo"+idFilaArchivo).html("ARCHIVO SUBIDO");
-          //$("#botonArchivo"+idform).css("background-color","#C00");
-          $("#botonArchivo"+idFilaArchivo).removeClass("btn-warning");
-          $("#botonArchivo"+idFilaArchivo).removeClass("btn-danger");
-          $("#botonArchivo"+idFilaArchivo).addClass("btn-success");
-          
-        }
-        $("#botonGuardar").show();
-        $("#botonSave").show();
-        $("#loading2").hide();
-      }
-    });
-    return false;
-  } */
 
 function mostrarMensaje(mensaje) {
   //alert(mensaje);

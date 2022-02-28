@@ -98,73 +98,21 @@ for ($i=0; $i <= $contadorLecciones; $i++) { //recorremos el arreglo en base a l
 	}
 }
 /*CARGAR ARCHIVO*/
-function generarClave2($longitud){ 
-	$cadena="[^A-Z0-9]"; 
-	return substr(str_replace($cadena, "", md5(rand())) . 
-	str_replace($cadena, "", md5(rand())) . 
-	str_replace($cadena, "", md5(rand())), 
-	0, $longitud); 
+
+$aInputArchivo = array();
+for ($i=0; $i <= $contadorLecciones ; $i++) { //recorremos el arreglo en base a la variable contador
+	$concatenacion = "inputArchivoText".$i;
+	switch (isset($_POST[$concatenacion])) {
+		case true:
+			$contenidoInput=htmlentities(trim($_POST[$concatenacion]));
+			array_push($aInputArchivo,$contenidoInput);
+			break;
+		
+		default:
+			array_push($aInputArchivo,"error");
+			break;
+	}
 }
-
-$aRecursoTemporal = array();
-$aRecursoNombre = array();
-$aExtencionRecurso = array();
-$aRecurso = array();
-$aRecursoExtencion = array();
-
-/* for ($i=0; $i <= $ContadorLecciones ; $i++) { 
-	$recursoContador = "recurso".$i;
-	$clave = generarClave2(5);
-	if (isset($_FILES['recurso0']['name'])){
-		$recursotemporal=$_FILES['recurso0']['tmp_name'];
-		$recursonombre=$_FILES['recurso0']['name'];
-		$extencionrecurso=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
-		$recurso=basename($_FILES['recurso0']['name'],".".$extencionrecurso)."_".$clave;
-		$recursoExtencion= $recurso.".".$extencionrecurso;
-			if($recursotemporal==""){
-				$recurso="";
-			}
-		array_push($aRecursoTemporal,$recursotemporal); //pendiente saber que objeto es el que pusheo al array 
-		array_push($aRecursoNombre,$recursonombre); //pendiente saber que objeto es el que pusheo al array 
-		array_push($aExtencionRecurso,$extencionrecurso); //pendiente saber que objeto es el que pusheo al array 
-		array_push($aRecurso,$recurso); //pendiente saber que objeto es el que pusheo al array 
-		array_push($aRecursoExtencion,$recursoExtencion); //pendiente saber que objeto es el que pusheo al array 
-		}else{
-		array_push($aRecursoTemporal,$recurso); 
-		array_push($aRecursoNombre,$recurso); 
-		array_push($aExtencionRecurso,$recurso); 
-		array_push($aRecurso,$recurso); 
-		array_push($aRecursoExtencion,$recurso);
-	}
-} */
-/* if (isset($_FILES['recurso0']['name'])){
-	$recursotemporal=$_FILES['recurso0']['tmp_name'];
-	$recursonombre=$_FILES['recurso0']['name'];
-	$extencionrecurso=pathinfo($_FILES['recurso0']['name'], PATHINFO_EXTENSION);
-	$recurso=basename($_FILES['recurso0']['name'],".".$extencionfactura)."_".generarClave(5);
-	$recursoExtencion= $recurso.".".$extencionrecurso;	
-	if($recursotemporal==""){
-		$frecurso="";
-	}
-}else{
-	$recursonombre = "No se encontro";
-	// $validacion=false;
-	// $mensaje=$mensaje."<p>El campo recurso no es correcto</p>";
-} */
-
-/* if (isset($_FILES['archivo']['name'])){
-	$facturatemporal=$_FILES['archivo']['tmp_name'];
-	$facturanombre=$_FILES['archivo']['name'];
-	$extencionfactura=pathinfo($_FILES['archivo']['name'], PATHINFO_EXTENSION);
-	$factura=basename($_FILES['archivo']['name'],".".$extencionfactura)."_".generarClave(5);
-	$facturaExtencion= $factura.".".$extencionfactura;	
-	if($facturatemporal==""){
-		$factura="";
-	}
-}else{
-	$validacion=false;
-	$mensaje=$mensaje."<p>El campo factura no es correcto</p>";
-} */
 
 // VARIABLES EXAMEN /////////////////////////////////////////////////////////////////////////////////////
 /* Contador Preguntas */
@@ -318,11 +266,7 @@ if($validacion){
 		$aTipoLecciones,
 		$aInputLecciones,
 		$aTextareaLecciones,
-		$aRecursoTemporal,
-		$aRecursoNombre,
-		$aExtencionRecurso,
-		$aRecurso,
-		$aRecursoExtencion,
+		$aInputArchivo,
 		$contadorExamen,// Examen
 		$nombreExamen,
 		$aValorPregunta, // PREGUNTAS
@@ -352,7 +296,7 @@ if($validacion){
 }
 
 echo utf8_encode($mensaje);
-// echo utf8_encode(" - "."Value Radio :".$radio." - ");
+// echo utf8_encode($inputArchivoText0);
 // echo utf8_encode(" - "."Contador inputRespuesta :".$inputRespuesta." - ");
-// echo utf8_encode(print_r($aTextareaLecciones));
+// echo utf8_encode(print_r($aInputArchivo));
 

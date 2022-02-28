@@ -133,6 +133,10 @@
   margin-top: 20px;
 }
 
+.margin-top10{
+  margin-top: 10px;
+}
+
 .margin-bot20{
   margin-bottom: 20px;
 }
@@ -175,4 +179,13 @@
 
 .margin-right{
   margin-right: 10px;
+}
+.border-radius{
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.width100{
+  width:100%;
 }

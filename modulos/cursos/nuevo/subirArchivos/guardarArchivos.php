@@ -11,5 +11,6 @@ for ($i = 0; $i < $conteo; $i++) {
     move_uploaded_file($ubicacionTemporal, "$rutaDestino/$nuevoNombre");
 }
 // Responder al cliente
-echo json_encode(true);
+// echo json_encode(true);
+echo json_encode($nuevoNombre);
 ?>

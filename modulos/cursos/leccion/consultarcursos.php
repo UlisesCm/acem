@@ -192,16 +192,48 @@ $filaAvance = mysqli_fetch_array($avanceActualizado);
 			Contenido:
 		</h2>
 		<h3 class="margen-lateral-texto  margen-bot50">
-			<?php
-			if ($filas['tipo'] == 'enlace') {
-			?>
-				<a href="<?php echo $filas['contenido'] ?>" target="_blank">
-					<?php echo $filas['contenido'] ?>
-				</a> <?php
-						} else {
-							echo $filas['contenido'];
-						}
+			<?php switch ($filas['tipo']) {
+						case 'texto':
+							?><p><?php echo $filas['contenido']?></p><?php 
+							// echo "Texto";
+							break;
+						case 'enlace':
+							?> <a href="<?php echo $filas['contenido']?>">
+								<?php echo $filas['contenido']?>
+							</a><?php 
+							break;
+						case 'imagen':
+							$contenidoImagen = "../../../empresas/modulalite/archivosSubidos/cursos/".$filas['contenido'];
 							?>
+							<div class="contenedor justify-content-center">
+								<img class="margin-top20 border-radius" src="<?php echo $contenidoImagen ?>" alt="">
+							</div>
+							<?php
+							break;
+						case 'video':
+							$contenidoVideo = "../../../empresas/modulalite/archivosSubidos/cursos/".$filas['contenido'];
+							?>
+							<div class="contenedor justify-content-center">
+								<video class="margin-top20 border-radius" src="<?php echo $contenidoVideo?>" controls></video>
+							</div>
+							<?php 
+							break;
+						case 'documento':
+							$contenidoDocumento = "../../../empresas/modulalite/archivosSubidos/cursos/".$filas['contenido'];
+							?> 
+							<iframe style="width:100%;height:700px;" src="<?php echo $contenidoDocumento ?>" frameborder="0"></iframe>
+							<div class="contenedor justify-content-center margin-top10">
+								<a href="<?php echo $contenidoDocumento ?>" target="_blank">
+									<input class="btn btn-success" type="button" value="Ver documento">
+								</a>
+							</div>
+							<?php 
+							break;
+
+						default:
+							echo "Leccion sin Tipo";
+							break;
+					} ?>
 		</h3>
 		<hr>
 		<div class="contenedor justify-content-center margen-bot2">

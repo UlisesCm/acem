@@ -243,7 +243,7 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 							if ($filas['visto'] === "NO") {
 								?><i class="fa fa-film icono-curso text-success"></i><?php
 							}else{
-								?><i class="fa fa-fil icono-curso text-muted"></i><?php
+								?><i class="fa fa-film icono-curso text-muted"></i><?php
 							}
 							break;
 						case 'documento':
