@@ -99,7 +99,7 @@ if (isset($_POST['id-avancecurso'])) {
 				?>
 
 				<?php $herramientas = "consultar";
-				include("../componentes/herramientas.php"); ?>
+				// include("../componentes/herramientas.php"); ?>
 				<?php include("../../../componentes/avisos.php"); ?>
 
 				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
