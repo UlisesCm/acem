@@ -50,6 +50,20 @@ if (isset($_POST['contador'])) {
 } else {
 	$contador = 0;
 }
+
+if (isset($_POST['contadorGlobal'])) {
+	$contadorGlobal = htmlentities($_POST['contadorGlobal']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$contadorGlobal = 0;
+}
+
+if (isset($_POST['arregloLeccionesVistas'])) {
+	$arregloLeccionesVistas = htmlentities($_POST['arregloLeccionesVistas']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$arregloLeccionesVistas = 0;
+}
 ?>
 
 <!DOCTYPE html>
@@ -135,6 +149,7 @@ if (isset($_POST['contador'])) {
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
+					<input type="hidden" name="contadorGlobal" value="<?php echo $contadorGlobal?>"/>
 				</form>
 				<div class="box box-info" style="border-color:#68983A">
 					<div class="box-header with-border contenedor alineacion-centro">
@@ -151,12 +166,11 @@ if (isset($_POST['contador'])) {
 						<div class="col-sm-2">
 							<h4>
 							<?php 
-						if ($avance != 100) {
+						if ($avance < 100) {
 							echo $avance?>% de Progreso<?php
 						} else {
 							?>Lecciones Terminadas <?php
-						}
-					?>
+						}?>
 							</h4>
 						</div>
 						<div class="col-sm-1">

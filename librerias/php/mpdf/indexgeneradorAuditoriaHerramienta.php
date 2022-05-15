@@ -42,7 +42,7 @@ $mpdf = new \Mpdf\Mpdf([
 
 
   // $mpdf->WriteHTML($html);
-//$mpdf->Output('pd.pdf','D');
+  //$mpdf->Output('pd.pdf','D');
   //$mpdf->Output('pd.pdf','I');
 
 return $mpdf->Output('pdc.pdf','I');

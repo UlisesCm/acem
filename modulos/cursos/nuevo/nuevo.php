@@ -231,10 +231,10 @@ include("../../seguridad/comprobar_login.php");
                         <label for="x" class="col-sm-2 control-label">Adjuntar Recurso:</label>
                         <div class="col-sm-4 contenedor" id="div-contenido-archivo-hijo0">
                           <div class="input-group col-sm-10" id="div-contenido-archivo-nieto0">
-                            <input type="file" class="form-control" id="inputArchivos0"><!-- accept="application/pdf" -->
+                            <input type="file" class="form-control" name="inputArchivos0" id="inputArchivos0" ><!-- accept="application/pdf" accept="image/png, image/gif, image/jpeg"-->
                             <input type="text" name="inputArchivoText0" id="inputArchivoText0" hidden>
                           </div>
-                          <input type="button" value="Subir" id="btnEnviar1" onclick="subirDocumento(0)" class="btn btn-success margen-5">
+                          <input type="button" value="Subir" id="btnEnviar0" onclick="subirDocumento(0)" class="btn btn-success margen-5">
                         </div>
                       </div>
                       <!-- FIN ARCHIVO -->

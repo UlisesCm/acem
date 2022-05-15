@@ -10,15 +10,16 @@ $nombreAlumno=$_COOKIE["nombreAlumno"];
 $calificacionFinal=$_COOKIE["calificacionFinal"];
 $idavancecurso=$_COOKIE["idavancecurso"];
 $nombreDocente=$_COOKIE["nombreDocente"];
+$nombrePDF=$_COOKIE["nombrePDF"];
 // $nombreExamen= "COOKIE NOMBRE DEL EXAMEN";
 
-function Reporte($nombreExamen, $nombreAlumno, $calificacionFinal, $idavancecurso, $nombreDocente){
+function Reporte($nombreExamen, $nombreAlumno, $calificacionFinal, $idavancecurso, $nombreDocente, $nombrePDF){
     $obtenerplantillacompleta = new clasegeneradorpdf;
-    $plantillacompleta=$obtenerplantillacompleta->GeneradorPdf($nombreExamen, $nombreAlumno, $calificacionFinal, $idavancecurso, $nombreDocente);
+    $plantillacompleta=$obtenerplantillacompleta->GeneradorPdf($nombreExamen, $nombreAlumno, $calificacionFinal, $idavancecurso, $nombreDocente, $nombrePDF);
     return $plantillacompleta;
 }
 // $nombreExamen= $_COOKIE["nombreExamen"];
 
 
-Reporte($nombreExamen, $nombreAlumno, $calificacionFinal, $idavancecurso, $nombreDocente);
+Reporte($nombreExamen, $nombreAlumno, $calificacionFinal, $idavancecurso, $nombreDocente, $nombrePDF);
  ?>

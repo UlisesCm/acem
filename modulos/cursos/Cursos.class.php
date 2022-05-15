@@ -249,7 +249,8 @@ class Cursos
 		$fechainicio = date('d-m-Y'); // se genera aqui
 		$fechafin = ""; //se deja asi
 		$finalizado = false; // se genera aqui
-
+		date_default_timezone_set('America/Mexico_City');
+		$horainicio = round((time()/60)/60);
 		//Detalle Examenes
 		$examen = mysqli_query($this->con->conect, "SELECT * FROM examenes WHERE idcurso='$idcurso'");
 		$extractor = mysqli_fetch_array($examen);
@@ -267,7 +268,7 @@ class Cursos
 		}
 
 		/////FIN  DE PERMISOS////////
-		$avancecursos = mysqli_query($this->con->conect, "INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, finalizado) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$finalizado')");
+		$avancecursos = mysqli_query($this->con->conect, "INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, finalizado, horainicio) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$finalizado','$horainicio')");
 		if ($this->con->conectar() == true) {
 			if ($avancecursos) {
 				if ($_SESSION['bitacora'] == "si") {
@@ -355,6 +356,20 @@ class Cursos
 			return mysqli_query($this->con->conect, "SELECT * FROM empleados WHERE idempleado='$idempleado'");
 		}
 	}
+	
+	function mostrarIndiceLeccion($idavancecurso)
+	{
+		if ($this->con->conectar() == true) {
+			return mysqli_query($this->con->conect, "SELECT indiceleccion FROM avancecursos WHERE idavancecurso='$idavancecurso'");
+		}
+	}
+	function aumentarIndiceLeccion($idavancecurso, $indice)
+	{
+		if ($this->con->conectar() == true ) {
+			$consulta = "UPDATE avancecursos SET indiceleccion ='$indice' WHERE idavancecurso ='$idavancecurso'";
+			mysqli_query($this->con->conect, $consulta);
+		}
+	}
 
 	function mostrarIndividual($idcurso)
 	{
@@ -374,6 +389,21 @@ class Cursos
 	{
 		if ($this->con->conectar() == true) {
 			return mysqli_query($this->con->conect, "SELECT * FROM avancecursos WHERE idavancecurso='$idavancecurso'");
+		}
+	}
+
+	function reiniciarLecciones($duracion, $horainicio, $idavancecurso)
+	{
+		date_default_timezone_set('America/Mexico_City');
+		$horaactual = round((time()/60)/60);
+		$horacomparacion = $horainicio + $duracion;
+
+		if ($horacomparacion <= $horaactual) {
+			mysqli_query($this->con->conect, "DELETE FROM avancecursos WHERE idavancecurso ='$idavancecurso'");
+			mysqli_query($this->con->conect, "DELETE FROM detallelecciones WHERE idavancecurso ='$idavancecurso'");
+			return false;
+		} else {
+			return true;
 		}
 	}
 
@@ -503,6 +533,12 @@ class Cursos
 		}
 	}
 
+	function obtenerHora($idcurso)
+	{
+		$consulta = "SELECT * FROM `cursos` WHERE idcurso = '$idcurso'";
+		return mysqli_query($this->con->conect, $consulta);
+	}
+
 	function mostrarTodoCursos( $campoOrden, $orden, $inicial, $cantidadamostrar, $categorias, $cursosBusqueda)
 	{
 			/////PERMISOS////////////////
@@ -578,6 +614,13 @@ class Cursos
 			return mysqli_query($this->con->conect, $consulta);
 		}
 	}
+
+	function mostrarDetalleExamen($iddetalleexamen)
+	{
+		$consulta = "SELECT * FROM `detalleexamenes` WHERE iddetalleexamen = '$iddetalleexamen'";
+		return mysqli_query($this->con->conect, $consulta);
+	}
+
 
 	function mostrarAlumno($idalumno)
 	{
@@ -881,7 +924,7 @@ class Cursos
 			WHERE avancecursos.idavancecurso = '$idavancecurso'
 		";
 
-		$consulta = "SELECT avance,iddetalleexamen,iddocente FROM avancecursos
+		$consulta = "SELECT avance,iddetalleexamen,iddocente,indiceleccion FROM avancecursos
 		$where
 		";
 		if ($this->con->conectar() == true) {
@@ -933,7 +976,7 @@ class Cursos
 		mysqli_query($this->con->conect, $actualizarAvance);
 	}
 
-	function enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas, $calificacionMaxima ,$iddetalleexamen)
+	function enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas, $calificacionMaxima ,$iddetalleexamen, $nombrePDF)
 	{
 		$sumaCalificacion = 0;
 		for ($i=1; $i <= $contadorCalificaciones ; $i++) { 
@@ -947,7 +990,7 @@ class Cursos
 		if ($calculoCalificacion == 0) {
 			$calculoCalificacion = 1;
 		}
-		$actualizarDetalleExamenes = "UPDATE detalleexamenes SET calificacion='$calculoCalificacion' WHERE iddetalleexamen='$iddetalleexamen'";
+		$actualizarDetalleExamenes = "UPDATE detalleexamenes SET calificacion='$calculoCalificacion', examenpdf='$nombrePDF' WHERE iddetalleexamen='$iddetalleexamen'";
 		mysqli_query($this->con->conect, $actualizarDetalleExamenes);
 		return $calculoCalificacion;
 	}

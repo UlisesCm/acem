@@ -7,7 +7,7 @@ if (!isset($_SESSION['permisos']['cursos']['acceso'])) {
 	exit;
 }
 /////FIN  DE PERMISOS////////
-include("../../../librerias/php/variasfunciones.php");
+// include("../../../librerias/php/variasfunciones.php"); /* PROBLEMAS SERVER */
 require('../Cursos.class.php');
 
 if (isset($_REQUEST['tipoVista']) && $_REQUEST['tipoVista'] != "") {
@@ -84,6 +84,7 @@ $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
 // $resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
 $resultado = $Ocursos->mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosTerminados);
+
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
@@ -184,14 +185,20 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 	<div class="box-body">
 		<?php
 		while ($filas = mysqli_fetch_array($resultado)) {
+			$resultadoExamen = $Ocursos->mostrarDetalleExamen($filas['iddetalleexamen']);
+			$filasExamen = mysqli_fetch_array($resultadoExamen);
+/* 			$resultadoIndice = $Ocursos->mostrarIndiceLeccion($filas['idavancecurso']);
+			$filaIndice = mysqli_fetch_array($resultadoIndice)
+			<p><?php echo $filaIndice['indiceleccion'] ?></p> */
 		?>
 			<div class="col-sm-3 carta-cursos" id="iregistro<?php echo $filas['idavancecurso'] ?>">
 				<h4 class="d-flex centrar-elementos">
 					<?php echo $filas['categoria'] ?>
 				</h4>
+				<p><?php echo $filaIndice['indiceleccion'] ?></p>
 				<hr class="d-flex centrar-elementos">
 				<div class="d-flex centrar-elementos">
-					<i class="fa fa-pencil icono-curso"></i>
+					<i class="fa <?php echo $filas['icono']?> icono-curso"></i>
 				</div>
 				<hr>
 				<h3 class="d-flex centrar-elementos">
@@ -202,7 +209,15 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 						if ($filas['avance'] < 100) {
 							echo $filas['avance']?>% de Progreso<?php
 						} else {
-							?> Curso Terminado <?php
+							if ($filas['finalizado'] == 1) {
+								if ($filasExamen['examenpdf'] != NULL || $filasExamen['examenpdf'] != "") {
+									?> Calificacion Final: <?php echo $filasExamen['calificacion'];
+								} else {
+									?> Pendiente por Calificar <?php
+								}
+							} else{
+								?>Lecciones Terminadas<?php
+							}
 						}
 					?>
 				</h5>
@@ -216,7 +231,18 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				<form class="d-flex centrar-elementos margen-bot" action="../navegacion/vistacursos.php?n1=cursos&n2=miscursos" method="post">
 					<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>"/>
 					<input type="hidden" name="id-avancecurso" value="<?php echo $filas['idavancecurso'] ?>"/>
-					<button class="btn btn-default boton-curso "> Ver Curso </button>
+					<?php if ($filasExamen['examenpdf'] != NULL || $filasExamen['examenpdf'] != "") {
+						$contenidoDocumento = "../../../empresas/modulalite/archivosSubidos/cursos/examenes/".$filasExamen['examenpdf'];
+						?>
+						<button class="btn btn-default boton-curso2 margen-5"> Ver Curso </button>
+						<a href="<?php echo $contenidoDocumento ?>" target="_blank">
+							<input class="btn btn-success boton-curso2 margen-5" type="button" value="Ver PDF">
+						</a> 
+						<?php
+					} else {
+						?> <button class="btn btn-default boton-curso "> Ver Curso </button> <?php 
+					}
+					?>
 				</form>
 				
 			</div>

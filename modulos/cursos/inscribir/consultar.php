@@ -8,7 +8,7 @@ if (!isset($_SESSION['permisos']['cursos']['acceso'])) {
 	exit;
 }
 /////FIN  DE PERMISOS////////
-include("../../../librerias/php/variasfunciones.php");
+// include("../../../librerias/php/variasfunciones.php"); /* ERROR EN EL SERVIDOR */
 require('../Cursos.class.php');
 
 if (isset($_REQUEST['tipoVista']) && $_REQUEST['tipoVista'] != "") {
@@ -91,9 +91,6 @@ if ($resultado == "denegado") {
 }
 $filasTotales = $Ocursos->contar($busqueda, $papelera);
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
-
-
-
 
 if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla 
 ?>

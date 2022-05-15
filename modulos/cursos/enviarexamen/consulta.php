@@ -7,7 +7,7 @@ if (!isset($_SESSION['permisos']['cursos']['acceso'])) {
 	exit;
 }
 /////FIN  DE PERMISOS////////
-include("../../../librerias/php/variasfunciones.php");
+// include("../../../librerias/php/variasfunciones.php");
 require('../Cursos.class.php');
 
 if (isset($_REQUEST['tipoVista']) && $_REQUEST['tipoVista'] != "") {

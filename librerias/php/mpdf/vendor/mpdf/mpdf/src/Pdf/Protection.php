@@ -64,12 +64,12 @@ class Protection
 
 	public function __construct(UniqidGenerator $uniqidGenerator)
 	{
-		if (!function_exists('random_int') || !function_exists('random_bytes')) {
+/* 		if (!function_exists('random_int') || !function_exists('random_bytes') || !function_exists('openssl_random_pseudo_bytes')) {
 			throw new \Mpdf\MpdfException(
 				'Unable to set PDF file protection, CSPRNG Functions are not available. '
 				. 'Use paragonie/random_compat polyfill or upgrade to PHP 7.'
 			);
-		}
+		} */
 
 		$this->uniqidGenerator = $uniqidGenerator;
 
@@ -117,7 +117,8 @@ class Protection
 		}
 
 		if ($owner_pass === null) {
-			$owner_pass = bin2hex(random_bytes(23));
+			$strong = false;
+			$owner_pass = bin2hex(openssl_random_pseudo_bytes(23, $strong));
 		}
 
 		$this->generateEncryptionKey($user_pass, $owner_pass, $protection);

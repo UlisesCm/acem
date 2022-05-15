@@ -16,6 +16,11 @@
 .d-flex {
   display: flex;
 }
+
+.d-flex2 {
+  display: flex;
+  height: 80%;
+}
 .padding-bot {
   padding-bottom: 12px;
 }
@@ -37,7 +42,7 @@
   padding-bottom: 5px;
   margin: 5px;
 }
-.col-sm-3{
+.col-sm-3 {
   width: 24% !important;
 }
 .carta-cursos {
@@ -51,115 +56,125 @@
   margin: 5px;
 }
 
-.icono-curso{
-  font-size:120px;
+.icono-curso {
+  font-size: 120px;
 }
 
-.icono-curso2{
-  font-size:180px;
+.icono-curso2 {
+  font-size: 180px;
 }
 
-.boton-curso{
+.boton-curso {
   width: 180px;
   font-size: 16px;
 }
 
-.centrar-elementos{
+.boton-curso2 {
+  width: 130px;
+  font-size: 16px;
+}
+
+.centrar-elementos {
   justify-content: center;
 }
 
-.margen-bot{
+
+.margen-bot {
   margin-bottom: 8px;
 }
-.margen-bot2{
+.margen-bot2 {
   margin-bottom: 10px;
 }
-.marger-left{
+.marger-left {
   margin-left: 30px;
 }
 
-.boton-eliminar{
+.boton-eliminar {
   margin-right: 25px;
 }
 
-.cabecera-cursos{
+.cabecera-cursos {
   justify-content: space-around;
 }
 
-.contenedor{
+.contenedor {
   display: flex;
 }
 
-.alineacion-centro{
+.alineacion-centro {
   align-items: center;
 }
 
-.alineacion-baseline{
+.alineacion-baseline {
   align-items: baseline;
 }
 
-.alineacion-centro-texto{
+.alineacion-centro-texto {
   margin-top: 20px;
 }
-.margen-lateral-texto{
+.margen-lateral-texto {
   margin-left: 20px;
   margin-right: 20px;
 }
 
-.margen-lateral{
+.margen-lateral {
   margin-left: 10px;
   margin-right: 10px;
 }
-.justify-content-spacebetween{
+.justify-content-spacebetween {
   justify-content: space-between;
 }
 
-.justify-content-center{
+.justify-content-center {
   justify-content: center;
 }
 
-.margen-bot50{
+.margen-bot50 {
   margin-bottom: 50px;
 }
 
-.margen-top50{
+.margen-top50 {
   margin-top: 50px;
 }
-.margen-5{
+.margen-5 {
   margin-left: 5px;
   margin-right: 5px;
 }
-.margin-top20{
+.margin-top20 {
   margin-top: 20px;
 }
 
-.margin-top10{
+.margin-top10 {
   margin-top: 10px;
 }
 
-.margin-bot20{
+.margin-bot20 {
   margin-bottom: 20px;
 }
 
-.margin-bot5{
+.margin-bot5 {
   margin-bottom: 5px;
 }
 
-.margin-top3{
+.margin-top3 {
   margin-top: 20px;
 }
 
-.margin-negativo-bot{
+.margin-top4 {
+  margin-top: 40px;
+}
+
+.margin-negativo-bot {
   margin-top: -5px;
 }
 
-.label-alinear{
+.label-alinear {
   display: block;
   padding-left: 15px;
   text-indent: -15px;
 }
 
-.label-alinear2{
+.label-alinear2 {
   margin-top: 7px;
   display: block;
   padding-left: 15px;
@@ -170,22 +185,26 @@
   width: 13px;
   height: 13px;
   padding: 0;
-  margin:0;
+  margin: 0;
   vertical-align: bottom;
   position: relative;
   top: -1px;
   *overflow: hidden;
 }
 
-.margin-right{
+.margin-right {
   margin-right: 10px;
 }
-.border-radius{
+.border-radius {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
 
-.width100{
-  width:100%;
+.width100 {
+  width: 100%;
+}
+
+.heigth80 {
+  height: auto !important;
 }

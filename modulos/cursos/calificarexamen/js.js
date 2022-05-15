@@ -39,13 +39,13 @@ function comprobarReglas() {
     cantidadamostrar = recuperarCookie("cantidadamostrarCursos");
     $("#cantidadamostrar option[value=" + cantidadamostrar + "]").attr(
       "selected",
-      true
+      true,
     );
   } else {
     cantidadamostrar = "20";
     $("#cantidadamostrar option[value=" + cantidadamostrar + "]").attr(
       "selected",
-      true
+      true,
     );
   }
 
@@ -111,7 +111,7 @@ $(document).ready(function () {
     cantidadamostrar,
     paginacion,
     busqueda,
-    tipoVista
+    tipoVista,
   );
 
   $(".botonEliminar").click(function () {
@@ -171,7 +171,7 @@ $(document).ready(function () {
         cantidadamostrar,
         paginacion,
         "",
-        tipoVista
+        tipoVista,
       );
     }
   });
@@ -185,7 +185,7 @@ $(document).ready(function () {
         cantidadamostrar,
         paginacion,
         "",
-        tipoVista
+        tipoVista,
       );
     }
   });
@@ -207,7 +207,7 @@ $(document).ready(function () {
       cantidadamostrar,
       paginacion,
       busqueda,
-      tipoVista
+      tipoVista,
     );
   });
 
@@ -218,7 +218,7 @@ $(document).ready(function () {
       cantidadamostrar,
       paginacion,
       busqueda,
-      tipoVista
+      tipoVista,
     );
   });
 
@@ -232,7 +232,7 @@ $(document).ready(function () {
         cantidadamostrar,
         paginacion,
         busqueda,
-        tipoVista
+        tipoVista,
       );
       $("#cajaBuscar").val("");
       $("#cajaBuscar").focus();
@@ -260,7 +260,49 @@ $(document).ready(function () {
 //***********************AJAX*********************
 
 //pdf INICIO
-const imprimirpdfs = () => {
+function imprimirpdfs() {
+  var nombreExamen = $("#nombreExamen").val();
+  var nombreAlumno = $("#nombreAlumno").val();
+  var calificacionFinal = $("#calificacionFinal").val();
+  var idavancecurso = $("#idavancecurso").val();
+  var nombreDocente = $("#nombreDocente").val();
+  var fecha = "";
+  // var nombreExamen = $("#nombreExamen").val();
+  // var nombreAlumno = $("#nombreAlumno").val();
+  document.cookie = "nombreExamen=" + nombreExamen;
+  document.cookie = "nombreAlumno=" + nombreAlumno;
+  document.cookie = "calificacionFinal=" + calificacionFinal;
+  document.cookie = "idavancecurso=" + idavancecurso;
+  document.cookie = "nombreDocente=" + nombreDocente;
+
+  window.open(
+    "reportePDF.php",
+    "_blank",
+    "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=900,height=900",
+  );
+}
+/* const imprimirpdfs = () => {
+  var nombreExamen = $("#nombreExamen").val();
+  var nombreAlumno = $("#nombreAlumno").val();
+  var calificacionFinal = $("#calificacionFinal").val();
+  var idavancecurso = $("#idavancecurso").val();
+  var nombreDocente = $("#nombreDocente").val();
+  var fecha = "";
+  // var nombreExamen = $("#nombreExamen").val();
+  // var nombreAlumno = $("#nombreAlumno").val();
+  document.cookie = "nombreExamen=" + nombreExamen;
+  document.cookie = "nombreAlumno=" + nombreAlumno;
+  document.cookie = "calificacionFinal=" + calificacionFinal;
+  document.cookie = "idavancecurso=" + idavancecurso;
+  document.cookie = "nombreDocente=" + nombreDocente;
+
+  window.open(
+    "reportePDF.php",
+    "_blank",
+    "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=900,height=900",
+  );
+}; */
+/* const imprimirpdfs = () => {
   var nombreExamen = $("#nombreExamen").val();
   var nombreAlumno = $("#nombreAlumno").val();
   document.cookie = "nombreExamen=" + nombreExamen;
@@ -271,10 +313,10 @@ const imprimirpdfs = () => {
     "_blank",
     "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=900,height=900"
   );
-}
+} */
 // pdf fin
 
-const menuFiltro = () => {
+/* const menuFiltro = () => {
   //MOSTRAR Y OCULTAR FILTRO GENERAL
   const botonMostrarFiltro = $(".botonMostrarFiltro");
   const botonOcultarFiltro = $(".botonOcultarFiltro");
@@ -294,7 +336,29 @@ const menuFiltro = () => {
     botonOcultarFiltro.hide();
     formulario.hide(200);
   });
-};
+}; */
+
+function menuFiltro() {
+  //MOSTRAR Y OCULTAR FILTRO GENERAL
+  const botonMostrarFiltro = $(".botonMostrarFiltro");
+  const botonOcultarFiltro = $(".botonOcultarFiltro");
+  const formulario = $(".box-body");
+
+  botonOcultarFiltro.hide();
+  formulario.hide();
+
+  botonMostrarFiltro.click(() => {
+    botonOcultarFiltro.show();
+    botonMostrarFiltro.hide();
+    formulario.show(200);
+  });
+
+  botonOcultarFiltro.click(() => {
+    botonMostrarFiltro.show();
+    botonOcultarFiltro.hide();
+    formulario.hide(200);
+  });
+}
 
 // Autor: Armando Viera Rodríguez
 // Onixbm 2014
@@ -305,7 +369,7 @@ function load_tablas(
   cantidadamostrar,
   paginacion,
   busqueda,
-  tipoVista
+  tipoVista,
 ) {
   //alert (orden);
   //alert (campoOrden);
@@ -340,7 +404,7 @@ function load_tablas(
       papelera +
       "&" +
       variables,
-    true
+    true,
   );
   xmlhttp.send();
 }
@@ -406,7 +470,7 @@ function mostrarMensaje(mensaje, ids, accion) {
       .removeClass()
       .addClass("alert alert-warning alert-dismissable");
     $("#notificacionTitulo").html(
-      "<i class='icon fa fa-warning'></i>" + res[1]
+      "<i class='icon fa fa-warning'></i>" + res[1],
     );
     $("#notificacionContenido").html(res[2]);
   } else {
@@ -415,7 +479,7 @@ function mostrarMensaje(mensaje, ids, accion) {
       .addClass("alert alert-error alert-dismissable");
     $("#notificacionTitulo").html("Operaci&oacute;n fallida");
     $("#notificacionContenido").html(
-      "<i class='icon fa fa-ban'></i>No se han resivido datos de respuesta desde el servidor [003]"
+      "<i class='icon fa fa-ban'></i>No se han resivido datos de respuesta desde el servidor [003]",
     );
   }
   $("#panel_alertas").stop(false, true);

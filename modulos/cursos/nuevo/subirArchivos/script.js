@@ -1,11 +1,10 @@
-
 // Elementos del DOM
 
 const subirDocumento = async (index) => {
-  const $inputArchivos = document.querySelector("#inputArchivos"+index)
-  const $btnEnviar = document.querySelector("#btnEnviar"+index)
-  const input = document.getElementById("inputArchivoText"+index);
-  // const btnEnviar = document.getElementById("btnEnviar"+index);
+  const $inputArchivos = document.querySelector("#inputArchivos" + index);
+  // const $btnEnviar = document.querySelector("#btnEnviar" + index);
+  const input = document.getElementById("inputArchivoText" + index);
+  const btnEnviar = document.getElementById("btnEnviar" + index);
   // $btnEnviar.addEventListener("click", async () => {
   const archivosParaSubir = $inputArchivos.files;
   if (archivosParaSubir.length <= 0) {
@@ -28,8 +27,11 @@ const subirDocumento = async (index) => {
   // Puedes manejar la respuesta como tú quieras
   // Finalmente limpiamos el campo
   $inputArchivos.value = null;
+
+  btnEnviar.value = "Subido";
+  btnEnviar.setAttribute("class", "btn btn-primary margen-5");
   // console.log(btnEnviar)
   input.value = respuesta;
   // $estado.textContent = "Archivos enviados";
   // });
-}
+};

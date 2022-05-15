@@ -7,7 +7,7 @@ if (!isset($_SESSION['permisos']['cursos']['acceso'])) {
 	exit;
 }
 /////FIN  DE PERMISOS////////
-include("../../../librerias/php/variasfunciones.php");
+// include("../../../librerias/php/variasfunciones.php");
 require('../Cursos.class.php');
 
 if (isset($_REQUEST['tipoVista']) && $_REQUEST['tipoVista'] != "") {
@@ -115,6 +115,13 @@ $resultado = $Ocursos->navegacionCurso($campoOrden, $orden, $inicial, $cantidada
 $resultadoExamen = $Ocursos-> mostrarExamen($idcurso);
 $resultadoAvance = $Ocursos-> mostrarIndividualAvance($idavancecurso);
 $filasAvance = mysqli_fetch_array($resultadoAvance);
+$resultadoIndice = $Ocursos->mostrarIndiceLeccion($filasAvance['idavancecurso']);
+$filaIndice = mysqli_fetch_array($resultadoIndice);
+$resultadoCurso = $Ocursos->obtenerHora($idcurso);
+$filaHora = mysqli_fetch_array($resultadoCurso);
+$reiniciar = $Ocursos->reiniciarLecciones($filaHora['duracion'], $filasAvance['horainicio'], $filasAvance['idavancecurso']);
+
+
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
@@ -123,89 +130,16 @@ if ($resultado == "denegado") {
 
 $filasTotales = mysqli_num_rows($resultado);
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
+// $horaactual = round((time()/60)/60);
+// $horacomparacion = $horaactual+$filaHora['duracion'];
+// echo "ID avancecursos: - ".$idavancecurso."<br>";
+// echo "HORA ACTUAL: - ".$horaactual."<br>";
+// echo "DURACION: - ".$filaHora['duracion']."<br>";
+// echo "HORA INICIO: - ".$filasAvance['horainicio']."<br>";
+// echo "HORA COMPRARACION: - ".$horacomparacion;
 
-if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla 
-?>
-	<div class="box-body table-responsive no-padding">
-		<!-- /.box-body -->
-		<table class="table table-hover table-bordered">
-			<tr>
-				<th class="checksEliminar" width="10"><input id="seleccionarTodo" type="checkbox" onclick="seleccionarTodo();"></th>
-				<th class="columnaDecorada" style="background:#000000;"></th>
-				<th class="Ciddetalleleccion">ID</th>
-				<th class="Cleccion">Leccion</th>
-				<th class="Ctipo">Tipo</th>
-				<th class="Cestado">Estado</th>
-				<th width="40"></th>
-				<th width="40"></th>
-			</tr>
-			<?php
-			while ($filas = mysqli_fetch_array($resultado)) { ?>
-				<tr id="iregistro<?php echo $filas['iddetalleleccion'] ?>">
-					<td class="checksEliminar" width="30" valign="middle">
-						<?php /////PERMISOS////////////////
-						if (isset($_SESSION['permisos']['cursos']['eliminar'])) { ?>
-							<?php if ($filas['iddetalleleccion'] != 0) { ?>
-								<input id="registroEliminar<?php echo $filas['iddetalleleccion'] ?>" type="checkbox" name="registroEliminar[]" value="<?php echo $filas['iddetalleleccion'] ?>" class="checkEliminar"> <!-- modificado -->
-							<?php } ?>
-						<?php
-						}
-						?>
-					</td>
-					<td class="columnaDecorada" style="background:#000000;"></td>
-					<td class="Ciddetalleleccion"><?php echo $filas['iddetalleleccion']; ?></td> <!-- modificado -->
-					<td class="Cleccion"><?php echo $filas['orden']; ?></td>
-					<td class="Ctipo"><?php echo $filas['tipo']; ?></td>
-					<td class="Cestado">
-						<?php
-						if ($filas['visto'] === "NO") {
-							echo "Sin Cursar";
-						} else {
-							echo "Cursada";
-						}
-						?>
-					</td>
-					<td>
-					</td>
-					<td>
-						<?php
-						/////PERMISOS////////////////
-						if (isset($_SESSION['permisos']['cursos']['modificar'])) {
-						?>
-							<form action="../navegacion/vistacursos.php?n1=cursos&n2=miscursos" method="post">
-								<input type="hidden" name="id" value="<?php echo $filas['iddetalleleccion'] ?>" />
-								<?php 
-								if ($filas['visto'] === "NO") {
-									?> 
-									<button type="submit" class="btn btn-success btn-xs" value="" title="Modificar">
-										<li class="fa fa-book"></li>
-									</button>
-									<?php
-								} else{
-									?> 
-									<button type="submit" class="btn btn-default btn-xs" value="" title="Modificar">
-										<li class="fa fa-book"></li>
-									</button>
-									<?php
-								}
-								?>		
-							</form>
-						<?php
-						} else { ?>
-							<a class="btn btn-success btn-xs disabled"><i class="fa fa-pencil"></i></a>
-						<?php
-						}
-						?>
-					</td>
-				</tr>
-			<?php
-			} //Fin de while si es tabla 
-			?>
-		</table>
-	</div><!-- /.box-body -->
-<?php
-} else { // Si se ha elegido el tipo lista ///////////////////////////////////////////////////////////////
-?>
+if ($reiniciar) {
+	?>
 	<div class="box-body">
 		<?php
 		while ($filas = mysqli_fetch_array($resultado)) {
@@ -214,6 +148,9 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 				<h4 class="d-flex centrar-elementos">
 					Leccion #<?php echo $filas['orden']?>
 				</h4>
+				<h1>
+					<?php echo $mensajeConfirmacion?>
+				</h1>
 				<hr class="d-flex centrar-elementos">
 				<div class="d-flex centrar-elementos">
 					<?php 
@@ -298,13 +235,22 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 					<input type="hidden" name="id-detalleleccion" value="<?php echo $filas['iddetalleleccion']?>"/>
 					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
-					<?php 
-					if ($filas['visto'] === "NO") {
-						?><button class="btn btn-success boton-curso"> Cursar</button><?php
-					}else{
-						?><button class="btn btn-default boton-curso"> Volver a Cursar</button><?php
+					<input type="hidden" name="duracion" id="<?php echo $filaHora['duracion'] ?>" value="<?php echo $filaHora['duracion'] ?>">
+					<input type="hidden" name="duracion" id="<?php echo $filasAvance['horainicio'] ?>" value="<?php echo $filasAvance['horainicio'] ?>">
+					<!-- $filaHora['duracion'], $filaIndice['horainicio'] -->
+					<?php
+
+					if ($filas['orden'] == 1 || $filaIndice['indiceleccion']+1 == $filas['orden']  || $filas['visto'] === "SI") {
+						if ($filas['visto'] === "NO") {
+							?><button class="btn btn-success boton-curso"> Cursar</button><?php
+						}else{
+							?><button class="btn btn-default boton-curso"> Volver a Cursar</button><?php
+						}
+					} else {
+						?> <input type="button" value="No disponible" class="btn btn-default boton-curso" disabled> <?php
 					}
 					?>
+				
 				</form>
 			</div>
 	<?php
@@ -337,23 +283,49 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
 					<input type="hidden" name="nombre" value="<?php echo $filasAvance['iddetalleexamen']?>"/>
 					<?php
-							if ($filasAvance['iddetalleexamen'] == 0) {
-								?> <button class="btn btn-success boton-curso">Presentar</button> <?php
-							} else {
-								?> <button class="btn btn-default boton-curso" disabled>Examen Enviado</button> <?php //disabled
-							}
+					if ($filasAvance['avance'] >= 100) {
+						if ($filasAvance['iddetalleexamen'] == 0) {
+							?> <button class="btn btn-success boton-curso">Presentar</button> <?php
+						} else {
+							?> <button class="btn btn-default boton-curso" disabled>Examen Enviado</button> <?php //disabled
+						}
+					} else {
+						?> <button class="btn btn-default boton-curso" disabled>No disponible</button> <?php //disabled
+					}
 						?>
-					
 			</form>
 		</div>
 		<?php
 		} 
-	
-	} // Fin de sis es lista
+	 // Fin de sis es lista
 	?>
-
 	</div>
 	<?php
+} else {
+	?> 
+		<div class="d-flex centrar-elementos">
+			<div>
+				<h3>
+					El tiempo para completar el curso se termino, vuelva a inscribirse para intentarlo de nuevo.
+				</h3>
+				<div class="d-flex centrar-elementos margin-top3">
+					<i class="fa fa-ban icono-curso2 text-danger"></i>
+				</div>
+				<div class="d-flex centrar-elementos margin-top4 margin-bot20">
+					<form action="../inscribir/vista.php?n1=cursos&n2=consultarcursos">
+						<Button class="btn btn-success margen-lateral" >Volver a Inscribirme</Button>
+					</form>
+					<form action="../miscursos/vistacursos.php?n1=cursos&n2=miscursos">
+						<Button class="btn btn-default margen-lateral">Volver a Mis Cursos</Button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<?php 
+}
+
 	paginar($pg, $cantidadamostrar, $filasTotales, $campoOrden, $orden, $busqueda, $tipoVista);
 	//FIN DEL CODIGO DE PAGINACION
 	if (mysqli_num_rows($resultado) == 0) {

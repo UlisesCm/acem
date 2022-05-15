@@ -7,7 +7,7 @@ if (!isset($_SESSION['permisos']['cursos']['acceso'])) {
 	exit;
 }
 /////FIN  DE PERMISOS////////
-include("../../../librerias/php/variasfunciones.php");
+// include("../../../librerias/php/variasfunciones.php");
 require('../Cursos.class.php');
 
 if (isset($_REQUEST['tipoVista']) && $_REQUEST['tipoVista'] != "") {
@@ -288,11 +288,14 @@ $contadorCalificaciones = 0;
 		<input type="hidden" name="cadenaCalificacion" id="cadenaCalificacion" value="<?php echo $cadenaCalificaciones?>"> <!-- SI EXISTE -->
 		<input type="hidden" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>"> <!-- SI EXISTE -->
 		<input type="hidden" name="calificacionMaxima" id="calificacionMaxima" value="<?php echo $calificacionMaxima?>"> <!-- SI EXISTE -->
+		<!-- VARIABLES PARA PDF -->
+		<input type="hidden" name="calificacionFinal" id="calificacionFinal" value="<?php echo $calificacionFinal?>">
 		<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>"> <!-- SI EXISTE -->
 		<input type="hidden" name="nombreAlumno" id="nombreAlumno" value="<?php echo $alumno?>"> <!-- SI EXISTE -->
 		<input type="hidden" name="calificacionFinal" id="calificacionFinal" value="<?php echo $calificacionFinal?>"> <!-- SI EXISTE -->
+		<input type="hidden" name="nombreDocente" id="nombreDocente" value="<?php echo $nombreDocente?>">
 		<div class="contenedor justify-content-center margen-bot2">
-			<button class="btn btn-success" id="enviarexamen">Enviar Calificación</button>
+			<button class="btn btn-success" id="enviarexamen" onclick="">Enviar Calificación</button>
 		</div>
 		</form>
 	</div>

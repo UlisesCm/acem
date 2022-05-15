@@ -7,7 +7,7 @@ if (!isset($_SESSION['permisos']['cursos']['acceso'])) {
 	exit;
 }
 /////FIN  DE PERMISOS////////
-include("../../../librerias/php/variasfunciones.php");
+// include("../../../librerias/php/variasfunciones.php");
 require('../Cursos.class.php');
 
 if (isset($_REQUEST['tipoVista']) && $_REQUEST['tipoVista'] != "") {
@@ -251,7 +251,20 @@ if (isset($_REQUEST['calificacionMaxima'])) {
 } else {
 	$calificacionMaxima = 0;
 }
-
+//GENERAR ID
+function generarClavePDF($numero,$prefijo="",$sufijo=""){
+	if ($sufijo==""){
+		$sufijo=date("jwynGis");
+	}
+	$rand="";
+	$caracter= "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+	srand((double)microtime()*1000000);
+	for($i=0; $i<$numero; $i++) {
+		$rand.= $caracter[rand()%strlen($caracter)];
+	}
+	return $prefijo.$rand.$sufijo.".pdf";
+}
+$nombrePDF = generarClavePDF(2);
 
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
@@ -266,7 +279,7 @@ $idempleado = $filas['iddocente'];
 $resultadoDocente = $Ocursos->mostrarDocente($idempleado);
 $filasDocente = mysqli_fetch_array($resultadoDocente);
 $nombreDocente = $filasDocente['nombre'];
-$calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas, $calificacionMaxima, $iddetalleexamen);
+$calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arregloCalificacion, $arregloIdRespuestas, $calificacionMaxima, $iddetalleexamen, $nombrePDF);
 
 ?>
 <div class="container">
@@ -287,7 +300,7 @@ $calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arre
 		<hr>
 		<form action="../evaluacion/vistacursos.php?n1=cursos&n2=evaluar" method="post">
 			<div class="contenedor justify-content-center margen-bot2">
-				<input class="btn btn-success pull-right margen-5" type="button" value="Imprimir Examen" onclick="imprimirpdfs()">
+				<input class="btn btn-success pull-right margen-5" type="button" value="Generar PDF" onclick="imprimirpdfs()">
 				<button class="btn btn-default pull-right margen-5">
 					Volver a Evaluaciones
 				</button>
@@ -296,6 +309,7 @@ $calificacionFinal = $Ocursos->enviarCalificacion($contadorCalificaciones, $arre
 				<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>">
 				<input type="hidden" name="idavancecurso" id="idavancecurso" value="<?php echo $idavancecurso?>">
 				<input type="hidden" name="nombreDocente" id="nombreDocente" value="<?php echo $nombreDocente?>">
+				<input type="hidden" name="nombrePDF" id="nombrePDF" value="<?php echo $nombrePDF?>">
 			</div>
 		</form>
 	</div>

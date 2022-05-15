@@ -257,25 +257,10 @@ if (isset($_POST['calificacionMaxima'])) {
 				include("../componentes/herramientas.php"); ?>
 				<?php include("../../../componentes/avisos.php"); ?>
 				
-				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">
-					<input type="hidden" name="id-detalleleccion" id="idleccion" value="<?php echo $iddetalleleccion?>">	
-					<input type="hidden" name="orden" id="orden" value="<?php echo $ordenLeccion?>">
-					<input type="hidden" name="contador" id="contador" value="<?php echo $contador?>">
+				<form class="form-horizontal" name="formularioFiltro" id="formularioFiltro" method="POST">	
 					<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso?>"/>
-					<input type="hidden" name="avance" value="<?php echo $avance?>"/>
-					<input type="hidden" name="nombre" value="<?php echo $nombre?>"/>
 					<input type="hidden" name="nombreAlumno" value="<?php echo $nombreAlumno?>"/>
 					<input type="hidden" name="nombreExamen" value="<?php echo $nombreExamen?>"/>
-					<input type="hidden" name="contadorPreguntas" value="<?php echo $contadorPreguntas?>"/>
-					<input type="hidden" name="contadorRespuestas" value="<?php echo $contadorRespuestas?>"/>
-					<input type="hidden" name="total" value="<?php echo $total?>"/>
-					<input type="hidden" name="idcurso" id="idcurso" value="<?php echo $idcurso?>">
-					<input type="hidden" name="cadenaPreguntas" id="cadenaPreguntas" value="<?php echo $cadenaPreguntas?>">
-					<input type="hidden" name="cadenaRespuestas" id="cadenaRespuestas" value="<?php echo $cadenaRespuestas?>">
-					<input type="hidden" name="cadenaTipo" id="cadenaTipo" value="<?php echo $cadenaTipo?>">
-					<input type="hidden" name="cadenaRespuestasAlumno" id="cadenaRespuestasAlumno" value="<?php echo $cadenaRespuestasAlumno?>">
-					<input type="hidden" name="prueba" id="prueba" value="<?php echo $prueba?>">
-					<input type="hidden" name="idexamen" id="idexamen" value="<?php echo $idexamen?>">
 					<input type="hidden" name="nombreExamen" id="nombreExamen" value="<?php echo $nombreExamen?>">
 					<input type="hidden" name="cadenaIdRespuestas" id="cadenaIdRespuestas" value="<?php echo $cadenaIdRespuestas?>">
 					<input type="hidden" name="contadorCalificaciones" id="contadorCalificaciones" value="<?php echo $contadorCalificaciones?>">
@@ -286,6 +271,7 @@ if (isset($_POST['calificacionMaxima'])) {
 				<div class="box box-info" style="border-color:#3A6D98">
 					<div class="box-header with-border">
 						<h3 class="box-title">Examen Enviado</h3>
+
 						
 					</div><!-- /.box-header -->
 					<div id="muestra_contenido_ajax" style="min-height:100px;">

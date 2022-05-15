@@ -7,7 +7,7 @@ if (!isset($_SESSION['permisos']['cursos']['acceso'])) {
 	exit;
 }
 /////FIN  DE PERMISOS////////
-include("../../../librerias/php/variasfunciones.php");
+// include("../../../librerias/php/variasfunciones.php");
 require('../Cursos.class.php');
 
 if (isset($_REQUEST['tipoVista']) && $_REQUEST['tipoVista'] != "") {
@@ -129,6 +129,7 @@ if (isset($_REQUEST['nombre'])) {
 } else {
 	$nombre  = "no existe";
 }
+
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
@@ -143,13 +144,12 @@ if ($resultado == "denegado") {
 $filasTotales = mysqli_num_rows($resultado);
 $filas = mysqli_fetch_array($resultado);
 $Ocursos->cambiarVisto($filas['iddetalleleccion']);
-if ($filas['visto'] == 'NO') {
-	$Ocursos->agregarAvance($filas['valor'], $idavancecurso);
-}
-
 $avanceActualizado = $Ocursos->mostrarAvance($idavancecurso);
 $filaAvance = mysqli_fetch_array($avanceActualizado);
-// $filaAvance['avance']
+if ($filas['visto'] == 'NO') {
+	$Ocursos->agregarAvance($filas['valor'], $idavancecurso);
+	$Ocursos->aumentarIndiceLeccion($idavancecurso, $filaAvance['indiceleccion']+1);
+}
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
 ?>
 <div class="container ">
@@ -206,7 +206,12 @@ $filaAvance = mysqli_fetch_array($avanceActualizado);
 							$contenidoImagen = "../../../empresas/modulalite/archivosSubidos/cursos/".$filas['contenido'];
 							?>
 							<div class="contenedor justify-content-center">
-								<img class="margin-top20 border-radius" src="<?php echo $contenidoImagen ?>" alt="">
+								<img class="margin-top20 border-radius" width="90%"  src="<?php echo $contenidoImagen ?>" alt="">
+							</div>
+							<div class="contenedor justify-content-center margin-top10">
+								<a href="<?php echo $contenidoImagen ?>" target="_blank">
+									<input class="btn btn-success" type="button" value="Ver Imagen">
+								</a>
 							</div>
 							<?php
 							break;
@@ -214,7 +219,7 @@ $filaAvance = mysqli_fetch_array($avanceActualizado);
 							$contenidoVideo = "../../../empresas/modulalite/archivosSubidos/cursos/".$filas['contenido'];
 							?>
 							<div class="contenedor justify-content-center">
-								<video class="margin-top20 border-radius" src="<?php echo $contenidoVideo?>" controls></video>
+								<video class="margin-top20 border-radius" width="90%" src="<?php echo $contenidoVideo?>" controls></video>
 							</div>
 							<?php 
 							break;
@@ -224,14 +229,15 @@ $filaAvance = mysqli_fetch_array($avanceActualizado);
 							<iframe style="width:100%;height:700px;" src="<?php echo $contenidoDocumento ?>" frameborder="0"></iframe>
 							<div class="contenedor justify-content-center margin-top10">
 								<a href="<?php echo $contenidoDocumento ?>" target="_blank">
-									<input class="btn btn-success" type="button" value="Ver documento">
+									<input class="btn btn-success" type="button" value="Ver Documento">
 								</a>
 							</div>
 							<?php 
 							break;
 
 						default:
-							echo "Leccion sin Tipo";
+						?><p><?php 	echo "No se pudo cargar el recurso";?></p><?php 
+
 							break;
 					} ?>
 		</h3>

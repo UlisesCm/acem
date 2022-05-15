@@ -1,4 +1,3 @@
-
 // JS MODULA Autor: Armando Viera Rodriguez 2016
 function vaciarCampos() {
   $("#cnombre").focus();
@@ -9,15 +8,14 @@ function vaciarCampos() {
   guardarArchivo();
 } */
 
-function fileinput(nombre,idform=""){
-	$('#n'+nombre).val($('#c'+nombre).val());
-	guardarArchivo(idform);
+function fileinput(nombre, idform = "") {
+  $("#n" + nombre).val($("#c" + nombre).val());
+  guardarArchivo(idform);
 }
 
 const objetoContador = [0];
 
-$(document).ready(function () {   
-
+$(document).ready(function () {
   let contadorLeccion = 0;
   let contadorExamen = 0;
 
@@ -65,11 +63,10 @@ $(document).ready(function () {
       }
     }
   });
-  
 
   $("#botonGuardarInscribir").click(function () {
-        var variables = $("#formulario-inscribirme").serialize();
-        guardarInscribir(variables);
+    var variables = $("#formulario-inscribirme").serialize();
+    guardarInscribir(variables);
   });
 
   $(".botonSave").click(function () {
@@ -124,12 +121,12 @@ function validar() {
 /* Funcion en flecha para ocultar y mostrar el input de contenidos. */
 const contenidoLecciones = (index) => {
   let select, textArea, input, documento;
-
+  const inputArchivo = document.getElementById("inputArchivos" + index);
   select = $("#ctipoLeccion" + index);
   textArea = $("#div-contenido-textArea" + index);
   input = $("#div-contenido-input" + index);
   documento = $("#div-contenido-archivo" + index);
-
+  // console.log(inputArchivo);
   textArea.show();
   input.hide();
   documento.hide();
@@ -153,21 +150,24 @@ const contenidoLecciones = (index) => {
       documento.show();
       input.hide();
       textArea.hide();
-      // console.log("se esta mostrando imagen")
+      inputArchivo.setAttribute("accept", "image/png, image/gif, image/jpeg");
+      // console.log("se esta mostrando imagen");
       break;
 
     case "video":
       documento.show();
       input.hide();
       textArea.hide();
-      // console.log("se esta mostrando video")
+      inputArchivo.setAttribute("accept", "video/mp4,video/x-m4v,video/mov");
+      // console.log("se esta mostrando video");
       break;
 
     case "documento":
       documento.show();
       input.hide();
       textArea.hide();
-      // console.log("se esta mostrando documento")
+      inputArchivo.setAttribute("accept", "application/pdf");
+      // console.log("se esta mostrando documento");
       break;
 
     default:
@@ -314,7 +314,7 @@ const crearLeccion = (index) => {
   let input = cloneChild321[1].id + index;
   cloneChild321[1].id = input;
   cloneChild321[1].setAttribute("name", `contenidoInput${index}`);
-  cloneChild321[1].setAttribute("value", `valor del Input ${index}`); //VALOR PARA HACER PRUEBAS
+  // cloneChild321[1].setAttribute("value", `valor del Input ${index}`); //VALOR PARA HACER PRUEBAS
   // Acceso al div contenido archivo
   let cloneChild33 = document.getElementById(divContenidoArchivo).childNodes;
   let divArchivoHijo = cloneChild33[3].id + index;
@@ -322,7 +322,7 @@ const crearLeccion = (index) => {
   // Acceso al div Archivo Hijo
   let cloneChild331 = document.getElementById(divArchivoHijo).childNodes;
   let divArchivoNieto = cloneChild331[1].id + index;
-  let botonSubirArchivo = cloneChild331[3].id + index; //BOTON PARA 
+  let botonSubirArchivo = cloneChild331[3].id + index; //BOTON PARA
   cloneChild331[1].id = divArchivoNieto;
   cloneChild331[3].id = botonSubirArchivo;
   cloneChild331[3].setAttribute("onclick", `subirDocumento(${index})`);
@@ -416,7 +416,7 @@ const crearPregunta = (index) => {
   cloneChild31[7].id = botonAgregarRespuesta;
   cloneChild31[7].setAttribute(
     "onClick",
-    `crearRespuesta(${index}),contenidoExamen(${index});`
+    `crearRespuesta(${index}),contenidoExamen(${index});`,
   );
 
   let cloneChild311 = document.getElementById(divInputRespuesta).childNodes;
@@ -459,7 +459,7 @@ const crearRespuesta = (index) => {
   cloneChild[9].id = botonBorrarRespuesta;
   cloneChild[9].setAttribute(
     "onclick",
-    `borrarRespuesta(${index},${objetoContador[index]});`
+    `borrarRespuesta(${index},${objetoContador[index]});`,
   );
   cloneChild[9].setAttribute("style", "display:block");
   document.getElementById(botonAgregarRespuesta).remove();
@@ -469,12 +469,12 @@ const crearRespuesta = (index) => {
   cloneChild1[1].id = inputRespuesta;
   cloneChild1[1].setAttribute(
     "name",
-    `inputRespuesta${index}${objetoContador[index]}`
+    `inputRespuesta${index}${objetoContador[index]}`,
   );
-  cloneChild1[1].setAttribute(
+  /*   cloneChild1[1].setAttribute(
     "value",
-    `inputRespuesta${index}${objetoContador[index]}`
-  );
+    `inputRespuesta${index}${objetoContador[index]}`,
+  ); */
 
   let cloneChild2 = document.getElementById(divCheckboxRespuesta).childNodes;
   let radio = "radio-respuesta" + index + objetoContador[index];
@@ -484,7 +484,7 @@ const crearRespuesta = (index) => {
   cloneChild2[3].id = radio;
   cloneChild2[1].setAttribute(
     "name",
-    `checkboxRespuesta${index}${objetoContador[index]}`
+    `checkboxRespuesta${index}${objetoContador[index]}`,
   );
   cloneChild2[3].setAttribute("name", `radioRespuesta${index}`);
   cloneChild2[3].setAttribute("value", `radio${index}${objetoContador[index]}`);
@@ -550,8 +550,8 @@ const actualizarContadorRespuesta = (index) => {
 
 const guardarArchivo = (idform) => {
   var formulario = "formularioArchivos";
-  variables=$("#"+formulario).serialize();
-  var formData = new FormData($("#"+formulario)[0]);
+  variables = $("#" + formulario).serialize();
+  var formData = new FormData($("#" + formulario)[0]);
   $("#botonGuardar").hide();
   $("#botonSave").hide();
   $("#loading").show();
@@ -562,31 +562,29 @@ const guardarArchivo = (idform) => {
     cache: false,
     contentType: false,
     processData: false,
-    success: function(mensaje){
-			mensaje = $.trim(mensaje);
-			if(mensaje == "fracaso"){
-				//intente nuevamente y pintar de rojo
-				$("#cajaArchivo").html("ERROR AL SUBIR");
-				$("#botonArchivo").html("INTENTE NUEVAMENTE");
-				//$("#botonArchivo"+idform).css("background-color","#C00");
-				$("#botonArchivo").removeClass("btn-warning");
-				$("#botonArchivo").removeClass("btn-success");
-				$("#botonArchivo").addClass("btn-danger");
-			}
-			else{
-				//archivo subido y pintar de verde
-				$("#cajaArchivo").html(mensaje);
-				$("#botonArchivo").html("ARCHIVO SUBIDO");
-				//$("#botonArchivo"+idform).css("background-color","#C00");
-				$("#botonArchivo").removeClass("btn-warning");
-				$("#botonArchivo").removeClass("btn-danger");
-				$("#botonArchivo").addClass("btn-success");
-				
-			}
-			$("#botonGuardar").show();
-			$("#botonSave").show();
-			$("#loading").hide();
-		}
+    success: function (mensaje) {
+      mensaje = $.trim(mensaje);
+      if (mensaje == "fracaso") {
+        //intente nuevamente y pintar de rojo
+        $("#cajaArchivo").html("ERROR AL SUBIR");
+        $("#botonArchivo").html("INTENTE NUEVAMENTE");
+        //$("#botonArchivo"+idform).css("background-color","#C00");
+        $("#botonArchivo").removeClass("btn-warning");
+        $("#botonArchivo").removeClass("btn-success");
+        $("#botonArchivo").addClass("btn-danger");
+      } else {
+        //archivo subido y pintar de verde
+        $("#cajaArchivo").html(mensaje);
+        $("#botonArchivo").html("ARCHIVO SUBIDO");
+        //$("#botonArchivo"+idform).css("background-color","#C00");
+        $("#botonArchivo").removeClass("btn-warning");
+        $("#botonArchivo").removeClass("btn-danger");
+        $("#botonArchivo").addClass("btn-success");
+      }
+      $("#botonGuardar").show();
+      $("#botonSave").show();
+      $("#loading").hide();
+    },
   });
   return false;
 };
@@ -607,7 +605,7 @@ const guardarInscribir = (variables) => {
     },
   });
   return false;
-}
+};
 
 const llenarSelectDocente = (condicion) => {
   $("#iddocente_ajax").html("<option value='1'>cargando...</option>");
@@ -670,7 +668,7 @@ function mostrarMensaje(mensaje) {
       .removeClass()
       .addClass("alert alert-warning alert-dismissable");
     $("#notificacionTitulo").html(
-      "<i class='icon fa fa-warning'></i>" + res[1]
+      "<i class='icon fa fa-warning'></i>" + res[1],
     );
     $("#notificacionContenido").html(res[2]);
   } else {
@@ -679,7 +677,7 @@ function mostrarMensaje(mensaje) {
       .addClass("alert alert-error alert-dismissable");
     $("#notificacionTitulo").html("Operaci&oacute;n fallida");
     $("#notificacionContenido").html(
-      "<i class='icon fa fa-ban'></i> No se han resivido datos de respuesta desde el servidor [003]"
+      "<i class='icon fa fa-ban'></i> No se han resivido datos de respuesta desde el servidor [003]",
     );
   }
   $("#panel_alertas").stop(false, true);

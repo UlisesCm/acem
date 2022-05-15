@@ -23,8 +23,12 @@ if (isset($_POST['id-avancecurso'])) {
 	$idavancecurso = $extractor2["idavancecurso"];
 	$avance = $extractor2["avance"];
 }
-
-
+if (isset($_POST['contadorGlobal'])) {
+	$contadorGlobal = htmlentities($_POST['contadorGlobal']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$contadorGlobal = 0;
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +64,6 @@ if (isset($_POST['id-avancecurso'])) {
 <body class="sidebar-mini <?php include("../../../componentes/skin.php"); ?>">
 	<!-- Wrapper es el contenedor principal -->
 	<div class="wrapper s">
-
 		<?php include("../../../componentes/menuSuperior.php"); ?>
 		<?php include("../../../componentes/menuLateral.php"); ?>
 		<!-- Contenido-->
@@ -107,6 +110,7 @@ if (isset($_POST['id-avancecurso'])) {
 					<input type="hidden" name="idavancecurso" id="idavancecurso" value="<?php echo $idavancecurso ?>">
 					<input type="hidden" name="nombre" id="nombre" value="<?php echo $nombre ?>">
 					<input type="hidden" name="avance" id="avance" value="<?php echo $avance ?>">
+					<input type="hidden" name="contadorGlobal" id="contadorGlobal" value="<?php echo $contadorGlobal ?>">
 				</form>
 				<div class="box box-info" style="border-color:#68983A">
 					<div class="box-header with-border contenedor alineacion-centro">
