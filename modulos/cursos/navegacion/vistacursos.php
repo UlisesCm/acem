@@ -64,6 +64,7 @@ if (isset($_POST['contadorGlobal'])) {
 <body class="sidebar-mini <?php include("../../../componentes/skin.php"); ?>">
 	<!-- Wrapper es el contenedor principal -->
 	<div class="wrapper s">
+
 		<?php include("../../../componentes/menuSuperior.php"); ?>
 		<?php include("../../../componentes/menuLateral.php"); ?>
 		<!-- Contenido-->

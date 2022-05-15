@@ -54,6 +54,7 @@ class Cursos
 		$categoria,
 		$icono,
 		$descripcion,
+		$horas,
 		$contadorLecciones, // Lecciones
 		$aTipoLecciones,
 		$aInputLecciones,
@@ -81,7 +82,7 @@ class Cursos
 			if ($this->comprobarCampo("nombre", $nombre, "nuevo")) {
 				return "nombreExiste";
 			} else {
-				if (mysqli_query($this->con->conect, "INSERT INTO cursos (idcurso, nombre, categoria, icono, descripcion) VALUES ('$idcurso','$nombre','$categoria','$icono','$descripcion')")) {
+				if (mysqli_query($this->con->conect, "INSERT INTO cursos (idcurso, nombre, categoria, icono, descripcion, duracion) VALUES ('$idcurso','$nombre','$categoria','$icono','$descripcion','$horas')")) {
 
 					/* GUARDAR LECCION */ ////////////////////////////////////////////////////////////////////////////////////////////////
 					/* FALTA GUARDAR ARCHIVOS */
@@ -249,8 +250,7 @@ class Cursos
 		$fechainicio = date('d-m-Y'); // se genera aqui
 		$fechafin = ""; //se deja asi
 		$finalizado = false; // se genera aqui
-		date_default_timezone_set('America/Mexico_City');
-		$horainicio = round((time()/60)/60);
+
 		//Detalle Examenes
 		$examen = mysqli_query($this->con->conect, "SELECT * FROM examenes WHERE idcurso='$idcurso'");
 		$extractor = mysqli_fetch_array($examen);
@@ -268,7 +268,7 @@ class Cursos
 		}
 
 		/////FIN  DE PERMISOS////////
-		$avancecursos = mysqli_query($this->con->conect, "INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, finalizado, horainicio) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$finalizado','$horainicio')");
+		$avancecursos = mysqli_query($this->con->conect, "INSERT INTO avancecursos (idavancecurso, idcurso, idalumno, iddocente, iddetalleexamen, avance, fechainicio, fechafin, finalizado) VALUES ('$idavancecurso','$idcurso','$idalumno','$iddocente','$iddetalleexamen','$avance','$fechainicio','$fechafin','$finalizado')");
 		if ($this->con->conectar() == true) {
 			if ($avancecursos) {
 				if ($_SESSION['bitacora'] == "si") {
@@ -356,20 +356,6 @@ class Cursos
 			return mysqli_query($this->con->conect, "SELECT * FROM empleados WHERE idempleado='$idempleado'");
 		}
 	}
-	
-	function mostrarIndiceLeccion($idavancecurso)
-	{
-		if ($this->con->conectar() == true) {
-			return mysqli_query($this->con->conect, "SELECT indiceleccion FROM avancecursos WHERE idavancecurso='$idavancecurso'");
-		}
-	}
-	function aumentarIndiceLeccion($idavancecurso, $indice)
-	{
-		if ($this->con->conectar() == true ) {
-			$consulta = "UPDATE avancecursos SET indiceleccion ='$indice' WHERE idavancecurso ='$idavancecurso'";
-			mysqli_query($this->con->conect, $consulta);
-		}
-	}
 
 	function mostrarIndividual($idcurso)
 	{
@@ -389,21 +375,6 @@ class Cursos
 	{
 		if ($this->con->conectar() == true) {
 			return mysqli_query($this->con->conect, "SELECT * FROM avancecursos WHERE idavancecurso='$idavancecurso'");
-		}
-	}
-
-	function reiniciarLecciones($duracion, $horainicio, $idavancecurso)
-	{
-		date_default_timezone_set('America/Mexico_City');
-		$horaactual = round((time()/60)/60);
-		$horacomparacion = $horainicio + $duracion;
-
-		if ($horacomparacion <= $horaactual) {
-			mysqli_query($this->con->conect, "DELETE FROM avancecursos WHERE idavancecurso ='$idavancecurso'");
-			mysqli_query($this->con->conect, "DELETE FROM detallelecciones WHERE idavancecurso ='$idavancecurso'");
-			return false;
-		} else {
-			return true;
 		}
 	}
 
@@ -531,12 +502,6 @@ class Cursos
 		if ($this->con->conectar() == true) {
 			return $resultado = mysqli_query($this->con->conect, $consulta);
 		}
-	}
-
-	function obtenerHora($idcurso)
-	{
-		$consulta = "SELECT * FROM `cursos` WHERE idcurso = '$idcurso'";
-		return mysqli_query($this->con->conect, $consulta);
 	}
 
 	function mostrarTodoCursos( $campoOrden, $orden, $inicial, $cantidadamostrar, $categorias, $cursosBusqueda)
@@ -924,7 +889,7 @@ class Cursos
 			WHERE avancecursos.idavancecurso = '$idavancecurso'
 		";
 
-		$consulta = "SELECT avance,iddetalleexamen,iddocente,indiceleccion FROM avancecursos
+		$consulta = "SELECT avance,iddetalleexamen,iddocente FROM avancecursos
 		$where
 		";
 		if ($this->con->conectar() == true) {

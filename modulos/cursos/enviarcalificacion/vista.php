@@ -271,7 +271,6 @@ if (isset($_POST['calificacionMaxima'])) {
 				<div class="box box-info" style="border-color:#3A6D98">
 					<div class="box-header with-border">
 						<h3 class="box-title">Examen Enviado</h3>
-
 						
 					</div><!-- /.box-header -->
 					<div id="muestra_contenido_ajax" style="min-height:100px;">

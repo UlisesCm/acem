@@ -130,6 +130,13 @@ if (isset($_REQUEST['nombre'])) {
 	$nombre  = "no existe";
 }
 
+if (isset($_REQUEST['contadorGlobal'])) {
+	$contadorGlobal = htmlentities($_REQUEST['contadorGlobal']);
+	// $busqueda=mysql_real_escape_string($busqueda);
+} else {
+	$contadorGlobal  = "no existe";
+}
+
 //CODIGO DE PAGINACION (REQUIERE: "variasfunciones.php")
 $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
@@ -144,12 +151,14 @@ if ($resultado == "denegado") {
 $filasTotales = mysqli_num_rows($resultado);
 $filas = mysqli_fetch_array($resultado);
 $Ocursos->cambiarVisto($filas['iddetalleleccion']);
-$avanceActualizado = $Ocursos->mostrarAvance($idavancecurso);
-$filaAvance = mysqli_fetch_array($avanceActualizado);
 if ($filas['visto'] == 'NO') {
 	$Ocursos->agregarAvance($filas['valor'], $idavancecurso);
-	$Ocursos->aumentarIndiceLeccion($idavancecurso, $filaAvance['indiceleccion']+1);
 }
+
+$avanceActualizado = $Ocursos->mostrarAvance($idavancecurso);
+$filaAvance = mysqli_fetch_array($avanceActualizado);
+$contadorGlobal++
+// $filaAvance['avance']
 // MOSTRAR LOS REGISTROS SEGUN EL RESULTADO DE LA CONSULTA
 ?>
 <div class="container ">
@@ -184,6 +193,7 @@ if ($filas['visto'] == 'NO') {
 			<form class="alineacion-centro-texto margen-lateral-texto" action="../navegacion/vistacursos.php?n1=cursos&n2=nuevocursos" method="post">
 				<input type="hidden" name="id" value="<?php echo $filas['idcurso'] ?>" />
 				<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
+				<input type="hidden" name="contadorGlobal" value="<?php echo $contadorGlobal ?>" />
 				<button class="btn btn-default"> Volver al Curso </button>
 			</form>
 		</div>
@@ -252,6 +262,7 @@ if ($filas['visto'] == 'NO') {
 				<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
 				<input type="hidden" name="avance" value="<?php echo $filaAvance['avance'] ?>" />
 				<input type="hidden" name="nombre" value="<?php echo $nombre ?>" />
+				<input type="hidden" name="contadorGlobal" value="<?php echo $contadorGlobal ?>" />
 				<?php
 				if ($filas['orden'] == 1) {
 				?><button class="btn btn-default" disabled>Anterior</button><?php
@@ -268,6 +279,7 @@ if ($filas['visto'] == 'NO') {
 				<input type="hidden" name="id-avancecurso" value="<?php echo $idavancecurso ?>" />
 				<input type="hidden" name="avance" value="<?php echo $filaAvance['avance'] ?>" />
 				<input type="hidden" name="nombre" value="<?php echo $nombre ?>" />
+				<input type="hidden" name="contadorGlobal" value="<?php echo $contadorGlobal ?>" />
 				<?php
 				if ($filas['orden'] == $contador) {
 				?><button class="btn btn-default" disabled>Siguiente</button><?php

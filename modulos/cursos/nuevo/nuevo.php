@@ -87,9 +87,18 @@ include("../../seguridad/comprobar_login.php");
                 <label for="ccategoria" class="col-sm-2 control-label">Categoria:</label>
                 <div class="col-sm-5">
                   <select id="ccategoria" name="categoria" class="form-control">
-                    <option value="informatica">informatica</option>
-                    <option value="logistica">logistica</option>
-                    <option value="inventarios">inventarios</option>
+                  <option value="Almacen">Almacen</option>
+                    <option value="Caja">Caja</option>
+                    <option value="Compras">Compras</option>
+                    <option value="Contabilidad">Contabilidad</option>
+                    <option value="Ferreteria">Ferreteria</option>
+                    <option value="Gerencia">Gerencia</option>
+                    <option value="Informatica">Informatica</option>
+                    <option value="Inventarios">Inventarios</option>
+                    <option value="Logistica">Logistica</option>
+                    <option value="Recursos Humanos">Recursos Humanos</option>
+                    <option value="Reparto">Reparto</option>
+                    <option value="Ventas">Ventas</option>
                   </select>
                 </div>
               </div>
@@ -135,6 +144,30 @@ include("../../seguridad/comprobar_login.php");
                   <textarea class="form-control" name="descripcion" cols="80" rows="4" id="cdescripcion"></textarea>
                 </div>
               </div>
+              
+              <div class="form-group ">
+                    <label for="x" class="col-sm-2 control-label">Duración máxima:</label>
+                    <div class="col-lg-6">
+                    
+                    	<div class="col-sm-5">
+                         <label class="radio inline control-label">
+                            <input id="cduracion-0" type="radio" name="tipo" value="Dias"/>
+                            Dias
+                         </label>
+                          
+                          		<input name="dias" type="text" class="form-control" id="cdias" readonly/>
+                          </div>
+                          
+                           <div class="col-sm-5">
+                         <label class="radio inline control-label">
+                            <input id="cduracion-1" type="radio" name="tipo" value="Horas">
+                            Horas
+                         </label>
+                         
+                         		<input name="horas" type="text" class="form-control" id="choras" readonly ="true"/>
+                         </div>
+					</div>
+				</div>
 
               <!-- LECCIONES -->
               <div class="box box-info" style="border-color:#000000">

@@ -84,7 +84,6 @@ $inicial = $pg * $cantidadamostrar;
 $Ocursos = new Cursos;
 // $resultado = $Ocursos->mostrar($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosBusqueda);
 $resultado = $Ocursos->mostrarMisCursos($campoOrden, $orden, $inicial, $cantidadamostrar, $busqueda, $papelera, $categorias, $cursosTerminados);
-
 if ($resultado == "denegado") {
 	echo $_SESSION['msgsinacceso'];
 	exit;
@@ -186,16 +185,12 @@ if ($tipoVista == "tabla") { // Si se ha elegido el tipo tabla
 		<?php
 		while ($filas = mysqli_fetch_array($resultado)) {
 			$resultadoExamen = $Ocursos->mostrarDetalleExamen($filas['iddetalleexamen']);
-			$filasExamen = mysqli_fetch_array($resultadoExamen);
-/* 			$resultadoIndice = $Ocursos->mostrarIndiceLeccion($filas['idavancecurso']);
-			$filaIndice = mysqli_fetch_array($resultadoIndice)
-			<p><?php echo $filaIndice['indiceleccion'] ?></p> */
+			$filasExamen = mysqli_fetch_array($resultadoExamen)
 		?>
 			<div class="col-sm-3 carta-cursos" id="iregistro<?php echo $filas['idavancecurso'] ?>">
 				<h4 class="d-flex centrar-elementos">
 					<?php echo $filas['categoria'] ?>
 				</h4>
-				<p><?php echo $filaIndice['indiceleccion'] ?></p>
 				<hr class="d-flex centrar-elementos">
 				<div class="d-flex centrar-elementos">
 					<i class="fa <?php echo $filas['icono']?> icono-curso"></i>

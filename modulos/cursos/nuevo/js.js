@@ -68,6 +68,32 @@ $(document).ready(function () {
     var variables = $("#formulario-inscribirme").serialize();
     guardarInscribir(variables);
   });
+  
+   $("#cduracion-0").change(function(){
+	  document.getElementById("cdias").readOnly = false;
+	   document.getElementById("choras").readOnly = true;
+	});
+	
+	 $("#cduracion-1").change(function(){
+	  document.getElementById("cdias").readOnly = true;
+	   document.getElementById("choras").readOnly = false;
+	});
+	
+	$("#cdias").keypress(function(){
+		return soloNumeros(event,'cdias');
+	});
+	
+	$("#cdias").keyup(function(){
+		$("#choras").val($("#cdias").val() * 24);
+	});
+	
+	$("#choras").keypress(function(){
+		return soloNumeros(event,'choras');
+	}); 
+	
+	$("#choras").keyup(function(){
+		$("#cdias").val($("#choras").val() /24);
+	});
 
   $(".botonSave").click(function () {
     if (Spry.Widget.Form.validate(formulario)) {

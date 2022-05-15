@@ -41,6 +41,17 @@ if (isset($_POST['descripcion'])){
 	$validacion=false;
 	$mensaje=$mensaje."<p>El campo descripcion no es correcto</p>";
 }
+
+$horas=0;
+if (isset($_POST['horas'])){
+	$horas=htmlentities(trim($_POST['horas']));
+	//$icono=mysql_real_escape_string($icono);
+}else{
+	$validacion=false;
+	$mensaje=$mensaje."<p>El campo horas no es correcto</p>";
+}
+
+
 // VARIABLES LECCIONES /////////////////////////////////////////////////////////////////
 //Input input Contador Lecciones
 if (isset($_POST['inputContadorLecciones'])){ //select tipo leccion
@@ -262,6 +273,7 @@ if($validacion){
 		$categoria,
 		$icono,
 		$descripcion,
+		$horas,
 		$contadorLecciones,// Lecciones
 		$aTipoLecciones,
 		$aInputLecciones,

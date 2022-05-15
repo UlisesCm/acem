@@ -140,6 +140,7 @@ include("../../seguridad/comprobar_login.php");
 
 				</div><!-- Fin box>-->
 				<!-- <div class="col-sm-4 carta-cursos">
+					<h1>Holas</h1>
 				</div> -->
 
 			</section><!-- /.content -->
